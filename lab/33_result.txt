@@ -1,0 +1,4 @@
+환경: python 3.11.8 / numpy 1.26.4
+백업: C:/Users/gwonn/AppData/Local/Temp/claude/c--Users-gwonn-Desktop-open/ac9f75b2-20b2-4bd0-a3a5-9f91191c2d24/scratchpad/model_mix8_backup.pkl
+train.csv 로딩...
+  [    17s] 준비 완료 (1475092, 65)
