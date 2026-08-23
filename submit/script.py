@@ -154,6 +154,23 @@ def main():
             acc += m.predict_proba(X)[:, 1]
             print(f"  model {i}/{len(models)} done")
         preds = acc / len(models)
+
+    # ---- CatBoost 혼합 (있을 때만) ----
+    # p = (1-w)*HGB평균 + w*CatBoost평균 — 행별 산술이므로 행 독립성 유지.
+    # 두 모델 계열 모두 train.csv만으로 사전 학습되어 model.pkl에 저장된 것.
+    cb_models = bundle.get("cb_models")
+    if cb_models and len(test) > 0:
+        w = float(bundle["w_cb"])
+        print(f"CatBoost inference ({len(cb_models)} models, w={w})...")
+        fcb = ft[bundle["cb_feats_num"]].copy()
+        for c in bundle["cb_feats_cat"]:
+            fcb[c] = ft[c].astype(str)
+        acc_cb = np.zeros(len(test), dtype=np.float64)
+        for i, m in enumerate(cb_models, 1):
+            acc_cb += m.predict_proba(fcb)[:, 1]
+            print(f"  cb model {i}/{len(cb_models)} done")
+        preds = (1.0 - w) * preds + w * (acc_cb / len(cb_models))
+        print(f"  mixed: w_cb={w}")
     preds = np.clip(preds, 0.0, 1.0)
     if len(preds):
         print(f"  pred mean={preds.mean():.6f}  min={preds.min():.6f}  max={preds.max():.6f}")

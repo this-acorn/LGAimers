@@ -1,0 +1,27 @@
+실행 환경: python 3.11.8 / numpy 1.26.4 / pandas 2.0.3
+catboost 1.2.10
+기존 번들 확인: HGB 8개 / 피처 65 / prior 0.523766  (LB 830.32 확정본)
+백업 완료 → C:/Users/gwonn/AppData/Local/Temp/claude/c--Users-gwonn-Desktop-open/ac9f75b2-20b2-4bd0-a3a5-9f91191c2d24/scratchpad/model_65feat_backup.pkl
+
+train.csv 로딩 중...
+  [    27s] 로딩 완료 (1475092, 49)
+  [    28s] 피처 준비 완료 — CatBoost 입력 (1475092, 65)
+  [   499s] catboost seed=42 완료 (1/8, 469s)
+  [   950s] catboost seed=7 완료 (2/8, 452s)
+  [  1422s] catboost seed=123 완료 (3/8, 472s)
+  [  1888s] catboost seed=2024 완료 (4/8, 466s)
+  [  2368s] catboost seed=99 완료 (5/8, 480s)
+  [  2835s] catboost seed=555 완료 (6/8, 467s)
+  [  3302s] catboost seed=31337 완료 (7/8, 467s)
+  [  3781s] catboost seed=1 완료 (8/8, 479s)
+  [  3782s] 저장 완료 submit/model/model.pkl  (4.4 MB)  w_cb=0.3
+
+저장본 재로드 + 5행 test.csv 혼합 예측 검증...
+  HGB   5행: [0.439798, 0.408309, 0.491046, 0.465754, 0.499029]
+  CB    5행: [0.436846, 0.402755, 0.476535, 0.432149, 0.528098]
+  혼합  5행: [0.438912, 0.406643, 0.486693, 0.455672, 0.50775]
+  범위: [0.406643, 0.507750]  (0~1 이내: True)
+
+총 소요 3787초
+다음: script.py 혼합 추론 개편 → exp/29 submit5.zip 빌드+검증
+EXIT_CODE=0
