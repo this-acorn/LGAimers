@@ -28,7 +28,7 @@ from common import (log, tick, raw_score, load_train, add_features, CAT, ALL_ENG
 
 SEEDS = [42, 7]
 CB_PRM = dict(iterations=500, depth=6, learning_rate=0.08, l2_leaf_reg=10.0,
-              verbose=False, thread_count=6, allow_writing_files=False)
+              verbose=False, thread_count=14, allow_writing_files=False)
 MIN_VOTES, MIN_PURITY = 20, 0.99
 
 # =====================================================================
