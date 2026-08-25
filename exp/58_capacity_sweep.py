@@ -11,14 +11,18 @@
     한 번의 학습으로 250/500/750...별 점수를 전부 얻어 어디서 평평해지는지 본다
   · 판정 임계 +15 (독립 시드 확증 전제)
 
-팔 (시드 42, 기준 exp/45 both seed42 = 777.0):
-  curve6  d6 / 2000 / lr0.03    깊이 고정, 학습 길이만 (현재 500이 충분한가)
-  curve8  d8 / 1000 / lr0.04    깊은 상호작용 (미검증 축)
+팔 (시드 42, lr 0.04 통일 — 교란 제거. 기준 exp/45 both seed42 = 777.0):
+  curve6  d6 / 2000 / lr0.04    길이 축 (현재 500이 충분한가)
+  curve8  d8 / 1000 / lr0.04    깊이 축
+
+★ lr을 맞췄으므로 같은 it 지점의 차이가 곧 순수 depth 효과다:
+    curve8[it=250/500/750/1000] − curve6[같은 it] = depth 6→8 순증
+    curve6[it=1000~2000] 추이     = 길이 스케줄의 실전 효과
 
 판독:
   최고점이 400~600 → 현재 500으로 충분, 길이 축 사망
   1000 이후에도 상승 → 길이 축 생존
-  d8 곡선이 d6를 위로 뛰어넘음 → 깊이 부족이 진짜 병목
+  같은 it에서 d8이 d6보다 위 → 깊이가 병목
   d8이 올랐다 내려감 → 깊이보다 정규화(l2/rsm) 튜닝 필요
 
 실행: PYTHONIOENCODING=utf-8 py -3.12 -u exp/58_capacity_sweep.py
@@ -44,8 +48,10 @@ REF_SEED42 = 777.0
 K_MIX = 50.0
 BASE_CB = dict(l2_leaf_reg=10.0, verbose=False, thread_count=NTHREAD,
                allow_writing_files=False, random_seed=SEED)
-ARMS = [("curve6", dict(iterations=2000, depth=6, learning_rate=0.03), 250),
-        ("curve8", dict(iterations=1000, depth=8, learning_rate=0.04), 125)]
+# ★ lr을 0.04로 통일 — staged 곡선이 같은 iteration에서 겹치므로
+#   curve8[it] − curve6[it] = 순수 depth 효과 (교란 제거, 추가 팔 불필요)
+ARMS = [("curve6", dict(iterations=2000, depth=6, learning_rate=0.04), 250),
+        ("curve8", dict(iterations=1000, depth=8, learning_rate=0.04), 250)]
 
 log("train 로딩...")
 df = load_train()
