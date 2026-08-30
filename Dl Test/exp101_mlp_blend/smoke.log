@@ -1,0 +1,36 @@
+=== exp/101 MLP blend probe  smoke=True seeds=[42] threads=4 ===
+nvidia-smi: name, memory.total [MiB], memory.used [MiB]
+NVIDIA GeForce GTX 1080 Ti, 11264 MiB, 51 MiB
+torch 2.7.1+cu126  cuda.is_available=True
+GPU NVIDIA GeForce GTX 1080 Ti  VRAM 11.7 GB  used 0.00 GB
+RAM total 33.6 GB  available 28.0 GB
+train 로딩...
+클래스 분포: 0:52.3% 1:11.5% 2:19.5% 3:3.4% 4:13.2%  미복원 0.05%
+  [    29s] 테이블·PFB 준비 (PFB thread_count=4; lab/89 챔피언은 14 — f_pfb 가 미세하게 다를 수 있음, HANDOFF exp/76)
+  [    33s] 피처 부착 완료
+2024 행 253,507  row_id sha256 fa6d28e84ad9c1a8  y 길이 253,507  lab/89 길이 253,507  NaN 0
+cat5 기준 재계산 873.9 (문서 873.9)
+학습행 60,000  내부검증 6,000 (고정 RNG 12345, 두 시드 공통)
+/localhome/dga73/venvs/tabm/lib/python3.13/site-packages/numpy/lib/_nanfunctions_impl.py:1216: RuntimeWarning: All-NaN slice encountered
+  return fnb._ureduce(a, func=_nanmedian, keepdims=keepdims,
+/local-scratch/localhome/dga73/Desktop/2026-Lg-Aimers/work/exp/101_mlp_blend_probe.py:326: RuntimeWarning: All-NaN slice encountered
+  self.lo, self.hi = np.nanmin(X, axis=0), np.nanmax(X, axis=0)   # 학습 관측 범위 — transform 에서 클립 (season 2024·미지 ID 의 선형 외삽 차단)
+  [    34s] 전처리 완료 — 입력 차원 136 (수치 74 + 결측지시 31 + one-hot 31)
+autocast dtype: torch.bfloat16  device: cuda
+   seed 42 epoch  1  loss 1.3992  내부검증 Brier(P0) 0.25240  ★
+   seed 42 epoch  2  loss 1.2381  내부검증 Brier(P0) 0.24692  ★
+  [    36s] seed 42: S_mlp -1705.0  d -2579.0  K 3100.3  w* 0.084  이론이득 +21.9  실제최적 +21.1@w=0.1  shape -1092.8  벌점 1523.1  best_epoch 2
+==============================================================================
+1. SMOKE
+2. 모델 plain PyTorch ResMLP(256×3)  GPU NVIDIA GeForce GTX 1080 Ti  amp torch.bfloat16
+3. 총 실행시간 0.6 분
+4. cat5 기준 873.9
+5. MLP seed42 -1705.0 / 2시드평균예측 -1705.0  (시드평균 -1705.0 std 0.0 min -1705.0 max -1705.0)
+6. d -2579.0   D_raw 7.745e-03   K 3100.3 (시드분산 보정 K−K̄cb/4−K̄mlp/4 = 3080.2; K̄cb 80.3 K̄mlp nan)   w* 0.084
+7. 이론 혼합이득 +21.9   실제 최적 +21.1 @ w=0.1
+8. w_probe=0.10: seed42 +21.1  평균 +21.1  (평균맞춤 -13.4)  세그먼트 R +16.1 F +5.0 rookie +14.1 veteran +7.0 R_conc +0.9 F_conc +2.0 rookie_conc +3.4 veteran_conc +0.4
+9. shape(MLP−cb) -1092.8   중심벌점 MLP 1523.1 vs cb 37.0   예측 mean 0.4244 std 0.0584 [0.171, 0.691]
+10. 게이트 1_cuda_two_seeds=X  2_K>=100=OK  3_d>-K=OK  4_w_star>=0.10=X  5_actual_gain>=15=OK  6_shape>0=X  7_probe_both_seeds_positive=X  8_not_only_mean_shift=X  8b_no_single_segment=X
+11. 파일 lab/101s_mlp_log.txt, lab/101s_mlp_meta.json, lab/101s_valid_row_id.npy, lab/101s_y2024.npy, lab/101s_mlp_seed42.npy, lab/101s_mlp_mean.npy, lab/101s_mlp_seed42.pt, lab/101s_mlp_preprocessor.joblib, lab/101s_blend_grid.csv, lab/101s_mlp_report.txt, lab/101s_mlp_report.json
+그리드 w:gain(mean) 0:+0.0  0.05:+18.3  0.1:+21.1  0.15:+8.4  0.2:-19.7  0.25:-63.4  0.3:-122.6  0.4:-287.5  0.5:-514.4
+==============================================================================
