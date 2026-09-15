@@ -1,6 +1,6 @@
 # Methodology
 
-This document follows development from the reproducible `submit14` checkpoint through the two final submission artifacts, `candidate_jm_w070_small.zip` and `last.zip`. The early checkpoint is included in this repository; the later pipeline description is grounded in the local archives' inference source and artifact metadata. Exploratory branches are distinguished from components actually used in those packages.
+This document follows development from the reproducible `submit14` checkpoint through late-stage candidates including `candidate_jm_w070_small.zip` and `last.zip`. The early checkpoint is included in this repository; the later pipeline description is grounded in the local archives' inference source and artifact metadata. Exploratory branches are distinguished from components actually used in those packages.
 
 ## Problem formulation
 
@@ -96,7 +96,7 @@ For a two-model blend `p(w) = (1 - w) * p_a + w * p_b`, Brier loss is quadratic 
 
 ## Final model integration
 
-Both final submission archives have a two-branch outer blend:
+The two inspected late-stage archives have a two-branch outer blend:
 
 ```text
 p_current = calibrated blend of the multiclass/hierarchical and temporal branches
@@ -111,7 +111,7 @@ p_final      = (1 - w) * p_current + w * p_specialist
 | `candidate_jm_w070_small.zip` | 0.30 | 0.70 | Weighted sum with probability-range validation |
 | `last.zip` | 0.381501766470134 | 0.618498233529866 | Weighted sum, clipping to [0, 1], and probability-range validation |
 
-Both packages use the same regular-season residual scale, 0.75, and a convex outer blend. An alternative three-component affine builder in the workspace is not the wrapper stored in either final artifact.
+Both packages use the same regular-season residual scale, 0.75, and a convex outer blend. An alternative three-component affine builder in the workspace is not the wrapper stored in either inspected artifact.
 
 The executable `script.py` is the source of truth for these weights. The 70% package's descriptive blend metadata retains an older equal-weight recipe; that metadata does not control the outer blend at runtime.
 
@@ -136,7 +136,7 @@ The included checkpoint bundle stores CatBoost models, feature names, a training
 
 Every feature is a function of one input row and fixed training artifacts. The portable [runner](../tools/run_inference.py) supplies the directory layout expected by the original script. The [packager](../tools/build_submission.py) preserves the archive paths `script.py`, `requirements.txt`, and `model/model.pkl`.
 
-Both final packages store additional inference modules and model assets in a flat layout and execute their outer components sequentially. They check component schemas, row IDs, and finite probability ranges before combining predictions. They are larger packages than the runnable `submit14` example; the example commands do not reproduce the complete final ensemble.
+Both inspected packages store additional inference modules and model assets in a flat layout and execute their outer components sequentially. They check component schemas, row IDs, and finite probability ranges before combining predictions. They are larger packages than the runnable `submit14` example; the example commands do not reproduce the complete final ensemble.
 
 The `candidate_jm_w070_small.zip` archive has the same 116 member paths, uncompressed sizes, and CRC values as `candidate_jm_w070.zip`, with a smaller compressed archive. Comparing it with `last.zip` identifies changes only in the top-level inference wrapper and descriptive outer-blend metadata by those checks. This supports describing the last step as a blend-weight and packaging revision, not a retrained model family.
 

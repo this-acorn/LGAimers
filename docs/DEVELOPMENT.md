@@ -1,6 +1,6 @@
 # Development journey
 
-This overview records the methods used to reach the final pipeline in `candidate_jm_w070_small.zip` and `last.zip`, identified by the team as its two final submission artifacts. It focuses on modeling decisions and engineering work rather than leaderboard results.
+This overview records the methods used in late-stage candidates, including `candidate_jm_w070.zip`, its compact package, and `last.zip`. It focuses on modeling decisions and engineering work rather than leaderboard results.
 
 ## From baseline to final ensemble
 
@@ -13,7 +13,7 @@ This overview records the methods used to reach the final pipeline in `candidate
 | Hierarchical correction | Shrunk pitcher/handedness/pressure effects | Model conditional differences while stabilizing sparse groups. |
 | Complementary branch | Temporal empirical-Bayes base, LightGBM/HGB residuals, team effects, and low-rank interactions | Add a model with a different inductive structure and error pattern. |
 | Calibration and blending | Fixed probability shifts/scaling and quadratic Brier-loss blend analysis | Adjust bias and combine complementary predictions. |
-| Final integration | Blend the calibrated pipeline with an adaptive prediction stack and a regular-season CatBoost residual ensemble | Produce the 70% residual-branch variant and the later approximately 61.85% variant. |
+| Final integration | Blend the calibrated pipeline with an adaptive prediction stack and a regular-season CatBoost residual ensemble | Produce the 70% residual-branch variant and the approximately 61.85% variant. |
 | Packaging | Frozen artifacts, sequential execution, row-ID alignment, and probability checks | Make the selected computation reproducible and independent of test-batch ordering. |
 
 ## How experiments informed development
@@ -27,7 +27,9 @@ This overview records the methods used to reach the final pipeline in `candidate
 
 Some validation years and public feedback were consulted repeatedly. These were model-development tools, not independent final-test estimates. The final methods should not be confused with every experiment proposed near the deadline.
 
-## Final submission variants
+## Inspected late-stage variants
+
+These examples describe attempted configurations, without identifying a highest-scoring candidate or asserting the submission order.
 
 | Artifact | Role in the final workflow |
 | --- | --- |
@@ -47,9 +49,9 @@ Blend weights are read from the executable wrapper, since the 70% variant's desc
 | Local `candidate_v18g030_src/script.py` | Later team categorical handling, hierarchical correction, and fixed calibration. |
 | `model/exp021_inference.py` inside local `last.zip` | The rebuilt temporal/residual branch and its frozen feature transformations. |
 | `model/current_inference.py` inside local `last.zip` | The calibrated combination of the existing branches. |
-| `script.py` inside local `candidate_jm_w070_small.zip` and `last.zip` | The two actual final blend settings and their output validation. |
+| `script.py` inside local `candidate_jm_w070_small.zip` and `last.zip` | Two inspected blend settings and their output validation. |
 | `model/jm0750_inference.py` and its residual manifest in both archives | The shared regular-season residual component. |
 
-The two final local artifacts are described here but are not bundled into this checkout. The inference commands in the root README run the earlier preserved checkpoint. Both final packages were inspected directly because a later-numbered builder script alone does not establish which implementation was actually packaged.
+These local candidate artifacts are described here but are not bundled into this checkout. The inference commands in the root README run the earlier preserved checkpoint. Both packages were inspected directly because a later-numbered builder script alone does not establish which implementation was actually packaged.
 
 The project's work includes feature development, multiclass modeling, experiments, inference implementation, calibration, component integration, and packaging.
