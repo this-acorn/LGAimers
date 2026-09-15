@@ -1,9 +1,0 @@
-=== exp166 pitcher x batter_hand x count residual EB ===
-fixed keys=('pitcher_id', 'batter_hand', '_count_state') alpha=1500.0 scale=0.2
-2023={'raw_gain': 1.316030715070582, 'equal_mean_shape_gain': 1.3842964507126965, 'F_contribution': 0.0, 'R_contribution': 1.3160307150716162, 'mean_shift': 2.2294588616134092e-05, 'effect_std': 0.0005802427586085062, 'effect_mean_abs': 0.00033935308961993634}
-2024={'raw_gain': 0.09139307340922187, 'equal_mean_shape_gain': 0.36663145968066146, 'F_contribution': 0.0, 'R_contribution': 0.09139307340724048, 'mean_shift': 7.83295014646912e-05, 'effect_std': 0.0005453209155165219, 'effect_mean_abs': 0.00030412511640402377}
-early=+0.883 late=-0.943
-hands=1|1:-0.532 1|2:+2.555 2|1:-0.018 2|2:-0.703
-bootstrap={'draws': 5000, 'pitchers': 391, 'median': 0.08150359210623262, 'p025': -1.0542410012645533, 'p975': 1.248492536593753, 'prob_positive': 0.5556}
-FINAL: FAIL_NO_SUBMISSION
-elapsed=35.10s

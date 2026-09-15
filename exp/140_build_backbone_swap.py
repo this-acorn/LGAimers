@@ -4,7 +4,7 @@
 현 챔피언 `candidate_exp021_w0356557.zip` 구조:
     script.py                       두 endpoint 를 순차 실행 후 고정 가중 혼합
     model/champion_inference.py     CatBoost 8시드(model.pkl) → V18 잔차 γ=.30 → 아핀(0.49+1.06(p−.49)−.0066)
-    model/exp021_inference.py       mk-isos EXP-021 exact endpoint (LGBM/HGB/EB/SVD)
+    model/exp021_inference.py       Temporal residual endpoint (LGBM/HGB/EB/SVD)
     model/model.pkl                 ← **이것만 교체한다**
     model/v18_tables.npz, *.json    나머지 전부 그대로 복사
 

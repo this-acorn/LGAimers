@@ -1,20 +1,8 @@
 # -*- coding: utf-8 -*-
-"""[142] mk-isos 의 두 '구조 기술'을 우리 챔피언 위에서 검증 (Claude 소유, 학습 0)
+"""Evaluate low-rank interactions and source-season normalization.
 
-공개 저장소(mk-isos) 상승분의 정체는 새 정보가 아니라 **정규화·선택 방식**이었다. 우리가 안 쓴 두 가지:
-
-  ① SRC  source-season 평균 — 냉동 표를 과거 전체에서 한 번 추정하지 않고, 과거 **각 시즌에서 따로 추정해
-         균등 평균**한다. 레짐 변화에 덜 흔들린다. (그들 EXP-019 Team EB 방식)
-  ② LR   저랭크 공유 — `투수 × 24문맥(카운트 12 × 타자손 2)` 잔차 행렬을 만들어 **rank-r SVD** 로 압축.
-         얇은 셀을 개별 추정하는 대신 투수들이 소수의 공통 '문맥 반응 패턴'을 공유한다. (그들 EXP-020, rank 6)
-         우리가 얇은 셀 때문에 15전 1승이었던 자리를, 키를 늘리는 대신 **모수를 줄여** 접근한다.
-
-기준선은 현 챔피언의 V18 보정(γ=0.30) 적용 후이며, 두 기술 모두 **그 위에 얹는 추가 항**으로 검증한다.
-게이트는 exp/107·109 와 동일: 2021~2023 leave-one-year-out 으로 강도(및 rank)를 잠그고, 통과 시에만
-exact CAT5 2022/2023/2024 로 확인. 학습·zip·제출 없음.
-
-실행: PYTHONIOENCODING=utf-8 python -u exp/142_lowrank_and_srcseason.py   (~5분)
-출력: lab/142_lowrank_srcseason.txt / .json
+Compare the two structural corrections against the existing multiclass and
+hierarchical baseline using saved predictions and matching validation rows.
 """
 
 from __future__ import annotations

@@ -1,5 +1,0 @@
-arm=A merge=None nfeat=82 solo=[829.39, 837.79] ens=854.6 seedmean=833.6 proj8=870.3 pen=38.2 paired=[-21.83, -18.67] shape=-18.2 d=-19.3 K=49.4
-arm=B merge=None nfeat=81 solo=[852.22, 835.26] ens=861.7 seedmean=843.7 proj8=875.1 pen=42.1 paired=[1.0, -21.2] shape=-7.2 d=-12.3 K=41.8
-arm=M4 merge=1 nfeat=79 solo=[842.68, 841.44] ens=861.3 seedmean=842.1 proj8=875.8 pen=38.2 paired=[-8.54, -15.02] shape=-11.4 d=-12.6 K=40.9
-arm=OH merge=None nfeat=79 solo=[845.37, 850.32] ens=867.8 seedmean=847.8 proj8=882.7 pen=45.0 paired=[-5.85, -6.14] shape=+1.8 d=-6.2 K=41.8
-arm=CTR1 merge=None nfeat=79 solo=[840.92, 858.22] ens=871.2 seedmean=849.6 proj8=887.4 pen=42.7 paired=[-10.3, 1.76] shape=+3.0 d=-2.7 K=42.8

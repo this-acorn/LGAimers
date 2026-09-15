@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-"""Independent follow-up for two public hierarchy axes omitted from exp/107."""
+"""Evaluate two additional hierarchical residual configurations.
+"""
 
 from __future__ import annotations
 

@@ -1,5 +1,0 @@
-EXP171 saved EXP170 three-year route audit
-2022 F-route d=+75.840169 K=70.225199 w=+1.039978 early=+136.907721 late=+12.718035 CI=[+46.920143,+106.523865]
-2023 F-route d=+122.245658 K=28.712796 w=+2.628766 early=+140.977140 late=+103.366367 CI=[+90.375703,+157.396358]
-2024 F-route d=-736.297338 K=609.761805 w=-0.103758 early=-863.052216 late=-570.811869 CI=[-944.682191,-554.554066]
-decision=FAIL_NO_DEPLOY_NO_ZIP checks={'raw_gain_ge_20': False, 'early_positive': False, 'late_positive': False, 'pitcher_p025_positive': False}

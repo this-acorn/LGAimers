@@ -1,20 +1,10 @@
 # -*- coding: utf-8 -*-
-"""Strict forward diagnostic for a robust conditional Tensor-EB residual.
+"""Forward validation of a conditional Tensor-EB residual.
 
-This is an original implementation from the method specification published in
-calico-cat17/LG-Aimers-9th issue #5.  It does not import or copy third-party
-source, model files, or predictions.  It reads only official train rows and
-the frozen OOF arrays already present in this workspace.
-
-Protocol (fixed before opening 2024 results):
-  * learn three zero-prior EB residual tables on 2022 R rows and apply to 2023;
-  * learn a pitcher reliability map from the resulting 2023 row losses;
-  * relearn the same EB tables on 2023 R rows and apply the frozen reliability
-    map to 2024 R rows;
-  * F rows remain exactly equal to the current blended OOF baseline.
-
-No test data, deployable model, ZIP, leaderboard value, or submission is read
-or produced by this script.
+Fit three zero-prior residual tables on 2022 regular-season rows and evaluate
+on 2023. Estimate pitcher reliability from 2023 losses, refit the tables on
+2023, and apply the frozen reliability map to 2024. Other game types retain
+the baseline prediction. Inputs are official training rows and saved OOFs.
 """
 
 from __future__ import annotations
@@ -407,7 +397,7 @@ def main() -> None:
         "reads_test": False,
         "uses_lb": False,
         "third_party_code_or_artifacts_read": False,
-        "method_source": "calico-cat17/LG-Aimers-9th issue #5 prose specification",
+        "method_source": "Conditional Tensor-EB residual specification",
         "protocol": {
             "tensor_specs": [
                 {"name": name, "keys": list(keys), "weight": weight, "alpha": alpha}

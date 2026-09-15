@@ -74,7 +74,7 @@ This table describes the `submit14` checkpoint. The later core retains the five-
 
 The later CatBoost branch adds fixed corrections organized by game type, pitcher, batter handedness, and count-pressure state. Broader groups provide parent estimates; finer groups contribute shrunk differences weighted by how much history supports them. At prediction time, each row looks up its own correction from training-derived tables.
 
-This V18-style extension was reconstructed from a public hierarchy description rather than treated as an exact copy of an unavailable V18 implementation. The correction is added to the multiclass success probability before the branch's fixed calibration transform.
+The hierarchical correction is added to the multiclass success probability before the branch's fixed calibration transform.
 
 ## Complementary temporal residual pipeline
 

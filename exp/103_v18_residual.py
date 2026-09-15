@@ -1,30 +1,10 @@
 # -*- coding: utf-8 -*-
-"""
-[103] Public V18-style hierarchical conditional residual pre-gate.
+"""Hierarchical conditional residual validation.
 
-This is a reproducible, read-only validation step.  It does not train a model,
-build a submission, or use test rows.  For validation year Y every lookup is
-computed from train rows with season < Y.
-
-The public repository does not contain the real V18 implementation.  This file
-therefore tests only the smallest reconstructable proxy from its later public
-hierarchy:
-
-  (game_type, pitcher)
-    -> (game_type, pitcher, batter_hand)
-      -> (game_type, pitcher, pressure_state, batter_hand)
-
-For each child level we form a shrunk delta from its parent and multiply it by
-the child's reliability.  The final correction is the sum of those two trusted
-deltas.  Gamma is selected using 2021-2023 only; 2024 is evaluated afterwards.
-
-Outputs:
-  lab/103_v18_pregate.txt
-  lab/103_v18_pregate.json
-  lab/103_v18_effect_2024.npy
-
-Run:
-  PYTHONIOENCODING=utf-8 py -3.12 -u exp/103_v18_residual.py
+For validation year Y, construct lookups from seasons before Y. Shrink
+pitcher/handedness and pressure-state effects toward broader parent groups,
+then combine the reliability-weighted differences. Select gamma using
+2021-2023 and evaluate the frozen setting on 2024.
 """
 
 from __future__ import annotations

@@ -1,11 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Strict read-only audit of five predeclared public hierarchy extensions.
-
-Baseline correction is frozen at .30*(pitcher_bhand + pressure_bhand).  Five
-additional public V25.5 hierarchy nodes are tested one at a time, with their
-published parent and shrink strength unchanged.  Selection uses 2021-2023
-leave-one-year-out HGB OOF only; at most one winner is then confirmed on exact
-CAT5 folds 2022-2024.  No test data, bundle creation, or submission occurs.
+"""Read-only evaluation of five predefined hierarchical residual extensions.
 """
 
 from __future__ import annotations

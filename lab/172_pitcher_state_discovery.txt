@@ -1,4 +1,0 @@
-EXP172 centered pitcher season-state discovery (2022 -> 2023)
-best={'alpha': 1200.0, 'scale': 0.25, 'coverage': 0.7795988188575501, 'gain': -2.4610487843634843, 'F': 2.907566114452493, 'R': -3.0874403658564233, 'early': 3.5423188830430234, 'late': -8.518596841877724, 'effect_std': 0.002067279812130593}
-bootstrap={'clusters': 382, 'p025': -11.552527351000585, 'median': -2.1377017562435516, 'p975': 6.062325688006843, 'prob_positive': 0.3172}
-FINAL: FAIL_DO_NOT_OPEN_2024

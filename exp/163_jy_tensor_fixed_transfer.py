@@ -1,21 +1,10 @@
 # -*- coding: utf-8 -*-
-"""Fixed-spec forward audit of the public JY Tensor-EB method.
+"""Forward validation of a fixed Tensor-EB residual configuration.
 
-This is an original implementation from the aggregate method description in
-calico-cat17/LG-Aimers-9th issue #6.  It reads official train rows and our own
-saved OOF predictions only.  No third-party code, model, prediction, or ZIP is
-loaded.
-
-The candidate specification is frozen before evaluating 2024:
-
-* R rows only; F rows are exact fallback to the current clean OOF anchor.
-* Three zero-prior residual EB tables, using all seasons before the target.
-* Component weights (0.50, 0.40, 0.10), global scale 0.58, no gate.
-* Original shrinkage alphas (500, 1000, 500).
-
-The script also reports the publicly described 0.40 and 0.55 scales as
-diagnostics, but deployment eligibility is decided solely by the frozen 0.58
-candidate and requires positive 2023 and 2024 transfer.
+Use regular-season rows, three zero-prior empirical-Bayes tables, component
+weights (0.50, 0.40, 0.10), shrinkage (500, 1000, 500), and scale 0.58.
+Compare additional fixed scales as diagnostics; freeze the candidate before
+2024 evaluation and require positive transfer in both validation years.
 """
 
 from __future__ import annotations

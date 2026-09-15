@@ -1,17 +1,7 @@
-"""Build a row-local blend of the frozen affine champion and an external endpoint.
+"""Build a row-independent blend of two frozen prediction endpoints.
 
-The two original submission bundles are preserved under separate directories.
-At inference time the root wrapper runs them sequentially, aligns predictions by
-``row_id`` against ``sample_submission.csv``, and writes their weighted average.
-
-Example (JY endpoint, 50:50 probe)::
-
-    python exp/188_build_external_blend.py \
-      --endpoint-zip reference/calico_JY_lfs_download/final/sub_JY_team_residual_scale015.zip \
-      --weight 0.5 --name probe_affine_jy_w050
-
-For the JM bundle, ``--endpoint-scale`` updates only the frozen top-level scale
-in ``model/r_residual_manifest.json`` before packaging.
+Package the selected endpoint archives, align predictions by row ID, and
+combine them using a fixed blend weight.
 """
 
 from __future__ import annotations

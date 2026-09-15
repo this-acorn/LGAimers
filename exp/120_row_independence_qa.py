@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-
-"""[120] 현 챔피언 제출물의 행 독립성 QA 매트릭스 — 실격 방어용 (Claude, 읽기 전용)
+"""Validate row-independent inference for a selected submission archive.
 
-mk-isos 공개 저장소의 QA 개념(배치/단일/역순/무작위순열/분할/중복 6케이스, tol 1e-12)을 우리 제출물에 적용한다.
-대회 규정 4)의 "각 행은 독립적인 예측 대상"을 만족하는지 = 행 순서·동반 행 구성이 바뀌어도 같은 row_id 의
-예측이 비트 단위로 같은지 확인한다. 기존 exp/102 프로브(앞 1,000행 vs 전체)보다 강한 검사다.
-
-대상 ZIP 은 --zip 으로 받는다(기본 candidate_v18g030.zip = 현 챔피언 LB 1092.808).
-★ ZIP 을 수정·재빌드하지 않는다. 임시 폴더에 풀어서 실행만 한다.
-실행: PYTHONIOENCODING=utf-8 python -u exp/120_row_independence_qa.py [--zip candidate_v18g030.zip] [--n 4000]
+Compare batch, singleton, reverse-order, shuffled, split, and duplicated-row
+execution with an absolute tolerance of 1e-12. Extract and execute the chosen
+ZIP in a temporary directory without rebuilding it.
 """
 
 _PROJECT_ROOT = __import__("pathlib").Path(__file__).resolve().parents[1]

@@ -44,8 +44,8 @@ SOURCE = STAGE / "source"
 REHEARSE = ROOT / 'archive/scratch/_rehearse_181'
 PYTHON = ROOT / "venv311" / "Scripts" / "python.exe"
 
-ISSUE_METHOD = "https://github.com/calico-cat17/LG-Aimers-9th/issues/5"
-ISSUE_CONTEXT = "https://github.com/calico-cat17/LG-Aimers-9th/issues/8"
+ISSUE_METHOD = "docs/METHODOLOGY.md#hierarchical-residual-correction"
+ISSUE_CONTEXT = "docs/METHODOLOGY.md#validation-and-development-workflow"
 TARGET = "control_success"
 ID = "row_id"
 

@@ -15,7 +15,7 @@ See [methodology](../docs/METHODOLOGY.md) for the modeling details and [developm
 
 ## Running selected work
 
-Run scripts from the repository root in the matching Python environment. Training requires the competition data and may require earlier local artifacts recorded in the [manifest](../artifacts/manifest.json). Many historical scripts execute training immediately when run or imported; inspect their arguments and expected inputs first.
+Run scripts from the repository root in the matching Python environment. Training requires competition data and may also require local OOF predictions or supplementary experiment sources. The [artifact guide](../artifacts/README.md) covers inference-package assets. Many historical scripts execute training immediately when run or imported; inspect their arguments and expected inputs first.
 
 ```bash
 python exp/54_train_mc79.py

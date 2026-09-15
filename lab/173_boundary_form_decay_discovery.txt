@@ -1,4 +1,0 @@
-EXP173 season-boundary form decay (2022 -> 2023)
-best={'tau': 500.0, 'scale': 0.5, 'coverage': 0.7671235108441096, 'gain': 6.485058846927849, 'F': 0.0, 'R': 7.243055101469054, 'early': 11.548158155050288, 'late': 1.377664789226074, 'effect_std': 0.003648328671844776}
-bootstrap={'clusters': 382, 'p025': -4.517817772196867, 'median': 6.116222879978627, 'p975': 19.631839473427032, 'prob_positive': 0.8664}
-FINAL: FAIL_DO_NOT_OPEN_2024

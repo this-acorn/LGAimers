@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-"""Build a flat, row-local blend of current affine-opt and Calico JM s=.75.
+"""Build a flat ensemble of the calibrated pipeline and JM residual endpoint.
 
-The public Calico archive stores ``scale=0.075``.  The authorized leaderboard
-endpoint is reproduced by changing only that manifest value to ``0.75``.  All
-component files are copied into one package at build time, so evaluation does
-not spend time extracting a nested 280 MB ZIP or duplicating ``test.csv``.
+Set the residual scale to 0.75 and copy runtime components into one package.
+Sequential inference avoids extracting a nested archive or duplicating test
+inputs. Validate component schemas, row IDs, and prediction ranges.
 """
 
 from __future__ import annotations

@@ -6,12 +6,12 @@ Predict pitch-control success from pre-pitch game context and player history. De
 
 ## Approach
 
-- **Features:** count states, handedness, runners, smoothed player history, current-season form, and pitch-mix estimates.
-- **Core model:** five-class CatBoost with eight-seed averaging and native categorical team features; return the success-class probability.
-- **Residual learning:** hierarchical corrections, LightGBM/HGB residual models, team effects, and low-rank interactions.
-- **Ensembling:** combine complementary prediction pipelines with fixed probability calibration and blend weights.
-- **Validation:** chronological backtests, matched-seed comparisons, feature ablations, and Brier-loss analysis.
-- **Inference:** shared feature logic, frozen training artifacts, and independent predictions for each input row.
+- **Feature engineering:** encoded count states, handedness, runners, smoothed player history, current-season form, and pitch-mix estimates.
+- **Modeling:** trained five-class CatBoost models with eight-seed averaging and categorical team features; predicted the success-class probability.
+- **Residual learning:** evaluated hierarchical corrections, LightGBM/HGB residuals, team effects, and low-rank interactions.
+- **Ensembling:** combined complementary predictions with fixed calibration and blend weights.
+- **Validation:** used chronological backtests, matched-seed comparisons, feature ablations, and Brier-loss analysis.
+- **Inference:** packaged shared feature logic and frozen artifacts for independent predictions on each row.
 
 **Stack:** Python, pandas, NumPy, scikit-learn, CatBoost, LightGBM, joblib.
 
@@ -44,9 +44,6 @@ exp/                    Experiment scripts and shared utilities
 submissions/            Earlier inference packages and preserved checkpoints
 candidates/             Late-stage ensemble inference packages
 probes/                 Calibration and blend probes
-handoffs/               GPU and team experiment work
 tools/                  Inference and packaging commands
-lab/                    Experiment reports
 artifacts/              Archive inventory and local artifact locations
-archive/                Earlier local automation
 ```

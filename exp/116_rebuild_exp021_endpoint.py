@@ -105,7 +105,7 @@ def check_sources() -> dict[str, str]:
 
 
 def windows_smoke_test(archive_path: Path) -> dict[str, object]:
-    """Equivalent to the upstream smoke test without a privileged symlink."""
+    """Run package smoke validation without requiring a privileged symlink."""
     with tempfile.TemporaryDirectory(prefix="exp021-smoke-win-") as raw:
         stage = Path(raw)
         with zipfile.ZipFile(archive_path) as archive:

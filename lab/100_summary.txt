@@ -1,6 +1,0 @@
-arm=C6 seeds=[42] ncls=6 solo=[834.6] paired=[-16.7] STOPPED after seed42 (rule: both seeds positive impossible) rookie=-14.9 vet=-1.8 F=-7.4 R=-9.3
-arm=IT seeds=[42, 7] ncls=5 solo=[851.22, 856.46] ens=873.9 seedmean=853.8 proj8=889.0 pen=37.0 paired=[-0.0, 0.0] shape=+0.0 d=+0.0 K=0.0
-arm=IT300 seeds=[42, 7] ncls=5 solo=[872.86, 872.39] ens=887.3 seedmean=872.6 proj8=898.4 pen=31.8 paired=[21.64, 15.93] shape=+8.3 d=+13.4 K=13.3
-arm=T13 seeds=[42] ncls=5 solo=[855.38] ens=855.4 seedmean=855.4 proj8=855.4 pen=52.8 paired=[-17.47] shape=+2.9 d=-17.5 K=91.5
-arm=HT(teamA,thread14) seeds=[42,7] solo=[834.7,833.5] ens=855.7 seedmean=834.1 proj8=871.8 pen=40.3 paired=[-16.5,-23.0] shape=-14.9 d=-18.3 K=49.4 REJECT
-arm=AUX5 seeds=[42] ncls=5 solo=[844.31] ens=844.3 seedmean=844.3 proj8=844.3 pen=43.9 paired=[-28.55] shape=-17.1 d=-28.5 K=65.2

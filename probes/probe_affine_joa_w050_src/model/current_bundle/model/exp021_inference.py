@@ -1,19 +1,11 @@
-"""EXP-021 계열 엔드포인트 추론 — 우리 팀 자체 구현.
+"""Temporal empirical-Bayes inference with additive residual corrections.
 
-이 파일은 `docs/EXP021_REIMPL_SPEC.md`(방법론 사양서)만 보고 처음부터 작성했다.
-공개 저장소(mk-isos)의 실험 기록에서 **방법론과 하이퍼파라미터를 참고**했으며,
-학습 산출물(model/ 아래 JSON·텍스트)은 대회 공식 데이터로 우리가 계산한 값이다.
+The pipeline combines a pitcher/batter seasonal base, grouped corrections,
+LightGBM and histogram-gradient-boosting residuals on regular-season rows,
+team effects, and low-rank interactions. Runtime state is loaded from model/.
 
-구조 — 해석식 베이스 위에 네 개의 가산 보정을 순차로 얹는다:
-
-    b_tmp  = 0.7·(투수 시즌 EB30) + 0.3·(타자 시즌 EB30)
-    b_grp  = clip(b_tmp + 0.7·group_base + 0.3·group_reverse)
-    b_bone = ½·clip(b_grp + 0.75·LGB잔차·1[R]) + ½·clip(b_grp + 1.00·HGB잔차·1[R])
-    b_team = clip(b_bone + ½·팀(투수)효과 + ½·팀(타자)효과)
-    p      = clip(b_team + 저랭크효과)
-
-행 간 독립성(대회 규칙): 모든 값은 (a) 그 행 자신의 컬럼과 (b) 학습에서 동결한 상수표로만
-계산된다. 평가 데이터의 다른 행·순서·분포를 참조하는 연산은 없다.
+Each prediction uses one input row and frozen training statistics; no
+cross-row test statistics are computed.
 """
 
 from __future__ import annotations

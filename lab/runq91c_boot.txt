@@ -1,8 +1,0 @@
-08-28 06:10:15 boot pid 4696
-08-28 06:15:56 addtype-fail Cannot convert argument "e", with value: "-2147483645", for "SetThreadExecutionState" to type "System.UInt32": "Cannot convert value "-2147483645" to type "System.UInt32". Error: "Value was either too large or too small for a UInt32."" pid 4696
-08-28 06:16:45 note-fail runq91c started (waiting for exp/91b arm D; takes over if runq91 dies) pid 4696
-08-28 06:16:45 note-ok pid 4696
-08-28 06:28:06 boot pid 27384
-08-28 06:28:08 addtype-ok pid 27384
-08-28 06:28:08 note-ok pid 27384
-08-28 08:03:26 end-91c-fail pid 27384

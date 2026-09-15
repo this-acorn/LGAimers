@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
-"""Exact OOF reproduction and diversity audit for public mk-isos EXP-021.
+"""Reproduce temporal-pipeline OOF predictions and evaluate ensemble diversity.
 
-The public repository does not track its generated ``.npy`` files.  This
-orchestrator runs the five documented prerequisite scripts in an isolated
-working copy, verifies the published rank-6 fold metrics, then measures the
-analytic blend geometry against our frozen CAT5+V18+affine OOF predictions.
-
-No deployment model, ZIP, test prediction, or leaderboard submission is made.
+Run the five prerequisite experiments in an isolated local working directory,
+verify fold metrics, and compare blend geometry against frozen multiclass,
+hierarchical, and affine-calibrated OOF predictions.
 """
 
 from __future__ import annotations
@@ -311,7 +308,7 @@ def write_report(payload: dict) -> None:
         encoding="utf-8",
     )
     lines = [
-        "exp/115 — mk-isos EXP-021 exact OOF reproduction × current champion",
+        "exp/115 — temporal OOF reproduction and baseline comparison",
         f"environment={payload['environment']}",
         "",
     ]
@@ -345,7 +342,7 @@ def main() -> None:
     if not (WORK / "data" / "train.csv").is_file():
         raise FileNotFoundError("isolated work copy is missing data/train.csv")
     if not CANONICAL.is_dir():
-        raise FileNotFoundError("canonical public repository is missing")
+        raise FileNotFoundError("required local experiment source is missing")
     environment = check_environment()
     write_log(f"environment exact: {environment}")
     stages = [run_stage(*stage) for stage in STAGES]
