@@ -14,4 +14,4 @@ Each package contains a standalone inference script, pinned dependencies, and a 
 | **`submit14_src/`** | **Reproducible five-class, 79-feature CatBoost checkpoint** |
 | `submit15_src/` | Three-way binary-model blend |
 
-See the root [README](../README.md#run-the-included-reference-model) for checkpoint inference and the [methodology](../docs/METHODOLOGY.md) for later development through the final local ensemble. Historical ZIPs are in [artifacts/submissions/](../artifacts/submissions/); source folders may reflect development after an earlier ZIP was created.
+See the root [README](../README.md#run-the-included-checkpoint) for checkpoint inference and the [methodology](../docs/METHODOLOGY.md) for later development through the final local ensemble. Historical ZIPs are in [artifacts/submissions/](../artifacts/submissions/); source folders may reflect development after an earlier ZIP was created.

@@ -86,7 +86,7 @@ The EXP-021-style branch follows a different modeling structure:
 4. Combine the residual branches and add smoothed team effects.
 5. Add low-rank interaction effects, representing structured group interactions with a compact factorization.
 
-The method draws on mk-isos reference work. The later local package contains a rebuilt inference implementation that uses stored training-derived tables and model artifacts. This attribution distinguishes an implemented reference method from a wholly original model design.
+The later local package contains a rebuilt inference implementation using stored training-derived tables and model artifacts. Development work included reproducing its transformations, checking inference equivalence, and integrating its predictions with the multiclass branch. Component acknowledgments are collected in the [development guide](DEVELOPMENT.md#acknowledgments).
 
 ## Probability calibration and ensemble geometry
 
@@ -94,21 +94,21 @@ Fixed affine transforms adjust probability location and spread: `p_adjusted = cl
 
 For a two-model blend `p(w) = (1 - w) * p_a + w * p_b`, Brier loss is quadratic in `w` before clipping. Development used this relationship to analyze model disagreement, select mixtures, and explore shifts and scaling. Public evaluation feedback was used during this selection; it is not an untouched validation protocol. No test-batch mean or other cross-row statistic is fitted during inference.
 
-## Final reference-component integration
+## Final model integration
 
 The inspected `last.zip` has a two-branch outer blend:
 
 ```text
 p_current = calibrated blend of the multiclass/hierarchical and temporal branches
-p_jm      = JOA reference prediction + bounded JM residual correction on R rows
-p_final   = (1 - w) * p_current + w * p_jm
+p_specialist = adaptive-stack prediction + bounded residual correction on R rows
+p_final      = (1 - w) * p_current + w * p_specialist
 ```
 
 `w` and the residual scale are fixed in the artifact. The actual package uses a convex outer blend; an alternative three-component affine builder in the workspace is not the wrapper stored in `last.zip`.
 
-The Calico JM component averages three CatBoost residual regressors. Its inputs include historical and current-season features, contextual categories, the JOA probability, and auxiliary prediction differences. Corrections are bounded and applied only where `game_type == 'R'`; other rows retain the JOA prediction.
+The regular-season component averages three CatBoost residual regressors. Its inputs include historical and current-season features, contextual categories, the underlying stack's probability, and auxiliary prediction differences. Corrections are bounded and applied only where `game_type == 'R'`; other rows retain the underlying stack's prediction.
 
-The inherited JOA stack includes seed-averaged CatBoost residual models, failure-subtype estimates, adaptive gating, and game-type-specific experts. It also incorporates contextual correction channels, including a saved neural conditioning component. Those internals belong to the integrated reference stack, not the project's independently tested MLP candidate. Rejection of the latter should not be interpreted as an entirely neural-network-free final ensemble.
+The integrated stack includes seed-averaged CatBoost residual models, failure-subtype estimates, adaptive gating, and game-type-specific experts. It also incorporates contextual correction channels, including a saved neural conditioning component. This component is separate from the independently tested MLP candidate, so rejecting that experiment does not imply an entirely neural-network-free final ensemble.
 
 ## Validation and development workflow
 

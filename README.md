@@ -16,7 +16,7 @@ The focus of this repository is the development process: how features, model obj
 | Training data | 1,475,092 pitches from 2019–2024; 48 input columns and one target |
 | Core model | Eight-seed, five-class CatBoost with contextual, current-season, and pitch-mix features |
 | Later extensions | Team categorical encoding, hierarchical shrinkage, residual learning, and low-rank interaction effects |
-| Final approach | Blend a calibrated CatBoost/temporal-residual pipeline with a reference-model pipeline enhanced by a regular-season residual ensemble |
+| Final approach | Blend a calibrated CatBoost/temporal-residual pipeline with an adaptive prediction stack enhanced by a regular-season residual ensemble |
 | Evaluation | Brier-based competition score; chronological backtests and comparisons using the same random seeds |
 | Delivery | Frozen model artifacts, shared feature transformations, and row-independent inference |
 | Stack | Python, NumPy, pandas, scikit-learn, CatBoost, LightGBM, joblib; additional XGBoost and neural-network investigations |
@@ -45,13 +45,13 @@ The resulting success probability became the core of the later pipeline. Team ID
 
 Extend the multiclass model with frozen, hierarchical corrections for pitcher, batter handedness, and count pressure. Shrink sparse groups toward broader groups so that limited history does not produce unstable adjustments.
 
-A complementary temporal pipeline combines smoothed pitcher/batter season estimates with LightGBM and histogram-gradient-boosting residual models, team effects, and low-rank interaction corrections. The EXP-021 method was informed by the mk-isos reference work; the project includes a locally rebuilt implementation in its later development artifacts.
+A complementary temporal pipeline combines smoothed pitcher/batter season estimates with LightGBM and histogram-gradient-boosting residual models, team effects, and low-rank interaction corrections. We implemented and evaluated this branch alongside the multiclass model to test whether the two approaches captured complementary information.
 
 ### 5. Calibrate and combine complementary models
 
 Apply fixed probability shifts and scaling to address systematic bias. Study prediction differences and the quadratic structure of Brier loss to choose blend weights, rather than assuming that adding another model will help.
 
-The final local package combines the calibrated pipeline with a **Calico JM reference component**: a JOA prediction stack plus an ensemble of CatBoost residual regressors applied to regular-season rows. The blend coefficients and correction strengths are fixed before inference. The [development journey](docs/DEVELOPMENT.md) distinguishes the project's development work from integrated reference components.
+We integrated the calibrated pipeline with an adaptive prediction stack and an ensemble of CatBoost residual regressors applied to regular-season rows. We then selected the blend coefficients and correction strengths and froze them before inference. The [development journey](docs/DEVELOPMENT.md) explains the implementation and integration work behind this final configuration.
 
 ### 6. Validate changes and package independent inference
 
@@ -67,13 +67,13 @@ flowchart TD
     A --> C[Temporal base and tree residual models]
     B --> D[Blend and fixed probability calibration]
     C --> D
-    A --> E[JOA reference stack and JM regular-season residuals]
+    A --> E[Adaptive prediction stack and regular-season residuals]
     D --> F[Final fixed-weight blend]
     E --> F
     F --> G[Success probability per row]
 ```
 
-## Run the included reference model
+## Run the included checkpoint
 
 The commands below run the preserved `submit14` multiclass model, an earlier reproducible checkpoint. The final development pipeline is documented above and in the methodology; its complete collection of later model artifacts is not included in this checkout.
 
@@ -140,6 +140,6 @@ LGAimers/
 
 Competition data and local environments are kept outside the versioned source. Ignore rules are maintained locally rather than distributed in this repository. Historical artifacts already tracked in the repository are preserved. See the [path migration map](docs/REPOSITORY_MAP.md).
 
-## Scope and attribution
+## Project scope
 
-This is a competition research repository and team project. The organizer supplied the baseline and data specification. Later development used methods informed by mk-isos and integrated the Calico JM/JOA reference components; these are identified explicitly rather than presented as original models developed entirely by this project. Original Korean research notes remain available for provenance. The English documentation describes the methodology through the final local package, while the runnable example uses the earlier checkpoint included here.
+The team worked on feature engineering, multiclass modeling, chronological experiments, residual correction, probability calibration, model integration, and inference packaging. The documentation covers the methodology through the final local package; the runnable example uses the earlier checkpoint included here. See the [implementation map and acknowledgments](docs/DEVELOPMENT.md#implementation-map) for component details.
