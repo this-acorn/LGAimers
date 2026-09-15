@@ -1,0 +1,32 @@
+{
+  "artifact": "C:\\Users\\gwonn\\Desktop\\open\\candidate_exp021_w0356557_v002.zip",
+  "sha256": "c080da7e82b1707e091501b9ba0d58bcd18cbebf9b73a975dbcee3a87c0f330b",
+  "bytes": 12408198,
+  "parent_sha256": "32d7f275afd34134ecd34891e67b3128b20d817732364507b3f4fbe2f1630faf",
+  "weights": {
+    "champion": 0.6434428305247574,
+    "exp021_strict": 0.35655716947524263
+  },
+  "measured_K": 171.5001496146865,
+  "projected_score": 1114.611684697336,
+  "entries": [
+    "script.py",
+    "requirements.txt",
+    "model/blend_metadata.json",
+    "model/champion_inference.py",
+    "model/exp021_inference.py",
+    "model/feature_schemas.json",
+    "model/group_effects.json",
+    "model/histgradientboosting.json",
+    "model/history_state.json",
+    "model/lowrank_effects.json",
+    "model/metadata.json",
+    "model/model.pkl",
+    "model/multirate_state.json",
+    "model/pitcher_count_effects.json",
+    "model/rfull_lightgbm.txt",
+    "model/team_effects.json",
+    "model/v18_tables.npz"
+  ],
+  "crc": "passed"
+}

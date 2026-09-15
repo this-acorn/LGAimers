@@ -1,0 +1,10 @@
+=== exp156 clean-room fine-pitch failure prior ===
+DIAGNOSTIC ONLY: no current validation pitch type/test/model/ZIP/LB
+match={'matched_rows': 804036, 'matched_rate': 0.5450751546344228, 'unique_join_keys': 804036, 'fine_types': ['ChangeUp', 'Changeup', 'Curveball', 'Cutter', 'Fastball', 'Four-Seam', 'OTHER', 'Other', 'Sinker', 'Slider', 'Splitter', 'Undefined']}
+selected on 2023: success ridge=1.0
+2023 transfer: {'raw_gain': 0.723372268707223, 'equal_mean_shape_gain': 0.5537883162709534, 'F_contribution': 0.4020838455109239, 'R_contribution': 0.3212884231892311, 'mean_shift': -5.5955619756686836e-05, 'effect_std': 0.0014946263759979994, 'effect_mean_abs': 0.0007997946635695132}
+refit coefficients: [0.3271155175573227]
+untouched 2024: {'raw_gain': 2.652680362080787, 'equal_mean_shape_gain': 2.590032499261156, 'F_contribution': 0.032744165625530966, 'R_contribution': 2.6199361964600314, 'mean_shift': -1.802670351458424e-05, 'effect_std': 0.001018081475312305, 'effect_mean_abs': 0.00047768884912230067}
+2024 scalar oracle (diagnostic only): {'beta': 3.6956425362640024, 'gain': 5.668610900766453}
+FINAL: FAIL_NO_SUBMISSION
+elapsed=27.52s

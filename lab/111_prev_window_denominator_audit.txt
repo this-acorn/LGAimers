@@ -1,0 +1,26 @@
+[    0.0s] === exp/111 prev-window denominator audit ===
+[    0.0s] No model training, no test data, no submission. Discovery=2020-21; report=2022-24.
+[    0.0s] Loading main train columns...
+[   18.6s] Main rows=1,475,092, pitchers=792
+[   23.7s] Segments=45,862; median n=19.0; counter-size agreement=1.0000; middle-count coverage=0.9827
+[   23.7s] TrackMan game/date anchor loading...
+[   56.8s] Strict 1:1 matched rows=803,940; valid anchored segments=35,651 (77.7%)
+[   72.2s] Locking decoder rules on 2020-2021 only...
+[   72.7s]   prev1: discovery n=10,941, tol=5.44e-07, max_n=145, rule=smallest, candidate=100.0%, unique=14.8%
+[   73.2s]   prev3: discovery n=9,213, tol=5.48e-07, max_n=395, rule=smallest, candidate=100.0%, unique=15.0%
+[   73.6s]   prev5: discovery n=7,893, tol=5.50e-07, max_n=638, rule=smallest, candidate=100.0%, unique=15.1%
+[   73.6s] Untouched 2022/2023/2024 reports...
+[   73.7s]   2022 prev1: samples=5,178, coverage=100.0%, unique=15.4%, exact_n(decoded)=81.9%, n_MAE=3.30, count exact S/M=82.2%/87.0%, official truth <=1e-5=100.0%
+[   73.8s]   2022 prev3: samples=4,210, coverage=100.0%, unique=15.6%, exact_n(decoded)=84.2%, n_MAE=9.08, count exact S/M=84.2%/84.4%, official truth <=1e-5=100.0%
+[   73.9s]   2022 prev5: samples=3,474, coverage=100.0%, unique=15.7%, exact_n(decoded)=83.3%, n_MAE=15.62, count exact S/M=83.3%/83.4%, official truth <=1e-5=100.0%
+[   74.0s]   2023 prev1: samples=5,249, coverage=100.0%, unique=14.9%, exact_n(decoded)=82.3%, n_MAE=3.12, count exact S/M=82.6%/86.7%, official truth <=1e-5=100.0%
+[   74.2s]   2023 prev3: samples=4,219, coverage=100.0%, unique=15.1%, exact_n(decoded)=83.2%, n_MAE=9.53, count exact S/M=83.2%/83.4%, official truth <=1e-5=100.0%
+[   74.3s]   2023 prev5: samples=3,474, coverage=100.0%, unique=15.4%, exact_n(decoded)=84.0%, n_MAE=15.67, count exact S/M=84.0%/84.0%, official truth <=1e-5=100.0%
+[   74.4s]   2024 prev1: samples=5,474, coverage=100.0%, unique=14.2%, exact_n(decoded)=83.3%, n_MAE=3.05, count exact S/M=83.7%/86.9%, official truth <=1e-5=100.0%
+[   74.5s]   2024 prev3: samples=4,400, coverage=100.0%, unique=14.4%, exact_n(decoded)=82.4%, n_MAE=9.42, count exact S/M=82.4%/82.7%, official truth <=1e-5=100.0%
+[   74.6s]   2024 prev5: samples=3,597, coverage=100.0%, unique=14.0%, exact_n(decoded)=83.2%, n_MAE=15.04, count exact S/M=83.2%/83.2%, official truth <=1e-5=100.0%
+[   74.6s] AUDIT GATE PASS: min coverage=100.0%, min exact_n=81.9%, min truth agreement=100.0%
+
+Decoder JSON contains full per-year/per-window metrics and locked rules.
+JSON: lab\111_prev_window_denominator_audit.json
+TXT:  lab\111_prev_window_denominator_audit.txt

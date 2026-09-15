@@ -1,0 +1,2 @@
+arm C (A+B) auto-skipped at 08-29 03:33: arm A paired mean -20.2 <= -10.
+lab/93_C.npy is an EMPTY marker so runq93 skips C. Delete both files before running C for real.

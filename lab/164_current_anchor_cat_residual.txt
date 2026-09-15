@@ -1,0 +1,11 @@
+=== exp164 current-anchor R-only CatBoost residual ===
+params={'iterations': 500, 'depth': 7, 'learning_rate': 0.035, 'l2_leaf_reg': 20.0, 'loss_function': 'RMSE', 'verbose': False, 'allow_writing_files': False, 'thread_count': 14} seeds=(42,) year_decay=0.65
+2023 curve: s=0.000:+0.000 s=0.050:-4.706 s=0.075:-7.698 s=0.100:-11.115 s=0.150:-19.229 s=0.200:-29.046 s=0.300:-53.793 s=0.500:-123.733 s=0.750:-249.495 s=1.000:-417.856
+locked scale=0.000 selected={'scale': 0.0, 'raw_gain': 0.0, 'equal_mean_shape_gain': 0.0, 'F_contribution': 0.0, 'R_contribution': 0.0, 'mean_shift': 0.0, 'effect_std': 0.0, 'effect_mean_abs': 0.0}
+2024 fixed confirmation={'raw_gain': 0.0, 'equal_mean_shape_gain': 0.0, 'F_contribution': 0.0, 'R_contribution': 0.0, 'mean_shift': 0.0, 'effect_std': 0.0, 'effect_mean_abs': 0.0}
+2024 diagnostic curve: s=0.000:+0.000 s=0.050:-1.368 s=0.075:-2.613 s=0.100:-4.233 s=0.150:-8.597 s=0.200:-14.458 s=0.300:-30.675 s=0.500:-81.083 s=0.750:-177.795 s=1.000:-311.955
+2024 early=+0.000 late=+0.000
+bootstrap={'draws': 3000, 'pitchers': 391, 'median': 0.0, 'p025': 0.0, 'p975': 0.0, 'prob_positive': 0.0}
+fit seconds 2023=[699.703565120697] 2024=[1117.2155213356018]
+FINAL: FAIL_NO_SUBMISSION
+elapsed=1953.03s

@@ -1,0 +1,7 @@
+=== immutable repaired exp125 seed42 raw-state screen ===
+official train.csv only; no test, ZIP, submission, or overwrite of lab/104/lab/122
+canonical 2022: rows=247,472 row_id_sha256=ec6cf4eea953764dd4dd983b7a6336b1236b3cee65daf2ce6ac20e0b9f171e6a
+canonical 2023: rows=245,525 row_id_sha256=67b5eb970712b6b79380c9f1ffd4775ff32334424e3093b83fd502c420ed6e76
+canonical 2024: rows=253,507 row_id_sha256=e88cd681d0a64617f28c486dc3c8738eb231b09100b49b67daa242cfe75e2d51
+building corrected exact-hand 2022 fold
+TIMEBOX STOP: 2022 CAT5 did not complete the required 500 trees within timebox; trees=312

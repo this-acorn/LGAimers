@@ -1,0 +1,36 @@
+{
+  "experiment": 190,
+  "status": "BUILT_HOLD_PHASE_SIGN_LOTTERY",
+  "output": {
+    "path": "candidate_exp190_affine_tensor_phase_lottery.zip",
+    "bytes": 12661013,
+    "sha256": "C1F23DCA2A3771650D4865BBEEABC6688E3C3AA5AECAD4E545C6C6BE02E3584C"
+  },
+  "source": {
+    "path": "candidate_exp185_affine_tensor_s020_hold.zip",
+    "sha256": "16E26F90E5D6C98AFAFC357D631A5BC8179D663D8617F6121F4F435E45AD9030"
+  },
+  "smoke": {
+    "rows": 5,
+    "F_max_abs_difference": 0.0,
+    "early_R_mean_difference": -0.0007133244775134884,
+    "late_R_mean_difference": 2.6109028708920512e-05,
+    "anchor_seconds": 36.92742347717285,
+    "candidate_seconds": 38.99169063568115,
+    "candidate_log_tail": "Load model...\n  cb_models=8  features=79  prior=0.523766\nLoad test data...\n  test rows=5\nBuild features...\n  f_cs_p_rate coverage=80.0%\n  f_mixcg_fb coverage=40.0%  f_pfb mean=0.680\n  X=(5, 79)\nInference (8 models)...\n  cb model 1/8 done\n  cb model 2/8 done\n  cb model 3/8 done\n  cb model 4/8 done\n  cb model 5/8 done\n  cb model 6/8 done\n  cb model 7/8 done\n  cb model 8/8 done\n  multiclass P(success) averaged, version=target5_teamcat  ntree_end=500 shift=0.0066 tree_count=[500, 500, 500, 500, 500, 500, 500, 500]\n  V18 frozen residual gamma=0.3 coverage=20.0% effect mean=+0.003777 std=0.007553\n  pred mean=0.459146  min=0.387186  max=0.519495\nBuild submission...\n  sample_submission 순서 사용 (rows=5)\nSaved: ./output\\submission.csv  rows=5\n[LightGBM] [Warning] Ignoring unrecognized parameter 'bagging_by_query' found in model string.\n[LightGBM] [Warning] Ignoring unrecognized parameter 'early_stopping_min_delta' found in model string.\nSaved: output\\submission.csv | candidate=strict_lowrank_s300_r6 | rows=5 | mean=0.443329 | min=0.372917 | max=0.516242\nSaved: output\\submission.csv rows=5 early_scale=+0.58 late_scale=-0.20 R=5 mean_effect_R=-0.00101000 coverage={'pitcher_batter_hand': 0.2, 'pitcher_count_base': 0.2, 'hand_count_base': 1.0}\n"
+  },
+  "row_independence_qa": {
+    "rows": 30,
+    "cases": [
+      "reverse",
+      "random_permutation",
+      "split",
+      "singleton",
+      "duplicate",
+      "small_batch"
+    ],
+    "max_absolute_difference": 0.0,
+    "passed": true
+  },
+  "submission_performed": false
+}

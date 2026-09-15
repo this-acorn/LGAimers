@@ -1,0 +1,320 @@
+================================================================================================
+CODEX low-rank pitcher-batter residual matchup probe
+mode=FULL, threads=1, process_priority=BelowNormal
+selection: 2021->2022 and 2021~22->2023 only; 2024 untouched confirmation
+correction: pure centered u_pitcher dot v_batter; additive player effects are discarded
+================================================================================================
+load 2021: n=247,088, y_rate=0.532762, base=1249.74, residual_mean=-2.139e-17
+load 2022: n=247,472, y_rate=0.528920, base=2283.26, residual_mean=-9.130e-18
+load 2023: n=245,525, y_rate=0.499957, base=-1408.44, residual_mean=-1.621e-17
+load 2024: n=253,507, y_rate=0.486105, base=699.49, residual_mean=-2.595e-17
+load 2024 champion: n=253,507, score=873.92
+prepare (2021,): rows=247,088, pitchers=386, batters=398, pairs=26,050, pair-MSE raw=0.03031277 -> after additive=0.02801511
+prepare (2021, 2022): rows=494,560, pitchers=515, batters=511, pairs=42,904, pair-MSE raw=0.02443268 -> after additive=0.02339628
+
+================================================================================================
+HYPERPARAMETER SELECTION (2024 is not read here)
+================================================================================================
+
+  rank=2, ridge=0.3
+      seed=42: interaction train pair-MSE=0.02538322, effect_std=0.048073734
+      seed=7: interaction train pair-MSE=0.02534952, effect_std=0.048169609
+      validation 2022: known_both=66.12%, unseen_pair_among_known=40.71%
+      validation 2022: residual/effect corr=-0.000965, unconstrained beta*=-0.013685, gain*=+0.097
+      seed=42: interaction train pair-MSE=0.02166714, effect_std=0.041817403
+      seed=7: interaction train pair-MSE=0.02166375, effect_std=0.041854043
+      validation 2023: known_both=75.48%, unseen_pair_among_known=35.34%
+      validation 2023: residual/effect corr=-0.000134, unconstrained beta*=+0.000965, gain*=+0.000
+      gamma=0.00: gain22=  -0.039, gain23=  -0.001, mean=  -0.020, stable=False
+      gamma=0.01: gain22=  -0.083, gain23=  -0.006, mean=  -0.045, stable=False
+      gamma=0.01: gain22=  -0.193, gain23=  -0.030, mean=  -0.111, stable=False
+      gamma=0.02: gain22=  -0.489, gain23=  -0.133, mean=  -0.311, stable=False
+      gamma=0.05: gain22=  -1.995, gain23=  -0.886, mean=  -1.441, stable=False
+      gamma=0.10: gain22=  -6.569, gain23=  -3.615, mean=  -5.092, stable=False
+      gamma=0.20: gain22= -23.451, gain23= -14.604, mean= -19.028, stable=False
+
+  rank=2, ridge=1
+      seed=42: interaction train pair-MSE=0.02545568, effect_std=0.040074226
+      seed=7: interaction train pair-MSE=0.02542826, effect_std=0.040628063
+      validation 2022: known_both=66.12%, unseen_pair_among_known=40.71%
+      validation 2022: residual/effect corr=-0.001343, unconstrained beta*=-0.020846, gain*=+0.184
+      seed=42: interaction train pair-MSE=0.02174461, effect_std=0.036621544
+      seed=7: interaction train pair-MSE=0.02175348, effect_std=0.036789167
+      validation 2023: known_both=75.48%, unseen_pair_among_known=35.34%
+      validation 2023: residual/effect corr=-0.002256, unconstrained beta*=-0.045186, gain*=+0.587
+      gamma=0.00: gain22=  -0.047, gain23=  -0.067, mean=  -0.057, stable=False
+      gamma=0.01: gain22=  -0.099, gain23=  -0.137, mean=  -0.118, stable=False
+      gamma=0.01: gain22=  -0.219, gain23=  -0.289, mean=  -0.254, stable=False
+      gamma=0.02: gain22=  -0.523, gain23=  -0.635, mean=  -0.579, stable=False
+      gamma=0.05: gain22=  -1.942, gain23=  -2.020, mean=  -1.981, stable=False
+      gamma=0.10: gain22=  -6.002, gain23=  -5.478, mean=  -5.740, stable=False
+      gamma=0.20: gain22= -20.476, gain23= -16.710, mean= -18.593, stable=False
+
+  rank=2, ridge=3
+      seed=42: interaction train pair-MSE=0.02563542, effect_std=0.034309246
+      seed=7: interaction train pair-MSE=0.02559902, effect_std=0.034284381
+      validation 2022: known_both=66.12%, unseen_pair_among_known=40.71%
+      validation 2022: residual/effect corr=-0.000647, unconstrained beta*=-0.011388, gain*=+0.046
+      seed=42: interaction train pair-MSE=0.02185716, effect_std=0.032617164
+      seed=7: interaction train pair-MSE=0.02188814, effect_std=0.031970536
+      validation 2023: known_both=75.48%, unseen_pair_among_known=35.34%
+      validation 2023: residual/effect corr=-0.004868, unconstrained beta*=-0.113967, gain*=+2.965
+      gamma=0.00: gain22=  -0.022, gain23=  -0.131, mean=  -0.077, stable=False
+      gamma=0.01: gain22=  -0.049, gain23=  -0.266, mean=  -0.158, stable=False
+      gamma=0.01: gain22=  -0.116, gain23=  -0.543, mean=  -0.330, stable=False
+      gamma=0.02: gain22=  -0.303, gain23=  -1.132, mean=  -0.718, stable=False
+      gamma=0.05: gain22=  -1.291, gain23=  -3.172, mean=  -2.231, stable=False
+      gamma=0.10: gain22=  -4.354, gain23=  -7.485, mean=  -5.920, stable=False
+      gamma=0.20: gain22= -15.802, gain23= -19.534, mean= -17.668, stable=False
+
+  rank=2, ridge=10
+      seed=42: interaction train pair-MSE=0.02634122, effect_std=0.023048357
+      seed=7: interaction train pair-MSE=0.02626142, effect_std=0.022411227
+      validation 2022: known_both=66.12%, unseen_pair_among_known=40.71%
+      validation 2022: residual/effect corr=+0.001066, unconstrained beta*=+0.026624, gain*=+0.107
+      seed=42: interaction train pair-MSE=0.02216241, effect_std=0.022721283
+      seed=7: interaction train pair-MSE=0.02221062, effect_std=0.022488673
+      validation 2023: known_both=75.48%, unseen_pair_among_known=35.34%
+      validation 2023: residual/effect corr=-0.002056, unconstrained beta*=-0.067542, gain*=+0.606
+      gamma=0.00: gain22=  +0.019, gain23=  -0.046, mean=  -0.013, stable=False
+      gamma=0.01: gain22=  +0.036, gain23=  -0.093, mean=  -0.028, stable=False
+      gamma=0.01: gain22=  +0.065, gain23=  -0.193, mean=  -0.064, stable=False
+      gamma=0.02: gain22=  +0.100, gain23=  -0.412, mean=  -0.156, stable=False
+      gamma=0.05: gain22=  +0.024, gain23=  -1.229, mean=  -0.602, stable=False
+      gamma=0.10: gain22=  -0.705, gain23=  -3.121, mean=  -1.913, stable=False
+      gamma=0.20: gain22=  -4.429, gain23=  -8.897, mean=  -6.663, stable=False
+
+  rank=2, ridge=30
+      seed=42: interaction train pair-MSE=0.02752765, effect_std=0.006585336
+      seed=7: interaction train pair-MSE=0.02749528, effect_std=0.006393746
+      validation 2022: known_both=66.12%, unseen_pair_among_known=40.71%
+      validation 2022: residual/effect corr=-0.000185, unconstrained beta*=-0.015424, gain*=+0.003
+      seed=42: interaction train pair-MSE=0.02285412, effect_std=0.009937331
+      seed=7: interaction train pair-MSE=0.02284457, effect_std=0.009702887
+      validation 2023: known_both=75.48%, unseen_pair_among_known=35.34%
+      validation 2023: residual/effect corr=+0.000915, unconstrained beta*=+0.050893, gain*=+0.080
+      gamma=0.00: gain22=  -0.001, gain23=  +0.008, mean=  +0.003, stable=False
+      gamma=0.01: gain22=  -0.002, gain23=  +0.015, mean=  +0.006, stable=False
+      gamma=0.01: gain22=  -0.005, gain23=  +0.028, mean=  +0.011, stable=False
+      gamma=0.02: gain22=  -0.014, gain23=  +0.050, mean=  +0.018, stable=False
+      gamma=0.05: gain22=  -0.054, gain23=  +0.080, mean=  +0.013, stable=False
+      gamma=0.10: gain22=  -0.174, gain23=  +0.005, mean=  -0.084, stable=False
+      gamma=0.20: gain22=  -0.615, gain23=  -0.604, mean=  -0.610, stable=False
+
+  rank=4, ridge=0.3
+      seed=42: interaction train pair-MSE=0.02297410, effect_std=0.069791854
+      seed=7: interaction train pair-MSE=0.02305632, effect_std=0.072473967
+      validation 2022: known_both=66.12%, unseen_pair_among_known=40.71%
+      validation 2022: residual/effect corr=+0.001155, unconstrained beta*=+0.010136, gain*=+0.129
+      seed=42: interaction train pair-MSE=0.02009111, effect_std=0.061554536
+      seed=7: interaction train pair-MSE=0.02009373, effect_std=0.061669894
+      validation 2023: known_both=75.48%, unseen_pair_among_known=35.34%
+      validation 2023: residual/effect corr=+0.000924, unconstrained beta*=+0.011129, gain*=+0.118
+      gamma=0.00: gain22=  +0.056, gain23=  +0.047, mean=  +0.051, stable=False
+      gamma=0.01: gain22=  +0.096, gain23=  +0.082, mean=  +0.089, stable=True
+      gamma=0.01: gain22=  +0.129, gain23=  +0.116, mean=  +0.123, stable=True
+      gamma=0.02: gain22=  +0.007, gain23=  +0.043, mean=  +0.025, stable=False
+      gamma=0.05: gain22=  -1.867, gain23=  -1.318, mean=  -1.592, stable=False
+      gamma=0.10: gain22= -10.016, gain23=  -7.385, mean=  -8.700, stable=False
+      gamma=0.20: gain22= -45.156, gain23= -33.768, mean= -39.462, stable=False
+
+  rank=4, ridge=1
+      seed=42: interaction train pair-MSE=0.02316062, effect_std=0.055798688
+      seed=7: interaction train pair-MSE=0.02315230, effect_std=0.058975945
+      validation 2022: known_both=66.12%, unseen_pair_among_known=40.71%
+      validation 2022: residual/effect corr=+0.002353, unconstrained beta*=+0.024048, gain*=+0.532
+      seed=42: interaction train pair-MSE=0.02018683, effect_std=0.052569854
+      seed=7: interaction train pair-MSE=0.02020705, effect_std=0.052786106
+      validation 2023: known_both=75.48%, unseen_pair_among_known=35.34%
+      validation 2023: residual/effect corr=+0.002842, unconstrained beta*=+0.034153, gain*=+0.824
+      gamma=0.00: gain22=  +0.105, gain23=  +0.116, mean=  +0.111, stable=True
+      gamma=0.01: gain22=  +0.198, gain23=  +0.224, mean=  +0.211, stable=True
+      gamma=0.01: gain22=  +0.350, gain23=  +0.412, mean=  +0.381, stable=True
+      gamma=0.02: gain22=  +0.517, gain23=  +0.683, mean=  +0.600, stable=True
+      gamma=0.05: gain22=  -0.088, gain23=  +0.647, mean=  +0.280, stable=False
+      gamma=0.10: gain22=  -4.774, gain23=  -2.240, mean=  -3.507, stable=False
+      gamma=0.20: gain22= -27.945, gain23= -18.618, mean= -23.282, stable=False
+
+  rank=4, ridge=3
+      seed=42: interaction train pair-MSE=0.02350692, effect_std=0.046229318
+      seed=7: interaction train pair-MSE=0.02348447, effect_std=0.048012163
+      validation 2022: known_both=66.12%, unseen_pair_among_known=40.71%
+      validation 2022: residual/effect corr=+0.003749, unconstrained beta*=+0.044594, gain*=+1.356
+      seed=42: interaction train pair-MSE=0.02041398, effect_std=0.043560211
+      seed=7: interaction train pair-MSE=0.02042145, effect_std=0.044099747
+      validation 2023: known_both=75.48%, unseen_pair_among_known=35.34%
+      validation 2023: residual/effect corr=+0.002331, unconstrained beta*=+0.029880, gain*=+0.458
+      gamma=0.00: gain22=  +0.148, gain23=  +0.073, mean=  +0.111, stable=True
+      gamma=0.01: gain22=  +0.287, gain23=  +0.140, mean=  +0.214, stable=True
+      gamma=0.01: gain22=  +0.540, gain23=  +0.255, mean=  +0.397, stable=True
+      gamma=0.02: gain22=  +0.943, gain23=  +0.408, mean=  +0.675, stable=True
+      gamma=0.05: gain22=  +1.336, gain23=  +0.250, mean=  +0.793, stable=True
+      gamma=0.10: gain22=  -0.737, gain23=  -2.064, mean=  -1.400, stable=False
+      gamma=0.20: gain22= -15.107, gain23= -14.383, mean= -14.745, stable=False
+
+  rank=4, ridge=10
+      seed=42: interaction train pair-MSE=0.02474483, effect_std=0.030624922
+      seed=7: interaction train pair-MSE=0.02469613, effect_std=0.032030732
+      validation 2022: known_both=66.12%, unseen_pair_among_known=40.71%
+      validation 2022: residual/effect corr=+0.004837, unconstrained beta*=+0.085629, gain*=+2.264
+      seed=42: interaction train pair-MSE=0.02108253, effect_std=0.029850145
+      seed=7: interaction train pair-MSE=0.02105125, effect_std=0.030711789
+      validation 2023: known_both=75.48%, unseen_pair_among_known=35.34%
+      validation 2023: residual/effect corr=+0.001346, unconstrained beta*=+0.023628, gain*=+0.155
+      gamma=0.00: gain22=  +0.130, gain23=  +0.031, mean=  +0.081, stable=False
+      gamma=0.01: gain22=  +0.257, gain23=  +0.059, mean=  +0.158, stable=True
+      gamma=0.01: gain22=  +0.498, gain23=  +0.104, mean=  +0.301, stable=True
+      gamma=0.02: gain22=  +0.934, gain23=  +0.151, mean=  +0.543, stable=True
+      gamma=0.05: gain22=  +1.872, gain23=  -0.038, mean=  +0.917, stable=False
+      gamma=0.10: gain22=  +2.200, gain23=  -1.465, mean=  +0.367, stable=False
+      gamma=0.20: gain22=  -1.775, gain23=  -8.487, mean=  -5.131, stable=False
+
+  rank=4, ridge=30
+      seed=42: interaction train pair-MSE=0.02703409, effect_std=0.009206829
+      seed=7: interaction train pair-MSE=0.02705264, effect_std=0.009098244
+      validation 2022: known_both=66.12%, unseen_pair_among_known=40.71%
+      validation 2022: residual/effect corr=+0.002359, unconstrained beta*=+0.128123, gain*=+0.525
+      seed=42: interaction train pair-MSE=0.02239801, effect_std=0.012732750
+      seed=7: interaction train pair-MSE=0.02238451, effect_std=0.013074889
+      validation 2023: known_both=75.48%, unseen_pair_among_known=35.34%
+      validation 2023: residual/effect corr=-0.000733, unconstrained beta*=-0.031255, gain*=+0.056
+      gamma=0.00: gain22=  +0.020, gain23=  -0.009, mean=  +0.005, stable=False
+      gamma=0.01: gain22=  +0.040, gain23=  -0.019, mean=  +0.010, stable=False
+      gamma=0.01: gain22=  +0.079, gain23=  -0.042, mean=  +0.019, stable=False
+      gamma=0.02: gain22=  +0.151, gain23=  -0.095, mean=  +0.028, stable=False
+      gamma=0.05: gain22=  +0.330, gain23=  -0.323, mean=  +0.003, stable=False
+      gamma=0.10: gain22=  +0.500, gain23=  -0.934, mean=  -0.217, stable=False
+      gamma=0.20: gain22=  +0.360, gain23=  -3.016, mean=  -1.328, stable=False
+
+  rank=8, ridge=0.3
+      seed=42: interaction train pair-MSE=0.01913188, effect_std=0.094620312
+      seed=7: interaction train pair-MSE=0.01909857, effect_std=0.096566772
+      validation 2022: known_both=66.12%, unseen_pair_among_known=40.71%
+      validation 2022: residual/effect corr=+0.000375, unconstrained beta*=+0.002352, gain*=+0.013
+      seed=42: interaction train pair-MSE=0.01740843, effect_std=0.084447752
+      seed=7: interaction train pair-MSE=0.01736708, effect_std=0.087356317
+      validation 2023: known_both=75.48%, unseen_pair_among_known=35.34%
+      validation 2023: residual/effect corr=+0.004492, unconstrained beta*=+0.035854, gain*=+2.228
+      gamma=0.00: gain22=  +0.013, gain23=  +0.300, mean=  +0.156, stable=False
+      gamma=0.01: gain22=  -0.003, gain23=  +0.578, mean=  +0.287, stable=False
+      gamma=0.01: gain22=  -0.121, gain23=  +1.069, mean=  +0.474, stable=False
+      gamma=0.02: gain22=  -0.699, gain23=  +1.792, mean=  +0.547, stable=False
+      gamma=0.05: gain22=  -5.177, gain23=  +1.881, mean=  -1.648, stable=False
+      gamma=0.10: gain22= -21.784, gain23=  -4.903, mean= -13.343, stable=False
+      gamma=0.20: gain22= -89.285, gain23= -44.469, mean= -66.877, stable=False
+
+  rank=8, ridge=1
+      seed=42: interaction train pair-MSE=0.01929095, effect_std=0.078935477
+      seed=7: interaction train pair-MSE=0.01932749, effect_std=0.079323979
+      validation 2022: known_both=66.12%, unseen_pair_among_known=40.71%
+      validation 2022: residual/effect corr=+0.000473, unconstrained beta*=+0.003570, gain*=+0.022
+      seed=42: interaction train pair-MSE=0.01756537, effect_std=0.071274225
+      seed=7: interaction train pair-MSE=0.01753257, effect_std=0.071790128
+      validation 2023: known_both=75.48%, unseen_pair_among_known=35.34%
+      validation 2023: residual/effect corr=+0.003998, unconstrained beta*=+0.037761, gain*=+1.814
+      gamma=0.00: gain22=  +0.020, gain23=  +0.232, mean=  +0.126, stable=False
+      gamma=0.01: gain22=  +0.018, gain23=  +0.449, mean=  +0.233, stable=False
+      gamma=0.01: gain22=  -0.048, gain23=  +0.834, mean=  +0.393, stable=False
+      gamma=0.02: gain22=  -0.434, gain23=  +1.413, mean=  +0.489, stable=False
+      gamma=0.05: gain22=  -3.617, gain23=  +1.623, mean=  -0.997, stable=False
+      gamma=0.10: gain22= -15.673, gain23=  -3.114, mean=  -9.393, stable=False
+      gamma=0.20: gain22= -65.101, gain23= -31.670, mean= -48.386, stable=False
+
+  rank=8, ridge=3
+      seed=42: interaction train pair-MSE=0.01990420, effect_std=0.064716429
+      seed=7: interaction train pair-MSE=0.01993001, effect_std=0.064246887
+      validation 2022: known_both=66.12%, unseen_pair_among_known=40.71%
+      validation 2022: residual/effect corr=+0.001326, unconstrained beta*=+0.011898, gain*=+0.169
+      seed=42: interaction train pair-MSE=0.01794801, effect_std=0.059841645
+      seed=7: interaction train pair-MSE=0.01790999, effect_std=0.058543132
+      validation 2023: known_both=75.48%, unseen_pair_among_known=35.34%
+      validation 2023: residual/effect corr=+0.001360, unconstrained beta*=+0.014541, gain*=+0.202
+      gamma=0.00: gain22=  +0.064, gain23=  +0.064, mean=  +0.064, stable=True
+      gamma=0.01: gain22=  +0.112, gain23=  +0.115, mean=  +0.114, stable=True
+      gamma=0.01: gain22=  +0.165, gain23=  +0.183, mean=  +0.174, stable=True
+      gamma=0.02: gain22=  +0.091, gain23=  +0.174, mean=  +0.132, stable=True
+      gamma=0.05: gain22=  -1.564, gain23=  -1.001, mean=  -1.283, stable=False
+      gamma=0.10: gain22=  -9.097, gain23=  -6.788, mean=  -7.943, stable=False
+      gamma=0.20: gain22= -42.071, gain23= -32.721, mean= -37.396, stable=False
+
+  rank=8, ridge=10
+      seed=42: interaction train pair-MSE=0.02216224, effect_std=0.041822837
+      seed=7: interaction train pair-MSE=0.02219343, effect_std=0.041593486
+      validation 2022: known_both=66.12%, unseen_pair_among_known=40.71%
+      validation 2022: residual/effect corr=+0.002680, unconstrained beta*=+0.034513, gain*=+0.685
+      seed=42: interaction train pair-MSE=0.01915935, effect_std=0.041320920
+      seed=7: interaction train pair-MSE=0.01912253, effect_std=0.040581540
+      validation 2023: known_both=75.48%, unseen_pair_among_known=35.34%
+      validation 2023: residual/effect corr=-0.001997, unconstrained beta*=-0.030317, gain*=+0.488
+      gamma=0.00: gain22=  +0.096, gain23=  -0.084, mean=  +0.006, stable=False
+      gamma=0.01: gain22=  +0.184, gain23=  -0.174, mean=  +0.005, stable=False
+      gamma=0.01: gain22=  +0.339, gain23=  -0.375, mean=  -0.018, stable=False
+      gamma=0.02: gain22=  +0.564, gain23=  -0.856, mean=  -0.146, stable=False
+      gamma=0.05: gain22=  +0.547, gain23=  -2.935, mean=  -1.194, stable=False
+      gamma=0.10: gain22=  -1.780, gain23=  -8.522, mean=  -5.151, stable=False
+      gamma=0.20: gain22= -15.056, gain23= -27.656, mean= -21.356, stable=False
+
+  rank=8, ridge=30
+      seed=42: interaction train pair-MSE=0.02646301, effect_std=0.011116513
+      seed=7: interaction train pair-MSE=0.02648554, effect_std=0.010973952
+      validation 2022: known_both=66.12%, unseen_pair_among_known=40.71%
+      validation 2022: residual/effect corr=+0.001462, unconstrained beta*=+0.064971, gain*=+0.200
+      seed=42: interaction train pair-MSE=0.02162249, effect_std=0.016910369
+      seed=7: interaction train pair-MSE=0.02159936, effect_std=0.016747519
+      validation 2023: known_both=75.48%, unseen_pair_among_known=35.34%
+      validation 2023: residual/effect corr=-0.000688, unconstrained beta*=-0.025231, gain*=+0.066
+      gamma=0.00: gain22=  +0.015, gain23=  -0.014, mean=  +0.001, stable=False
+      gamma=0.01: gain22=  +0.030, gain23=  -0.029, mean=  +0.000, stable=False
+      gamma=0.01: gain22=  +0.057, gain23=  -0.062, mean=  -0.003, stable=False
+      gamma=0.02: gain22=  +0.104, gain23=  -0.146, mean=  -0.021, stable=False
+      gamma=0.05: gain22=  +0.189, gain23=  -0.519, mean=  -0.165, stable=False
+      gamma=0.10: gain22=  +0.142, gain23=  -1.555, mean=  -0.707, stable=False
+      gamma=0.20: gain22=  -0.662, gain23=  -5.178, mean=  -2.920, stable=False
+
+Top selection rows:
+ rank  ridge  gamma  gain_2022  gain_2023  mean_gain  min_gain  stable_positive  known_2022  known_2023  unseen_2022  unseen_2023
+    4    3.0  0.050   1.335592   0.250236   0.792914  0.250236             True    0.661158    0.754783      0.26919     0.266767
+    4    3.0  0.020   0.943223   0.407775   0.675499  0.407775             True    0.661158    0.754783      0.26919     0.266767
+    4    1.0  0.020   0.516856   0.682895   0.599876  0.516856             True    0.661158    0.754783      0.26919     0.266767
+    4   10.0  0.020   0.934125   0.151445   0.542785  0.151445             True    0.661158    0.754783      0.26919     0.266767
+    4    3.0  0.010   0.539776   0.255168   0.397472  0.255168             True    0.661158    0.754783      0.26919     0.266767
+    4    1.0  0.010   0.350412   0.412133   0.381272  0.350412             True    0.661158    0.754783      0.26919     0.266767
+    4   10.0  0.010   0.497941   0.103505   0.300723  0.103505             True    0.661158    0.754783      0.26919     0.266767
+    4    3.0  0.005   0.286929   0.140404   0.213667  0.140404             True    0.661158    0.754783      0.26919     0.266767
+    4    1.0  0.005   0.198202   0.223738   0.210970  0.198202             True    0.661158    0.754783      0.26919     0.266767
+    8    3.0  0.010   0.164688   0.182655   0.173672  0.164688             True    0.661158    0.754783      0.26919     0.266767
+    4   10.0  0.005   0.256690   0.058698   0.157694  0.058698             True    0.661158    0.754783      0.26919     0.266767
+    8    3.0  0.020   0.090613   0.173867   0.132240  0.090613             True    0.661158    0.754783      0.26919     0.266767
+
+Historical stability gate (each year > 0.05): PASS
+
+SELECTED (without 2024): rank=4, ridge=3, gamma=0.05, gain22=+1.336, gain23=+0.250
+
+prepare final 2021~23: rows=740,085, pitchers=587, batters=595, pairs=57,454
+      seed=42: interaction train pair-MSE=0.01930042, effect_std=0.043895042
+      seed=7: interaction train pair-MSE=0.01928360, effect_std=0.044614728
+
+================================================================================================
+UNTOUCHED 2024 CONFIRMATION
+================================================================================================
+  effect mean=-0.0000512, std=0.0372999, q01/q50/q99=[-0.11204936  0.          0.10652913]
+
+  [HGB base65 + frozen FM] base=699.494, frozen candidate=701.101
+    frozen d=+1.607, K=1.392, analytic w*=1.0000, oracle mix gain=+1.607
+    fixed candidate-weight gains: w=0.25 +0.663  w=0.50 +1.151  w=0.75 +1.466  w=1.00 +1.607
+    pitcher bootstrap frozen d: median=+1.613, 95% [-1.896,+5.090], P(d>0)=0.819 (5,000 draws)
+    subgroup coverage and gain:
+      known+seen_pair     n= 122,987 ( 48.51%)  global_contrib=  +1.995  local_gain=  +4.110
+      known+unseen_pair   n=  59,196 ( 23.35%)  global_contrib=  -0.388  local_gain=  -1.663
+      unknown_player      n=  71,324 ( 28.13%)  global_contrib=  +0.000  local_gain=  +0.000
+
+  [CAT5 champion + frozen FM] base=873.917, frozen candidate=875.566
+    frozen d=+1.649, K=1.392, analytic w*=1.0000, oracle mix gain=+1.649
+    fixed candidate-weight gains: w=0.25 +0.673  w=0.50 +1.173  w=0.75 +1.498  w=1.00 +1.649
+    pitcher bootstrap frozen d: median=+1.649, 95% [-1.732,+5.074], P(d>0)=0.837 (5,000 draws)
+    subgroup coverage and gain:
+      known+seen_pair     n= 122,987 ( 48.51%)  global_contrib=  +1.993  local_gain=  +4.106
+      known+unseen_pair   n=  59,196 ( 23.35%)  global_contrib=  -0.344  local_gain=  -1.473
+      unknown_player      n=  71,324 ( 28.13%)  global_contrib=  +0.000  local_gain=  +0.000
+
+Saved Codex-prefixed artifacts. No CatBoost training or submission was started.

@@ -1,0 +1,17 @@
+{
+  "name": "champ55_exp02145_v001",
+  "weights": {
+    "champion": 0.55,
+    "exp021_strict": 0.45
+  },
+  "champion_zip": {
+    "name": "candidate_v18g030.zip",
+    "sha256": "ed1b729b9b83eb1f0d344b475939353149d5adc83009a40ff116df6e5a168557"
+  },
+  "exp021_zip": {
+    "name": "candidate_exp021_strict_rebuilt_v001.zip",
+    "sha256": "e3035466beb88a5e04635567a4b318286da26c56eb51de18852c6c55b74cd5e2"
+  },
+  "row_local": true,
+  "component_execution": "sequential"
+}

@@ -1,0 +1,39 @@
+{
+  "experiment": 191,
+  "status": "BUILT_HOLD_EARLY_SCALE_058_LOTTERY",
+  "output": {
+    "path": "candidate_exp191_affine_tensor_early_s058_lottery.zip",
+    "bytes": 12660968,
+    "sha256": "8CD8F811E816F3530BE1EAF203ADD07C542B42FCBBD9F121EBBE8396BE5BA29E"
+  },
+  "source": {
+    "path": "candidate_exp189_affine_tensor_early_hold.zip",
+    "sha256": "954CFB42E2938E7B6C82C63DBD4316CCD97D6E1D1E11C50ED646D3A1825562CC"
+  },
+  "evidence": {
+    "2024_early_gain_scale_020": 6.096292926538581,
+    "2024_early_gain_scale_058": 11.630026193110098,
+    "late_policy": "exact affine anchor",
+    "caveat": "single validation season; submit only if EXP189 LB direction is positive"
+  },
+  "identity": {
+    "non_metadata_entries": 19,
+    "all_non_metadata_entries_byte_identical": true,
+    "script_sha256": "DD4623D7BC7D069051207924782DF4A8B6694B0CB61D8069F8D8EBF3486DFB2A",
+    "tables_sha256": "8843214E050221840A7FF6DAE72209ED7AE85CD5A6D309C21E07BE288230471B"
+  },
+  "smoke": {
+    "rows": 5,
+    "active_rows": 4,
+    "inactive_max_abs_difference": 0.0,
+    "active_mean_difference": -0.0007133244775134884,
+    "anchor_seconds": 16.901283025741577,
+    "candidate_seconds": 16.649929523468018,
+    "candidate_log_tail": "r=0.523766\nLoad test data...\n  test rows=5\nBuild features...\n  f_cs_p_rate coverage=80.0%\n  f_mixcg_fb coverage=40.0%  f_pfb mean=0.680\n  X=(5, 79)\nInference (8 models)...\n  cb model 1/8 done\n  cb model 2/8 done\n  cb model 3/8 done\n  cb model 4/8 done\n  cb model 5/8 done\n  cb model 6/8 done\n  cb model 7/8 done\n  cb model 8/8 done\n  multiclass P(success) averaged, version=target5_teamcat  ntree_end=500 shift=0.0066 tree_count=[500, 500, 500, 500, 500, 500, 500, 500]\n  V18 frozen residual gamma=0.3 coverage=20.0% effect mean=+0.003777 std=0.007553\n  pred mean=0.459146  min=0.387186  max=0.519495\nBuild submission...\n  sample_submission 순서 사용 (rows=5)\nSaved: ./output\\submission.csv  rows=5\n[LightGBM] [Warning] Ignoring unrecognized parameter 'bagging_by_query' found in model string.\n[LightGBM] [Warning] Ignoring unrecognized parameter 'early_stopping_min_delta' found in model string.\nSaved: output\\submission.csv | candidate=strict_lowrank_s300_r6 | rows=5 | mean=0.443329 | min=0.372917 | max=0.516242\nSaved: output\\submission.csv rows=5 scale=0.58 R=5 active_early_R=4 mean_effect_active=-0.00122987 coverage={'pitcher_batter_hand': 0.2, 'pitcher_count_base': 0.2, 'hand_count_base': 1.0}\n"
+  },
+  "row_independence_inherited": {
+    "basis": "all executable/model-table entries are byte-identical to EXP189; only scalar metadata changed",
+    "EXP189_max_absolute_difference": 0.0
+  },
+  "submission_performed": false
+}

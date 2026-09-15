@@ -1,0 +1,33 @@
+EXP183 lab-GPU full-X176 validation result (user report, 2026-09-01 KST)
+=============================================================================
+status=FAIL_NO_DEPLOY
+wall_seconds=293
+post_2024_tuning=false
+test_inference=false
+zip_created=false
+
+2023 discovery gain=+309.5464
+2023 locked blend weight=0.603 (reported)
+2023 current-anchor score=-22.74
+
+2024 locked transferred gain=-185.3540
+2024 early gain=-241.8599 (143,541 rows)
+2024 late gain=-111.5519 (109,966 rows)
+pitcher bootstrap p025=-240.6031
+pitcher bootstrap median=-184.4
+pitcher bootstrap probability positive=0.0
+row independence max abs=8.94e-08
+
+2024 endpoint score=401.0
+2024 current-anchor score=936.58
+2024 endpoint/current correlation=0.880
+2024 oracle diagnostic weight=0.0346
+2024 oracle diagnostic maximum gain=+0.6899
+
+Decision
+--------
+The full X176 TrackMan+shuffle ResMLP direction is closed.  Even an invalid
+same-fold 2024 oracle weight cannot reach the predeclared +8 gate.  Do not
+rerun, retune, final-train, infer on test, package, or submit this endpoint.
+The 2023 +309.5 discovery result is an anchor-regime artifact: the frozen
+current anchor itself scored -22.74 in that year versus +936.58 in 2024.

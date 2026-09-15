@@ -1,0 +1,938 @@
+{
+  "experiment": 153,
+  "description": "clean-room strict-past target5 pitcher-runner-call tensor screen",
+  "status": "SEMANTIC_AXIS_STABLE_FOR_FURTHER_WORK",
+  "analysis_only": true,
+  "reads_official_train_only": true,
+  "reads_test": false,
+  "reads_third_party_source": false,
+  "builds_model_zip_or_submission": false,
+  "uses_lb": false,
+  "target5_contract": {
+    "class_order": [
+      "success",
+      "middle",
+      "reverse",
+      "overlap",
+      "bigmiss"
+    ],
+    "labeled_rows": 1474300,
+    "unavailable_rows": 792,
+    "coverage": 0.9994630843364346,
+    "class_counts": {
+      "success": 772140,
+      "middle": 170297,
+      "reverse": 287401,
+      "overlap": 50266,
+      "bigmiss": 194196
+    }
+  },
+  "context_contract": {
+    "runner_call_state": {
+      "0": "none",
+      "1": "first_base_steal_threat_only",
+      "2": "scoring_position_only",
+      "3": "both_first_base_and_scoring_position"
+    },
+    "count_group": {
+      "0": "balls_gt_strikes",
+      "1": "balls_eq_strikes",
+      "2": "strikes_gt_balls"
+    },
+    "child_keys": [
+      "pitcher_id",
+      "runner_call_state",
+      "count_group",
+      "batter_hand"
+    ]
+  },
+  "protocol": {
+    "validation_years": [
+      2022,
+      2023,
+      2024
+    ],
+    "history_rule": "season < validation_year",
+    "parent": "pitcher-only class distribution shrunk to strict-past global class prior",
+    "parent_k": 220.0,
+    "child": "pitcher x runner_call_state x count_group x batter_hand counts shrunk to row pitcher parent",
+    "child_k_grid": [
+      110.0,
+      220.0,
+      440.0
+    ],
+    "grid_is_diagnostic_only": true
+  },
+  "folds": {
+    "2022": {
+      "history_rows": 728387,
+      "validation_rows": 247391,
+      "global_class_prior": {
+        "success": 0.5430972820766983,
+        "middle": 0.10562105034823521,
+        "reverse": 0.17863992630291314,
+        "overlap": 0.03350142163437843,
+        "bigmiss": 0.13914031963777498
+      },
+      "coverage": {
+        "seen_pitcher_rows": 208475,
+        "seen_pitcher_rate": 0.8426943583234636,
+        "seen_child_rows": 205921,
+        "seen_child_rate": 0.8323706197881087,
+        "parent_cells": 560,
+        "child_cells": 12067
+      },
+      "pitcher_parent_metrics": {
+        "multiclass_logloss": 1.2798160027739913,
+        "multiclass_brier": 0.6495866816614854,
+        "per_class": {
+          "success": {
+            "prevalence": 0.5288591743434482,
+            "prediction_mean": 0.5392508407467073,
+            "ovr_brier": 0.24783104137812081,
+            "ovr_logloss": 0.6887820705298754
+          },
+          "middle": {
+            "prevalence": 0.11298713372758104,
+            "prediction_mean": 0.10547019645744656,
+            "ovr_brier": 0.10026858687413717,
+            "ovr_logloss": 0.35305373927050077
+          },
+          "reverse": {
+            "prevalence": 0.19622379148796845,
+            "prediction_mean": 0.1846875630898518,
+            "ovr_brier": 0.1566502377211289,
+            "ovr_logloss": 0.491891712809727
+          },
+          "overlap": {
+            "prevalence": 0.03652517674450566,
+            "prediction_mean": 0.03470846252499143,
+            "ovr_brier": 0.03515029127771805,
+            "ovr_logloss": 0.15601133741134818
+          },
+          "bigmiss": {
+            "prevalence": 0.12540472369649663,
+            "prediction_mean": 0.13588293718100306,
+            "ovr_brier": 0.10968652441038027,
+            "ovr_logloss": 0.3775009032749797
+          }
+        }
+      },
+      "children": {
+        "k110": {
+          "metrics": {
+            "multiclass_logloss": 1.2773723551577167,
+            "multiclass_brier": 0.6487182249425412,
+            "per_class": {
+              "success": {
+                "prevalence": 0.5288591743434482,
+                "prediction_mean": 0.5390823260299998,
+                "ovr_brier": 0.24795829191108823,
+                "ovr_logloss": 0.6890508445038428
+              },
+              "middle": {
+                "prevalence": 0.11298713372758104,
+                "prediction_mean": 0.10549596250376837,
+                "ovr_brier": 0.10034457253273205,
+                "ovr_logloss": 0.35352145409250824
+              },
+              "reverse": {
+                "prevalence": 0.19622379148796845,
+                "prediction_mean": 0.18578785550633992,
+                "ovr_brier": 0.1561995901355219,
+                "ovr_logloss": 0.49061032440364943
+              },
+              "overlap": {
+                "prevalence": 0.03652517674450566,
+                "prediction_mean": 0.034766987240781456,
+                "ovr_brier": 0.035185859856500364,
+                "ovr_logloss": 0.15656302895488516
+              },
+              "bigmiss": {
+                "prevalence": 0.12540472369649663,
+                "prediction_mean": 0.13486686871911047,
+                "ovr_brier": 0.10902991050669862,
+                "ovr_logloss": 0.37461339117715053
+              }
+            }
+          },
+          "gain_vs_pitcher_parent": {
+            "multiclass_logloss_gain": 0.00244364761627458,
+            "multiclass_brier_gain": 0.0008684567189441994,
+            "per_class": {
+              "success": {
+                "ovr_brier_gain": -0.00012725053296741562,
+                "ovr_logloss_gain": -0.00026877397396740665,
+                "prediction_mean_shift": -0.00016851471670742413,
+                "direction": "WORSE_BOTH"
+              },
+              "middle": {
+                "ovr_brier_gain": -7.598565859487372e-05,
+                "ovr_logloss_gain": -0.00046771482200747005,
+                "prediction_mean_shift": 2.5766046321817893e-05,
+                "direction": "WORSE_BOTH"
+              },
+              "reverse": {
+                "ovr_brier_gain": 0.0004506475856070058,
+                "ovr_logloss_gain": 0.0012813884060775549,
+                "prediction_mean_shift": 0.0011002924164881245,
+                "direction": "BETTER_BOTH"
+              },
+              "overlap": {
+                "ovr_brier_gain": -3.5568578782313454e-05,
+                "ovr_logloss_gain": -0.0005516915435369862,
+                "prediction_mean_shift": 5.8524715790028714e-05,
+                "direction": "WORSE_BOTH"
+              },
+              "bigmiss": {
+                "ovr_brier_gain": 0.0006566139036816437,
+                "ovr_logloss_gain": 0.00288751209782917,
+                "prediction_mean_shift": -0.0010160684618925886,
+                "direction": "BETTER_BOTH"
+              }
+            }
+          }
+        },
+        "k220": {
+          "metrics": {
+            "multiclass_logloss": 1.2768346545396214,
+            "multiclass_brier": 0.6485548091714833,
+            "per_class": {
+              "success": {
+                "prevalence": 0.5288591743434482,
+                "prediction_mean": 0.539095658649368,
+                "ovr_brier": 0.24780410212692602,
+                "ovr_logloss": 0.688733039582505
+              },
+              "middle": {
+                "prevalence": 0.11298713372758104,
+                "prediction_mean": 0.10559653241282638,
+                "ovr_brier": 0.10028138842740275,
+                "ovr_logloss": 0.35315568817938037
+              },
+              "reverse": {
+                "prevalence": 0.19622379148796845,
+                "prediction_mean": 0.1856298865158998,
+                "ovr_brier": 0.15621149385243446,
+                "ovr_logloss": 0.4905749370442948
+              },
+              "overlap": {
+                "prevalence": 0.03652517674450566,
+                "prediction_mean": 0.034761897621576596,
+                "ovr_brier": 0.03516350209319605,
+                "ovr_logloss": 0.15622692662914373
+              },
+              "bigmiss": {
+                "prevalence": 0.12540472369649663,
+                "prediction_mean": 0.13491602480032908,
+                "ovr_brier": 0.1090943226715242,
+                "ovr_logloss": 0.3749499121714714
+              }
+            }
+          },
+          "gain_vs_pitcher_parent": {
+            "multiclass_logloss_gain": 0.002981348234369907,
+            "multiclass_brier_gain": 0.0010318724900020282,
+            "per_class": {
+              "success": {
+                "ovr_brier_gain": 2.6939251194790792e-05,
+                "ovr_logloss_gain": 4.9030947370409805e-05,
+                "prediction_mean_shift": -0.00015518209733922372,
+                "direction": "BETTER_BOTH"
+              },
+              "middle": {
+                "ovr_brier_gain": -1.2801553265578969e-05,
+                "ovr_logloss_gain": -0.00010194890887960106,
+                "prediction_mean_shift": 0.00012633595537982212,
+                "direction": "WORSE_BOTH"
+              },
+              "reverse": {
+                "ovr_brier_gain": 0.00043874386869444115,
+                "ovr_logloss_gain": 0.0013167757654322099,
+                "prediction_mean_shift": 0.0009423234260479973,
+                "direction": "BETTER_BOTH"
+              },
+              "overlap": {
+                "ovr_brier_gain": -1.321081547799724e-05,
+                "ovr_logloss_gain": -0.00021558921779554763,
+                "prediction_mean_shift": 5.343509658516793e-05,
+                "direction": "WORSE_BOTH"
+              },
+              "bigmiss": {
+                "ovr_brier_gain": 0.0005922017388560602,
+                "ovr_logloss_gain": 0.0025509911035083155,
+                "prediction_mean_shift": -0.0009669123806739788,
+                "direction": "BETTER_BOTH"
+              }
+            }
+          }
+        },
+        "k440": {
+          "metrics": {
+            "multiclass_logloss": 1.277138327094022,
+            "multiclass_brier": 0.6486714364655304,
+            "per_class": {
+              "success": {
+                "prevalence": 0.5288591743434482,
+                "prediction_mean": 0.5391529887620574,
+                "ovr_brier": 0.24775240251725772,
+                "ovr_logloss": 0.6886259841005372
+              },
+              "middle": {
+                "prevalence": 0.11298713372758104,
+                "prediction_mean": 0.10562587622162392,
+                "ovr_brier": 0.10025489308684758,
+                "ovr_logloss": 0.35299890419445373
+              },
+              "reverse": {
+                "prevalence": 0.19622379148796845,
+                "prediction_mean": 0.1853954242645349,
+                "ovr_brier": 0.15629409102328304,
+                "ovr_logloss": 0.49078730043424673
+              },
+              "overlap": {
+                "prevalence": 0.03652517674450566,
+                "prediction_mean": 0.03474575952230896,
+                "ovr_brier": 0.03515275327085506,
+                "ovr_logloss": 0.15606191838475894
+              },
+              "bigmiss": {
+                "prevalence": 0.12540472369649663,
+                "prediction_mean": 0.1350799512294749,
+                "ovr_brier": 0.10921729656728672,
+                "ovr_logloss": 0.3755100817102843
+              }
+            }
+          },
+          "gain_vs_pitcher_parent": {
+            "multiclass_logloss_gain": 0.002677675679969349,
+            "multiclass_brier_gain": 0.0009152451959549834,
+            "per_class": {
+              "success": {
+                "ovr_brier_gain": 7.863886086309502e-05,
+                "ovr_logloss_gain": 0.00015608642933817585,
+                "prediction_mean_shift": -9.785198464984379e-05,
+                "direction": "BETTER_BOTH"
+              },
+              "middle": {
+                "ovr_brier_gain": 1.369378728958981e-05,
+                "ovr_logloss_gain": 5.483507604703286e-05,
+                "prediction_mean_shift": 0.00015567976417736606,
+                "direction": "BETTER_BOTH"
+              },
+              "reverse": {
+                "ovr_brier_gain": 0.00035614669784586606,
+                "ovr_logloss_gain": 0.001104412375480257,
+                "prediction_mean_shift": 0.0007078611746831054,
+                "direction": "BETTER_BOTH"
+              },
+              "overlap": {
+                "ovr_brier_gain": -2.4619931370123416e-06,
+                "ovr_logloss_gain": -5.0580973410763175e-05,
+                "prediction_mean_shift": 3.7296997317533276e-05,
+                "direction": "WORSE_BOTH"
+              },
+              "bigmiss": {
+                "ovr_brier_gain": 0.00046922784309354204,
+                "ovr_logloss_gain": 0.0019908215646953775,
+                "prediction_mean_shift": -0.0008029859515281679,
+                "direction": "BETTER_BOTH"
+              }
+            }
+          }
+        }
+      }
+    },
+    "2023": {
+      "history_rows": 975778,
+      "validation_rows": 245406,
+      "global_class_prior": {
+        "success": 0.5394874653865941,
+        "middle": 0.10748858859289716,
+        "reverse": 0.18309799974994312,
+        "overlap": 0.03426804047641984,
+        "bigmiss": 0.1356579057941458
+      },
+      "coverage": {
+        "seen_pitcher_rows": 211557,
+        "seen_pitcher_rate": 0.8620693870565512,
+        "seen_child_rows": 209985,
+        "seen_child_rate": 0.8556636757047505,
+        "parent_cells": 648,
+        "child_cells": 13892
+      },
+      "pitcher_parent_metrics": {
+        "multiclass_logloss": 1.3158961033079404,
+        "multiclass_brier": 0.6726216838958308,
+        "per_class": {
+          "success": {
+            "prevalence": 0.49996332608004695,
+            "prediction_mean": 0.5369164056611919,
+            "ovr_brier": 0.25151428691015304,
+            "ovr_logloss": 0.6962803999424217
+          },
+          "middle": {
+            "prevalence": 0.11908836784756689,
+            "prediction_mean": 0.10869524760155763,
+            "ovr_brier": 0.10503771345921382,
+            "ovr_logloss": 0.3657946792021214
+          },
+          "reverse": {
+            "prevalence": 0.22162457315632056,
+            "prediction_mean": 0.1860483001120177,
+            "ovr_brier": 0.1735047177413123,
+            "ovr_logloss": 0.5333025130975063
+          },
+          "overlap": {
+            "prevalence": 0.03421676731620254,
+            "prediction_mean": 0.035241724256495216,
+            "ovr_brier": 0.03307878632859268,
+            "ovr_logloss": 0.1498472357978449
+          },
+          "bigmiss": {
+            "prevalence": 0.1251069655998631,
+            "prediction_mean": 0.1330983223687376,
+            "ovr_brier": 0.10948617945655895,
+            "ovr_logloss": 0.3770361342314881
+          }
+        }
+      },
+      "children": {
+        "k110": {
+          "metrics": {
+            "multiclass_logloss": 1.3129994469105435,
+            "multiclass_brier": 0.6715220358502507,
+            "per_class": {
+              "success": {
+                "prevalence": 0.49996332608004695,
+                "prediction_mean": 0.5366094171704358,
+                "ovr_brier": 0.2516277717835464,
+                "ovr_logloss": 0.6965549026284577
+              },
+              "middle": {
+                "prevalence": 0.11908836784756689,
+                "prediction_mean": 0.1090541635815581,
+                "ovr_brier": 0.10505575589734877,
+                "ovr_logloss": 0.36595672608127094
+              },
+              "reverse": {
+                "prevalence": 0.22162457315632056,
+                "prediction_mean": 0.1870170297418615,
+                "ovr_brier": 0.17309218838154838,
+                "ovr_logloss": 0.5324092345521401
+              },
+              "overlap": {
+                "prevalence": 0.03421676731620254,
+                "prediction_mean": 0.03527412700240363,
+                "ovr_brier": 0.033128842891929536,
+                "ovr_logloss": 0.15066464341421776
+              },
+              "bigmiss": {
+                "prevalence": 0.1251069655998631,
+                "prediction_mean": 0.13204526250374105,
+                "ovr_brier": 0.10861747689587782,
+                "ovr_logloss": 0.37324994805906986
+              }
+            }
+          },
+          "gain_vs_pitcher_parent": {
+            "multiclass_logloss_gain": 0.0028966563973968906,
+            "multiclass_brier_gain": 0.0010996480455800484,
+            "per_class": {
+              "success": {
+                "ovr_brier_gain": -0.00011348487339335467,
+                "ovr_logloss_gain": -0.00027450268603590455,
+                "prediction_mean_shift": -0.00030698849075616597,
+                "direction": "WORSE_BOTH"
+              },
+              "middle": {
+                "ovr_brier_gain": -1.8042438134940886e-05,
+                "ovr_logloss_gain": -0.00016204687914955773,
+                "prediction_mean_shift": 0.000358915980000471,
+                "direction": "WORSE_BOTH"
+              },
+              "reverse": {
+                "ovr_brier_gain": 0.0004125293597639079,
+                "ovr_logloss_gain": 0.0008932785453662495,
+                "prediction_mean_shift": 0.0009687296298437897,
+                "direction": "BETTER_BOTH"
+              },
+              "overlap": {
+                "ovr_brier_gain": -5.005656333685604e-05,
+                "ovr_logloss_gain": -0.0008174076163728616,
+                "prediction_mean_shift": 3.2402745908412245e-05,
+                "direction": "WORSE_BOTH"
+              },
+              "bigmiss": {
+                "ovr_brier_gain": 0.0008687025606811255,
+                "ovr_logloss_gain": 0.0037861861724182155,
+                "prediction_mean_shift": -0.0010530598649965417,
+                "direction": "BETTER_BOTH"
+              }
+            }
+          }
+        },
+        "k220": {
+          "metrics": {
+            "multiclass_logloss": 1.312354861978076,
+            "multiclass_brier": 0.6713820255256807,
+            "per_class": {
+              "success": {
+                "prevalence": 0.49996332608004695,
+                "prediction_mean": 0.5366556180096539,
+                "ovr_brier": 0.2514773172880492,
+                "ovr_logloss": 0.6962299573238536
+              },
+              "middle": {
+                "prevalence": 0.11908836784756689,
+                "prediction_mean": 0.10903293195200794,
+                "ovr_brier": 0.10500644031756,
+                "ovr_logloss": 0.3656761123819174
+              },
+              "reverse": {
+                "prevalence": 0.22162457315632056,
+                "prediction_mean": 0.18695510173761176,
+                "ovr_brier": 0.17307318300755334,
+                "ovr_logloss": 0.532135128235271
+              },
+              "overlap": {
+                "prevalence": 0.03421676731620254,
+                "prediction_mean": 0.03529423426896445,
+                "ovr_brier": 0.03310274546914077,
+                "ovr_logloss": 0.15023962636025678
+              },
+              "bigmiss": {
+                "prevalence": 0.1251069655998631,
+                "prediction_mean": 0.13206211403176193,
+                "ovr_brier": 0.10872233944337761,
+                "ovr_logloss": 0.3737223105918963
+              }
+            }
+          },
+          "gain_vs_pitcher_parent": {
+            "multiclass_logloss_gain": 0.003541241329864331,
+            "multiclass_brier_gain": 0.001239658370150054,
+            "per_class": {
+              "success": {
+                "ovr_brier_gain": 3.696962210386623e-05,
+                "ovr_logloss_gain": 5.044261856812504e-05,
+                "prediction_mean_shift": -0.0002607876515380303,
+                "direction": "BETTER_BOTH"
+              },
+              "middle": {
+                "ovr_brier_gain": 3.127314165382589e-05,
+                "ovr_logloss_gain": 0.00011856682020400244,
+                "prediction_mean_shift": 0.0003376843504503124,
+                "direction": "BETTER_BOTH"
+              },
+              "reverse": {
+                "ovr_brier_gain": 0.0004315347337589537,
+                "ovr_logloss_gain": 0.0011673848622353322,
+                "prediction_mean_shift": 0.0009068016255940614,
+                "direction": "BETTER_BOTH"
+              },
+              "overlap": {
+                "ovr_brier_gain": -2.3959140548091007e-05,
+                "ovr_logloss_gain": -0.0003923905624118873,
+                "prediction_mean_shift": 5.251001246923265e-05,
+                "direction": "WORSE_BOTH"
+              },
+              "bigmiss": {
+                "ovr_brier_gain": 0.0007638400131813328,
+                "ovr_logloss_gain": 0.003313823639591762,
+                "prediction_mean_shift": -0.0010362083369756525,
+                "direction": "BETTER_BOTH"
+              }
+            }
+          }
+        },
+        "k440": {
+          "metrics": {
+            "multiclass_logloss": 1.3126703918418836,
+            "multiclass_brier": 0.6715249506340533,
+            "per_class": {
+              "success": {
+                "prevalence": 0.49996332608004695,
+                "prediction_mean": 0.536733447980604,
+                "ovr_brier": 0.25142355178165443,
+                "ovr_logloss": 0.6961096544413633
+              },
+              "middle": {
+                "prevalence": 0.11908836784756689,
+                "prediction_mean": 0.10898407752784121,
+                "ovr_brier": 0.10499212151513637,
+                "ovr_logloss": 0.36558424882137625
+              },
+              "reverse": {
+                "prevalence": 0.22162457315632056,
+                "prediction_mean": 0.18678517815936344,
+                "ovr_brier": 0.17313435965086005,
+                "ovr_logloss": 0.5322107764251262
+              },
+              "overlap": {
+                "prevalence": 0.03421676731620254,
+                "prediction_mean": 0.03529313567678319,
+                "ovr_brier": 0.033088248308056144,
+                "ovr_logloss": 0.15000992073379849
+              },
+              "bigmiss": {
+                "prevalence": 0.1251069655998631,
+                "prediction_mean": 0.1322041606554081,
+                "ovr_brier": 0.10888666937834623,
+                "ovr_logloss": 0.3744451547947539
+              }
+            }
+          },
+          "gain_vs_pitcher_parent": {
+            "multiclass_logloss_gain": 0.0032257114660567687,
+            "multiclass_brier_gain": 0.001096733261777505,
+            "per_class": {
+              "success": {
+                "ovr_brier_gain": 9.07351284986091e-05,
+                "ovr_logloss_gain": 0.00017074550105844466,
+                "prediction_mean_shift": -0.00018295768058795847,
+                "direction": "BETTER_BOTH"
+              },
+              "middle": {
+                "ovr_brier_gain": 4.5591944077452706e-05,
+                "ovr_logloss_gain": 0.0002104303807451413,
+                "prediction_mean_shift": 0.00028882992628358195,
+                "direction": "BETTER_BOTH"
+              },
+              "reverse": {
+                "ovr_brier_gain": 0.0003703580904522441,
+                "ovr_logloss_gain": 0.0010917366723801614,
+                "prediction_mean_shift": 0.0007368780473457348,
+                "direction": "BETTER_BOTH"
+              },
+              "overlap": {
+                "ovr_brier_gain": -9.461979463463999e-06,
+                "ovr_logloss_gain": -0.00016268493595358868,
+                "prediction_mean_shift": 5.14114202879723e-05,
+                "direction": "WORSE_BOTH"
+              },
+              "bigmiss": {
+                "ovr_brier_gain": 0.0005995100782127116,
+                "ovr_logloss_gain": 0.0025909794367341976,
+                "prediction_mean_shift": -0.0008941617133294832,
+                "direction": "BETTER_BOTH"
+              }
+            }
+          }
+        }
+      }
+    },
+    "2024": {
+      "history_rows": 1221184,
+      "validation_rows": 253116,
+      "global_class_prior": {
+        "success": 0.5315447958702374,
+        "middle": 0.1098196504376081,
+        "reverse": 0.1908402009852733,
+        "overlap": 0.0342577367538389,
+        "bigmiss": 0.13353761595304228
+      },
+      "coverage": {
+        "seen_pitcher_rows": 202849,
+        "seen_pitcher_rate": 0.8014072599124512,
+        "seen_child_rows": 201285,
+        "seen_child_rate": 0.7952282747831034,
+        "parent_cells": 711,
+        "child_cells": 15330
+      },
+      "pitcher_parent_metrics": {
+        "multiclass_logloss": 1.336340871101878,
+        "multiclass_brier": 0.6837416741853023,
+        "per_class": {
+          "success": {
+            "prevalence": 0.486045923608148,
+            "prediction_mean": 0.5270752596842253,
+            "ovr_brier": 0.25167429839258587,
+            "ovr_logloss": 0.6965651002481509
+          },
+          "middle": {
+            "prevalence": 0.14296607089239716,
+            "prediction_mean": 0.11262105377570267,
+            "ovr_brier": 0.12335601789865153,
+            "ovr_logloss": 0.4143265940904666
+          },
+          "reverse": {
+            "prevalence": 0.2147236840025917,
+            "prediction_mean": 0.19582403322099476,
+            "ovr_brier": 0.16861344572785092,
+            "ovr_logloss": 0.5204550702164531
+          },
+          "overlap": {
+            "prevalence": 0.03330883863525024,
+            "prediction_mean": 0.03357484634993435,
+            "ovr_brier": 0.032228415686253245,
+            "ovr_logloss": 0.14669878881279907
+          },
+          "bigmiss": {
+            "prevalence": 0.12295548286161286,
+            "prediction_mean": 0.13090480696914303,
+            "ovr_brier": 0.107869496479961,
+            "ovr_logloss": 0.3728599384805785
+          }
+        }
+      },
+      "children": {
+        "k110": {
+          "metrics": {
+            "multiclass_logloss": 1.3339813249536667,
+            "multiclass_brier": 0.6828177680847558,
+            "per_class": {
+              "success": {
+                "prevalence": 0.486045923608148,
+                "prediction_mean": 0.5270618398665915,
+                "ovr_brier": 0.2518016752511782,
+                "ovr_logloss": 0.6968510686398875
+              },
+              "middle": {
+                "prevalence": 0.14296607089239716,
+                "prediction_mean": 0.11282031605096338,
+                "ovr_brier": 0.12337414841195904,
+                "ovr_logloss": 0.4146552423981863
+              },
+              "reverse": {
+                "prevalence": 0.2147236840025917,
+                "prediction_mean": 0.19667630051968818,
+                "ovr_brier": 0.1681442952831504,
+                "ovr_logloss": 0.5191613700521652
+              },
+              "overlap": {
+                "prevalence": 0.03330883863525024,
+                "prediction_mean": 0.03351944331014993,
+                "ovr_brier": 0.03226936834542391,
+                "ovr_logloss": 0.14743565352734536
+              },
+              "bigmiss": {
+                "prevalence": 0.12295548286161286,
+                "prediction_mean": 0.1299221002526071,
+                "ovr_brier": 0.10722828079304418,
+                "ovr_logloss": 0.3700037825904188
+              }
+            }
+          },
+          "gain_vs_pitcher_parent": {
+            "multiclass_logloss_gain": 0.0023595461482113222,
+            "multiclass_brier_gain": 0.0009239061005464899,
+            "per_class": {
+              "success": {
+                "ovr_brier_gain": -0.00012737685859232073,
+                "ovr_logloss_gain": -0.00028596839173666844,
+                "prediction_mean_shift": -1.3419817633808506e-05,
+                "direction": "WORSE_BOTH"
+              },
+              "middle": {
+                "ovr_brier_gain": -1.8130513307512697e-05,
+                "ovr_logloss_gain": -0.00032864830771967,
+                "prediction_mean_shift": 0.00019926227526070872,
+                "direction": "WORSE_BOTH"
+              },
+              "reverse": {
+                "ovr_brier_gain": 0.0004691504447005279,
+                "ovr_logloss_gain": 0.0012937001642878698,
+                "prediction_mean_shift": 0.000852267298693421,
+                "direction": "BETTER_BOTH"
+              },
+              "overlap": {
+                "ovr_brier_gain": -4.095265917066632e-05,
+                "ovr_logloss_gain": -0.000736864714546287,
+                "prediction_mean_shift": -5.540303978442129e-05,
+                "direction": "WORSE_BOTH"
+              },
+              "bigmiss": {
+                "ovr_brier_gain": 0.0006412156869168156,
+                "ovr_logloss_gain": 0.0028561558901597506,
+                "prediction_mean_shift": -0.0009827067165359415,
+                "direction": "BETTER_BOTH"
+              }
+            }
+          }
+        },
+        "k220": {
+          "metrics": {
+            "multiclass_logloss": 1.333274527796226,
+            "multiclass_brier": 0.6826490069685033,
+            "per_class": {
+              "success": {
+                "prevalence": 0.486045923608148,
+                "prediction_mean": 0.5270532936321028,
+                "ovr_brier": 0.25164753063943945,
+                "ovr_logloss": 0.6965251704019583
+              },
+              "middle": {
+                "prevalence": 0.14296607089239716,
+                "prediction_mean": 0.11284911972899671,
+                "ovr_brier": 0.12332588378482948,
+                "ovr_logloss": 0.41430816491541056
+              },
+              "reverse": {
+                "prevalence": 0.2147236840025917,
+                "prediction_mean": 0.19659323252333877,
+                "ovr_brier": 0.16815519354962805,
+                "ovr_logloss": 0.5191108541528174
+              },
+              "overlap": {
+                "prevalence": 0.03330883863525024,
+                "prediction_mean": 0.03357024988159836,
+                "ovr_brier": 0.03224733403390373,
+                "ovr_logloss": 0.1470329496326764
+              },
+              "bigmiss": {
+                "prevalence": 0.12295548286161286,
+                "prediction_mean": 0.1299341042339632,
+                "ovr_brier": 0.10727306496070252,
+                "ovr_logloss": 0.37022425058544267
+              }
+            }
+          },
+          "gain_vs_pitcher_parent": {
+            "multiclass_logloss_gain": 0.0030663433056521416,
+            "multiclass_brier_gain": 0.0010926672167990148,
+            "per_class": {
+              "success": {
+                "ovr_brier_gain": 2.6767753146417217e-05,
+                "ovr_logloss_gain": 3.9929846192610086e-05,
+                "prediction_mean_shift": -2.196605212245739e-05,
+                "direction": "BETTER_BOTH"
+              },
+              "middle": {
+                "ovr_brier_gain": 3.0134113822050113e-05,
+                "ovr_logloss_gain": 1.8429175056067226e-05,
+                "prediction_mean_shift": 0.00022806595329404045,
+                "direction": "BETTER_BOTH"
+              },
+              "reverse": {
+                "ovr_brier_gain": 0.00045825217822287323,
+                "ovr_logloss_gain": 0.0013442160636356615,
+                "prediction_mean_shift": 0.0007691993023440091,
+                "direction": "BETTER_BOTH"
+              },
+              "overlap": {
+                "ovr_brier_gain": -1.89183476504845e-05,
+                "ovr_logloss_gain": -0.0003341608198773327,
+                "prediction_mean_shift": -4.596468335990589e-06,
+                "direction": "WORSE_BOTH"
+              },
+              "bigmiss": {
+                "ovr_brier_gain": 0.0005964315192584779,
+                "ovr_logloss_gain": 0.002635687895135852,
+                "prediction_mean_shift": -0.0009707027351798236,
+                "direction": "BETTER_BOTH"
+              }
+            }
+          }
+        },
+        "k440": {
+          "metrics": {
+            "multiclass_logloss": 1.3334494096604634,
+            "multiclass_brier": 0.6827462614684897,
+            "per_class": {
+              "success": {
+                "prevalence": 0.486045923608148,
+                "prediction_mean": 0.5270537134677635,
+                "ovr_brier": 0.25158999012099503,
+                "ovr_logloss": 0.6964018152412882
+              },
+              "middle": {
+                "prevalence": 0.14296607089239716,
+                "prediction_mean": 0.11283771005672844,
+                "ovr_brier": 0.12331098245816889,
+                "ovr_logloss": 0.41416996297620107
+              },
+              "reverse": {
+                "prevalence": 0.2147236840025917,
+                "prediction_mean": 0.19645275304456228,
+                "ovr_brier": 0.16823175045716893,
+                "ovr_logloss": 0.519300136126949
+              },
+              "overlap": {
+                "prevalence": 0.03330883863525024,
+                "prediction_mean": 0.0335968664891402,
+                "ovr_brier": 0.03223497114944764,
+                "ovr_logloss": 0.146821281061958
+              },
+              "bigmiss": {
+                "prevalence": 0.12295548286161286,
+                "prediction_mean": 0.13005895694180553,
+                "ovr_brier": 0.10737856728270924,
+                "ovr_logloss": 0.3707007873456904
+              }
+            }
+          },
+          "gain_vs_pitcher_parent": {
+            "multiclass_logloss_gain": 0.002891461441414611,
+            "multiclass_brier_gain": 0.0009954127168125826,
+            "per_class": {
+              "success": {
+                "ovr_brier_gain": 8.430827159083831e-05,
+                "ovr_logloss_gain": 0.0001632850068626901,
+                "prediction_mean_shift": -2.1546216461776346e-05,
+                "direction": "BETTER_BOTH"
+              },
+              "middle": {
+                "ovr_brier_gain": 4.50354404826353e-05,
+                "ovr_logloss_gain": 0.00015663111426555965,
+                "prediction_mean_shift": 0.00021665628102576773,
+                "direction": "BETTER_BOTH"
+              },
+              "reverse": {
+                "ovr_brier_gain": 0.00038169527068199205,
+                "ovr_logloss_gain": 0.0011549340895040672,
+                "prediction_mean_shift": 0.0006287198235675195,
+                "direction": "BETTER_BOTH"
+              },
+              "overlap": {
+                "ovr_brier_gain": -6.55546319439787e-06,
+                "ovr_logloss_gain": -0.00012249224915891754,
+                "prediction_mean_shift": 2.2020139205845835e-05,
+                "direction": "WORSE_BOTH"
+              },
+              "bigmiss": {
+                "ovr_brier_gain": 0.0004909291972517577,
+                "ovr_logloss_gain": 0.0021591511348881265,
+                "prediction_mean_shift": -0.0008458500273375025,
+                "direction": "BETTER_BOTH"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "robustness": {
+    "k110": {
+      "all_years_logloss_better": true,
+      "all_years_brier_better": true,
+      "min_logloss_gain": 0.0023595461482113222,
+      "mean_logloss_gain": 0.002566616720627598,
+      "min_brier_gain": 0.0008684567189441994,
+      "mean_brier_gain": 0.0009640036216902459,
+      "pass_both_all_years": true
+    },
+    "k220": {
+      "all_years_logloss_better": true,
+      "all_years_brier_better": true,
+      "min_logloss_gain": 0.002981348234369907,
+      "mean_logloss_gain": 0.003196310956628793,
+      "min_brier_gain": 0.0010318724900020282,
+      "mean_brier_gain": 0.001121399358983699,
+      "pass_both_all_years": true
+    },
+    "k440": {
+      "all_years_logloss_better": true,
+      "all_years_brier_better": true,
+      "min_logloss_gain": 0.002677675679969349,
+      "mean_logloss_gain": 0.0029316161958135765,
+      "min_brier_gain": 0.0009152451959549834,
+      "mean_brier_gain": 0.001002463724848357,
+      "pass_both_all_years": true
+    }
+  },
+  "input_sha256": {
+    "data/train.csv": "d2081186b458b49f60b082be480c273135833e15ba59a76d033af28bcf8763ff"
+  },
+  "elapsed_seconds": 5353.153723955154
+}

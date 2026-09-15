@@ -1,0 +1,10 @@
+=== exp163 fixed JY-style Tensor-EB transfer ===
+official train + our OOF only; no external code/model/prediction/ZIP
+frozen scale=0.58 2023: {'raw_gain': 1.5713179372767172, 'equal_mean_shape_gain': 2.2133468335683304, 'F_contribution': 0.0, 'R_contribution': 1.5713179372710517, 'mean_shift': 0.0002047947652079607, 'effect_std': 0.004198057478256407, 'effect_mean_abs': 0.0028399557705580084, 'clipped_rate': 0.0}
+frozen scale=0.58 2024: {'raw_gain': -3.328806279612195, 'equal_mean_shape_gain': 3.5258369162517056, 'F_contribution': 0.0, 'R_contribution': -3.328806279630721, 'mean_shift': 0.001653887725836689, 'effect_std': 0.004467257986738638, 'effect_mean_abs': 0.0030615087045176115, 'clipped_rate': 0.0}
+2023 curve: s=0.0:+0.000 s=0.4:+2.596 s=0.55:+1.837 s=0.58:+1.571 s=0.75:-0.646 s=1.0:-6.113
+2024 curve: s=0.0:+0.000 s=0.4:-0.352 s=0.55:-2.711 s=0.58:-3.329 s=0.75:-7.747 s=1.0:-17.080
+2024 early=+11.630 late=-22.878
+2024 bootstrap={'draws': 5000, 'pitchers': 391, 'median': -3.260022502928852, 'p025': -14.242776339965562, 'p975': 6.779466851277006, 'prob_positive': 0.2724}
+FINAL: FAIL_NO_SUBMISSION
+elapsed=18.77s

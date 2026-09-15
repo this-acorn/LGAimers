@@ -1,0 +1,10 @@
+=== exp/93 arm=CTR1 smoke=True CB extra {'max_ctr_complexity': 1} ===
+train 로딩...
+클래스 분포: 0:52.3% 1:11.5% 2:19.5% 3:3.4% 4:13.2%  미복원 0.05%
+  [   172s] 테이블·PFB 준비
+  [   209s] 피처 부착 완료
+기준 cat5: 시드별 851.2 / 856.5  2시드 873.9  proj8 889.0  벌점 37.0
+멀티클래스 학습 행: 1,221,184 / 1,221,585   피처 79 (79 + 0)  cat 5개 ['top_bottom', 'game_type', 'base_state', 'pitcher_team_id', 'batter_team_id']
+smoke: 6만행·20it 학습/예측 정상 — 클래스 [np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4)]  P(성공) 평균 0.4497 점수 -290.4
+smoke 중요도 상위 12: f_count_diff=16.7, asof_pitcher_reverse_rate=8.5, asof_pitcher_success_rate=7.5, strikes_before=5.8, f_smooth_p=4.7, f_cs_p_rate=4.6, balls_before=3.8, f_count_state=3.7, asof_batter_success_rate=3.6, f_form_dev3=2.0, f_is_2strike=1.9, game_month=1.9
+exit=0

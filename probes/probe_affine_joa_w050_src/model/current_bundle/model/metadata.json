@@ -1,0 +1,147 @@
+{
+  "experiment": "EXP-021",
+  "candidate": "strict_lowrank_s300_r6",
+  "training_rows": 1475092,
+  "training_seasons": [
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "history_through_season": 2024,
+  "full_fit_backbone": {
+    "base": "EXP018 temporal base + last3 group",
+    "R_lightgbm": "rfull_l63_m1000_i300 weight 0.75",
+    "R_histgradientboosting": "hist_l15_d4_m3000_i160 weight 1.0",
+    "ensemble": "fixed 50:50",
+    "F": "EXP018 temporal base + last3 group"
+  },
+  "source_effect_seasons": [
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "source_combination": "equal average; missing mapping contributes zero",
+  "probability_calibration": "identity",
+  "validation_aggregate_2022_2024": {
+    "season_briers": {
+      "2022": 0.24470458400867237,
+      "2023": 0.2477311440988816,
+      "2024": 0.24763380341629648
+    },
+    "season_skills": {
+      "2022": 1789.5967932082258,
+      "2023": 907.5416355312283,
+      "2024": 869.9211702032806
+    },
+    "mean_skill": 1189.0198663142448,
+    "min_skill": 869.9211702032806,
+    "latest_2024_skill": 869.9211702032806,
+    "season_skill_change_vs_base": {
+      "2022": 5.199395859112428,
+      "2023": 8.930770913562242,
+      "2024": 19.518330601309117
+    },
+    "season_skill_change_vs_saturated_s600": {
+      "2022": -2.0766262442073185,
+      "2023": -1.0320381099826363,
+      "2024": 6.572499395729437
+    },
+    "mean_skill_change_vs_base": 11.216165791327967,
+    "min_skill_change_vs_base": 19.518330601309117,
+    "mean_skill_change_vs_saturated_s600": 1.1546116805129714,
+    "min_skill_change_vs_saturated_s600": 6.572499395729437
+  },
+  "model_fit_seconds": {
+    "lightgbm": 200.66391348838806,
+    "histgradientboosting": 63.08717656135559
+  },
+  "feature_counts": {
+    "lightgbm": 186,
+    "histgradientboosting": 84
+  },
+  "multirate_reconstruction_diagnostics": {
+    "2019_pitcher_control": {
+      "negative_count": 0,
+      "above_n_count": 0
+    },
+    "2019_batter_control": {
+      "negative_count": 0,
+      "above_n_count": 0
+    },
+    "2019_pitcher_pitchmix": {
+      "negative_count": 0,
+      "above_n_count": 0
+    },
+    "2020_pitcher_control": {
+      "negative_count": 0,
+      "above_n_count": 216
+    },
+    "2020_batter_control": {
+      "negative_count": 0,
+      "above_n_count": 30
+    },
+    "2020_pitcher_pitchmix": {
+      "negative_count": 0,
+      "above_n_count": 724
+    },
+    "2021_pitcher_control": {
+      "negative_count": 0,
+      "above_n_count": 278
+    },
+    "2021_batter_control": {
+      "negative_count": 0,
+      "above_n_count": 64
+    },
+    "2021_pitcher_pitchmix": {
+      "negative_count": 0,
+      "above_n_count": 816
+    },
+    "2022_pitcher_control": {
+      "negative_count": 0,
+      "above_n_count": 285
+    },
+    "2022_batter_control": {
+      "negative_count": 0,
+      "above_n_count": 59
+    },
+    "2022_pitcher_pitchmix": {
+      "negative_count": 0,
+      "above_n_count": 838
+    },
+    "2023_pitcher_control": {
+      "negative_count": 0,
+      "above_n_count": 304
+    },
+    "2023_batter_control": {
+      "negative_count": 0,
+      "above_n_count": 78
+    },
+    "2023_pitcher_pitchmix": {
+      "negative_count": 0,
+      "above_n_count": 858
+    },
+    "2024_pitcher_control": {
+      "negative_count": 0,
+      "above_n_count": 319
+    },
+    "2024_batter_control": {
+      "negative_count": 0,
+      "above_n_count": 68
+    },
+    "2024_pitcher_pitchmix": {
+      "negative_count": 0,
+      "above_n_count": 886
+    }
+  },
+  "versions": {
+    "python": "3.12.6",
+    "numpy": "2.5.1",
+    "pandas": "3.0.5",
+    "lightgbm": "4.6.0",
+    "scikit_learn": "1.9.0"
+  }
+}

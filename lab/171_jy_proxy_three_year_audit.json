@@ -1,0 +1,230 @@
+{
+  "experiment": 171,
+  "source": "saved official-only EXP170 predictions",
+  "no_model_fit": true,
+  "years": {
+    "2022": {
+      "standalone": {
+        "geometry": {
+          "anchor_score": 2337.158883878898,
+          "candidate_score": 2456.51353845201,
+          "d": 119.35465457311193,
+          "K": 161.27390147578387,
+          "d_plus_K": 280.6285560488958,
+          "w_unconstrained": 0.8700371029686835,
+          "w_constrained": 0.8700371029686835,
+          "analytic_gain": 122.07862795753307,
+          "actual_clipped_gain": 122.07862795753363
+        },
+        "early_gain": 206.66354304948982,
+        "late_gain": 29.121096081563337,
+        "pitcher_bootstrap": {
+          "p025": 76.55738673012978,
+          "median": 118.51145095249356,
+          "p975": 162.80145825615992,
+          "prob_positive": 1.0,
+          "pitchers": 390,
+          "draws": 5000
+        }
+      },
+      "F_team_R_anchor": {
+        "geometry": {
+          "anchor_score": 2337.158883878898,
+          "candidate_score": 2412.9990528538037,
+          "d": 75.84016897490574,
+          "K": 70.22519857361105,
+          "d_plus_K": 146.0653675485168,
+          "w_unconstrained": 1.039978316297739,
+          "w_constrained": 1.0,
+          "analytic_gain": 75.84016897490575,
+          "actual_clipped_gain": 75.84016897490574
+        },
+        "early_gain": 136.90772134102872,
+        "late_gain": 12.718034897085545,
+        "pitcher_bootstrap": {
+          "p025": 46.920142523844106,
+          "median": 75.14814499160833,
+          "p975": 106.5238651990555,
+          "prob_positive": 1.0,
+          "pitchers": 390,
+          "draws": 5000
+        }
+      },
+      "R_team_F_anchor": {
+        "geometry": {
+          "anchor_score": 2337.158883878898,
+          "candidate_score": 2380.673369477104,
+          "d": 43.51448559820619,
+          "K": 91.04870290217279,
+          "d_plus_K": 134.563188500379,
+          "w_unconstrained": 0.7389626881613037,
+          "w_constrained": 0.7389626881613037,
+          "analytic_gain": 49.71858775089815,
+          "actual_clipped_gain": 49.71858775091323
+        },
+        "early_gain": 69.75582170846155,
+        "late_gain": 16.403061184466424,
+        "pitcher_bootstrap": {
+          "p025": 14.52012859360208,
+          "median": 43.34920633113775,
+          "p975": 72.67771324481079,
+          "prob_positive": 0.9992,
+          "pitchers": 390,
+          "draws": 5000
+        }
+      }
+    },
+    "2023": {
+      "standalone": {
+        "geometry": {
+          "anchor_score": -22.742734501002282,
+          "candidate_score": 95.44687433272748,
+          "d": 118.18960883372975,
+          "K": 144.26615856205083,
+          "d_plus_K": 262.4557673957806,
+          "w_unconstrained": 0.9096234696056414,
+          "w_constrained": 0.9096234696056414,
+          "analytic_gain": 119.36796287828057,
+          "actual_clipped_gain": 119.36796287824737
+        },
+        "early_gain": 108.39319841933204,
+        "late_gain": 128.09309993809802,
+        "pitcher_bootstrap": {
+          "p025": 60.65432934455533,
+          "median": 117.5196243617945,
+          "p975": 177.68728071876214,
+          "prob_positive": 1.0,
+          "pitchers": 382,
+          "draws": 5000
+        }
+      },
+      "F_team_R_anchor": {
+        "geometry": {
+          "anchor_score": -22.742734501002282,
+          "candidate_score": 99.5029233159861,
+          "d": 122.24565781698837,
+          "K": 28.71279556053242,
+          "d_plus_K": 150.95845337752078,
+          "w_unconstrained": 2.6287662073738103,
+          "w_constrained": 1.0,
+          "analytic_gain": 122.24565781698837,
+          "actual_clipped_gain": 122.24565781698837
+        },
+        "early_gain": 140.97713998079132,
+        "late_gain": 103.36636749799231,
+        "pitcher_bootstrap": {
+          "p025": 90.37570330836728,
+          "median": 121.51120973707644,
+          "p975": 157.39635849792938,
+          "prob_positive": 1.0,
+          "pitchers": 382,
+          "draws": 5000
+        }
+      },
+      "R_team_F_anchor": {
+        "geometry": {
+          "anchor_score": -22.742734501002282,
+          "candidate_score": -26.79878348430531,
+          "d": -4.056048983303029,
+          "K": 115.55336300151842,
+          "d_plus_K": 111.49731401821539,
+          "w_unconstrained": 0.48244945504853143,
+          "w_constrained": 0.48244945504853143,
+          "analytic_gain": 26.895909193731498,
+          "actual_clipped_gain": 26.89590919374707
+        },
+        "early_gain": -32.58394156144817,
+        "late_gain": 24.726732440105707,
+        "pitcher_bootstrap": {
+          "p025": -48.90200242659172,
+          "median": -4.976042144659772,
+          "p975": 46.66291756519268,
+          "prob_positive": 0.4188,
+          "pitchers": 382,
+          "draws": 5000
+        }
+      }
+    },
+    "2024": {
+      "standalone": {
+        "geometry": {
+          "anchor_score": 936.5839989479041,
+          "candidate_score": 120.2410380026886,
+          "d": -816.3429609452155,
+          "K": 691.6850746896599,
+          "d_plus_K": -124.65788625555558,
+          "w_unconstrained": -0.09011173640799329,
+          "w_constrained": 0.0,
+          "analytic_gain": -0.0,
+          "actual_clipped_gain": 0.0
+        },
+        "early_gain": -963.2500080918315,
+        "late_gain": -624.5397989306456,
+        "pitcher_bootstrap": {
+          "p025": -1028.2368283032679,
+          "median": -812.009084143627,
+          "p975": -636.8348743611598,
+          "prob_positive": 0.0,
+          "pitchers": 391,
+          "draws": 5000
+        }
+      },
+      "F_team_R_anchor": {
+        "geometry": {
+          "anchor_score": 936.5839989479041,
+          "candidate_score": 200.28666108958814,
+          "d": -736.2973378583159,
+          "K": 609.7618046270611,
+          "d_plus_K": -126.53553323125482,
+          "w_unconstrained": -0.10375816611590302,
+          "w_constrained": 0.0,
+          "analytic_gain": -0.0,
+          "actual_clipped_gain": 0.0
+        },
+        "early_gain": -863.052215754112,
+        "late_gain": -570.8118690072262,
+        "pitcher_bootstrap": {
+          "p025": -944.6821913244911,
+          "median": -732.120915325487,
+          "p975": -554.554065987939,
+          "prob_positive": 0.0,
+          "pitchers": 391,
+          "draws": 5000
+        }
+      },
+      "R_team_F_anchor": {
+        "geometry": {
+          "anchor_score": 936.5839989479041,
+          "candidate_score": 856.5383758610157,
+          "d": -80.04562308688844,
+          "K": 81.92327006259869,
+          "d_plus_K": 1.877646975710249,
+          "w_unconstrained": 0.01145979020536847,
+          "w_constrained": 0.01145979020536847,
+          "analytic_gain": 0.01075872021069202,
+          "actual_clipped_gain": 0.010758720203625671
+        },
+        "early_gain": -100.19779233770839,
+        "late_gain": -53.72792992341954,
+        "pitcher_bootstrap": {
+          "p025": -107.70420030008206,
+          "median": -79.7203686700739,
+          "p975": -53.125651123906025,
+          "prob_positive": 0.0,
+          "pitchers": 391,
+          "draws": 5000
+        }
+      }
+    }
+  },
+  "F_route_deploy_gate_2024": {
+    "checks": {
+      "raw_gain_ge_20": false,
+      "early_positive": false,
+      "late_positive": false,
+      "pitcher_p025_positive": false
+    },
+    "pass": false
+  },
+  "decision": "FAIL_NO_DEPLOY_NO_ZIP"
+}

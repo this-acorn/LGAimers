@@ -1,0 +1,81 @@
+=== 2024 first-seen-pitcher routing audit ===
+rows=253,507 rookie_rows=50,348 (19.86%) rookie_pitchers=81 r_all=0.486105 r_rookie=0.489930
+champion=cat5 score=873.92
+All gains below are global-equivalent points on the full 2024 score.
+
+[MC04] d=-3.01 K=11.53 w*=0.370 optimum=+1.57
+  rookie means: y=0.48993 champion=0.50589 partner=0.50319
+  sweep w=0.25:+1.41 w=0.50:+1.38 w=0.75:-0.09 w=1.00:-3.01
+  pitcher-bootstrap w=0.25: 95% [-1.56, +4.34] median=+1.42 P(gain>0)=0.824
+  pitcher-bootstrap w=0.50: 95% [-4.77, +7.28] median=+1.41 P(gain>0)=0.676
+  pitcher-bootstrap w=0.75: 95% [-9.54, +8.79] median=-0.01 P(gain>0)=0.499
+  pitcher-bootstrap w=1.00: 95% [-15.90, +9.02] median=-2.87 P(gain>0)=0.323
+  pitcher-bootstrap w*=diagnostic: 95% [-2.88, +5.92] median=+1.60 P(gain>0)=0.760
+  note: w* is selected on these labels; fixed-weight intervals are the less selection-biased evidence.
+  asof_pitcher_n bucket optima (exploratory): 0-24:n=1,968,d=-0.38,K=0.81,w*=0.27,g=+0.06 | 25-99:n=4,822,d=-0.88,K=1.32,w*=0.17,g=+0.04 | 100-299:n=8,905,d=+1.66,K=2.00,w*=0.92,g=+1.67 | 300+:n=34,653,d=-3.40,K=7.39,w*=0.27,g=+0.54
+
+[BIN04] d=+0.25 K=15.81 w*=0.508 optimum=+4.08
+  rookie means: y=0.48993 champion=0.50589 partner=0.50134
+  sweep w=0.25:+3.03 w=0.50:+4.08 w=0.75:+3.15 w=1.00:+0.25
+  pitcher-bootstrap w=0.25: 95% [-0.66, +6.81] median=+2.97 P(gain>0)=0.948
+  pitcher-bootstrap w=0.50: 95% [-3.28, +11.55] median=+4.01 P(gain>0)=0.857
+  pitcher-bootstrap w=0.75: 95% [-7.87, +14.31] median=+3.10 P(gain>0)=0.706
+  pitcher-bootstrap w=1.00: 95% [-14.57, +15.19] median=+0.22 P(gain>0)=0.511
+  pitcher-bootstrap w*=diagnostic: 95% [-3.40, +11.67] median=+4.01 P(gain>0)=0.851
+  note: w* is selected on these labels; fixed-weight intervals are the less selection-biased evidence.
+  asof_pitcher_n bucket optima (exploratory): 0-24:n=1,968,d=-0.41,K=1.25,w*=0.34,g=+0.14 | 25-99:n=4,822,d=-2.38,K=1.99,w*=0.00,g=+0.00 | 100-299:n=8,905,d=+0.96,K=3.22,w*=0.65,g=+1.35 | 300+:n=34,653,d=+2.08,K=9.36,w*=0.61,g=+3.49
+
+[M4] d=-2.53 K=7.96 w*=0.341 optimum=+0.93
+  rookie means: y=0.48993 champion=0.50589 partner=0.50478
+  sweep w=0.25:+0.86 w=0.50:+0.73 w=0.75:-0.40 w=1.00:-2.53
+  pitcher-bootstrap w=0.25: 95% [-1.31, +2.96] median=+0.83 P(gain>0)=0.773
+  pitcher-bootstrap w=0.50: 95% [-3.65, +4.97] median=+0.68 P(gain>0)=0.618
+  pitcher-bootstrap w=0.75: 95% [-7.05, +6.02] median=-0.47 P(gain>0)=0.440
+  pitcher-bootstrap w=1.00: 95% [-11.60, +6.07] median=-2.62 P(gain>0)=0.274
+  pitcher-bootstrap w*=diagnostic: 95% [-2.03, +3.81] median=+0.89 P(gain>0)=0.720
+  note: w* is selected on these labels; fixed-weight intervals are the less selection-biased evidence.
+  asof_pitcher_n bucket optima (exploratory): 0-24:n=1,968,d=-1.05,K=0.72,w*=0.00,g=+0.00 | 25-99:n=4,822,d=+0.47,K=1.21,w*=0.69,g=+0.59 | 100-299:n=8,905,d=-2.22,K=1.57,w*=0.00,g=+0.00 | 300+:n=34,653,d=+0.28,K=4.45,w*=0.53,g=+1.26
+
+[OH] d=-4.32 K=7.88 w*=0.226 optimum=+0.40
+  rookie means: y=0.48993 champion=0.50589 partner=0.50581
+  sweep w=0.25:+0.40 w=0.50:-0.19 w=0.75:-1.76 w=1.00:-4.32
+  pitcher-bootstrap w=0.25: 95% [-1.60, +2.72] median=+0.41 P(gain>0)=0.644
+  pitcher-bootstrap w=0.50: 95% [-4.19, +4.40] median=-0.16 P(gain>0)=0.469
+  pitcher-bootstrap w=0.75: 95% [-7.82, +5.05] median=-1.74 P(gain>0)=0.287
+  pitcher-bootstrap w=1.00: 95% [-12.42, +4.72] median=-4.29 P(gain>0)=0.159
+  pitcher-bootstrap w*=diagnostic: 95% [-1.40, +2.50] median=+0.41 P(gain>0)=0.664
+  note: w* is selected on these labels; fixed-weight intervals are the less selection-biased evidence.
+  asof_pitcher_n bucket optima (exploratory): 0-24:n=1,968,d=+0.57,K=0.74,w*=0.89,g=+0.58 | 25-99:n=4,822,d=+0.14,K=1.15,w*=0.56,g=+0.36 | 100-299:n=8,905,d=-2.12,K=1.76,w*=0.00,g=+0.00 | 300+:n=34,653,d=-2.91,K=4.23,w*=0.16,g=+0.10
+
+[CTR1] d=-0.76 K=8.86 w*=0.457 optimum=+1.85
+  rookie means: y=0.48993 champion=0.50589 partner=0.50475
+  sweep w=0.25:+1.47 w=0.50:+1.83 w=0.75:+1.09 w=1.00:-0.76
+  pitcher-bootstrap w=0.25: 95% [-0.30, +3.44] median=+1.47 P(gain>0)=0.949
+  pitcher-bootstrap w=0.50: 95% [-1.71, +5.73] median=+1.82 P(gain>0)=0.838
+  pitcher-bootstrap w=0.75: 95% [-4.25, +6.89] median=+1.05 P(gain>0)=0.661
+  pitcher-bootstrap w=1.00: 95% [-7.96, +6.90] median=-0.82 P(gain>0)=0.423
+  pitcher-bootstrap w*=diagnostic: 95% [-1.38, +5.42] median=+1.84 P(gain>0)=0.862
+  note: w* is selected on these labels; fixed-weight intervals are the less selection-biased evidence.
+  asof_pitcher_n bucket optima (exploratory): 0-24:n=1,968,d=-0.33,K=0.76,w*=0.28,g=+0.06 | 25-99:n=4,822,d=-1.22,K=1.22,w*=0.00,g=+0.00 | 100-299:n=8,905,d=-0.30,K=1.76,w*=0.41,g=+0.30 | 300+:n=34,653,d=+1.09,K=5.12,w*=0.61,g=+1.89
+
+[rookie_expert] d=-51.75 K=42.32 w*=0.000 optimum=+0.00
+  rookie means: y=0.48993 champion=0.50589 partner=0.50835
+  sweep w=0.25:-5.00 w=0.50:-15.30 w=0.75:-30.88 w=1.00:-51.75
+  pitcher-bootstrap w=0.25: 95% [-11.96, +1.58] median=-4.90 P(gain>0)=0.073
+  pitcher-bootstrap w=0.50: 95% [-29.69, -1.91] median=-15.15 P(gain>0)=0.011
+  pitcher-bootstrap w=0.75: 95% [-53.57, -10.15] median=-30.64 P(gain>0)=0.002
+  pitcher-bootstrap w=1.00: 95% [-83.44, -23.05] median=-51.50 P(gain>0)=0.000
+  pitcher-bootstrap w*=diagnostic: 95% [+0.00, +0.00] median=+0.00 P(gain>0)=0.000
+  note: w* is selected on these labels; fixed-weight intervals are the less selection-biased evidence.
+  asof_pitcher_n bucket optima (exploratory): 0-24:n=1,968,d=-2.97,K=2.76,w*=0.00,g=+0.00 | 25-99:n=4,822,d=-6.87,K=4.94,w*=0.00,g=+0.00 | 100-299:n=8,905,d=-2.13,K=7.58,w*=0.36,g=+0.98 | 300+:n=34,653,d=-39.78,K=27.04,w*=0.00,g=+0.00
+
+[HGB65_no_pitcher] d=-39.84 K=43.63 w*=0.043 optimum=+0.08
+  rookie means: y=0.48993 champion=0.50589 partner=0.49962
+  sweep w=0.25:-1.78 w=0.50:-9.02 w=0.75:-21.70 w=1.00:-39.84
+  pitcher-bootstrap w=0.25: 95% [-6.74, +4.08] median=-1.85 P(gain>0)=0.237
+  pitcher-bootstrap w=0.50: 95% [-18.92, +2.50] median=-9.12 P(gain>0)=0.051
+  pitcher-bootstrap w=0.75: 95% [-36.69, -4.80] median=-21.81 P(gain>0)=0.008
+  pitcher-bootstrap w=1.00: 95% [-59.87, -17.51] median=-40.02 P(gain>0)=0.001
+  pitcher-bootstrap w*=diagnostic: 95% [-0.77, +1.11] median=+0.07 P(gain>0)=0.565
+  note: w* is selected on these labels; fixed-weight intervals are the less selection-biased evidence.
+  asof_pitcher_n bucket optima (exploratory): 0-24:n=1,968,d=-1.58,K=3.13,w*=0.25,g=+0.19 | 25-99:n=4,822,d=-5.38,K=5.97,w*=0.05,g=+0.01 | 100-299:n=8,905,d=-6.44,K=8.72,w*=0.13,g=+0.15 | 300+:n=34,653,d=-26.45,K=25.80,w*=0.00,g=+0.00

@@ -1,0 +1,12 @@
+exp/115 — mk-isos EXP-021 exact OOF reproduction × current champion
+environment={'python': '3.12', 'numpy': '2.5.1', 'pandas': '3.0.5', 'sklearn': '1.9.0', 'lightgbm': '4.6.0'}
+
+2022: champ=2418.280 EXP021=1789.597 d=-628.683 K=663.393 w*=0.0262 gain=+0.454 midpoint=-148.493 corr=0.869404 published_diff=+0.000e+00
+2023: champ=-897.977 EXP021=907.542 d=+1805.519 K=1395.174 w*=1.0000 gain=+1805.519 midpoint=+1251.553 corr=0.579409 published_diff=+0.000e+00
+2024: champ=926.841 EXP021=869.921 d=-56.920 K=175.413 w*=0.3378 gain=+20.011 midpoint=+15.393 corr=0.915222 published_diff=+0.000e+00
+
+exact_metrics=True
+folds_gain>=20=2/3
+K min/median=175.413/663.393
+PASS_FOR_LB_PROBE=True
+No bundle or submission was created.

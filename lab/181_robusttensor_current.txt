@@ -1,0 +1,31 @@
+EXP181 RobustTensor on current clean anchor
+===========================================
+status: TECHNICALLY_DEPLOYABLE_BUT_VALIDATION_NO_GO_DO_NOT_SUBMIT
+submitted: false
+
+Our locked 2024 confirmation (actual decision evidence)
+  raw gain                 +0.342677
+  equal-mean shape gain    +4.320049
+  early / late             +8.786015 / -10.690995
+  all hands positive       False
+  pitcher 95% CI           [-6.859475, +7.834113]
+  decision                 FAIL_NO_SUBMISSION
+
+External context (not evidence for our anchor)
+  Public issue #5 reports +15.4889 locally and official 1148.7730692448
+  on JM R Residual scale 1.00. Issue #8 repeats that endpoint as an input.
+  Issue #8 does not give Tensor settings; it reports a later Hybrid official
+  failure (1109.979787 vs its 1150.378388 base), reinforcing transfer risk.
+  No JM code, ZIP, weights, predictions, or OOF artifacts were read or used.
+
+Technical artifact (HOLD only)
+  zip      candidate_exp181_robusttensor_hold.zip
+  bytes    12760762
+  SHA256   626B1295E0AC9EA356E02776C736CEB111A0800C44BF15F44AF47E926ED1E0E6
+  fake QA  rows=245789 rc=0 range_ok=true F_changed=0
+  row independence max abs diff = 0
+
+Bottom line
+  A clean 2025 implementation is technically possible and server-safe, but the
+  only valid transfer check on our current anchor failed. This ZIP must not consume
+  a leaderboard slot unless an explicit decision overrides the frozen guardrail.

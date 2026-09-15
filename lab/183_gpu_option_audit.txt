@@ -1,0 +1,86 @@
+EXP183 GPU OPTION FEASIBILITY AUDIT (NO TRAINING)
+Audited: 2026-09-01 KST
+
+DECISION: GO — run exactly one remaining GPU axis:
+  full official-data 176-feature robust-z MLP, evaluated only as a new endpoint
+  blended with the frozen current champion. Do not run another 79/80-feature NN.
+
+WHY THIS IS NOT AN ALREADY-DEAD AXIS
+- Local TabM/BatchEnsemble is dead: normal 2024 chose w_nn=0 and even w=.05 hurt;
+  discrimination was negative in both years (HANDOFF.md:623).
+- Local 79-feature ResMLP is dead: 2-seed endpoint d=-389, w*=0, seed K=528.4
+  (HANDOFF.md:1370-1387). XGBoost is also closed (HANDOFF.md:626).
+- EXP179's fast 80-feature robust-z proxy is dead on untouched 2024:
+  endpoint d=-846.47 and the 2023-locked blend lost -183.43
+  (lab/179_fast_stdmlp_endpoint.json). EXP182 is the same 80->160 feature axis
+  with more epochs, so GPU time should not be spent on it.
+- The proposed endpoint adds 96 inputs missing from EXP179: 88 cutoff-safe domain
+  features (TrackMan physical 55 + count 27 + role 5 + coverage 1) and 8 ID-frequency
+  features. Thus it is materially different from every local neural failure.
+
+PUBLIC EVIDENCE / HONEST CEILING
+- Elephant's combined package moved Public 1080.425 -> 1082.106 (+1.68), despite
+  reported val2024 +22.3; measured transfer was only 0.075
+  (reference/LA9elephantmiracle/performance_tracking/models/sj_stdmlp.md:3-25).
+- Among MLP representations, only std:176 received positive blend weight: forward
+  2024 +12.3, reverse +6.1, but 2022 forward -0.2 and w_mlp=.15
+  (same file:113-136). This is positive public evidence, but it implies realistic
+  hidden upside is low single digits, not a credible +20-point route.
+
+LICENSE / DATA BOUNDARY
+- Audited public HEAD is 57783aa88ccc30915a57abe887c8b8125408d483 and still matches
+  origin/main. Repository code is MIT; preserve its LICENSE/notice in any package.
+- Use only our official data/train.csv and data/trackman_history.csv. Do not open or
+  use Elephant zips, checkpoints, npz/OOF predictions, features_sample.csv.gz, or LUTs.
+
+INDEPENDENT RECONSTRUCTION IS FEASIBLE
+Exact Elephant release reproduction is NOT feasible: run_arm.py, work matrices,
+validation predictions, and the base champion archive are absent. They are not needed
+for this standalone scientific endpoint because the published MIT components specify:
+1. X68 raw/one-hot/derived builder and 4 strict EB split encodings:
+   reference/LA9elephantmiracle/src/common.py:22-40,72-120,127-178.
+2. Eight prior-season form features:
+   reference/LA9elephantmiracle/src/season_form.py:37-40,90-128.
+3. X80 -> X168 domain blocks, using official TrackMan only:
+   reference/LA9elephantmiracle/src/build_v13.py:4-13,35-63,83-106,127-155.
+   Pitcher mapping can be rebuilt from the two official files using
+   reference/LA9elephantmiracle/src/trackman_match2.py:37-145; its missing old map is
+   used only by the lines 176-194 comparison/report and is not an algorithm input.
+4. Eight train-fold-only log-frequency/unseen features:
+   reference/LA9elephantmiracle/performance_tracking/models/sj_stdmlp/atoms.py:99-116.
+5. Train-fold median/IQR scaling, clipping to [-4,4], plus finite-value mask (352 in):
+   reference/LA9elephantmiracle/performance_tracking/models/sj_stdmlp/prep_mlp.py:102-137.
+6. MLP: Linear(352,384), 3 residual blocks [LN, 384->768, GELU, dropout .3,
+   768->384, skip], LN, scalar head. Sigmoid-Brier loss; AdamW lr=.002,
+   wd=.0003; OneCycleLR; batch=1024; 8 epochs; AMP; final epoch; seeds 0/1/2.
+   Sources: cowork/cw/v17/src/dl.py:95-107 and train_v13.py:77-83,117-158.
+
+THE ONE EXPERIMENT (predeclare before touching 2024)
+A. Build fold-safe X176 for train<=2022 -> 2023 and train<=2023 -> 2024. Every EB,
+   frequency, season-form, TrackMan, role, median and IQR statistic uses the fit side only.
+B. Fit the exact 3-seed MLP above and average raw probabilities. Use no validation-selected
+   epoch. On 2023 only, fit one logit-affine calibration and one convex coefficient against
+   the frozen current OOF; freeze both, then apply unchanged to 2024.
+C. PASS only if both 2023 analytic gain and locked 2024 gain are >=8, 2024 early and late
+   gains are positive, and pitcher-cluster bootstrap p025>0. Otherwise stop: no final fit,
+   test read, ZIP, or submission.
+D. If PASS, refit the unchanged 3 seeds through 2024, build all LUTs from official train /
+   TrackMan, and add the frozen coefficient to the current clean package. Test processing
+   must be row-local; require fake-server, singleton/permutation/split QA and <600 seconds.
+
+RUNTIME / DEPLOYABILITY
+- Public source documents TrackMan matching about 3 min, the X168 build about 6 min,
+  and MLP about 15 sec/seed on its RTX4090 development machine
+  (trackman_match2.py:21-23; build_v13.py:20-22; tune_dl.py:14-25).
+- Even allowing a large slowdown, two 3-seed folds plus preprocessing fit inside 60 min;
+  impose a hard 45-minute validation stop so QA time remains.
+- The MLP has about 1.91M parameters/seed (~23 MB fp32 for 3 seeds). With the current
+  ~12.4 MB package, size is far below the 500 MB limit. Elephant's heavier full ensemble
+  was estimated at 409/600 server seconds and passed row-independence
+  (sj_stdmlp.md:187-204); MLP-only still requires our own measured rehearsal.
+
+BOTTOM LINE
+This is the only defensible GPU shot: new physical-feature representation, public positive
+LB evidence, official-only independent construction, and deployable cost. Its expected
+ceiling is modest. If its strict 2023->2024 locked gate fails, there is no worthwhile GPU
+axis left under the deadline.

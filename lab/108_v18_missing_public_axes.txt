@@ -1,0 +1,17 @@
+=== exp/108 strict public-hierarchy extension audit ===
+Five axes fixed before reading results; no k/key/bin/negative-weight search.
+2021: rows=247,088 extension effects ready
+2022: rows=247,472 extension effects ready
+2023: rows=245,525 extension effects ready
+2024: rows=253,507 extension effects ready
+
+LOO/Holm results
+axis                 weights       raw heldout       shape heldout      p(max) Holm
+batter_phand         0.00/0.00/0.00 +0.00/+0.00/+0.00 +0.00/+0.00/+0.00 1.0000 False
+pitcher_stint        0.00/0.00/0.00 +0.00/+0.00/+0.00 +0.00/+0.00/+0.00 1.0000 False
+
+No LOO+Holm survivor; exact confirmation skipped by design.
+
+FINAL GATE FAIL
+PASS would authorize only a separate audited bundle; this script never builds/submits.
+elapsed=26.7s

@@ -1,0 +1,43 @@
+=== exp/153 cause x runner tensor strict-past screen ===
+DIAGNOSTIC ONLY: official train + restored target5; no test/model/ZIP/LB/submission
+target5 coverage=0.999463 (1,474,300/1,475,092)
+parent K=220; child K grid=[110.0, 220.0, 440.0]
+
+year  childK coverage(parent/child)  logloss_gain   brier_gain
+2022     110 0.8427/0.8324 +0.002443648 +0.000868457
+2022     220 0.8427/0.8324 +0.002981348 +0.001031872
+2022     440 0.8427/0.8324 +0.002677676 +0.000915245
+2023     110 0.8621/0.8557 +0.002896656 +0.001099648
+2023     220 0.8621/0.8557 +0.003541241 +0.001239658
+2023     440 0.8621/0.8557 +0.003225711 +0.001096733
+2024     110 0.8014/0.7952 +0.002359546 +0.000923906
+2024     220 0.8014/0.7952 +0.003066343 +0.001092667
+2024     440 0.8014/0.7952 +0.002891461 +0.000995413
+
+Per-cause OVR direction at fixed child K=220 (positive gain=better)
+[2022]
+  success  brier=+0.000026939 logloss=+0.000049031 mean_shift=-0.0001552 BETTER_BOTH
+  middle   brier=-0.000012802 logloss=-0.000101949 mean_shift=+0.0001263 WORSE_BOTH
+  reverse  brier=+0.000438744 logloss=+0.001316776 mean_shift=+0.0009423 BETTER_BOTH
+  overlap  brier=-0.000013211 logloss=-0.000215589 mean_shift=+0.0000534 WORSE_BOTH
+  bigmiss  brier=+0.000592202 logloss=+0.002550991 mean_shift=-0.0009669 BETTER_BOTH
+[2023]
+  success  brier=+0.000036970 logloss=+0.000050443 mean_shift=-0.0002608 BETTER_BOTH
+  middle   brier=+0.000031273 logloss=+0.000118567 mean_shift=+0.0003377 BETTER_BOTH
+  reverse  brier=+0.000431535 logloss=+0.001167385 mean_shift=+0.0009068 BETTER_BOTH
+  overlap  brier=-0.000023959 logloss=-0.000392391 mean_shift=+0.0000525 WORSE_BOTH
+  bigmiss  brier=+0.000763840 logloss=+0.003313824 mean_shift=-0.0010362 BETTER_BOTH
+[2024]
+  success  brier=+0.000026768 logloss=+0.000039930 mean_shift=-0.0000220 BETTER_BOTH
+  middle   brier=+0.000030134 logloss=+0.000018429 mean_shift=+0.0002281 BETTER_BOTH
+  reverse  brier=+0.000458252 logloss=+0.001344216 mean_shift=+0.0007692 BETTER_BOTH
+  overlap  brier=-0.000018918 logloss=-0.000334161 mean_shift=-0.0000046 WORSE_BOTH
+  bigmiss  brier=+0.000596432 logloss=+0.002635688 mean_shift=-0.0009707 BETTER_BOTH
+
+Robustness across 2022/2023/2024
+K=110: pass=True min/mean logloss gain=+0.002359546/+0.002566617 min/mean brier gain=+0.000868457/+0.000964004
+K=220: pass=True min/mean logloss gain=+0.002981348/+0.003196311 min/mean brier gain=+0.001031872/+0.001121399
+K=440: pass=True min/mean logloss gain=+0.002677676/+0.002931616 min/mean brier gain=+0.000915245/+0.001002464
+FINAL: SEMANTIC_AXIS_STABLE_FOR_FURTHER_WORK
+This screen does not select a deployable K and creates no prediction/model artifact.
+elapsed=5353.15s

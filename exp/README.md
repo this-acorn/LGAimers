@@ -1,42 +1,24 @@
-# Experiment guide
+# Experiments
 
-Numbered scripts preserve the research sequence. Run from the repository root, since many paths are relative to it. Training can be expensive and can replace corresponding model bundles or predictions.
+This directory includes the local experiment series through the late-stage 192 builders, plus shared utilities. Numbers identify development steps and may have multiple branches.
 
-## Recommended reading order
-
-| Question | Source |
+| Stage | Entry points |
 | --- | --- |
-| How are predictions scored and features shared? | [common.py](common.py) |
-| How is chronological validation organized? | [22_multiyear_harness.py](22_multiyear_harness.py) |
-| How were current-season features developed? | [41_season_progress.py](41_season_progress.py) |
-| How are auxiliary labels reconstructed? | [45_label_recon.py](45_label_recon.py) |
-| Why split the failure target? | [52_target_anatomy.py](52_target_anatomy.py) and [53_multiclass.py](53_multiclass.py) |
-| How is the selected model trained? | [54_train_mc79.py](54_train_mc79.py) |
-| Did improvement come from more than a mean shift? | [59_gain_decomp.py](59_gain_decomp.py) |
+| Baselines and temporal evaluation | [Shared utilities](common.py), [multi-year harness](22_multiyear_harness.py) |
+| Target and multiclass modeling | [Target analysis](52_target_anatomy.py), [multiclass comparison](53_multiclass.py), [full-data fit](54_train_mc79.py) |
+| Hierarchical and temporal branches | [Hierarchical residuals](103_v18_residual.py), [temporal endpoint](116_rebuild_exp021_endpoint.py) |
+| Calibration and probe analysis | [Affine scan](144_affine_feasible_scan.py), [blend geometry](190_solve_public_geometry.py) |
+| Final component integration | [Flat residual blend builder](188_build_current_calico_jm_blend.py) |
+| Inference checks | [Row independence](120_row_independence_qa.py), [rebuilt pipeline QA](147_row_independence_ours.py) |
 
-## Experiment families
-
-| IDs | Focus |
-| --- | --- |
-| 01–18 | Signal discovery, ablations, calibration, tracking history, and season stability |
-| 19–35 | Baseline rebuilds, chronological comparisons, CatBoost, LightGBM, and ensemble weights |
-| 36–50 | Row matching, player history, season-progress features, and pitch-mix supervision |
-| 51–64 | Target anatomy, multiclass training, error analysis, distillation, and capacity sweeps |
-
-Results are in [lab/](../lab/). The checked-in [MLP reports](../lab/deep_learning/exp101_mlp_blend/) extend beyond this standalone source sequence; not every reported experiment has a matching source script here. A historical team package remains in [artifacts/submissions/teampack_100.zip](../artifacts/submissions/teampack_100.zip).
+See [methodology](../docs/METHODOLOGY.md) for the modeling details and [development journey](../docs/DEVELOPMENT.md) for the progression. Scripts preserve the exploratory workflow; a higher experiment number does not establish which model was submitted.
 
 ## Running selected work
 
-Install [the selected environment](../submissions/submit14_src/requirements.txt) and provide [the data files](../docs/DATA.md). From the repository root:
+Run scripts from the repository root in the matching Python environment. Training requires the competition data and may require earlier local artifacts recorded in the [manifest](../artifacts/manifest.json). Many historical scripts execute training immediately when run or imported; inspect their arguments and expected inputs first.
 
 ```bash
-# Multi-year HGB comparison: several model fits per year.
-python -X utf8 exp/22_multiyear_harness.py
-
-# Full-data eight-seed, five-class CatBoost training.
-python -X utf8 exp/54_train_mc79.py
+python exp/54_train_mc79.py
 ```
 
-Other scripts may require predictions from earlier experiments, optional libraries, or private data. Original packaging scripts contain historical workstation-specific scratch directories and interpreter paths. For portable packaging and inference, use [tools/run_inference.py](../tools/run_inference.py) and [tools/build_submission.py](../tools/build_submission.py).
-
-Original Korean comments and reports remain as research history. The English [methodology](../docs/METHODOLOGY.md) follows the core model through later corrections and the final local blend; those later artifacts extend beyond the standalone sources included here.
+This refits the earlier multiclass checkpoint and can take several hours. For inference with existing weights, use [the runner](../tools/run_inference.py). Individual experiments have different dependencies; there is no single environment lock covering every exploratory branch.

@@ -1,0 +1,19 @@
+환경: python 3.11.8 / numpy 1.26.4 / pandas 2.0.3
+arm=A  combo_cats=['c_team_matchup', 'c_pteam_role', 'c_bteam_role']  4클래스=False  cat_features=['top_bottom', 'game_type', 'base_state', 'pitcher_team_id', 'batter_team_id', 'c_team_matchup', 'c_pteam_role', 'c_bteam_role']  threads=4  seeds=[42, 7]
+train 로딩...
+  [    86s] 로딩 (1475092, 49)
+★ 라벨 복원 검증(succ): 일치율 100.00%
+클래스 분포(5): 0:52.3% 1:11.5% 2:19.5% 3:3.4% 4:13.2%  미복원 0.05%
+  [  1370s] 피처 부착 완료
+피처 82개 (79 + 3), cat_features 8개
+학습 행: 1,475,092 → 미복원 792 드롭 → 1,474,300
+★ SMOKE: 학습 행 80,000 / it 20 / 시드 [42, 7] — 배포 경로 검증 전용
+  조합 레벨 수: c_team_matchup=90, c_pteam_role=20, c_bteam_role=20
+  [  1479s] [최종] seed=42 (1/2, 91s)
+  [  1588s] [최종] seed=7 (2/2, 109s)
+  [  1588s] 저장: submit17_src/model/model.pkl (0.3 MB)
+  5행 예측(P(성공)) = [0.438537, 0.433897, 0.437692, 0.463999, 0.456717]
+  5행 조합 예시: c_team_matchup=16_21 | c_pteam_role=16_T_R | c_bteam_role=21_T_R
+
+총 1590초. 다음: exp/95_build_submit17.py 로 zip 빌드+검증 (사용자 검토 후)
+exit=0

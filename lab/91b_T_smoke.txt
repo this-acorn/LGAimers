@@ -1,0 +1,53 @@
+=== exp/91b arm=T smoke=True ===
+train 로딩...
+클래스 분포: 0:52.3% 1:11.5% 2:19.5% 3:3.4% 4:13.2%  미복원 0.05%
+영역 분포 (라벨행 99.95%): 0:34.2% 1:15.0% 2:50.8%   성공 중 볼 29.9% / 존 70.1%
+91c 피처 부착: 13개  (2024 커버리지 f_im_exec_exp 80.1% / f_tm_agree 77.1%)
+  [   932s] 테이블·PFB 준비 — 프로필 셀 T1 15,893 / T2 8,271 / 투수 711
+  [   959s]   시즌 2019: 프로필 커버리지 0.0%
+  [   990s]   시즌 2020: 프로필 커버리지 77.6%
+  [  1015s]   시즌 2021: 프로필 커버리지 79.4%
+  [  1040s]   시즌 2022: 프로필 커버리지 84.3%
+  [  1095s]   시즌 2023: 프로필 커버리지 86.2%
+  [  1146s] 피처 부착 완료 — 검증 프로필 커버리지 80.1%  lvl 분포 {1: 0.696, 2: 0.051, 3: 0.053, 4: 0.2}
+
+--- 사전 게이트: corr(챔피언 잔차, 피처) / 결측 제외 ---
+  f_smooth_p       corr +0.0019  cover 100.0%  mean 0.5166
+  f_cs_p_rate      corr +0.0044  cover  99.2%  mean 0.4937
+  f_mixcg_fb       corr -0.0030  cover  80.1%  mean 0.5402
+  f_pc_succ        corr +0.0019  cover  80.1%  mean 0.5262
+  f_pc_succ_d      corr +0.0114  cover  80.1%  mean -0.0001
+  f_pc_logn        corr +0.0058  cover 100.0%  mean 3.9464
+  f_pc_lvl         corr -0.0061  cover 100.0%  mean 1.7567
+  f_pc_int         corr +0.0034  cover  80.1%  mean 0.3077
+  f_pc_int_d       corr +0.0047  cover  80.1%  mean 0.0011
+  f_pc_arr_ball    corr +0.0023  cover  80.1%  mean 0.3505
+  f_pc_arr_mid     corr +0.0005  cover  80.1%  mean 0.1462
+  f_pc_sgb         corr +0.0028  cover  80.1%  mean 0.4614
+  f_pc_sge         corr +0.0010  cover  80.1%  mean 0.7226
+  f_pc_agree       corr -0.0019  cover  80.1%  mean 0.4651
+  f_pc_exec        corr +0.0012  cover  80.1%  mean 0.6442
+  f_im_ball        corr +0.0007  cover 100.0%  mean 0.3666
+  f_im_exec_ball   corr +0.0012  cover  80.1%  mean 0.5255
+  f_im_exec_edge   corr +0.0016  cover  80.1%  mean 0.5261
+  f_im_exec_exp    corr +0.0015  cover  80.1%  mean 0.5259
+  f_tm_agree       corr +0.0007  cover  77.1%  mean 0.4059
+  f_tm_ctrl        corr +0.0038  cover  77.1%  mean 0.5094
+  f_tm_arr_ball    corr -0.0007  cover  77.1%  mean 0.3473
+  f_tm_arr_mid     corr -0.0006  cover  77.1%  mean 0.2133
+  f_tm_logn        corr +0.0070  cover 100.0%  mean 3.3021
+  f_tm_agree_sd    corr +0.0017  cover  75.2%  mean 0.0044
+  f_tm_agree_fb    corr +0.0003  cover  77.1%  mean 0.4075
+  f_tm_agree_nfb   corr +0.0003  cover  77.1%  mean 0.4041
+  f_tm_agree_pt    corr +0.0000  cover  77.1%  mean 0.4059
+  선형 게이트 [B  ] R²(잔차) 0.00018 → 점수 상당 +18.1  (in-sample OLS, 8개 열)
+  선형 게이트 [C  ] R²(잔차) 0.00020 → 점수 상당 +19.6  (in-sample OLS, 12개 열)
+  선형 게이트 [D  ] R²(잔차) 0.00023 → 점수 상당 +23.0  (in-sample OLS, 24개 열)
+  선형 게이트 [T  ] R²(잔차) 0.00033 → 점수 상당 +32.4  (in-sample OLS, 50개 열)
+  (참고: 기존 피처의 잔차 R² 는 모델이 이미 흡수해 0 근처여야 정상)
+  선형 게이트 [ref] R²(잔차) 0.00003 → 점수 상당 +3.0  (in-sample OLS, 4개 열)
+
+멀티클래스 학습 행: 1,221,184 / 1,221,585   피처 104 (79 + 25)
+smoke: 6만행·20it 학습/예측 정상 — P(성공) 평균 0.4457 점수 -486.6
+smoke 중요도 상위 15: f_count_diff=14.8, asof_pitcher_reverse_rate=9.0, strikes_before=7.2, asof_pitcher_success_rate=5.8, f_cs_p_rate=5.7, f_count_state=5.2, f_smooth_p=3.8, f_pfb=2.6, away_win_expectancy=1.8, asof_pitcher_breaking_rate=1.8, f_is_2strike=1.7, asof_pitcher_prev3_game_middle_rate=1.6, asof_batter_success_rate=1.6, home_win_expectancy=1.5, balls_before=1.5
+smoke 중 새 피처 중요도: f_pc_succ=0.0, f_pc_succ_d=0.0, f_pc_logn=0.0, f_pc_lvl=0.0, f_pc_int=0.0, f_pc_int_d=0.0, f_pc_arr_ball=0.0, f_pc_arr_mid=0.0, f_pc_sgb=0.0, f_pc_sge=0.0, f_pc_agree=0.0, f_pc_exec=0.0, f_im_ball=1.5, f_im_exec_ball=0.0, f_im_exec_edge=0.0, f_im_exec_exp=0.0, f_tm_agree=0.0, f_tm_ctrl=0.0, f_tm_arr_ball=0.0, f_tm_arr_mid=0.0, f_tm_logn=0.0, f_tm_agree_sd=0.0, f_tm_agree_fb=0.0, f_tm_agree_nfb=0.0, f_tm_agree_pt=0.0

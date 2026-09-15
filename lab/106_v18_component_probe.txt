@@ -1,0 +1,19 @@
+=== exp/106 V18 residual component-weight pre-gate ===
+Selection: HGB OOF 2021-2023 minimax; confirmation: exact CAT5 2022-2024
+2021: rows=247,088 hand std=0.015062 detail std=0.006431 corr=+0.1298
+2022: rows=247,472 hand std=0.016260 detail std=0.007349 corr=+0.1142
+2023: rows=245,525 hand std=0.017056 detail std=0.007950 corr=+0.1172
+2024: rows=253,507 hand std=0.014823 detail std=0.007941 corr=+0.1122
+
+LOCKED component weights before confirmation: hand=0.30, detail=0.10
+discovery gains={'2021': 13.281364329753615, '2022': 11.555865508106308, '2023': 16.340973743345103} min=+11.556 mean=+13.726
+
+Exact CAT5 confirmation versus reference (.30,.30)
+year   selected   reference   incremental
+2022    +20.953     +20.684       +0.268
+2023    +24.020     +27.724       -3.704
+2024    +21.541     +25.404       -3.863
+
+GATE FAIL: every exact-year incremental >=0 and mean incremental >=3; min=-3.863 mean=-2.433
+PASS authorizes only a separately verified bundle; this script never builds/submits.
+elapsed=23.6s

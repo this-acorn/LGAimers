@@ -1,0 +1,45 @@
+{
+  "method": "official 2024 R residual zero-prior Tensor-EB",
+  "scale": 0.2,
+  "specifications": [
+    {
+      "name": "pitcher_batter_hand",
+      "keys": [
+        "pitcher_id",
+        "batter_hand"
+      ],
+      "weight": 0.5,
+      "alpha": 500.0
+    },
+    {
+      "name": "pitcher_count_base",
+      "keys": [
+        "pitcher_id",
+        "_count_state",
+        "base_state"
+      ],
+      "weight": 0.4,
+      "alpha": 1000.0
+    },
+    {
+      "name": "hand_count_base",
+      "keys": [
+        "pitcher_hand",
+        "batter_hand",
+        "_count_state",
+        "base_state"
+      ],
+      "weight": 0.1,
+      "alpha": 500.0
+    }
+  ],
+  "source": {
+    "official_train_sha256": "d2081186b458b49f60b082be480c273135833e15ba59a76d033af28bcf8763ff",
+    "source_season": 2024,
+    "source_R_rows": 223497,
+    "residual": "control_success - own current-clean OOF",
+    "current_anchor_score_2024": 936.5839989479041
+  },
+  "F_fallback": "exact current clean anchor",
+  "row_independent": true
+}

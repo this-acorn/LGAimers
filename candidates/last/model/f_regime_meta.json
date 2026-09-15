@@ -1,0 +1,9 @@
+{
+  "v2_scale": 1.5,
+  "v355_scale": 0.375,
+  "v330_scale": 0.375,
+  "v330_all_weight": 0.25,
+  "v330_recent_inner_scale": 0.1875,
+  "subtype_scale": 0.5625,
+  "transition_scale": 0.1125
+}

@@ -1,0 +1,19 @@
+=== exp/152 pitcher x any_runner residual gate ===
+DIAGNOSTIC ONLY: official train + saved OOF; no test/model/ZIP/LB/submission
+Third-party Python source imported/read: NO (saved OOF arrays only)
+temporal mapping: fit 2023 residual -> untouched 2024
+hierarchy: within game_type, EB pitcher parent -> EB pitcher x any_runner child
+emitted effect: child-parent only (pitcher parent itself is NOT added)
+baseline weights: champion=0.6434428305 EXP021=0.3565571695
+baseline scores: 2023=-22.742735 2024=936.583999
+
+ smoothing role                         coverage(parent/child) effect_std   raw     shape    F       R       oracle_beta oracle_gain corr_V18 corr_endpoint
+       220 fixed_primary                0.7127/0.7121 0.0112259  +3.803  +3.842  +0.576  +3.227    +0.27575     +3.836  +0.0235       -0.0263
+       110 descriptive_sensitivity_only 0.7127/0.7121 0.0137015  +3.207  +3.263  +0.552  +2.655    +0.21034     +3.325  +0.0196       -0.0234
+       440 descriptive_sensitivity_only 0.7127/0.7121 0.0088029  +3.859  +3.867  +0.528  +3.332    +0.37381     +4.335  +0.0283       -0.0301
+
+PRIMARY fixed K=220, gamma=0.25: checks={'raw_gain': False, 'equal_mean_shape_gain': False, 'F_nonnegative': True, 'R_nonnegative': True}
+FINAL: FAIL_RUNNER_AXIS_NO_SUBMISSION
+K=110/440 and the 2024 oracle are descriptive only; neither may select a deployable setting.
+No test data was read and no model or submission artifact was created.
+elapsed=40.72s

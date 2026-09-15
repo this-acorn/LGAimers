@@ -1,0 +1,22 @@
+=== exp/123 exact target5 LightGBM strict temporal gate ===
+source=archive\src\submit12_src\script.py (primary path, then archive fallback)
+fixed_config={'objective': 'multiclass', 'num_class': 5, 'n_estimators': 500, 'learning_rate': 0.04, 'num_leaves': 31, 'min_child_samples': 1000, 'reg_lambda': 10.0, 'feature_fraction': 0.8, 'bagging_fraction': 0.8, 'bagging_freq': 1, 'random_state': 42, 'n_jobs': 14, 'verbosity': -1, 'deterministic': True, 'force_col_wise': True}
+discovery_gate={'raw_gain_min': 0.0, 'oracle_shape_gain_min': 15.0, 'equal_mean_gain_min': 10.0, 'analytic_blend_gain_min': 20.0, 'bootstrap_p025_min_exclusive': 0.0, 'd_plus_K_min_exclusive': 0.0}
+K>=250 is diagnostic only; +20 is record/open, while +50 on 2024 raw or analytic blend is required for moonshot promotion
+oracle shape is the same-fold unconstrained-affine ceiling; equal-mean is not re-clipped
+
+====================================================================================================
+YEAR 2023: train<=2022, valid=2023, fixed seed=42
+====================================================================================================
+  [     0.1s] year=2023: load train and reconstruct exact auxiliary labels
+  [    28.5s] year=2023: V18 checked with string keys; batter_hand restored numeric
+  [    95.9s] year=2023: constant tables, pitchmix, and exact PFB ready
+  [   109.2s] year=2023: exact 79 feature values attached
+  [   117.8s] year=2023: QA exact rows/features/target; train=975,778 valid=245,525
+  [   117.9s] year=2023: train the single locked LightGBM configuration
+  [   785.9s] year=2023: trained/saved in 667.7s (123_target5_lgb_y2023_probs_seed42.npy)
+  base/candidate=-959.10/-1160.41 raw=-201.30 oracleShape=-19.37 equalMean=-198.44
+  d=-201.30 K=166.02 d+K=-35.28 w*=0.0000 blendGain=+0.00 K>=250(diag)=False
+  F/R=-112.70/-88.60 rawBoot95=[-264.39,-142.87] P>0=0.0000 mixBoot95=[+0.00,+0.00]
+DISCOVERY FAIL: {'raw_gain': False, 'oracle_shape_gain': False, 'equal_mean_gain': False, 'analytic_blend_gain': False, 'bootstrap_p025': False, 'd_plus_K': False}
+2024 remains unopened; no confirmation, bundle, submission, or LB action

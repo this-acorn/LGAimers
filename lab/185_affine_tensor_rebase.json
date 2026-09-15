@@ -1,0 +1,23 @@
+{
+  "experiment": 185,
+  "status": "HOLD_EXTERNAL_TRANSFER_LOTTERY_NOT_SUBMITTED",
+  "affine_anchor": {
+    "file": "candidate_affine_opt.zip",
+    "sha256": "E772CA86DAF99209A50AB9E29F030EE680C0770520D98FF5ABE9C3FD4832EC65"
+  },
+  "artifacts": [
+    {
+      "source": "candidate_tensor_s020.zip",
+      "output": "candidate_exp185_affine_tensor_s020_hold.zip",
+      "sha256": "16E26F90E5D6C98AFAFC357D631A5BC8179D663D8617F6121F4F435E45AD9030",
+      "bytes": 12660662
+    },
+    {
+      "source": "candidate_exp181_robusttensor_hold.zip",
+      "output": "candidate_exp185_affine_robusttensor_hold.zip",
+      "sha256": "0D204A2A256DCE1E4B37A1447908A10FCE6A2091E9313979274D9550DBFC113E",
+      "bytes": 12760968
+    }
+  ],
+  "note": "Packaging-only rebase; EXP180/181 validation failures still apply."
+}

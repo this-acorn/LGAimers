@@ -1,0 +1,39 @@
+EXP185 affine LB update — independent audit
+============================================
+Observed 2026-09-01 07:01:02 KST
+  previous champion = 1114.6116846973
+  candidate_affine_opt = 1116.5770907872
+  observed gain = +1.9654060899
+  old projection = 1116.522784
+  projection residual = +0.0543067872
+
+Submitted affine coefficients (no clipping on the full rehearsal):
+  q = 0.655318*p1 + 0.387810*p2 - 0.020206959
+
+Same p1/p2/intercept plane
+  exp155 fixed-lambda reconstruction: peak 1116.587028, remaining +0.009937.
+  Physically enforcing lambda=100000/[r(1-r)] gives the prior-compatible root
+  r=0.456927728, lambda=402990.545, peak=1116.588802, remaining +0.011711.
+  A second, prior-distant root r=0.451367615 has remaining +0.070077.
+  Even the distant root is below a 0.1-point recovery; no LB slot is justified.
+
+Audit caveat
+  exp155 is not literally assumption-free: it fixes lambda=402483 while its
+  recovered r implies lambda about 402955, and assumes A1=B11=S1 / zero mean
+  bias although V18 was added after the older affine calibration. Therefore its
+  six-decimal optimum is not exact. This weakens precision, not the no-slot
+  conclusion: every identified solution leaves less than 0.1 point.
+
+Remaining five-slot priority
+  1. Submit only an exp183 176-feature GPU-MLP/current locked blend that passes
+     the predeclared 2023->2024 transfer and stability gate.
+  2. Use one refinement only if that new outside-plane endpoint's LB observation
+     and an identified curvature support it; never refine p1/p2 again.
+  3. Desperation lottery: candidate_tensor_s020 (2024 raw +0.904, but late and
+     pitcher-CI gates failed).
+  4. Lower-priority lottery: candidate_exp181_robusttensor_hold (external 1148
+     context, but our raw +0.343, early/late and pitcher-CI gates failed).
+  5. Reserve / leave unused; do not spend merely to exhaust submissions.
+
+Explicit no-submit: affine micro-tuning, anti-blend, tensor_s058, and any other
+candidate wholly inside the already measured p1/p2 plane.

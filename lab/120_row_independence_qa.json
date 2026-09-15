@@ -1,0 +1,36 @@
+{
+ "zip": "candidate_v18g030.zip",
+ "sha256": "ED1B729B9B83EB1F0D344B475939353149D5ADC83009A40FF116DF6E5A168557",
+ "n_rows": 4000,
+ "tolerance": 1e-12,
+ "cases": {
+  "reverse": {
+   "max_abs_diff": 0.0,
+   "n_compared": 4000
+  },
+  "permutation": {
+   "max_abs_diff": 0.0,
+   "n_compared": 4000
+  },
+  "duplicate": {
+   "max_abs_diff": 0.0,
+   "n_compared": 8000
+  },
+  "split": {
+   "max_abs_diff": 0.0,
+   "n_compared": 4000
+  },
+  "singleton5": {
+   "max_abs_diff": 0.0,
+   "n_compared": 5
+  }
+ },
+ "timings": {
+  "batch": 2.8207497596740723,
+  "reverse": 3.5861074924468994,
+  "permutation": 3.933662176132202,
+  "duplicate": 3.2772254943847656,
+  "split": 6.548910140991211
+ },
+ "all_pass": true
+}

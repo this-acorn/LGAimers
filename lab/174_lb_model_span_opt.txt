@@ -1,0 +1,42 @@
+EXP174 whole-model LB-span optimization
+rows=245,789 endpoints=10 missing=['submit6', 'submit9']
+a=235459.882011317 axis_rms=0.026988192 K_check=171.500149614687
+rank(1e-12)=8/10 condition=702.798
+calibration b_v18=+3.6024516703e-11 score_residual=-3.592504072e-11
+
+INVALID: reconstructed solutions below use fake-test Gram; DO NOT SUBMIT:
+   ridge_1e-05 score=43681.810248 gain=+42567.198563 L1=2573.735 max|c|=776.879 clip=0.0000%
+   ridge_1e-04 score=5533.853523 gain=+4419.241838 L1=263.702 max|c|=77.220 clip=0.0000%
+   ridge_1e-03 score=1715.651266 gain=+601.039582 L1=31.230 max|c|=7.283 clip=0.0000%
+   ridge_3e-03 score=1425.059626 gain=+310.447942 L1=12.760 max|c|=2.476 clip=0.0000%
+          box1 score=1316.220598 gain=+201.608913 L1=7.386 max|c|=1.000 clip=0.0000%
+   ridge_1e-02 score=1306.271536 gain=+191.659851 L1=5.216 max|c|=1.104 clip=0.0000%
+     svd_1e-03 score=1295.281710 gain=+180.670026 L1=9.106 max|c|=2.549 clip=0.0000%
+     svd_1e-04 score=1295.281710 gain=+180.670026 L1=9.106 max|c|=2.549 clip=0.0000%
+     svd_1e-05 score=1295.281710 gain=+180.670026 L1=9.106 max|c|=2.549 clip=0.0000%
+     svd_1e-06 score=1295.281710 gain=+180.670026 L1=9.106 max|c|=2.549 clip=0.0000%
+     svd_1e-08 score=1295.281710 gain=+180.670026 L1=9.106 max|c|=2.549 clip=0.0000%
+     svd_1e-10 score=1295.281710 gain=+180.670026 L1=9.106 max|c|=2.549 clip=0.0000%
+
+RECOMMENDATION: {'status': 'INVALID_FAKE_TEST_GEOMETRY', 'selected': None, 'reason': 'whole-model covariance was measured on fake rehearsal rows; do not submit any reconstructed solution'}
+
+Documented HGB/CB relation audit:
+  submit5 pred_rms=4.3e-17 score residual=-27.169094
+
+Exact scored affine identities (valid hidden curvature):
+  submit5=blend(submit4,submit8): K_hidden=64.379451 hidden/fake=0.332271 best=898.618631
+  submit13=blend(submit12,submit8): K_hidden=117.512992 hidden/fake=0.443619 best=994.711277
+
+Current x old sensitivity (NOT an LB forecast):
+  submit8: observed-ratio upper best=1114.612; even fake-ratio-1 best=1144.777; ratio needed for 1150=1.060
+  submit13: observed-ratio upper best=1114.612; even fake-ratio-1 best=1123.732; ratio needed for 1150=1.590
+  submit5: observed-ratio upper best=1114.612; even fake-ratio-1 best=1118.681; ratio needed for 1150=1.618
+  submit4: observed-ratio upper best=1114.612; even fake-ratio-1 best=1116.003; ratio needed for 1150=1.737
+  submit12: observed-ratio upper best=1114.612; even fake-ratio-1 best=1115.649; ratio needed for 1150=2.340
+  champion: observed-ratio upper best=1114.612; even fake-ratio-1 best=1115.382; ratio needed for 1150=3.412
+  submit10: observed-ratio upper best=1114.612; even fake-ratio-1 best=1114.630; ratio needed for 1150=2.718
+  submit14: observed-ratio upper best=1114.612; even fake-ratio-1 best=1114.612; ratio needed for 1150=5.623
+  submit16: observed-ratio upper best=1114.612; even fake-ratio-1 best=1114.612; ratio needed for 1150=8.385
+
+No current x old midpoint probe is justified by these data.
+FINAL: INVALID_FAKE_TEST_GEOMETRY / NO_1150_EVIDENCE

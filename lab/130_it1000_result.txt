@@ -1,0 +1,9 @@
+환경: python 3.11.8 / numpy 1.26.4 / pandas 2.0.3
+arm=NONE  combo_cats=[]  4클래스=False  cat_features=['top_bottom', 'game_type', 'base_state', 'pitcher_team_id', 'batter_team_id']  threads=14  seeds=[42, 7, 123, 2024, 99, 555, 31337, 1]
+train 로딩...
+  [    14s] 로딩 (1475092, 49)
+★ 라벨 복원 검증(succ): 일치율 100.00%
+클래스 분포(5): 0:52.3% 1:11.5% 2:19.5% 3:3.4% 4:13.2%  미복원 0.05%
+  [   190s] 피처 부착 완료
+피처 79개 (79 + 0), cat_features 5개
+학습 행: 1,475,092 → 미복원 792 드롭 → 1,474,300

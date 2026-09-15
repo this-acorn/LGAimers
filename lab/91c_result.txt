@@ -1,0 +1,33 @@
+=== exp/91c smoke=False thread=14 it=300 ===
+train 로딩...
+라벨 행 99.95%  영역 0/1/2 = 34.2%/15.0%/50.8%  세그먼트 45,838  fold0 비율 0.501
+  [    30s] 행 조인: 매칭 802,889 / 1,475,092 (54.4%)  ≤2023 라벨∩매칭 667,915
+  [    47s] IM fold0: 학습 324,333 성공행 → OOF 611,640 (17s)
+  [    63s] IM fold1: 학습 324,781 성공행 → OOF 609,945 (16s)
+  IM OOF(성공행): Brier 0.2050 vs 사전 0.2086  → 설명비율 0.017   p_I 평균 0.297 / 2024 0.308
+  [   308s] AM/CM fold0: 학습 333,077 → OOF 334,838 (245s)
+  [   561s] AM/CM fold1: 학습 334,838 → OOF 333,077 (252s)
+  AM OOF: multiclass logloss 0.9929 vs 사전 0.9971  설명비율 0.004   pA 평균 볼/미들/존 = [0.356, 0.147, 0.497]
+  CM OOF(매칭행, 물리만): 점수 918.7   (exp/57 teacher=물리+상황 1632)
+  일치도: 평균 0.456  corr(agree,y) +0.0480  corr(p_cm,y) +0.0960  성공/실패 평균 일치도 0.457/0.455
+  [   563s]   시즌 2020: 행 244,087  IM 실행률 커버 77.6%  TM 프로필 커버 71.0%  평균 일치도 0.461
+  [   564s]   시즌 2021: 행 247,088  IM 실행률 커버 79.4%  TM 프로필 커버 75.2%  평균 일치도 0.458
+  [   565s]   시즌 2022: 행 247,472  IM 실행률 커버 84.3%  TM 프로필 커버 78.6%  평균 일치도 0.456
+  [   567s]   시즌 2023: 행 245,525  IM 실행률 커버 86.2%  TM 프로필 커버 83.5%  평균 일치도 0.455
+  [   569s]   시즌 2024: 행 253,507  IM 실행률 커버 80.1%  TM 프로필 커버 77.1%  평균 일치도 0.453
+
+2024 행 피처 요약:
+  f_im_ball        cover 100.0%  mean 0.3081  sd 0.0642
+  f_im_exec_ball   cover  80.1%  mean 0.5253  sd 0.0538
+  f_im_exec_edge   cover  80.1%  mean 0.5261  sd 0.0608
+  f_im_exec_exp    cover  80.1%  mean 0.5259  sd 0.0586
+  f_tm_agree       cover  77.1%  mean 0.4531  sd 0.0116
+  f_tm_ctrl        cover  77.1%  mean 0.5123  sd 0.0209
+  f_tm_arr_ball    cover  77.1%  mean 0.3567  sd 0.0131
+  f_tm_arr_mid     cover  77.1%  mean 0.1487  sd 0.0083
+  f_tm_logn        cover 100.0%  mean 3.3021  sd 2.2090
+  f_tm_agree_sd    cover  75.2%  mean 0.0162  sd 0.0025
+  f_tm_agree_fb    cover  77.1%  mean 0.4577  sd 0.0082
+  f_tm_agree_nfb   cover  77.1%  mean 0.4488  sd 0.0076
+  f_tm_agree_pt    cover  77.1%  mean 0.4535  sd 0.0072
+저장: lab/91c_feats.npz  (1,475,092행 × 13피처)

@@ -1,0 +1,417 @@
+{
+  "experiment": 107,
+  "baseline_gamma": 0.3,
+  "axes": {
+    "pitcher_bteam": {
+      "keys": [
+        "game_type",
+        "pitcher_id",
+        "batter_team_id"
+      ],
+      "parent": "pitcher",
+      "k": 260.0
+    },
+    "pitcher_count": {
+      "keys": [
+        "game_type",
+        "pitcher_id",
+        "_count_state"
+      ],
+      "parent": "pitcher",
+      "k": 190.0
+    },
+    "pitcher_inning": {
+      "keys": [
+        "game_type",
+        "pitcher_id",
+        "_inning_phase"
+      ],
+      "parent": "pitcher",
+      "k": 230.0
+    },
+    "pitcher_baseout": {
+      "keys": [
+        "game_type",
+        "pitcher_id",
+        "_baseout_state"
+      ],
+      "parent": "pitcher",
+      "k": 280.0
+    },
+    "pitcher_batter": {
+      "keys": [
+        "game_type",
+        "pitcher_id",
+        "batter_id"
+      ],
+      "parent": "pitcher_bhand",
+      "k": 700.0
+    }
+  },
+  "weight_grid": [
+    0.0,
+    0.05,
+    0.1,
+    0.15,
+    0.2,
+    0.25,
+    0.3,
+    0.35,
+    0.4,
+    0.45,
+    0.5
+  ],
+  "selection": "2021-2023 leave-one-year-out; conservative worst-fold p; Holm alpha=.05; top1 only",
+  "loo": {
+    "pitcher_bteam": {
+      "folds": {
+        "2021": {
+          "train_years": [
+            2022,
+            2023
+          ],
+          "selected_weight": 0.0,
+          "raw_gain": 0.0,
+          "shape_gain": 0.0,
+          "mean_shift": 0.0,
+          "bootstrap": {
+            "median": 0.0,
+            "p025": 0.0,
+            "p975": 0.0,
+            "prob_positive": 0.0,
+            "p_one_sided": 1.0
+          }
+        },
+        "2022": {
+          "train_years": [
+            2021,
+            2023
+          ],
+          "selected_weight": 0.0,
+          "raw_gain": 0.0,
+          "shape_gain": 0.0,
+          "mean_shift": 0.0,
+          "bootstrap": {
+            "median": 0.0,
+            "p025": 0.0,
+            "p975": 0.0,
+            "prob_positive": 0.0,
+            "p_one_sided": 1.0
+          }
+        },
+        "2023": {
+          "train_years": [
+            2021,
+            2022
+          ],
+          "selected_weight": 0.0,
+          "raw_gain": 0.0,
+          "shape_gain": 0.0,
+          "mean_shift": 0.0,
+          "bootstrap": {
+            "median": 0.0,
+            "p025": 0.0,
+            "p975": 0.0,
+            "prob_positive": 0.0,
+            "p_one_sided": 1.0
+          }
+        }
+      },
+      "full_discovery": {
+        "weight": 0.0,
+        "yearly_gain": {
+          "2021": 0.0,
+          "2022": 0.0,
+          "2023": 0.0
+        },
+        "min_gain": 0.0,
+        "mean_gain": 0.0
+      },
+      "preliminary_pass": false,
+      "p_value": 1.0,
+      "holm_pass": false,
+      "holm_threshold": 0.0125
+    },
+    "pitcher_count": {
+      "folds": {
+        "2021": {
+          "train_years": [
+            2022,
+            2023
+          ],
+          "selected_weight": 0.2,
+          "raw_gain": 0.3330914158273117,
+          "shape_gain": 0.038322928230854814,
+          "mean_shift": 4.1728201872759385e-05,
+          "bootstrap": {
+            "median": 0.3438713717963868,
+            "p025": -2.7520337538372894,
+            "p975": 3.5431666650656215,
+            "prob_positive": 0.591,
+            "p_one_sided": 0.4091181763647271
+          }
+        },
+        "2022": {
+          "train_years": [
+            2021,
+            2023
+          ],
+          "selected_weight": 0.15,
+          "raw_gain": 2.307088787300927,
+          "shape_gain": 2.3392096155648687,
+          "mean_shift": 4.492194631999791e-05,
+          "bootstrap": {
+            "median": 2.3666792490835262,
+            "p025": 0.08304670569268537,
+            "p975": 4.539481082704912,
+            "prob_positive": 0.9776,
+            "p_one_sided": 0.022595480903819236
+          }
+        },
+        "2023": {
+          "train_years": [
+            2021,
+            2022
+          ],
+          "selected_weight": 0.15,
+          "raw_gain": 1.49503703199548,
+          "shape_gain": 2.5963873608870927,
+          "mean_shift": 6.681887244441853e-05,
+          "bootstrap": {
+            "median": 1.416550711601584,
+            "p025": -1.390960113740577,
+            "p975": 4.6630828073062975,
+            "prob_positive": 0.822,
+            "p_one_sided": 0.17816436712657469
+          }
+        }
+      },
+      "full_discovery": {
+        "weight": 0.15,
+        "yearly_gain": {
+          "2021": 0.42697118995965866,
+          "2022": 2.307088787300927,
+          "2023": 1.49503703199548
+        },
+        "min_gain": 0.42697118995965866,
+        "mean_gain": 1.4096990030853551
+      },
+      "preliminary_pass": true,
+      "p_value": 0.4091181763647271,
+      "holm_pass": false,
+      "holm_threshold": 0.01
+    },
+    "pitcher_inning": {
+      "folds": {
+        "2021": {
+          "train_years": [
+            2022,
+            2023
+          ],
+          "selected_weight": 0.0,
+          "raw_gain": 0.0,
+          "shape_gain": 0.0,
+          "mean_shift": 0.0,
+          "bootstrap": {
+            "median": 0.0,
+            "p025": 0.0,
+            "p975": 0.0,
+            "prob_positive": 0.0,
+            "p_one_sided": 1.0
+          }
+        },
+        "2022": {
+          "train_years": [
+            2021,
+            2023
+          ],
+          "selected_weight": 0.0,
+          "raw_gain": 0.0,
+          "shape_gain": 0.0,
+          "mean_shift": 0.0,
+          "bootstrap": {
+            "median": 0.0,
+            "p025": 0.0,
+            "p975": 0.0,
+            "prob_positive": 0.0,
+            "p_one_sided": 1.0
+          }
+        },
+        "2023": {
+          "train_years": [
+            2021,
+            2022
+          ],
+          "selected_weight": 0.15,
+          "raw_gain": -1.2318815874712072,
+          "shape_gain": -3.457110032401033,
+          "mean_shift": -0.0001356711963510504,
+          "bootstrap": {
+            "median": -1.26369844757916,
+            "p025": -5.124452660535797,
+            "p975": 2.4647170714670703,
+            "prob_positive": 0.2546,
+            "p_one_sided": 0.7454509098180364
+          }
+        }
+      },
+      "full_discovery": {
+        "weight": 0.0,
+        "yearly_gain": {
+          "2021": 0.0,
+          "2022": 0.0,
+          "2023": 0.0
+        },
+        "min_gain": 0.0,
+        "mean_gain": 0.0
+      },
+      "preliminary_pass": false,
+      "p_value": 1.0,
+      "holm_pass": false,
+      "holm_threshold": 0.016666666666666666
+    },
+    "pitcher_baseout": {
+      "folds": {
+        "2021": {
+          "train_years": [
+            2022,
+            2023
+          ],
+          "selected_weight": 0.0,
+          "raw_gain": 0.0,
+          "shape_gain": 0.0,
+          "mean_shift": 0.0,
+          "bootstrap": {
+            "median": 0.0,
+            "p025": 0.0,
+            "p975": 0.0,
+            "prob_positive": 0.0,
+            "p_one_sided": 1.0
+          }
+        },
+        "2022": {
+          "train_years": [
+            2021,
+            2023
+          ],
+          "selected_weight": 0.0,
+          "raw_gain": 0.0,
+          "shape_gain": 0.0,
+          "mean_shift": 0.0,
+          "bootstrap": {
+            "median": 0.0,
+            "p025": 0.0,
+            "p975": 0.0,
+            "prob_positive": 0.0,
+            "p_one_sided": 1.0
+          }
+        },
+        "2023": {
+          "train_years": [
+            2021,
+            2022
+          ],
+          "selected_weight": 0.05,
+          "raw_gain": -0.3806833197118067,
+          "shape_gain": -0.6028500868726496,
+          "mean_shift": -1.3505172938632626e-05,
+          "bootstrap": {
+            "median": -0.3783907230190766,
+            "p025": -1.0223678035412682,
+            "p975": 0.28654554549370004,
+            "prob_positive": 0.1284,
+            "p_one_sided": 0.871625674865027
+          }
+        }
+      },
+      "full_discovery": {
+        "weight": 0.0,
+        "yearly_gain": {
+          "2021": 0.0,
+          "2022": 0.0,
+          "2023": 0.0
+        },
+        "min_gain": 0.0,
+        "mean_gain": 0.0
+      },
+      "preliminary_pass": false,
+      "p_value": 1.0,
+      "holm_pass": false,
+      "holm_threshold": 0.025
+    },
+    "pitcher_batter": {
+      "folds": {
+        "2021": {
+          "train_years": [
+            2022,
+            2023
+          ],
+          "selected_weight": 0.5,
+          "raw_gain": -0.11153041672423569,
+          "shape_gain": -0.10927808823385021,
+          "mean_shift": -3.1808495570828654e-07,
+          "bootstrap": {
+            "median": -0.10798595436845057,
+            "p025": -0.2747940438473966,
+            "p975": 0.04566437412451766,
+            "prob_positive": 0.088,
+            "p_one_sided": 0.9120175964807039
+          }
+        },
+        "2022": {
+          "train_years": [
+            2021,
+            2023
+          ],
+          "selected_weight": 0.0,
+          "raw_gain": 0.0,
+          "shape_gain": 0.0,
+          "mean_shift": 0.0,
+          "bootstrap": {
+            "median": 0.0,
+            "p025": 0.0,
+            "p975": 0.0,
+            "prob_positive": 0.0,
+            "p_one_sided": 1.0
+          }
+        },
+        "2023": {
+          "train_years": [
+            2021,
+            2022
+          ],
+          "selected_weight": 0.0,
+          "raw_gain": 0.0,
+          "shape_gain": 0.0,
+          "mean_shift": 0.0,
+          "bootstrap": {
+            "median": 0.0,
+            "p025": 0.0,
+            "p975": 0.0,
+            "prob_positive": 0.0,
+            "p_one_sided": 1.0
+          }
+        }
+      },
+      "full_discovery": {
+        "weight": 0.0,
+        "yearly_gain": {
+          "2021": 0.0,
+          "2022": 0.0,
+          "2023": 0.0
+        },
+        "min_gain": 0.0,
+        "mean_gain": 0.0
+      },
+      "preliminary_pass": false,
+      "p_value": 1.0,
+      "holm_pass": false,
+      "holm_threshold": 0.05
+    }
+  },
+  "survivors": [],
+  "winner": null,
+  "confirmation": null,
+  "gate_pass": false,
+  "elapsed_seconds": 26.261570930480957
+}

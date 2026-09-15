@@ -1,0 +1,20 @@
+=== exp/109 our-signals-as-protected-residuals audit (exp/107 protocol) ===
+5 axes predeclared (keys/parent/k/bin edges fixed); weight grid only.
+2021: rows=247,088 rookie_share=0.206 effects ready
+2022: rows=247,472 rookie_share=0.157 effects ready
+2023: rows=245,525 rookie_share=0.138 effects ready
+2024: rows=253,507 rookie_share=0.199 effects ready
+
+LOO/Holm 결과
+axis            weights        raw heldout          shape heldout        p(max)  Holm
+team_match      0.00/0.00/0.00 +0.00/+0.00/+0.00    +0.00/+0.00/+0.00    1.0000  False
+rookie_srate    0.00/0.00/0.00 +0.00/+0.00/+0.00    +0.00/+0.00/+0.00    1.0000  False
+batter_count    0.00/0.00/0.00 +0.00/+0.00/+0.00    +0.00/+0.00/+0.00    1.0000  False
+mid_bin         0.00/0.00/0.00 +0.00/+0.00/+0.00    +0.00/+0.00/+0.00    1.0000  False
+b_early         0.00/0.00/0.00 +0.00/+0.00/+0.00    +0.00/+0.00/+0.00    1.0000  False
+
+생존자 0 — exact 확인 생략 (설계상).
+
+FINAL GATE FAIL
+PASS 여도 이 스크립트는 zip/제출을 만들지 않는다 (별도 감사 빌더에서).
+elapsed=57.3s

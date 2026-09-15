@@ -1,0 +1,3 @@
+arm=B feats=4 solo=[np.float64(850.9275783393778), np.float64(859.8861189206275)] ens=876.7 seedmean=855.4 proj8=892.7 pen=37.1 paired=[np.float64(-0.27242166062228534), np.float64(3.3861189206274958)] shape=+2.9 d=+2.8 K=51.6
+arm=D feats=12 solo=[np.float64(852.6087421934614), np.float64(847.0781883936795)] ens=871.2 seedmean=849.8 proj8=887.2 pen=46.8 paired=[np.float64(1.4087421934613076), np.float64(-9.421811606320489)] shape=+7.0 d=-2.7 K=59.5
+arm=T feats=25 solo=[np.float64(859.7603704460388), np.float64(858.4383215761826)] ens=880.4 seedmean=859.1 proj8=896.3 pen=41.7 paired=[np.float64(8.560370446038746), np.float64(1.9383215761826023)] shape=+11.1 d=+6.5 K=62.4

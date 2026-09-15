@@ -1,0 +1,16 @@
+exp/114 — segment calibration capacity (diagnostic only)
+rows=253,507 target_rate=0.486104920 pred_mean=0.489238333
+base_score=926.841016
+global_oracle delta=-0.003133413 gain=+3.930345
+
+game_type                groups= 2 total_oracle=+6.056276 differential_over_global=+2.125931
+probability_4_fixed      groups= 4 total_oracle=+8.738147 differential_over_global=+4.807802
+game_type_x_p50          groups= 4 total_oracle=+11.541039 differential_over_global=+7.610694
+count_12                 groups=12 total_oracle=+14.516932 differential_over_global=+10.586587
+count_3                  groups= 3 total_oracle=+6.975734 differential_over_global=+3.045389
+game_type_x_rookie       groups= 4 total_oracle=+11.200539 differential_over_global=+7.270194
+
+DECISION: REJECT as a +100 path. game_type×p50 (4 groups) adds only
+about +7.6 beyond a global oracle; all 12 counts add about +10.6.
+This is an upper-bound diagnostic using 2024 labels, not a deployable model.
+Segment-wise LB inversion also requires separate written rules approval.

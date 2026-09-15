@@ -1,0 +1,8 @@
+train 로딩...
+  [    12s] as-of 테이블 생성 중 (GA/GB/GC/GD)...
+  [    14s] 테이블 완료 GA6,749 GB7,103 GC150,624
+  GA 검증 커버리지: f_p_cnt_delta 80%
+  GB 검증 커버리지: f_b_cnt_delta 91%
+  GC 검증 커버리지: f_pair_rate 100%, f_pair_logn 100%
+  GD 검증 커버리지: f_p_hand_delta 80%, f_b_hand_delta 91%
+기준 (exp/36 ref): 674.4

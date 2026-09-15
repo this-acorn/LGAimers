@@ -1,0 +1,233 @@
+08-25 12:22:46 exp/67_train_mc04 cpu_total=24.5min delta_5min=24.5min ram=5.22GB
+08-25 12:27:49 exp/67_train_mc04 cpu_total=53.6min delta_5min=29.2min ram=4.03GB
+08-25 12:32:50 exp/67_train_mc04 cpu_total=81.4min delta_5min=27.7min ram=4.30GB
+08-25 12:37:50 exp/67_train_mc04 cpu_total=109.9min delta_5min=28.5min ram=3.79GB
+08-25 12:42:51 exp/67_train_mc04 cpu_total=137.7min delta_5min=27.8min ram=2.88GB
+08-25 12:47:52 exp/67_train_mc04 cpu_total=165.5min delta_5min=27.7min ram=3.28GB
+08-25 12:52:52 exp/67_train_mc04 cpu_total=193.8min delta_5min=28.3min ram=2.13GB
+08-25 12:57:52 exp/67_train_mc04 cpu_total=222.4min delta_5min=28.6min ram=3.83GB
+08-27 23:20:01 exp/89_cat5_val cpu_total=22.6min delta_5min=22.6min ram=2.42GB
+08-27 23:25:03 exp/89_cat5_val cpu_total=58.1min delta_5min=35.5min ram=2.43GB
+08-27 23:30:06 exp/89_cat5_val cpu_total=92.6min delta_5min=34.5min ram=2.61GB
+08-27 23:35:06 exp/89_cat5_val cpu_total=127.8min delta_5min=35.2min ram=3.25GB
+08-27 23:40:08 exp/89_cat5_val cpu_total=164.8min delta_5min=37.0min ram=2.91GB
+08-27 23:45:09 exp/89_cat5_val cpu_total=201.8min delta_5min=37.0min ram=2.39GB
+08-27 23:50:10 exp/89_cat5_val cpu_total=236.9min delta_5min=35.1min ram=2.86GB
+08-27 23:55:16 exp/89_cat5_val cpu_total=272.5min delta_5min=35.6min ram=2.60GB
+08-28 00:00:17 exp/89_cat5_val cpu_total=308.1min delta_5min=35.6min ram=1.99GB
+08-28 00:05:17 exp/89_cat5_val cpu_total=345.0min delta_5min=36.9min ram=2.87GB
+08-28 00:10:18 exp/89_cat5_val cpu_total=381.9min delta_5min=36.9min ram=3.01GB
+08-28 00:15:19 exp/89_cat5_val cpu_total=417.3min delta_5min=35.4min ram=3.10GB
+08-28 00:20:20 exp/89_cat5_val cpu_total=451.8min delta_5min=34.5min ram=2.84GB
+08-28 00:25:22 exp/89_cat5_val cpu_total=488.5min delta_5min=36.7min ram=2.01GB
+08-28 00:30:24 exp/89_cat5_val cpu_total=525.8min delta_5min=37.3min ram=2.38GB
+08-28 00:35:24 exp/89_cat5_val cpu_total=563.1min delta_5min=37.3min ram=2.02GB
+08-28 00:40:25 exp/89_cat5_val cpu_total=597.7min delta_5min=34.6min ram=2.19GB
+08-28 00:45:26 exp/89_cat5_val cpu_total=631.9min delta_5min=34.3min ram=2.47GB
+08-28 00:50:27 exp/89_cat5_val cpu_total=666.7min delta_5min=34.8min ram=2.45GB
+08-28 04:57:10 exp/91b arm=B cpu_total=23.0min delta_5min=23.0min ram=4.64GB
+08-28 05:02:13 exp/91b arm=B cpu_total=57.8min delta_5min=34.8min ram=4.10GB
+08-28 05:07:14 exp/91b arm=B cpu_total=85.7min delta_5min=27.9min ram=4.66GB
+08-28 05:12:15 exp/91b arm=B cpu_total=116.1min delta_5min=30.4min ram=4.36GB
+08-28 05:17:17 exp/91b arm=B cpu_total=148.7min delta_5min=32.6min ram=3.99GB
+08-28 05:22:17 exp/91b arm=B cpu_total=184.5min delta_5min=35.8min ram=4.20GB
+08-28 05:27:18 exp/91b arm=B cpu_total=221.0min delta_5min=36.5min ram=3.40GB
+08-28 05:32:20 exp/91b arm=B cpu_total=257.8min delta_5min=36.8min ram=3.43GB
+08-28 05:37:21 exp/91b arm=B cpu_total=293.5min delta_5min=35.7min ram=2.53GB
+08-28 05:42:23 exp/91b arm=B cpu_total=329.3min delta_5min=35.8min ram=2.87GB
+08-28 05:47:25 exp/91b arm=B cpu_total=365.3min delta_5min=35.9min ram=3.71GB
+08-28 05:52:26 exp/91b arm=B cpu_total=400.8min delta_5min=35.5min ram=3.27GB
+08-28 05:57:27 exp/91b arm=B cpu_total=436.6min delta_5min=35.8min ram=4.10GB
+08-28 06:02:28 exp/91b arm=B cpu_total=472.3min delta_5min=35.7min ram=3.12GB
+08-28 06:07:29 exp/91b arm=B cpu_total=508.4min delta_5min=36.1min ram=2.72GB
+08-28 06:12:32 exp/91b arm=B cpu_total=544.3min delta_5min=35.9min ram=3.51GB
+08-28 06:17:35 exp/91b arm=B cpu_total=579.7min delta_5min=35.5min ram=4.01GB
+08-28 06:22:36 exp/91b arm=B cpu_total=615.1min delta_5min=35.4min ram=3.70GB
+08-28 06:32:45 exp/91b arm=D cpu_total=27.0min delta_5min=27.0min ram=3.07GB
+08-28 06:37:47 exp/91b arm=D cpu_total=62.5min delta_5min=35.5min ram=2.33GB
+08-28 06:42:47 exp/91b arm=D cpu_total=97.5min delta_5min=35.0min ram=2.26GB
+08-28 06:47:48 exp/91b arm=D cpu_total=132.2min delta_5min=34.7min ram=3.12GB
+08-28 06:52:49 exp/91b arm=D cpu_total=167.8min delta_5min=35.6min ram=2.50GB
+08-28 06:57:49 exp/91b arm=D cpu_total=203.6min delta_5min=35.8min ram=2.48GB
+08-28 07:02:50 exp/91b arm=D cpu_total=239.4min delta_5min=35.7min ram=2.67GB
+08-28 07:07:50 exp/91b arm=D cpu_total=275.4min delta_5min=36.0min ram=2.74GB
+08-28 07:12:51 exp/91b arm=D cpu_total=315.0min delta_5min=39.6min ram=2.93GB
+08-28 07:17:52 exp/91b arm=D cpu_total=354.2min delta_5min=39.2min ram=3.78GB
+08-28 07:22:53 exp/91b arm=D cpu_total=392.6min delta_5min=38.4min ram=3.05GB
+08-28 07:27:53 exp/91b arm=D cpu_total=431.6min delta_5min=39.0min ram=3.12GB
+08-28 07:32:54 exp/91b arm=D cpu_total=469.8min delta_5min=38.2min ram=2.56GB
+08-28 07:37:54 exp/91b arm=D cpu_total=505.6min delta_5min=35.7min ram=4.02GB
+08-28 07:42:55 exp/91b arm=D cpu_total=541.5min delta_5min=35.9min ram=3.88GB
+08-28 07:47:56 exp/91b arm=D cpu_total=577.4min delta_5min=35.9min ram=2.96GB
+08-28 07:58:26 exp/91c cpu_total=26.9min delta_5min=26.9min ram=1.48GB
+08-28 08:09:15 exp/91b arm=T cpu_total=31.1min delta_5min=31.1min ram=3.01GB
+08-28 08:14:17 exp/91b arm=T cpu_total=68.5min delta_5min=37.4min ram=3.18GB
+08-28 08:19:18 exp/91b arm=T cpu_total=105.5min delta_5min=37.0min ram=2.56GB
+08-28 08:24:18 exp/91b arm=T cpu_total=142.5min delta_5min=36.9min ram=2.43GB
+08-28 08:29:22 exp/91b arm=T cpu_total=179.9min delta_5min=37.4min ram=2.47GB
+08-28 08:34:22 exp/91b arm=T cpu_total=216.4min delta_5min=36.5min ram=2.00GB
+08-28 08:39:25 exp/91b arm=T cpu_total=253.7min delta_5min=37.3min ram=2.73GB
+08-28 08:44:25 exp/91b arm=T cpu_total=290.4min delta_5min=36.8min ram=2.49GB
+08-28 08:49:26 exp/91b arm=T cpu_total=327.5min delta_5min=37.1min ram=3.55GB
+08-28 08:54:27 exp/91b arm=T cpu_total=364.6min delta_5min=37.1min ram=2.68GB
+08-28 08:59:27 exp/91b arm=T cpu_total=403.1min delta_5min=38.4min ram=2.00GB
+08-28 09:04:28 exp/91b arm=T cpu_total=440.0min delta_5min=37.0min ram=2.29GB
+08-28 09:09:29 exp/91b arm=T cpu_total=477.0min delta_5min=37.0min ram=2.61GB
+08-28 09:14:30 exp/91b arm=T cpu_total=514.0min delta_5min=37.0min ram=2.86GB
+08-28 09:19:30 exp/91b arm=T cpu_total=550.9min delta_5min=36.9min ram=2.55GB
+08-28 09:24:30 exp/91b arm=T cpu_total=588.5min delta_5min=37.6min ram=2.38GB
+08-28 09:34:36 exp/91b arm=T0 cpu_total=31.7min delta_5min=31.7min ram=2.33GB
+08-28 09:39:38 exp/91b arm=T0 cpu_total=69.2min delta_5min=37.5min ram=2.58GB
+08-28 09:44:39 exp/91b arm=T0 cpu_total=106.2min delta_5min=37.0min ram=2.77GB
+08-28 09:49:41 exp/91b arm=T0 cpu_total=143.2min delta_5min=37.0min ram=1.87GB
+08-28 09:54:41 exp/91b arm=T0 cpu_total=180.1min delta_5min=36.9min ram=1.87GB
+08-28 09:59:41 exp/91b arm=T0 cpu_total=216.9min delta_5min=36.8min ram=3.08GB
+08-28 10:04:42 exp/91b arm=T0 cpu_total=254.6min delta_5min=37.7min ram=2.20GB
+08-28 10:09:42 exp/91b arm=T0 cpu_total=291.4min delta_5min=36.8min ram=1.99GB
+08-28 10:14:43 exp/91b arm=T0 cpu_total=328.9min delta_5min=37.4min ram=2.45GB
+08-28 10:19:43 exp/91b arm=T0 cpu_total=365.9min delta_5min=37.0min ram=2.51GB
+08-28 10:24:44 exp/91b arm=T0 cpu_total=403.3min delta_5min=37.4min ram=2.67GB
+08-29 01:29:27 exp/93 arm=A cpu_total=45.4min delta_5min=45.4min ram=2.63GB
+08-29 01:41:41 exp/93 arm=A cpu_total=136.9min delta_5min=91.4min ram=2.49GB
+08-29 01:50:12 exp/93 arm=A cpu_total=199.3min delta_5min=62.4min ram=2.37GB
+08-29 01:57:11 exp/93 arm=A cpu_total=247.9min delta_5min=48.6min ram=2.21GB
+08-29 02:03:26 exp/93 arm=A cpu_total=291.3min delta_5min=43.4min ram=1.98GB
+08-29 02:08:31 exp/93 arm=A cpu_total=327.0min delta_5min=35.7min ram=1.91GB
+08-29 02:13:44 exp/93 arm=A cpu_total=364.1min delta_5min=37.1min ram=2.73GB
+08-29 02:18:48 exp/93 arm=A cpu_total=400.4min delta_5min=36.2min ram=2.72GB
+08-29 02:23:51 exp/93 arm=A cpu_total=437.1min delta_5min=36.8min ram=2.50GB
+08-29 02:28:51 exp/93 arm=A cpu_total=475.1min delta_5min=38.0min ram=1.88GB
+08-29 02:33:51 exp/93 arm=A cpu_total=515.7min delta_5min=40.5min ram=1.66GB
+08-29 02:38:52 exp/93 arm=A cpu_total=557.9min delta_5min=42.3min ram=2.13GB
+08-29 02:43:52 exp/93 arm=A cpu_total=598.7min delta_5min=40.7min ram=2.72GB
+08-29 02:48:52 exp/93 arm=A cpu_total=639.0min delta_5min=40.3min ram=2.74GB
+08-29 02:53:53 exp/93 arm=A cpu_total=680.6min delta_5min=41.7min ram=2.46GB
+08-29 02:58:53 exp/93 arm=A cpu_total=723.1min delta_5min=42.4min ram=2.59GB
+08-29 03:03:53 exp/93 arm=A cpu_total=764.8min delta_5min=41.7min ram=2.02GB
+08-29 03:08:54 exp/93 arm=A cpu_total=807.4min delta_5min=42.6min ram=2.71GB
+08-29 03:13:54 exp/93 arm=A cpu_total=849.7min delta_5min=42.4min ram=2.41GB
+08-29 03:18:54 exp/93 arm=A cpu_total=889.5min delta_5min=39.8min ram=2.65GB
+08-29 03:23:54 exp/93 arm=A cpu_total=931.1min delta_5min=41.5min ram=2.75GB
+08-29 03:28:54 exp/93 arm=A cpu_total=972.0min delta_5min=41.0min ram=2.87GB
+08-29 03:39:00 exp/93 arm=B cpu_total=36.9min delta_5min=36.9min ram=2.46GB
+08-29 03:44:02 exp/93 arm=B cpu_total=74.3min delta_5min=37.4min ram=2.81GB
+08-29 03:49:03 exp/93 arm=B cpu_total=113.6min delta_5min=39.3min ram=2.86GB
+08-29 03:54:03 exp/93 arm=B cpu_total=151.3min delta_5min=37.7min ram=2.64GB
+08-29 03:59:04 exp/93 arm=B cpu_total=190.5min delta_5min=39.2min ram=2.95GB
+08-29 04:04:04 exp/93 arm=B cpu_total=231.1min delta_5min=40.6min ram=2.49GB
+08-29 04:09:05 exp/93 arm=B cpu_total=269.9min delta_5min=38.8min ram=2.73GB
+08-29 04:14:06 exp/93 arm=B cpu_total=310.2min delta_5min=40.3min ram=2.43GB
+08-29 04:19:06 exp/93 arm=B cpu_total=352.9min delta_5min=42.7min ram=2.39GB
+08-29 04:24:07 exp/93 arm=B cpu_total=395.5min delta_5min=42.6min ram=2.91GB
+08-29 04:29:07 exp/93 arm=B cpu_total=437.0min delta_5min=41.5min ram=2.84GB
+08-29 04:34:07 exp/93 arm=B cpu_total=480.0min delta_5min=43.0min ram=1.75GB
+08-29 04:39:07 exp/93 arm=B cpu_total=523.1min delta_5min=43.1min ram=2.96GB
+08-29 04:44:08 exp/93 arm=B cpu_total=564.0min delta_5min=40.8min ram=2.89GB
+08-29 04:49:09 exp/93 arm=B cpu_total=606.7min delta_5min=42.7min ram=3.29GB
+08-29 04:54:09 exp/93 arm=B cpu_total=649.0min delta_5min=42.3min ram=2.54GB
+08-29 04:59:09 exp/93 arm=B cpu_total=691.3min delta_5min=42.3min ram=2.13GB
+08-29 05:04:09 exp/93 arm=B cpu_total=733.5min delta_5min=42.2min ram=2.56GB
+08-29 05:09:10 exp/93 arm=B cpu_total=776.0min delta_5min=42.5min ram=2.56GB
+08-29 05:19:15 exp/93 arm=M4 cpu_total=39.0min delta_5min=39.0min ram=2.44GB
+08-29 05:24:15 exp/93 arm=M4 cpu_total=78.5min delta_5min=39.6min ram=1.56GB
+08-29 16:04:43 exp/93 arm=M4 cpu_total=118.3min delta_5min=39.7min ram=2.28GB
+08-29 16:09:49 exp/93 arm=M4 cpu_total=152.0min delta_5min=33.7min ram=1.97GB
+08-29 16:15:06 exp/93 arm=M4 cpu_total=186.7min delta_5min=34.7min ram=1.80GB
+08-29 16:20:17 exp/93 arm=M4 cpu_total=221.2min delta_5min=34.5min ram=2.78GB
+08-29 16:25:19 exp/93 arm=M4 cpu_total=255.6min delta_5min=34.4min ram=2.06GB
+08-29 16:30:38 exp/93 arm=M4 cpu_total=291.6min delta_5min=36.0min ram=2.03GB
+08-29 16:35:56 exp/93 arm=M4 cpu_total=327.3min delta_5min=35.8min ram=2.30GB
+08-29 16:43:50 exp/93 arm=M4 cpu_total=378.1min delta_5min=50.8min ram=1.48GB
+08-29 16:50:56 exp/93 arm=M4 cpu_total=427.3min delta_5min=49.2min ram=2.31GB
+08-29 17:03:54 exp/93 arm=OH cpu_total=30.1min delta_5min=30.1min ram=1.79GB
+08-29 17:11:04 exp/93 arm=OH cpu_total=69.4min delta_5min=39.3min ram=1.02GB
+08-29 17:21:59 exp/93 arm=OH cpu_total=154.4min delta_5min=85.0min ram=0.66GB
+08-29 17:33:06 exp/93 arm=CTR1 cpu_total=31.2min delta_5min=31.2min ram=1.98GB
+08-29 17:38:07 exp/93 arm=CTR1 cpu_total=67.2min delta_5min=36.0min ram=1.03GB
+08-29 17:43:08 exp/93 arm=CTR1 cpu_total=103.2min delta_5min=36.1min ram=1.16GB
+08-29 17:48:09 exp/93 arm=CTR1 cpu_total=139.4min delta_5min=36.1min ram=1.04GB
+08-29 17:53:10 exp/93 arm=CTR1 cpu_total=175.3min delta_5min=35.9min ram=1.03GB
+08-29 17:58:11 exp/93 arm=CTR1 cpu_total=211.5min delta_5min=36.2min ram=1.08GB
+08-29 18:03:12 exp/93 arm=CTR1 cpu_total=249.3min delta_5min=37.7min ram=1.83GB
+08-29 18:08:13 exp/93 arm=CTR1 cpu_total=288.9min delta_5min=39.6min ram=1.09GB
+08-29 18:13:13 exp/93 arm=CTR1 cpu_total=329.1min delta_5min=40.2min ram=1.05GB
+08-29 18:18:13 exp/93 arm=CTR1 cpu_total=366.4min delta_5min=37.3min ram=1.12GB
+08-29 22:42:44 exp/100 arm=C6 cpu_total=29.4min delta_5min=29.4min ram=4.68GB bat=2/79%
+08-29 22:47:51 exp/100 arm=C6 cpu_total=67.9min delta_5min=38.5min ram=4.66GB bat=2/79%
+08-29 22:52:56 exp/100 arm=C6 cpu_total=106.9min delta_5min=39.0min ram=4.08GB bat=2/79%
+08-29 22:57:59 exp/100 arm=C6 cpu_total=145.5min delta_5min=38.6min ram=3.55GB bat=1/78%
+08-29 23:03:02 exp/100 arm=C6 cpu_total=182.8min delta_5min=37.3min ram=3.00GB bat=1/77%
+08-29 23:08:09 exp/100 arm=C6 cpu_total=216.9min delta_5min=34.1min ram=3.96GB bat=1/75%
+08-29 23:13:34 exp/100 arm=C6 cpu_total=254.5min delta_5min=37.6min ram=3.94GB bat=1/73%
+08-29 23:18:37 exp/100 arm=C6 cpu_total=292.9min delta_5min=38.4min ram=2.48GB bat=1/71%
+08-29 23:23:45 exp/100 arm=C6 cpu_total=330.6min delta_5min=37.7min ram=3.17GB bat=1/70%
+08-29 23:28:52 exp/100 arm=C6 cpu_total=369.8min delta_5min=39.2min ram=2.93GB bat=1/68%
+08-29 23:33:56 exp/100 arm=C6 cpu_total=407.3min delta_5min=37.5min ram=2.13GB bat=1/66%
+08-29 23:39:40 exp/100 arm=C6 cpu_total=441.3min delta_5min=34.0min ram=2.44GB bat=1/64%
+08-29 23:44:47 exp/100 arm=C6 cpu_total=482.7min delta_5min=41.4min ram=3.15GB bat=1/62%
+08-29 23:50:29 exp/100 arm=C6 cpu_total=520.1min delta_5min=37.4min ram=3.46GB bat=1/61%
+08-29 23:55:33 exp/100 arm=C6 cpu_total=560.1min delta_5min=39.9min ram=2.93GB bat=1/59%
+08-30 00:01:53 exp/100 arm=C6 cpu_total=597.5min delta_5min=37.5min ram=3.74GB bat=1/57%
+08-30 00:07:12 exp/100 arm=C6 cpu_total=643.1min delta_5min=45.5min ram=3.86GB bat=1/55%
+08-30 00:12:20 exp/100 arm=C6 cpu_total=676.6min delta_5min=33.5min ram=2.38GB bat=1/53%
+08-30 00:17:25 exp/100 arm=C6 cpu_total=710.3min delta_5min=33.7min ram=2.55GB bat=2/53%
+08-30 00:26:32 exp/100 arm=IT cpu_total=28.9min delta_5min=28.9min ram=3.73GB bat=2/57%
+08-30 00:31:45 exp/100 arm=IT cpu_total=61.9min delta_5min=33.0min ram=3.71GB bat=2/60%
+08-30 00:37:30 exp/100 arm=IT cpu_total=92.9min delta_5min=30.9min ram=3.54GB bat=2/62%
+08-30 00:43:15 exp/100 arm=IT cpu_total=128.9min delta_5min=36.0min ram=3.59GB bat=2/65%
+08-30 00:48:20 exp/100 arm=IT cpu_total=164.9min delta_5min=36.0min ram=2.78GB bat=2/67%
+08-30 00:53:29 exp/100 arm=IT cpu_total=196.6min delta_5min=31.7min ram=3.21GB bat=2/70%
+08-30 00:58:31 exp/100 arm=IT cpu_total=226.2min delta_5min=29.6min ram=3.52GB bat=2/72%
+08-30 01:03:45 exp/100 arm=IT cpu_total=258.3min delta_5min=32.1min ram=3.92GB bat=2/75%
+08-30 01:08:57 exp/100 arm=IT cpu_total=288.7min delta_5min=30.4min ram=2.11GB bat=2/77%
+08-30 01:14:07 exp/100 arm=IT cpu_total=323.2min delta_5min=34.5min ram=2.60GB bat=2/79%
+08-30 01:19:59 exp/100 arm=IT cpu_total=355.9min delta_5min=32.6min ram=2.53GB bat=2/79%
+08-30 01:25:10 exp/100 arm=IT cpu_total=397.0min delta_5min=41.1min ram=3.02GB bat=2/79%
+08-30 01:30:16 exp/100 arm=IT cpu_total=432.4min delta_5min=35.4min ram=2.55GB bat=2/79%
+08-30 01:35:25 exp/100 arm=IT cpu_total=467.8min delta_5min=35.4min ram=2.92GB bat=2/79%
+08-30 01:40:40 exp/100 arm=IT cpu_total=503.4min delta_5min=35.6min ram=2.22GB bat=2/79%
+08-30 01:45:43 exp/100 arm=IT cpu_total=536.8min delta_5min=33.4min ram=1.89GB bat=2/79%
+08-30 01:50:46 exp/100 arm=IT cpu_total=570.2min delta_5min=33.4min ram=2.71GB bat=2/79%
+08-30 01:55:50 exp/100 arm=IT cpu_total=606.3min delta_5min=36.1min ram=2.70GB bat=2/79%
+08-30 02:00:58 exp/100 arm=IT cpu_total=640.9min delta_5min=34.6min ram=2.53GB bat=2/79%
+08-30 02:06:13 exp/100 arm=IT cpu_total=675.0min delta_5min=34.1min ram=3.30GB bat=2/79%
+08-30 02:11:18 exp/100 arm=IT cpu_total=709.6min delta_5min=34.6min ram=2.80GB bat=2/79%
+08-30 02:16:20 exp/100 arm=IT cpu_total=745.5min delta_5min=35.9min ram=3.00GB bat=2/79%
+08-30 02:21:47 exp/100 arm=IT cpu_total=782.8min delta_5min=37.3min ram=3.04GB bat=2/79%
+08-30 02:26:52 exp/100 arm=IT cpu_total=823.4min delta_5min=40.6min ram=3.07GB bat=2/79%
+08-30 02:31:55 exp/100 arm=IT cpu_total=861.1min delta_5min=37.7min ram=2.40GB bat=1/79%
+08-30 02:36:57 exp/100 arm=IT cpu_total=897.7min delta_5min=36.6min ram=2.15GB bat=1/77%
+08-30 02:41:59 exp/100 arm=IT cpu_total=934.2min delta_5min=36.4min ram=2.14GB bat=1/75%
+08-30 02:47:02 exp/100 arm=IT cpu_total=969.7min delta_5min=35.6min ram=2.48GB bat=1/74%
+08-30 02:52:05 exp/100 arm=IT cpu_total=1,004.7min delta_5min=35.0min ram=2.27GB bat=2/72%
+08-30 02:57:21 exp/100 arm=IT cpu_total=1,040.3min delta_5min=35.6min ram=2.29GB bat=2/75%
+08-30 03:02:30 exp/100 arm=IT cpu_total=1,077.1min delta_5min=36.8min ram=2.55GB bat=2/77%
+08-30 03:07:33 exp/100 arm=IT cpu_total=1,111.3min delta_5min=34.1min ram=1.53GB bat=2/79%
+08-30 03:12:35 exp/100 arm=IT cpu_total=1,145.4min delta_5min=34.2min ram=1.79GB bat=2/79%
+08-30 03:17:38 exp/100 arm=IT cpu_total=1,181.5min delta_5min=36.1min ram=2.72GB bat=2/79%
+08-30 03:22:42 exp/100 arm=IT cpu_total=1,218.6min delta_5min=37.1min ram=2.91GB bat=2/79%
+08-30 03:27:43 exp/100 arm=IT cpu_total=1,255.3min delta_5min=36.6min ram=2.03GB bat=2/79%
+08-30 03:32:46 exp/100 arm=IT cpu_total=1,293.4min delta_5min=38.1min ram=1.87GB bat=2/79%
+08-30 04:17:27 exp/100 arm=IT300 cpu_total=28.0min delta_5min=28.0min ram=4.58GB bat=2/79%
+08-30 04:22:54 exp/100 arm=IT300 cpu_total=62.7min delta_5min=34.8min ram=2.34GB bat=2/79%
+08-30 04:28:24 exp/100 arm=IT300 cpu_total=102.0min delta_5min=39.3min ram=2.04GB bat=2/79%
+08-30 04:33:28 exp/100 arm=IT300 cpu_total=137.4min delta_5min=35.4min ram=2.52GB bat=2/79%
+08-30 04:38:51 exp/100 arm=IT300 cpu_total=172.3min delta_5min=34.9min ram=2.35GB bat=2/79%
+08-30 04:43:53 exp/100 arm=IT300 cpu_total=211.3min delta_5min=39.0min ram=2.21GB bat=2/79%
+08-30 04:49:00 exp/100 arm=IT300 cpu_total=247.2min delta_5min=35.9min ram=2.60GB bat=2/79%
+08-30 04:54:06 exp/100 arm=IT300 cpu_total=284.0min delta_5min=36.8min ram=2.96GB bat=2/79%
+08-30 04:59:09 exp/100 arm=IT300 cpu_total=320.0min delta_5min=36.0min ram=2.33GB bat=2/79%
+08-30 05:04:14 exp/100 arm=IT300 cpu_total=356.9min delta_5min=36.9min ram=3.04GB bat=2/79%
+08-30 05:09:17 exp/100 arm=IT300 cpu_total=393.7min delta_5min=36.7min ram=2.72GB bat=2/79%
+08-30 23:20:51 exp/94 it1000 cpu_total=0.0min delta_5min=0.0min ram=0.00GB bat=1/74%
+08-30 23:25:52 exp/94 it1000 cpu_total=0.0min delta_5min=0.0min ram=0.00GB bat=1/72%
+08-30 23:30:54 exp/94 it1000 cpu_total=0.0min delta_5min=0.0min ram=0.00GB bat=1/70%
+08-30 23:35:55 exp/94 it1000 cpu_total=0.0min delta_5min=0.0min ram=0.00GB bat=1/68%
+08-30 23:40:56 exp/94 it1000 cpu_total=0.0min delta_5min=0.0min ram=0.00GB bat=1/67%
+08-30 23:45:57 exp/94 it1000 cpu_total=0.0min delta_5min=0.0min ram=0.00GB bat=1/65%
+08-30 23:50:59 exp/94 it1000 cpu_total=0.0min delta_5min=0.0min ram=0.00GB bat=1/63%
+08-30 23:56:01 exp/94 it1000 cpu_total=0.0min delta_5min=0.0min ram=0.00GB bat=1/61%
+08-31 00:01:02 exp/94 it1000 cpu_total=0.0min delta_5min=0.0min ram=0.00GB bat=1/60%
+08-31 00:06:03 exp/94 it1000 cpu_total=0.0min delta_5min=0.0min ram=0.00GB bat=1/58%
+08-31 00:11:04 exp/94 it1000 cpu_total=0.0min delta_5min=0.0min ram=0.00GB bat=1/56%
+08-31 00:16:06 exp/94 it1000 cpu_total=0.0min delta_5min=0.0min ram=0.00GB bat=1/54%

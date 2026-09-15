@@ -46,12 +46,12 @@ Blend weights are read from the executable wrapper, since the 70% variant's desc
 | --- | --- |
 | [Shared utilities](../exp/common.py) and [multi-year harness](../exp/22_multiyear_harness.py) | Feature engineering, Brier diagnostics, and chronological comparisons. |
 | [Target analysis](../exp/52_target_anatomy.py) and [multiclass training](../exp/54_train_mc79.py) | The five-class, eight-seed CatBoost checkpoint included here. |
-| Local `candidate_v18g030_src/script.py` | Later team categorical handling, hierarchical correction, and fixed calibration. |
-| `model/exp021_inference.py` inside local `last.zip` | The rebuilt temporal/residual branch and its frozen feature transformations. |
-| `model/current_inference.py` inside local `last.zip` | The calibrated combination of the existing branches. |
-| `script.py` inside local `candidate_jm_w070_small.zip` and `last.zip` | Two inspected blend settings and their output validation. |
-| `model/jm0750_inference.py` and its residual manifest in both archives | The shared regular-season residual component. |
+| [Hierarchical candidate](../candidates/candidate_v18g030_src/script.py) | Later team categorical handling, hierarchical correction, and fixed calibration. |
+| [Temporal branch](../candidates/last/model/exp021_inference.py) | The rebuilt temporal/residual branch and its frozen feature transformations. |
+| [Calibrated combination](../candidates/last/model/current_inference.py) | The calibrated combination of the existing branches. |
+| [70% wrapper](../candidates/candidate_jm_w070_src/script.py) and [last wrapper](../candidates/last/script.py) | Two inspected blend settings and their output validation. |
+| [Residual inference](../candidates/last/model/jm0750_inference.py) and [manifest](../candidates/last/model/r_residual_manifest.json) | The shared regular-season residual component. |
 
-These local candidate artifacts are described here but are not bundled into this checkout. The inference commands in the root README run the earlier preserved checkpoint. Both packages were inspected directly because a later-numbered builder script alone does not establish which implementation was actually packaged.
+The candidate inference source and small configuration files are included in this checkout; additional weights and runtime state remain local, as recorded in the [artifact inventory](../artifacts/README.md). The inference commands in the root README run the earlier preserved checkpoint. Both packages were inspected directly because a later-numbered builder script alone does not establish which implementation was actually packaged.
 
 The project's work includes feature development, multiclass modeling, experiments, inference implementation, calibration, component integration, and packaging.

@@ -1,0 +1,162 @@
+{
+  "experiment": 128,
+  "protocol": "frozen 2023 rule -> one-shot untouched 2024 confirmation",
+  "precommitted_before_2024": {
+    "primary": "0.50*Acur + 0.50*p0",
+    "secondary": "Acur on R; p0 on F",
+    "direct_p0": "diagnostic only",
+    "no_weight_tuning_after_2024": true
+  },
+  "baseline": {
+    "score": 936.5839989479041,
+    "expected_score": 936.5839989479041,
+    "weights": {
+      "own": 0.6434428305247574,
+      "EXP020_rank6": 0.35655716947524263
+    }
+  },
+  "alignment": {
+    "rows": 253507,
+    "official_vs_saved_target_exact": true,
+    "row_id_fingerprint": "f0e4b274731891a5f055aaae522c9deab949e04acba99750a048c4b0ee9fdc02"
+  },
+  "volatility_scale": 0.05138808713656849,
+  "hierarchical_diagnostics": {
+    "label": "confirmation-2024",
+    "rows": 253507,
+    "pitcher_seen_rate": 0.8013940443459155,
+    "batter_seen_rate": 0.9069532596733029,
+    "pitcher_negative_window_rows": 0,
+    "batter_negative_window_rows": 0,
+    "pitcher_invalid_success_rows": 0,
+    "batter_invalid_success_rows": 0,
+    "pitcher_season_n_min": 0.0,
+    "pitcher_season_n_max": 3123.0,
+    "volatility_missing_rate": 0.01435068854114482,
+    "p0_min": 0.39127701335660414,
+    "p0_max": 0.6970747066859395,
+    "p0_mean": 0.5010894113587958,
+    "components": {
+      "reverse": {
+        "negative_window_rows": 0,
+        "invalid_count_rows": 0,
+        "bridge_n_min": 0.0,
+        "bridge_n_max": 3124.0,
+        "count_min": 0.0,
+        "count_max": 846.0
+      },
+      "middle": {
+        "negative_window_rows": 0,
+        "invalid_count_rows": 0,
+        "bridge_n_min": 0.0,
+        "bridge_n_max": 3124.0,
+        "count_min": 0.0,
+        "count_max": 612.0
+      }
+    }
+  },
+  "variants": {
+    "primary_global_p0_w050": {
+      "name": "primary_global_p0_w050",
+      "score": 786.203170454125,
+      "raw_gain": -150.38082849377906,
+      "equal_mean_gain_unclipped": -120.54462416828392,
+      "equal_mean_gain_clipped": -120.54462416828392,
+      "F_contribution": -74.92043182977153,
+      "R_contribution": -75.46039666400537,
+      "mean_shift": 0.005317365663444651,
+      "pitcher_bootstrap": {
+        "pitchers": 391,
+        "draws": 2000,
+        "p025": -185.93502050774265,
+        "median": -150.06964742494105,
+        "p975": -116.2666426555779,
+        "prob_positive": 0.0
+      }
+    },
+    "secondary_F_p0_R_acur": {
+      "name": "secondary_F_p0_R_acur",
+      "score": 698.1482936501249,
+      "raw_gain": -238.43570529777924,
+      "equal_mean_gain_unclipped": -213.07950569138256,
+      "equal_mean_gain_clipped": -213.07950569138256,
+      "F_contribution": -238.43570529780226,
+      "R_contribution": 0.0,
+      "mean_shift": 0.004720077723066984,
+      "pitcher_bootstrap": {
+        "pitchers": 391,
+        "draws": 2000,
+        "p025": -308.8969671228775,
+        "median": -237.47487162544198,
+        "p975": -173.1310266098966,
+        "prob_positive": 0.0
+      }
+    },
+    "diagnostic_direct_p0": {
+      "name": "diagnostic_direct_p0",
+      "score": 399.0685664530869,
+      "raw_gain": -537.5154324948172,
+      "equal_mean_gain_unclipped": -455.20603938071775,
+      "equal_mean_gain_clipped": -455.20603938071775,
+      "F_contribution": -238.43570529780226,
+      "R_contribution": -299.07972719700035,
+      "mean_shift": 0.010634731326888858,
+      "pitcher_bootstrap": {
+        "pitchers": 391,
+        "draws": 2000,
+        "p025": -620.1891222962026,
+        "median": -536.6643307285658,
+        "p975": -458.28505337871496,
+        "prob_positive": 0.0
+      }
+    }
+  },
+  "gates": {
+    "primary": {
+      "raw_gain_min": 15.0,
+      "equal_mean_gain_min": 10.0,
+      "F_contribution_min": 0.0,
+      "R_contribution_min": 0.0,
+      "bootstrap_p025_min": 0.0
+    },
+    "primary_checks": {
+      "raw_gain": false,
+      "equal_mean_gain": false,
+      "F_nonnegative": false,
+      "R_nonnegative": false,
+      "bootstrap_lower_positive": false
+    },
+    "primary_pass": false,
+    "secondary": {
+      "raw_gain_min": 25.0,
+      "equal_mean_gain_min": 20.0,
+      "F_contribution_min": 0.0,
+      "bootstrap_p025_min": 0.0
+    },
+    "secondary_checks": {
+      "primary_failed": true,
+      "raw_gain": false,
+      "equal_mean_gain": false,
+      "F_positive": false,
+      "R_exact_zero": true,
+      "bootstrap_lower_positive": false
+    },
+    "secondary_pass": false
+  },
+  "decision": "FAIL_NO_DEPLOYMENT",
+  "sources_sha256": {
+    "C:\\Users\\gwonn\\Desktop\\open\\data\\train.csv": "d2081186b458b49f60b082be480c273135833e15ba59a76d033af28bcf8763ff",
+    "C:\\Users\\gwonn\\Desktop\\open\\lab\\89_cat5_probs_seed42.npy": "0122c2af82647231c3f788a8927a23958e0817bbbada5fd4f2776a52b9180258",
+    "C:\\Users\\gwonn\\Desktop\\open\\lab\\103_v18_effect_2024.npy": "9c6d6a55dbacc2347c44f18ab54c3aa906a8381b6fa0c3913bc46c02db2685f3",
+    "C:\\Users\\gwonn\\Desktop\\open\\lab\\115_mkis_exp021_work\\artifacts\\EXP-020\\low_rank_pitcher_context_eb\\predictions_lowrank_s300_r6_2024.npy": "576f4d9d312877079026779f1d3cff10a1a4fb5961f6adc894aba46e0b32118d",
+    "C:\\Users\\gwonn\\Desktop\\open\\lab\\115_mkis_exp021_work\\artifacts\\EXP-020\\low_rank_pitcher_context_eb\\targets_2024.npy": "32a5a12d22d5e171e4227ed46fe02a9cd4fac20b0ca4b7618977333df97b238f"
+  },
+  "elapsed_seconds": 19.131672143936157,
+  "prohibitions": {
+    "test_read": false,
+    "EXP021_inference_source": false,
+    "model_fit": false,
+    "zip": false,
+    "submission": false
+  }
+}

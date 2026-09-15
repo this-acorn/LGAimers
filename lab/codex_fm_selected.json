@@ -1,0 +1,16 @@
+{
+  "status": "confirmed_2024",
+  "historical_gate_pass": true,
+  "rank": 4,
+  "ridge": 3.0,
+  "gamma": 0.05,
+  "seeds": [
+    42,
+    7
+  ],
+  "iterations": 12,
+  "gain_2022": 1.3355915185920821,
+  "gain_2023": 0.2502363926516864,
+  "selection_file": "lab\\codex_fm_selection.csv",
+  "result_file": "lab\\codex_fm_result.txt"
+}

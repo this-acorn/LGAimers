@@ -1,0 +1,61 @@
+{
+  "experiment": 106,
+  "selection_years": [
+    2021,
+    2022,
+    2023
+  ],
+  "selection_rule": "maximize minimum HGB OOF raw gain; tie mean then smaller L2",
+  "grid": [
+    0.0,
+    0.05,
+    0.1,
+    0.15,
+    0.2,
+    0.25,
+    0.3,
+    0.35,
+    0.4,
+    0.45,
+    0.5,
+    0.55,
+    0.6,
+    0.65,
+    0.7
+  ],
+  "reference_weights": {
+    "hand": 0.3,
+    "detail": 0.3
+  },
+  "selected": {
+    "hand_weight": 0.3,
+    "detail_weight": 0.1,
+    "yearly_gain": {
+      "2021": 13.281364329753615,
+      "2022": 11.555865508106308,
+      "2023": 16.340973743345103
+    },
+    "min_gain": 11.555865508106308,
+    "mean_gain": 13.726067860401676,
+    "distance": 0.1
+  },
+  "confirmation": {
+    "2022": {
+      "selected_gain": 20.9527107638105,
+      "reference_gain": 20.684418703264782,
+      "incremental_gain": 0.2682920605457184
+    },
+    "2023": {
+      "selected_gain": 24.02012329143497,
+      "reference_gain": 27.723795381673312,
+      "incremental_gain": -3.703672090238342
+    },
+    "2024": {
+      "selected_gain": 21.54109577652264,
+      "reference_gain": 25.40430210307136,
+      "incremental_gain": -3.8632063265487204
+    }
+  },
+  "gate_pass": false,
+  "elapsed_seconds": 23.553324937820435
+}

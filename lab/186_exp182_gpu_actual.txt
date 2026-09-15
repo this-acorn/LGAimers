@@ -1,0 +1,23 @@
+EXP182 lab-GPU validation result (user report, 2026-09-01 KST)
+================================================================
+status=FAIL_NO_DEPLOY
+wall_seconds=31
+d=-814.2355
+K=757.0539
+optimal_weight_unconstrained=-0.0378
+locked_convex_weight=0.0
+gain=+0.0000
+early_gain=+0.0000
+late_gain=+0.0000
+pitcher_bootstrap_p025=+0.0000
+current_2024_score=936.58
+endpoint_ensemble_score=122.35
+seed endpoint deltas=-807.9,-816.2,-821.3
+
+Decision
+--------
+The fast X80/160-input MLP direction is closed.  Do not run final_train and do
+not rerun a shuffle-only variant.  EXP183 is a separate full-X176 experiment:
+it adds 55 TrackMan physical features and the remaining season/count/role
+features, uses an actual torch.randperm row shuffle each epoch, and writes a
+separate output directory.

@@ -1,0 +1,110 @@
+"""Sequential, row-local blend of two frozen probability endpoints."""
+
+from __future__ import annotations
+
+import gc
+import os
+import runpy
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+
+
+ID_COL = "row_id"
+TARGET_COL = "control_success"
+CHAMPION_WEIGHT = 0.6434428305247574
+EXP021_WEIGHT = 0.35655716947524263
+MODEL_DIR = Path("./model")
+OUTPUT_DIR = Path("./output")
+OUTPUT_PATH = OUTPUT_DIR / "submission.csv"
+SAMPLE_PATH = Path("./data/sample_submission.csv")
+ANTI_WEIGHT = -0.5397043598776958
+TEST_PATH = Path("./data/test.csv")
+
+
+def _run_component(filename: str, namespace: str) -> pd.DataFrame:
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    if OUTPUT_PATH.exists():
+        OUTPUT_PATH.unlink()
+    module = runpy.run_path(str(MODEL_DIR / filename), run_name=namespace)
+    main = module.get("main")
+    if not callable(main):
+        raise RuntimeError(f"component has no callable main(): {filename}")
+    main()
+    if not OUTPUT_PATH.is_file():
+        raise RuntimeError(f"component did not create {OUTPUT_PATH}: {filename}")
+    prediction = pd.read_csv(OUTPUT_PATH, encoding="utf-8-sig")
+    del main, module
+    gc.collect()
+    return prediction
+
+
+def _validate_component(frame: pd.DataFrame, name: str) -> None:
+    if list(frame.columns) != [ID_COL, TARGET_COL]:
+        raise ValueError(f"{name}: invalid columns {frame.columns.tolist()}")
+    if frame[ID_COL].duplicated().any():
+        raise ValueError(f"{name}: duplicate row_id")
+    values = frame[TARGET_COL].to_numpy(dtype=np.float64)
+    if not np.isfinite(values).all():
+        raise ValueError(f"{name}: non-finite probability")
+    if not ((values >= 0.0).all() and (values <= 1.0).all()):
+        raise ValueError(f"{name}: probability outside [0,1]")
+
+
+def main() -> None:
+    champion = _run_component("champion_inference.py", "champ_component")
+    _validate_component(champion, "champion")
+    champion_values = champion[TARGET_COL].to_numpy(dtype=np.float64, copy=True)
+    champion_ids = champion[ID_COL].to_numpy(copy=True)
+    del champion
+    gc.collect()
+
+    raw_cat5 = _run_component("cat5_raw_inference.py", "raw_cat5_component")
+    _validate_component(raw_cat5, "raw_cat5")
+    if not np.array_equal(champion_ids, raw_cat5[ID_COL].to_numpy()):
+        raise ValueError("raw CAT5 row_id order mismatch")
+    raw_cat5_values = raw_cat5[TARGET_COL].to_numpy(dtype=np.float64, copy=True)
+    del raw_cat5
+    gc.collect()
+
+    exp021 = _run_component("exp021_inference.py", "exp021_component")
+    _validate_component(exp021, "exp021")
+    exp021_ids = exp021[ID_COL].to_numpy()
+    if not np.array_equal(champion_ids, exp021_ids):
+        raise ValueError("component row_id order mismatch")
+    exp021_values = exp021[TARGET_COL].to_numpy(dtype=np.float64)
+
+    sample = pd.read_csv(SAMPLE_PATH, encoding="utf-8-sig")
+    sample.columns = [column.replace("﻿", "").strip() for column in sample.columns]
+    if ID_COL not in sample.columns or len(sample) != len(champion_ids):
+        raise ValueError("sample_submission schema/row count mismatch")
+    if not np.array_equal(sample[ID_COL].to_numpy(), champion_ids):
+        raise ValueError("component order differs from sample_submission")
+
+    blended = CHAMPION_WEIGHT * champion_values + EXP021_WEIGHT * exp021_values
+    test = pd.read_csv(TEST_PATH, encoding="utf-8-sig", usecols=[ID_COL, "game_type"])
+    test.columns = [column.replace("ï»¿", "").strip() for column in test.columns]
+    if test[ID_COL].duplicated().any():
+        raise ValueError("duplicate test row_id")
+    game_by_id = test.set_index(ID_COL)["game_type"]
+    if not pd.Index(champion_ids).isin(game_by_id.index).all():
+        raise ValueError("missing test row_id for game_type routing")
+    is_r = game_by_id.reindex(champion_ids).astype(str).eq("R").to_numpy()
+    blended[is_r] = np.clip(
+        blended[is_r] + ANTI_WEIGHT * (raw_cat5_values[is_r] - blended[is_r]), 0.0, 1.0
+    )
+    if not np.isfinite(blended).all() or not ((blended >= 0.0).all() and (blended <= 1.0).all()):
+        raise ValueError("invalid blended probabilities")
+    submission = pd.DataFrame({ID_COL: sample[ID_COL], TARGET_COL: blended})
+    submission.to_csv(OUTPUT_PATH, index=False, encoding="utf-8")
+    print(
+        f"Saved: {OUTPUT_PATH} | rows={len(submission)} | "
+        f"champion={CHAMPION_WEIGHT:.2f} exp021={EXP021_WEIGHT:.2f} | "
+        f"mean={blended.mean():.9f} min={blended.min():.9f} max={blended.max():.9f}",
+        flush=True,
+    )
+
+
+if __name__ == "__main__":
+    main()

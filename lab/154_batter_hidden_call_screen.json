@@ -1,0 +1,487 @@
+{
+  "experiment": 154,
+  "scope": "official train only; arithmetic EB screen; no learner/test/zip/LB",
+  "specification": {
+    "validation_years": [
+      2022,
+      2023,
+      2024
+    ],
+    "parent_keys": [
+      "pitcher_hand",
+      "batter_hand",
+      "exact_12_count",
+      "runner_call_state"
+    ],
+    "parent_strength": 200.0,
+    "batter_strengths": [
+      50.0,
+      200.0,
+      800.0
+    ],
+    "batter_updated_classes": [
+      "reverse_only",
+      "overlap",
+      "bigmiss"
+    ],
+    "success_middle_rule": "preserve parent ratio in remaining probability mass",
+    "direct_batter_id_model": false,
+    "selection": "gate first, then maximum worst-fold logloss gain"
+  },
+  "recovery": {
+    "next_row_coverage": 0.9994630843364346,
+    "target5_coverage": 0.9994630843364346,
+    "success_mismatch": 0
+  },
+  "keys": {
+    "parent_states_observed": 192,
+    "batter_levels": 830,
+    "runner_state_definition": {
+      "steal_threat": "runner_on_1b == 1 and runner_on_2b == 0",
+      "scoring_position": "runner_on_2b == 1 or runner_on_3b == 1",
+      "state": "steal_threat + 2*scoring_position"
+    }
+  },
+  "folds": {
+    "2022": {
+      "source_rows": 728387,
+      "validation_rows": 247391,
+      "source_years": [
+        2019,
+        2020,
+        2021
+      ],
+      "global_probability": {
+        "success": 0.5430972820766983,
+        "middle_only": 0.10562105034823521,
+        "reverse_only": 0.17863992630291314,
+        "overlap": 0.03350142163437843,
+        "bigmiss": 0.13914031963777498
+      },
+      "parent_states_with_source_support": 192,
+      "parent_target5_logloss": 1.278188648046701,
+      "parent_one_vs_rest_brier": {
+        "success": 0.24915271287012047,
+        "middle_only": 0.10016673879574006,
+        "reverse_only": 0.15728707977855386,
+        "overlap": 0.035186158437631405,
+        "bigmiss": 0.10843048897651812
+      },
+      "candidates": {
+        "50": {
+          "strength": 50.0,
+          "target5_logloss": 1.2805849022506002,
+          "target5_logloss_gain": -0.0023962542038991064,
+          "one_vs_rest_brier": {
+            "success": 0.2484550309837256,
+            "middle_only": 0.10016553736471583,
+            "reverse_only": 0.15719111521143211,
+            "overlap": 0.03516071353331427,
+            "bigmiss": 0.10957416076679778
+          },
+          "one_vs_rest_brier_gain": {
+            "success": 0.0006976818863948797,
+            "middle_only": 1.2014310242364212e-06,
+            "reverse_only": 9.59645671217424e-05,
+            "overlap": 2.544490431713453e-05,
+            "bigmiss": -0.00114367179027966
+          },
+          "coverage_seen_batter": 0.8897858046574046,
+          "cold_rows": 27266,
+          "cold_fallback_max_abs_difference": 0.0,
+          "prediction_mean": {
+            "success": 0.54667106079876,
+            "middle_only": 0.10583842859906592,
+            "reverse_only": 0.17979158820204663,
+            "overlap": 0.03341240540571673,
+            "bigmiss": 0.13428651699441052
+          }
+        },
+        "200": {
+          "strength": 200.0,
+          "target5_logloss": 1.2795342209940623,
+          "target5_logloss_gain": -0.001345572947361262,
+          "one_vs_rest_brier": {
+            "success": 0.24840912690968114,
+            "middle_only": 0.1001669658639328,
+            "reverse_only": 0.15712877608280582,
+            "overlap": 0.03515266167744335,
+            "bigmiss": 0.10939947579892025
+          },
+          "one_vs_rest_brier_gain": {
+            "success": 0.0007435859604393302,
+            "middle_only": -2.270681927346585e-07,
+            "reverse_only": 0.00015830369574804104,
+            "overlap": 3.349676018805231e-05,
+            "bigmiss": -0.0009689868224021236
+          },
+          "coverage_seen_batter": 0.8897858046574046,
+          "cold_rows": 27266,
+          "cold_fallback_max_abs_difference": 0.0,
+          "prediction_mean": {
+            "success": 0.5437292599445687,
+            "middle_only": 0.10527969380513363,
+            "reverse_only": 0.18130792486849223,
+            "overlap": 0.0340253908225901,
+            "bigmiss": 0.13565773055921537
+          }
+        },
+        "800": {
+          "strength": 800.0,
+          "target5_logloss": 1.27876412288849,
+          "target5_logloss_gain": -0.0005754748417889921,
+          "one_vs_rest_brier": {
+            "success": 0.24851017917043777,
+            "middle_only": 0.10017205576618551,
+            "reverse_only": 0.1571058403360469,
+            "overlap": 0.03515197847101284,
+            "bigmiss": 0.10911833993736926
+          },
+          "one_vs_rest_brier_gain": {
+            "success": 0.0006425336996827014,
+            "middle_only": -5.31697044545143e-06,
+            "reverse_only": 0.00018123944250694746,
+            "overlap": 3.4179966618565205e-05,
+            "bigmiss": -0.0006878509608511385
+          },
+          "coverage_seen_batter": 0.8897858046574046,
+          "cold_rows": 27266,
+          "cold_fallback_max_abs_difference": 0.0,
+          "prediction_mean": {
+            "success": 0.5411233424738098,
+            "middle_only": 0.10479334747992583,
+            "reverse_only": 0.1821304351636463,
+            "overlap": 0.03447844334366355,
+            "bigmiss": 0.13747443153895458
+          }
+        }
+      }
+    },
+    "2023": {
+      "source_rows": 975778,
+      "validation_rows": 245406,
+      "source_years": [
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "global_probability": {
+        "success": 0.5394874653865941,
+        "middle_only": 0.10748858859289716,
+        "reverse_only": 0.18309799974994312,
+        "overlap": 0.03426804047641984,
+        "bigmiss": 0.1356579057941458
+      },
+      "parent_states_with_source_support": 192,
+      "parent_target5_logloss": 1.3061312481530554,
+      "parent_one_vs_rest_brier": {
+        "success": 0.25127722041645667,
+        "middle_only": 0.10489636980566705,
+        "reverse_only": 0.1730212310348035,
+        "overlap": 0.033032054749935855,
+        "bigmiss": 0.10781767807984355
+      },
+      "candidates": {
+        "50": {
+          "strength": 50.0,
+          "target5_logloss": 1.3223694054411155,
+          "target5_logloss_gain": -0.016238157288060107,
+          "one_vs_rest_brier": {
+            "success": 0.25291824563962545,
+            "middle_only": 0.10504395599438533,
+            "reverse_only": 0.17493350460877435,
+            "overlap": 0.03310895513542362,
+            "bigmiss": 0.10933103795802773
+          },
+          "one_vs_rest_brier_gain": {
+            "success": -0.0016410252231687794,
+            "middle_only": -0.00014758618871828222,
+            "reverse_only": -0.001912273573970863,
+            "overlap": -7.690038548776451e-05,
+            "bigmiss": -0.001513359878184184
+          },
+          "coverage_seen_batter": 0.9060128929203035,
+          "cold_rows": 23065,
+          "cold_fallback_max_abs_difference": 0.0,
+          "prediction_mean": {
+            "success": 0.5396220278146721,
+            "middle_only": 0.10729415469847145,
+            "reverse_only": 0.1860066344758372,
+            "overlap": 0.03460861947260118,
+            "bigmiss": 0.1324685635384179
+          }
+        },
+        "200": {
+          "strength": 200.0,
+          "target5_logloss": 1.3180390423202377,
+          "target5_logloss_gain": -0.01190779416718235,
+          "one_vs_rest_brier": {
+            "success": 0.25234487069230954,
+            "middle_only": 0.10502346834634475,
+            "reverse_only": 0.17442457034147854,
+            "overlap": 0.033088783448871666,
+            "bigmiss": 0.10914780631639902
+          },
+          "one_vs_rest_brier_gain": {
+            "success": -0.0010676502758528716,
+            "middle_only": -0.0001270985406777031,
+            "reverse_only": -0.00140333930667505,
+            "overlap": -5.672869893581095e-05,
+            "bigmiss": -0.0013301282365554695
+          },
+          "coverage_seen_batter": 0.9060128929203035,
+          "cold_rows": 23065,
+          "cold_fallback_max_abs_difference": 0.0,
+          "prediction_mean": {
+            "success": 0.5378115045575305,
+            "middle_only": 0.10694319498678406,
+            "reverse_only": 0.18710199055440754,
+            "overlap": 0.03501364032647965,
+            "bigmiss": 0.1331296695747984
+          }
+        },
+        "800": {
+          "strength": 800.0,
+          "target5_logloss": 1.3130755956631117,
+          "target5_logloss_gain": -0.006944347510056348,
+          "one_vs_rest_brier": {
+            "success": 0.25168989105659617,
+            "middle_only": 0.10498941763796159,
+            "reverse_only": 0.17380255147659923,
+            "overlap": 0.0330628541057644,
+            "bigmiss": 0.10880187664828767
+          },
+          "one_vs_rest_brier_gain": {
+            "success": -0.00041267064013950083,
+            "middle_only": -9.304783229453772e-05,
+            "reverse_only": -0.0007813204417957409,
+            "overlap": -3.0799355828545205e-05,
+            "bigmiss": -0.0009841985684441168
+          },
+          "coverage_seen_batter": 0.9060128929203035,
+          "cold_rows": 23065,
+          "cold_fallback_max_abs_difference": 0.0,
+          "prediction_mean": {
+            "success": 0.5359531042883064,
+            "middle_only": 0.10658994251643172,
+            "reverse_only": 0.18778646601510934,
+            "overlap": 0.03538140088618189,
+            "bigmiss": 0.1342890862939705
+          }
+        }
+      }
+    },
+    "2024": {
+      "source_rows": 1221184,
+      "validation_rows": 253116,
+      "source_years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "global_probability": {
+        "success": 0.5315447958702374,
+        "middle_only": 0.1098196504376081,
+        "reverse_only": 0.1908402009852733,
+        "overlap": 0.0342577367538389,
+        "bigmiss": 0.13353761595304228
+      },
+      "parent_states_with_source_support": 192,
+      "parent_target5_logloss": 1.330291102864527,
+      "parent_one_vs_rest_brier": {
+        "success": 0.25162569061746043,
+        "middle_only": 0.12342351716343641,
+        "reverse_only": 0.16831220407202133,
+        "overlap": 0.032194729182672216,
+        "bigmiss": 0.10658214533311512
+      },
+      "candidates": {
+        "50": {
+          "strength": 50.0,
+          "target5_logloss": 1.340820614777635,
+          "target5_logloss_gain": -0.010529511913107914,
+          "one_vs_rest_brier": {
+            "success": 0.25242576370690645,
+            "middle_only": 0.12353469034580034,
+            "reverse_only": 0.16945438271716332,
+            "overlap": 0.032261785386152465,
+            "bigmiss": 0.10779064107367467
+          },
+          "one_vs_rest_brier_gain": {
+            "success": -0.0008000730894460184,
+            "middle_only": -0.00011117318236392171,
+            "reverse_only": -0.001142178645141989,
+            "overlap": -6.705620348024938e-05,
+            "bigmiss": -0.0012084957405595481
+          },
+          "coverage_seen_batter": 0.9070584238056859,
+          "cold_rows": 23525,
+          "cold_fallback_max_abs_difference": 0.0,
+          "prediction_mean": {
+            "success": 0.5307746802612779,
+            "middle_only": 0.10932476691763059,
+            "reverse_only": 0.195481188068542,
+            "overlap": 0.03384007799097785,
+            "bigmiss": 0.13057928676157163
+          }
+        },
+        "200": {
+          "strength": 200.0,
+          "target5_logloss": 1.338297811788957,
+          "target5_logloss_gain": -0.008006708924430006,
+          "one_vs_rest_brier": {
+            "success": 0.2521103329498511,
+            "middle_only": 0.12352556308965196,
+            "reverse_only": 0.16918800345862364,
+            "overlap": 0.03224383648553933,
+            "bigmiss": 0.10761899173567578
+          },
+          "one_vs_rest_brier_gain": {
+            "success": -0.00048464233239065013,
+            "middle_only": -0.00010204592621554376,
+            "reverse_only": -0.0008757993866023162,
+            "overlap": -4.9107302867112956e-05,
+            "bigmiss": -0.0010368464025606594
+          },
+          "coverage_seen_batter": 0.9070584238056859,
+          "cold_rows": 23525,
+          "cold_fallback_max_abs_difference": 0.0,
+          "prediction_mean": {
+            "success": 0.5301746767384853,
+            "middle_only": 0.10920902104004804,
+            "reverse_only": 0.19552582166913102,
+            "overlap": 0.03410898273088317,
+            "bigmiss": 0.13098149782145252
+          }
+        },
+        "800": {
+          "strength": 800.0,
+          "target5_logloss": 1.3354895694201565,
+          "target5_logloss_gain": -0.0051984665556294996,
+          "one_vs_rest_brier": {
+            "success": 0.251795151852836,
+            "middle_only": 0.12351323208415362,
+            "reverse_only": 0.16886718692528918,
+            "overlap": 0.0322222799361069,
+            "bigmiss": 0.1073402168277536
+          },
+          "one_vs_rest_brier_gain": {
+            "success": -0.00016946123537558977,
+            "middle_only": -8.971492071720155e-05,
+            "reverse_only": -0.0005549828532678547,
+            "overlap": -2.7550753434683883e-05,
+            "bigmiss": -0.000758071494638482
+          },
+          "coverage_seen_batter": 0.9070584238056859,
+          "cold_rows": 23525,
+          "cold_fallback_max_abs_difference": 0.0,
+          "prediction_mean": {
+            "success": 0.5294587478821549,
+            "middle_only": 0.10907735415729754,
+            "reverse_only": 0.19509466049729496,
+            "overlap": 0.03447990884064146,
+            "bigmiss": 0.13188932862261118
+          }
+        }
+      }
+    }
+  },
+  "summaries": {
+    "50": {
+      "strength": 50.0,
+      "logloss_gains": {
+        "2022": -0.0023962542038991064,
+        "2023": -0.016238157288060107,
+        "2024": -0.010529511913107914
+      },
+      "worst_logloss_gain": -0.016238157288060107,
+      "mean_logloss_gain": -0.009721307801689042,
+      "cause_brier_gains": {
+        "reverse_only": {
+          "2022": 9.59645671217424e-05,
+          "2023": -0.001912273573970863,
+          "2024": -0.001142178645141989
+        },
+        "overlap": {
+          "2022": 2.544490431713453e-05,
+          "2023": -7.690038548776451e-05,
+          "2024": -6.705620348024938e-05
+        },
+        "bigmiss": {
+          "2022": -0.00114367179027966,
+          "2023": -0.001513359878184184,
+          "2024": -0.0012084957405595481
+        }
+      },
+      "minimum_coverage": 0.8897858046574046,
+      "cold_fallback_exact": true,
+      "gate_pass": false
+    },
+    "200": {
+      "strength": 200.0,
+      "logloss_gains": {
+        "2022": -0.001345572947361262,
+        "2023": -0.01190779416718235,
+        "2024": -0.008006708924430006
+      },
+      "worst_logloss_gain": -0.01190779416718235,
+      "mean_logloss_gain": -0.0070866920129912065,
+      "cause_brier_gains": {
+        "reverse_only": {
+          "2022": 0.00015830369574804104,
+          "2023": -0.00140333930667505,
+          "2024": -0.0008757993866023162
+        },
+        "overlap": {
+          "2022": 3.349676018805231e-05,
+          "2023": -5.672869893581095e-05,
+          "2024": -4.9107302867112956e-05
+        },
+        "bigmiss": {
+          "2022": -0.0009689868224021236,
+          "2023": -0.0013301282365554695,
+          "2024": -0.0010368464025606594
+        }
+      },
+      "minimum_coverage": 0.8897858046574046,
+      "cold_fallback_exact": true,
+      "gate_pass": false
+    },
+    "800": {
+      "strength": 800.0,
+      "logloss_gains": {
+        "2022": -0.0005754748417889921,
+        "2023": -0.006944347510056348,
+        "2024": -0.0051984665556294996
+      },
+      "worst_logloss_gain": -0.006944347510056348,
+      "mean_logloss_gain": -0.004239429635824947,
+      "cause_brier_gains": {
+        "reverse_only": {
+          "2022": 0.00018123944250694746,
+          "2023": -0.0007813204417957409,
+          "2024": -0.0005549828532678547
+        },
+        "overlap": {
+          "2022": 3.4179966618565205e-05,
+          "2023": -3.0799355828545205e-05,
+          "2024": -2.7550753434683883e-05
+        },
+        "bigmiss": {
+          "2022": -0.0006878509608511385,
+          "2023": -0.0009841985684441168,
+          "2024": -0.000758071494638482
+        }
+      },
+      "minimum_coverage": 0.8897858046574046,
+      "cold_fallback_exact": true,
+      "gate_pass": false
+    }
+  },
+  "selected_strength_diagnostic_only": 800,
+  "overall_gate_pass": false,
+  "elapsed_seconds": 10.008924961090088
+}

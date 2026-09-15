@@ -1,0 +1,260 @@
+{
+  "experiment": 152,
+  "description": "clean-room pitcher x any_runner residual differential on current blend",
+  "status": "FAIL_RUNNER_AXIS_NO_SUBMISSION",
+  "analysis_only": true,
+  "reads_official_train": true,
+  "reads_test": false,
+  "reads_third_party_python_source": false,
+  "builds_model_or_submission": false,
+  "uses_lb": false,
+  "protocol": {
+    "source_year": 2023,
+    "validation_year": 2024,
+    "baseline": "seed42 corrected CAT5+V18+affine blended with saved EXP021 OOF",
+    "champion_weight": 0.6434428305247574,
+    "exp021_weight": 0.35655716947524263,
+    "source_residual": "y-current_blend, centered separately within F and R",
+    "hierarchy": "game_type -> pitcher parent -> pitcher x any_runner child",
+    "emitted_effect": "child EB residual - pitcher parent EB residual; parent is not added",
+    "primary_smoothing": 220.0,
+    "sensitivity_smoothing": [
+      110.0,
+      440.0
+    ],
+    "fixed_gamma": 0.25,
+    "unseen_child_effect": 0.0,
+    "sensitivity_is_nonselective": true,
+    "same_fold_oracle_is_not_deployable": true
+  },
+  "alignment": {
+    "2023": {
+      "rows": 245525,
+      "official_vs_saved_target_exact": true,
+      "target_rate": 0.49995723449750534,
+      "any_runner_rate": 0.47634660421545666,
+      "F_rows": 25686,
+      "R_rows": 219839
+    },
+    "2024": {
+      "rows": 253507,
+      "official_vs_saved_target_exact": true,
+      "target_rate": 0.4861049201797189,
+      "any_runner_rate": 0.4807520107926014,
+      "F_rows": 30010,
+      "R_rows": 223497
+    }
+  },
+  "baseline_scores": {
+    "2023": -22.742734501002282,
+    "2024": 936.5839989479041
+  },
+  "fit": {
+    "source_rows": 245525,
+    "raw_residual_mean": -0.0038163361536680566,
+    "raw_residual_mean_by_game_type": {
+      "F": -0.14127869194052825,
+      "R": 0.012244772524688792
+    },
+    "centered_residual_mean_by_game_type": {
+      "F": 1.1065058565134317e-18,
+      "R": -1.6031240905253832e-17
+    },
+    "parent_cells": 526,
+    "child_cells": 1032,
+    "source_pitchers": 382,
+    "parent_n_median": 138.0,
+    "child_n_median": 71.0
+  },
+  "variants": {
+    "k220": {
+      "role": "fixed_primary",
+      "mapping": {
+        "smoothing": 220.0,
+        "validation_rows": 253507,
+        "seen_parent_rows": 180671,
+        "seen_parent_rate": 0.712686434694111,
+        "seen_child_rows": 180518,
+        "seen_child_rate": 0.712082901063876,
+        "seen_child_rate_by_game_type": {
+          "F": 0.5241252915694768,
+          "R": 0.7373208588929605
+        },
+        "effect_mean": 4.5181394761663645e-05,
+        "effect_std": 0.01122586633416634,
+        "effect_mean_abs": 0.007718042364391044,
+        "effect_min": -0.037550882705457575,
+        "effect_max": 0.03563051470222155,
+        "effect_mean_by_game_type": {
+          "F": -0.00024924832277532576,
+          "R": 8.471586646949441e-05
+        }
+      },
+      "fixed_gamma_metrics": {
+        "gamma": 0.25,
+        "base_score": 936.5839989479041,
+        "candidate_score": 940.386499355994,
+        "raw_gain": 3.8025004080899407,
+        "equal_mean_shape_gain": 3.8418875039525346,
+        "prediction_mean_shift": 1.129534869048765e-05,
+        "equal_mean_restoration_error": 0.0,
+        "F_contribution": 0.5759120620155529,
+        "R_contribution": 3.2265883460721625,
+        "clip_low_rows": 0,
+        "clip_high_rows": 0
+      },
+      "same_fold_oracle": {
+        "diagnostic_only": true,
+        "uses_validation_2024_labels": true,
+        "must_not_be_used_for_deployment": true,
+        "unclipped_quadratic_beta": 0.27574987926589717,
+        "score_gain_after_probability_clip": 3.8359501434825916
+      },
+      "overlap": {
+        "v18_raw_effect": {
+          "pearson_correlation": 0.023493612236662284,
+          "cosine_similarity": 0.023311776002124626
+        },
+        "exp021_endpoint_direction": {
+          "pearson_correlation": -0.02633184008023959,
+          "cosine_similarity": -0.02574810724848339
+        }
+      }
+    },
+    "k110": {
+      "role": "descriptive_sensitivity_only",
+      "mapping": {
+        "smoothing": 110.0,
+        "validation_rows": 253507,
+        "seen_parent_rows": 180671,
+        "seen_parent_rate": 0.712686434694111,
+        "seen_child_rows": 180518,
+        "seen_child_rate": 0.712082901063876,
+        "seen_child_rate_by_game_type": {
+          "F": 0.5241252915694768,
+          "R": 0.7373208588929605
+        },
+        "effect_mean": 6.41237599656833e-05,
+        "effect_std": 0.013701510921117597,
+        "effect_mean_abs": 0.009332285468509014,
+        "effect_min": -0.0483723578431753,
+        "effect_max": 0.048173120681968946,
+        "effect_mean_by_game_type": {
+          "F": -0.00016096861592715576,
+          "R": 9.434797863771965e-05
+        }
+      },
+      "fixed_gamma_metrics": {
+        "gamma": 0.25,
+        "base_score": 936.5839989479041,
+        "candidate_score": 939.7907030067377,
+        "raw_gain": 3.206704058833566,
+        "equal_mean_shape_gain": 3.262634641554314,
+        "prediction_mean_shift": 1.6030939991362736e-05,
+        "equal_mean_restoration_error": 2.220446049250313e-16,
+        "F_contribution": 0.5521777544414661,
+        "R_contribution": 2.6545263044010277,
+        "clip_low_rows": 0,
+        "clip_high_rows": 0
+      },
+      "same_fold_oracle": {
+        "diagnostic_only": true,
+        "uses_validation_2024_labels": true,
+        "must_not_be_used_for_deployment": true,
+        "unclipped_quadratic_beta": 0.21033887611819438,
+        "score_gain_after_probability_clip": 3.324918896840927
+      },
+      "overlap": {
+        "v18_raw_effect": {
+          "pearson_correlation": 0.019617082044625502,
+          "cosine_similarity": 0.019411926433216
+        },
+        "exp021_endpoint_direction": {
+          "pearson_correlation": -0.023428885465945137,
+          "cosine_similarity": -0.02279157601213621
+        }
+      }
+    },
+    "k440": {
+      "role": "descriptive_sensitivity_only",
+      "mapping": {
+        "smoothing": 440.0,
+        "validation_rows": 253507,
+        "seen_parent_rows": 180671,
+        "seen_parent_rate": 0.712686434694111,
+        "seen_child_rows": 180518,
+        "seen_child_rate": 0.712082901063876,
+        "seen_child_rate_by_game_type": {
+          "F": 0.5241252915694768,
+          "R": 0.7373208588929605
+        },
+        "effect_mean": 9.154193774099083e-06,
+        "effect_std": 0.008802903119331818,
+        "effect_mean_abs": 0.00603157538886365,
+        "effect_min": -0.02744746764244063,
+        "effect_max": 0.0287940622454651,
+        "effect_mean_by_game_type": {
+          "F": -0.00032191486521434713,
+          "R": 5.360840327240676e-05
+        }
+      },
+      "fixed_gamma_metrics": {
+        "gamma": 0.25,
+        "base_score": 936.5839989479041,
+        "candidate_score": 940.4431460297346,
+        "raw_gain": 3.8591470818305424,
+        "equal_mean_shape_gain": 3.867119042444415,
+        "prediction_mean_shift": 2.2885484434742587e-06,
+        "equal_mean_restoration_error": 5.551115123125783e-17,
+        "F_contribution": 0.5275906808518266,
+        "R_contribution": 3.3315564009805243,
+        "clip_low_rows": 0,
+        "clip_high_rows": 0
+      },
+      "same_fold_oracle": {
+        "diagnostic_only": true,
+        "uses_validation_2024_labels": true,
+        "must_not_be_used_for_deployment": true,
+        "unclipped_quadratic_beta": 0.37381324138897887,
+        "score_gain_after_probability_clip": 4.334681575246577
+      },
+      "overlap": {
+        "v18_raw_effect": {
+          "pearson_correlation": 0.02828407931049288,
+          "cosine_similarity": 0.0282190188423912
+        },
+        "exp021_endpoint_direction": {
+          "pearson_correlation": -0.030092493531086017,
+          "cosine_similarity": -0.029807383269400085
+        }
+      }
+    }
+  },
+  "primary_promotion_gate": {
+    "thresholds": {
+      "raw_gain_min": 8.0,
+      "equal_mean_shape_gain_min": 5.0,
+      "F_contribution_min": 0.0,
+      "R_contribution_min": 0.0
+    },
+    "checks": {
+      "raw_gain": false,
+      "equal_mean_shape_gain": false,
+      "F_nonnegative": true,
+      "R_nonnegative": true
+    },
+    "pass": false
+  },
+  "input_sha256": {
+    "data/train.csv": "d2081186b458b49f60b082be480c273135833e15ba59a76d033af28bcf8763ff",
+    "lab/122_y2023_seed42_base_final.npy": "34dad30a9469d137ed75f79a06f91b9f9bd53cd1c26f7820377027428b7fc7cc",
+    "lab/89_cat5_probs_seed42.npy": "0122c2af82647231c3f788a8927a23958e0817bbbada5fd4f2776a52b9180258",
+    "lab/104_v18_effect_y2023.npy": "719392ec251d9cbb3a19e9dc01845631023bc149eb9bec90d96f877bb69f3243",
+    "lab/103_v18_effect_2024.npy": "9c6d6a55dbacc2347c44f18ab54c3aa906a8381b6fa0c3913bc46c02db2685f3",
+    "lab/115_mkis_exp021_work/artifacts/EXP-020/low_rank_pitcher_context_eb/predictions_lowrank_s300_r6_2023.npy": "cb4af985cc43d9b946cecfcd2b0015b529d7f7b37a583c617aacc692bee608e8",
+    "lab/115_mkis_exp021_work/artifacts/EXP-020/low_rank_pitcher_context_eb/predictions_lowrank_s300_r6_2024.npy": "576f4d9d312877079026779f1d3cff10a1a4fb5961f6adc894aba46e0b32118d",
+    "lab/115_mkis_exp021_work/artifacts/EXP-020/low_rank_pitcher_context_eb/targets_2023.npy": "7f2117cb4614e23e43bbfef3f52fb8aff65340e4a2b3f90253fd3f23874e1417",
+    "lab/115_mkis_exp021_work/artifacts/EXP-020/low_rank_pitcher_context_eb/targets_2024.npy": "32a5a12d22d5e171e4227ed46fe02a9cd4fac20b0ca4b7618977333df97b238f"
+  },
+  "elapsed_seconds": 40.71562337875366
+}

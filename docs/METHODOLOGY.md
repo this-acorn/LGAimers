@@ -1,6 +1,6 @@
 # Methodology
 
-This document follows development from the reproducible `submit14` checkpoint through late-stage candidates including `candidate_jm_w070_small.zip` and `last.zip`. The early checkpoint is included in this repository; the later pipeline description is grounded in the local archives' inference source and artifact metadata. Exploratory branches are distinguished from components actually used in those packages.
+This document follows development from the reproducible `submit14` checkpoint through late-stage candidates including `candidate_jm_w070_small.zip` and `last.zip`. The early checkpoint is included in this repository; the later inference source is included under `candidates/`, with additional weights recorded in the local artifact inventory. Exploratory branches are distinguished from components actually used in those packages.
 
 ## Problem formulation
 
@@ -134,7 +134,7 @@ Repeated use of 2024 for feature and hyperparameter decisions makes it a develop
 
 The included checkpoint bundle stores CatBoost models, feature names, a training prior, historical pitcher/batter constants, pitch-mix tables, and the auxiliary classifier. Its standalone script reads `data/test.csv` and writes `output/submission.csv`, matching sample-submission order when a compatible file is supplied.
 
-Every feature is a function of one input row and fixed training artifacts. The portable [runner](../tools/run_inference.py) supplies the directory layout expected by the original script. The [packager](../tools/build_submission.py) preserves the archive paths `script.py`, `requirements.txt`, and `model/model.pkl`.
+Every feature is a function of one input row and fixed training artifacts. The portable [runner](../tools/run_inference.py) supplies the directory layout expected by the original script. The [packager](../tools/build_submission.py) preserves the selected package's runtime layout, including `script.py`, `requirements.txt`, `model/`, and any `src/` modules.
 
 Both inspected packages store additional inference modules and model assets in a flat layout and execute their outer components sequentially. They check component schemas, row IDs, and finite probability ranges before combining predictions. They are larger packages than the runnable `submit14` example; the example commands do not reproduce the complete final ensemble.
 

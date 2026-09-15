@@ -1,0 +1,26 @@
+candidate_affine_opt.zip QA: PASS
+checked_at_kst=2026-09-01 03:50
+sha256=E772CA86DAF99209A50AB9E29F030EE680C0770520D98FF5ABE9C3FD4832EC65
+bytes=12440993
+zip_entries=17
+zip_top_level=model/,script.py,requirements.txt
+full_rehearsal_rows=245789
+full_rehearsal_output_bytes=6609029
+row_independence_rows=300
+reverse_max_abs=0.000e+00
+permutation_max_abs=0.000e+00
+split_max_abs=0.000e+00
+singleton_max_abs=0.000e+00
+duplicate_max_abs=0.000e+00
+small_batch_max_abs=0.000e+00
+status=PASS
+
+LB quadratic reconstruction (three measured points):
+current_score=1114.6116846973
+projected_affine_opt_score_at_r_0.4607=1116.522784
+projected_gain=+1.911099
+weights_champion=0.655318
+weights_exp021=0.387810
+global_shift=0.020206959
+
+This is a fallback candidate. It does not meet the 1150 target by itself.

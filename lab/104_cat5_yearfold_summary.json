@@ -1,0 +1,131 @@
+{
+  "experiment": 104,
+  "gamma_source": "lab\\103_v18_pregate.json",
+  "locked_gamma": 0.3,
+  "catboost": {
+    "iterations": 500,
+    "depth": 6,
+    "learning_rate": 0.08,
+    "l2_leaf_reg": 10.0,
+    "verbose": false,
+    "thread_count": 14,
+    "allow_writing_files": false,
+    "loss_function": "MultiClass"
+  },
+  "years": {
+    "2022": {
+      "seeds": [
+        42,
+        7
+      ],
+      "seed_results": {
+        "42": {
+          "base_score": 2381.5282392350978,
+          "candidate_score": 2400.8280916601234,
+          "raw_gain": 19.29985242502562,
+          "shape_gain": 19.089504250991013,
+          "mean_shift": -0.0003285850971438409,
+          "F_contribution": 1.838856692659747,
+          "R_contribution": 17.460995732385253
+        },
+        "7": {
+          "base_score": 2366.5697276075703,
+          "candidate_score": 2388.6387123323584,
+          "raw_gain": 22.06898472478815,
+          "shape_gain": 21.99011688257542,
+          "mean_shift": -0.0003285850971439519,
+          "F_contribution": 2.205811403097584,
+          "R_contribution": 19.863173321711898
+        }
+      },
+      "ensemble": {
+        "base_score": 2401.8166229877957,
+        "candidate_score": 2422.501041562741,
+        "raw_gain": 20.68441857494554,
+        "shape_gain": 20.53981056676639,
+        "mean_shift": -0.0003285850971439519,
+        "F_contribution": 2.0223340478786764,
+        "R_contribution": 18.662084527048563
+      },
+      "bootstrap": {
+        "draws": 5000,
+        "pitchers": 390,
+        "median": 20.157555603304353,
+        "p025": 4.079830664652215,
+        "p975": 38.776975808983984,
+        "prob_positive": 0.9938
+      },
+      "effect_diagnostics": {
+        "rows": 247472,
+        "hand_coverage": 0.8190623585698584,
+        "detail_coverage": 0.8167590676925066,
+        "hand_n_mean": 1175.4020939742677,
+        "detail_n_mean": 632.6496250080817,
+        "effect_mean": -0.0010952836571467407,
+        "effect_std": 0.018592794253859176,
+        "effect_abs_mean": 0.012746449161768468
+      },
+      "gate_pass": true
+    },
+    "2023": {
+      "seeds": [
+        42,
+        7
+      ],
+      "seed_results": {
+        "42": {
+          "base_score": -815.0300605992644,
+          "candidate_score": -786.3568331662574,
+          "raw_gain": 28.673227433007014,
+          "shape_gain": 25.769293426902664,
+          "mean_shift": -0.00022064300997781672,
+          "F_contribution": 2.9698926825159346,
+          "R_contribution": 25.703334750487183
+        },
+        "7": {
+          "base_score": -884.2857002887561,
+          "candidate_score": -857.5113369370779,
+          "raw_gain": 26.774363351678176,
+          "shape_gain": 23.789929536488444,
+          "mean_shift": -0.00022064300997759467,
+          "F_contribution": 3.0038131808956376,
+          "R_contribution": 23.77055017082704
+        }
+      },
+      "ensemble": {
+        "base_score": -828.866568933817,
+        "candidate_score": -801.1427735414856,
+        "raw_gain": 27.723795392331454,
+        "shape_gain": 24.779611481706638,
+        "mean_shift": -0.0002206430099777057,
+        "F_contribution": 2.9868529317057746,
+        "R_contribution": 24.736942460657104
+      },
+      "bootstrap": {
+        "draws": 5000,
+        "pitchers": 382,
+        "median": 27.55010065171703,
+        "p025": 8.099319732411091,
+        "p975": 46.67175658693113,
+        "prob_positive": 0.9964
+      },
+      "effect_diagnostics": {
+        "rows": 245525,
+        "hand_coverage": 0.8490255574788718,
+        "detail_coverage": 0.8475878220140515,
+        "hand_n_mean": 1510.4263354037266,
+        "detail_n_mean": 812.1180327868852,
+        "effect_mean": -0.000735476699925722,
+        "effect_std": 0.019644000110188818,
+        "effect_abs_mean": 0.014234117230976976
+      },
+      "gate_pass": true
+    }
+  },
+  "requested_years": [
+    2022,
+    2023
+  ],
+  "all_requested_pass": true,
+  "elapsed_seconds": 24387.116247415543
+}

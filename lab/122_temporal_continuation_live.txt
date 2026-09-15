@@ -1,0 +1,24 @@
+=== exp/122 strict temporal CatBoost continuation ===
+mode=FULL threads=14 seed=42
+base={'iterations': 500, 'depth': 6, 'learning_rate': 0.08, 'l2_leaf_reg': 10.0, 'verbose': False, 'allow_writing_files': False, 'loss_function': 'MultiClass'}
+append={'iterations': 50, 'depth': 6, 'learning_rate': 0.04, 'l2_leaf_reg': 10.0, 'verbose': False, 'allow_writing_files': False, 'loss_function': 'MultiClass'}
+discovery_gate={'raw_gain_min': 0.0, 'oracle_shape_gain_min': 15.0, 'equal_mean_gain_min': 10.0, 'shape_over_control_min': 5.0, 'analytic_blend_gain_min': 20.0, 'bootstrap_p025_min': 0.0}
+shape=1e5*corr^2 is reported only as same-fold unconstrained-affine oracle
+
+====================================================================================================
+YEAR 2023: train<=2022, re-expose 2022, valid=2023, seed=42
+====================================================================================================
+  [     0.0s] year=2023: load and restore labels
+  [   111.6s] year=2023: constants, pitchmix, PFB ready
+  [   123.6s] year=2023: hand QA {'train_same_hand_rate': 0.5064606684015327, 'valid_same_hand_rate': 0.4942062926382242}
+  [   123.9s] year=2023: exact 79 features ready
+  [   134.5s] year=2023: pools ready {'train': 975778, 'recent': 247391, 'recent_F': 30391, 'valid': 245525}
+  [  2960.5s] year=2023: base trained and saved, trees=500
+  [  3138.4s] year=2023: ALL_HISTORY_CONTROL continued and saved, trees=550
+  [  3193.3s] year=2023: RECENT_ALL continued and saved, trees=550
+  [  3248.1s] year=2023: RECENT_F continued and saved, trees=550
+  RECENT_ALL          raw=  -61.15 oracleShape=  -10.52 equalMean=  -64.17 overCtl=  -11.54 F/R= -34.74/ -26.41
+      d=  -61.15 K=    4.77 w*=0.0000 blendGain=  +0.00 boot95=[-76.04,-48.66] GATE=FAIL {'raw_gain': False, 'oracle_shape_gain': False, 'equal_mean_gain': False, 'shape_over_control': False, 'analytic_blend_gain': False, 'bootstrap_p025': False}
+  RECENT_F            raw= -386.63 oracleShape=  -35.31 equalMean= -362.66 overCtl=  -36.33 F/R=-386.63/  +0.00
+      d= -386.63 K=   25.36 w*=0.0000 blendGain=  +0.00 boot95=[-503.52,-289.67] GATE=FAIL {'raw_gain': False, 'oracle_shape_gain': False, 'equal_mean_gain': False, 'shape_over_control': False, 'analytic_blend_gain': False, 'bootstrap_p025': False}
+DISCOVERY FAIL: 2024 remains unopened; experiment stops

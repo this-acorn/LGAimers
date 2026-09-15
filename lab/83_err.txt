@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "C:\Users\gwonn\AppData\Local\Programs\Python\Python312\Lib\site-packages\joblib\externals\loky\backend\resource_tracker.py", line 326, in main
+    registry[rtype][name] -= 1
+    ~~~~~~~~~~~~~~~^^^^^^
+KeyError: 'C:\\Users\\gwonn\\AppData\\Local\\Temp\\joblib_memmapping_folder_30668_35ed714febd8410eb6bea212d6a817ba_09b9dbcfc7f6463c8f4c212613248d13\\30668-1621503205904-e07d1d21e21948098a70d5ef22c455e6.pkl'
+Traceback (most recent call last):
+  File "C:\Users\gwonn\AppData\Local\Programs\Python\Python312\Lib\site-packages\joblib\externals\loky\backend\resource_tracker.py", line 326, in main
+    registry[rtype][name] -= 1
+    ~~~~~~~~~~~~~~~^^^^^^
+KeyError: 'C:\\Users\\gwonn\\AppData\\Local\\Temp\\joblib_memmapping_folder_30668_35ed714febd8410eb6bea212d6a817ba_09b9dbcfc7f6463c8f4c212613248d13\\30668-1621503205904-e8971781597b47be8c75ca16f8c32463.pkl'

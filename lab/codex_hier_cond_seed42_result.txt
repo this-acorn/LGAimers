@@ -1,0 +1,12 @@
+CODEX hierarchical conditional head | seed=42 smoke=False
+identity max abs error: 3.556e-08
+conditional Brier: 0.227344651 -> 0.227478993 (new-base +0.000134342)
+conditional logloss: 0.646923557 -> 0.647229347 (new-base +0.000305790)
+main score: 851.215 -> 831.424 (raw -19.791)
+center contribution: -9.635 | same-mean shape gain: -10.156 | penalty 39.686->49.321
+mix: d=-19.791 K=44.319 w*=0.2767 gain*=+3.394
+fixed mix gains: w=0.1:+2.010 w=0.2:+3.133 w=0.3:+3.370
+pitcher bootstrap raw (5000): median=-19.696 95%=[-38.978,-1.188] P(>0)=0.018
+pitcher bootstrap mix (5000): median=+3.406 95%=[-1.884,+8.687] P(>0)=0.902
+gates: conditional_metrics=False performance=False VERDICT=FAIL_STOP_NO_SEED7
+saved: lab\codex_hier_cond_seed42_qS.npy, lab\codex_hier_cond_seed42_candidate.npy, lab\codex_hier_cond_seed42_result.json, lab\codex_hier_cond_seed42_result.txt

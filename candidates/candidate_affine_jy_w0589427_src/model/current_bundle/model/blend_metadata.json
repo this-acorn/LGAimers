@@ -1,0 +1,31 @@
+{
+  "name": "exp021_w0356557_v002",
+  "weights": {
+    "champion": 0.6434428305247574,
+    "exp021_strict": 0.35655716947524263
+  },
+  "champion_zip": {
+    "name": "candidate_v18g030.zip",
+    "sha256": "ed1b729b9b83eb1f0d344b475939353149d5adc83009a40ff116df6e5a168557"
+  },
+  "exp021_zip": {
+    "name": "candidate_exp021_strict_rebuilt_v001.zip",
+    "sha256": "e3035466beb88a5e04635567a4b318286da26c56eb51de18852c6c55b74cd5e2"
+  },
+  "row_local": true,
+  "component_execution": "sequential",
+  "parent_blend": {
+    "name": "candidate_champ55.zip",
+    "sha256": "32d7f275afd34134ecd34891e67b3128b20d817732364507b3f4fbe2f1630faf",
+    "public_score": 1113.1142204091
+  },
+  "geometry": {
+    "champion_score": 1092.808353586,
+    "exp021_endpoint_score": 1043.6074197937,
+    "probe_weight": 0.45,
+    "probe_score": 1113.1142204091,
+    "measured_K": 171.5001496146865,
+    "analytic_weight": 0.35655716947524263,
+    "projected_score": 1114.611684697336
+  }
+}

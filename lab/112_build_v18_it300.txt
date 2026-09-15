@@ -1,0 +1,36 @@
+========================================================================================
+exp/112 — combine locked IT300 inference with frozen V18 correction
+========================================================================================
+[OK] protected champion ZIP exists
+[OK] protected champion ZIP hash
+[OK] new candidate ZIP path is unused
+[OK] new candidate source path is unused
+[OK] 2024 arrays align
+2024 current(it500+V18) -> candidate(it300+V18): 926.841 -> 942.975, gain=+16.134, shape=+14.498, F/R=+2.641/+13.492
+pitcher bootstrap: median=+15.960 95%=[+5.273,+27.331] P(>0)=0.9972
+[OK] raw gain gate >= +8
+[OK] shape gain gate >= +5
+[OK] F contribution nonnegative
+[OK] R contribution nonnegative
+[OK] pitcher bootstrap 2.5% lower bound positive
+[OK] champion archive structure
+[OK] single NTREE_END=500 patch anchor
+[OK] only intended source replacement applied
+[OK] model byte identity
+[OK] V18 table byte identity
+[OK] real test outputs align
+[OK] candidate output is finite
+[OK] IT300 changes real test predictions
+[OK] current runtime confirms 500 trees
+[OK] candidate runtime confirms 300 trees
+[OK] candidate runtime confirms V18 path
+[OK] candidate ZIP CRC
+[OK] candidate archive structure
+[OK] protected champion still unchanged
+
+REJECTED, DO NOT SUBMIT: C:\Users\gwonn\Desktop\open\REJECTED_DO_NOT_SUBMIT_v18g030_it300.zip
+Direct 2025 LB evidence: submit18_it300.zip=1040.0366 (-19.0 vs then champion).
+The positive 2024 calculation is known non-transfer and is not a deployment gate.
+sha256=ec1ada4f4d1dcca89c2c12f127c555aafbbe013616367ded7ab45fd432706332
+real test max |delta|=0.01349398
+elapsed=22.7s

@@ -1,0 +1,16 @@
+=== EXP-127 dynamic hierarchical residual — SMOKE DISCOVERY ===
+fold=train<=2022 -> valid=2023 rows=20000/20000 seed=42 threads=14
+primary baseline=Acur exact fixed blend; own EXP122 endpoint is diagnostic only
+no 2024 confirmation / no test / no EXP021 source / no F sidecar / no ZIP / no submission
+  [     6.3s] load prepared-feature cache 127_y2023_smoke_features.joblib
+  [     7.5s] cache row-id/order/schema validation passed
+  [     7.6s] prepared rows train/valid=20,000/20,000 features=101 cache_hit=True
+  [     7.7s] loaded resumable smoke model 127_y2023_seed42_smoke.cbm
+  [     7.7s] smoke model ready cache_hit=True
+  [    14.9s] smoke evaluation against exact Acur and blend geometry complete
+
+scores Acur/ownDiagnostic/p0/candidate=-0.262/-1063.375/492.257/261.089
+geometry d=+261.351 K=480.242 d+K=+741.593 w*=0.7721 gain=+286.293 equalMean(unclipped/clipped)=+289.773/+289.773
+blend F/R=+244.827/+41.466 boot95=[+105.753,+457.240]
+effect mean/std/max/clip_rate=+0.000531/0.014833/0.073194/0.000000
+SMOKE ONLY: metrics are plumbing diagnostics, not a selection result.

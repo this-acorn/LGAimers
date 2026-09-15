@@ -1,0 +1,16 @@
+=== exp/124 strict next-season output-residual map audit ===
+base: exact 2-seed CAT5 + frozen V18 gamma=.30
+transitions: 2022->2023 and 2023->2024; no training/test/submission
+
+[robust] team alpha=10000, pitcher-hand alpha=1000
+  2022->2023: raw=+23.851 shape=+22.604 F/R=+74.381/-50.531 team/hand=+11.531/+12.906 bootstrap=deferred
+  2023->2024: raw=-46.425 shape=-41.899 F/R=-30.152/-16.273 team/hand=-30.627/-19.698 bootstrap=deferred
+  mean raw/shape=-11.287/-9.648; gate=FAIL
+
+[clean] team alpha=50, pitcher-hand alpha=500
+  2022->2023: raw=+22.214 shape=+20.254 F/R=+111.831/-89.617 team/hand=+24.729/-1.248 bootstrap=deferred
+  2023->2024: raw=-106.470 shape=-104.731 F/R=-46.677/-59.793 team/hand=-60.056/-53.920 bootstrap=deferred
+  mean raw/shape=-42.128/-42.238; gate=FAIL
+
+FINAL ROBUST GATE: FAIL
+A pass authorizes only a deployment-mechanics audit, not a submission.

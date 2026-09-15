@@ -1,0 +1,184 @@
+{
+  "experiment": 122,
+  "smoke": false,
+  "seed": 42,
+  "threads": 14,
+  "base_params": {
+    "iterations": 500,
+    "depth": 6,
+    "learning_rate": 0.08,
+    "l2_leaf_reg": 10.0,
+    "verbose": false,
+    "allow_writing_files": false,
+    "loss_function": "MultiClass"
+  },
+  "append_params": {
+    "iterations": 50,
+    "depth": 6,
+    "learning_rate": 0.04,
+    "l2_leaf_reg": 10.0,
+    "verbose": false,
+    "allow_writing_files": false,
+    "loss_function": "MultiClass"
+  },
+  "discovery_gate": {
+    "raw_gain_min": 0.0,
+    "oracle_shape_gain_min": 15.0,
+    "equal_mean_gain_min": 10.0,
+    "shape_over_control_min": 5.0,
+    "analytic_blend_gain_min": 20.0,
+    "bootstrap_p025_min": 0.0
+  },
+  "confirmation_gate": {
+    "raw_gain_min": 0.0,
+    "oracle_shape_gain_min": 15.0,
+    "equal_mean_gain_min": 10.0,
+    "shape_over_control_min": 5.0,
+    "analytic_blend_gain_min": 20.0,
+    "bootstrap_p025_min": 0.0
+  },
+  "folds": {
+    "2023": {
+      "year": 2023,
+      "counts": {
+        "train": 975778,
+        "recent": 247391,
+        "recent_F": 30391,
+        "valid": 245525
+      },
+      "effect_diagnostics": {
+        "rows": 245525,
+        "hand_coverage": 0.8490255574788718,
+        "detail_coverage": 0.8475878220140515,
+        "hand_n_mean": 1510.4263354037266,
+        "detail_n_mean": 812.1180327868852,
+        "effect_mean": -0.000735476699925722,
+        "effect_std": 0.019644000110188818,
+        "effect_abs_mean": 0.014234117230976976
+      },
+      "feature_diagnostics": {
+        "train_same_hand_rate": 0.5064606684015327,
+        "valid_same_hand_rate": 0.4942062926382242
+      },
+      "base_exactness_qa": {
+        "cached": null,
+        "max_abs_diff": null,
+        "pass": true,
+        "reason": "smoke or no trustworthy pre-2024 exact cache"
+      },
+      "branches": {
+        "RECENT_ALL": {
+          "name": "RECENT_ALL",
+          "base_score": -959.1007958482445,
+          "candidate_score": -1020.2532796321107,
+          "raw_gain": -61.15248378386616,
+          "base_oracle_shape": {
+            "score": 168.80053641280287,
+            "corr": 0.041085342448713126,
+            "a": 0.35421707376786193,
+            "b": 0.2845130066423043
+          },
+          "candidate_oracle_shape": {
+            "score": 158.27867132533802,
+            "corr": 0.039784252076083826,
+            "a": 0.36014111700367635,
+            "b": 0.2731138628911956
+          },
+          "control_oracle_shape": {
+            "score": 169.81837659559443,
+            "corr": 0.04120902529732952,
+            "a": 0.35366027928744026,
+            "b": 0.2855464411376705
+          },
+          "oracle_shape_gain": -10.521865087464846,
+          "shape_over_control": -11.539705270256405,
+          "equal_mean_gain": -64.16936118429635,
+          "mean_shift": -0.00031084849307705387,
+          "F_contribution": -34.741874276478086,
+          "R_contribution": -26.41060950737455,
+          "blend": {
+            "d": -61.15248378386616,
+            "K": 4.7651294610392,
+            "optimal_weight": 0.0,
+            "analytic_gain": 0.0
+          },
+          "bootstrap": {
+            "draws": 3000,
+            "pitchers": 382,
+            "median": -60.76349603311125,
+            "p025": -76.03773243586608,
+            "p975": -48.65603474321668,
+            "prob_positive": 0.0
+          },
+          "gate_pass": false,
+          "gate_checks": {
+            "raw_gain": false,
+            "oracle_shape_gain": false,
+            "equal_mean_gain": false,
+            "shape_over_control": false,
+            "analytic_blend_gain": false,
+            "bootstrap_p025": false
+          }
+        },
+        "RECENT_F": {
+          "name": "RECENT_F",
+          "base_score": -959.1007958482445,
+          "candidate_score": -1345.72840942353,
+          "raw_gain": -386.6276135752854,
+          "base_oracle_shape": {
+            "score": 168.80053641280287,
+            "corr": 0.041085342448713126,
+            "a": 0.35421707376786193,
+            "b": 0.2845130066423043
+          },
+          "candidate_oracle_shape": {
+            "score": 133.4867765445373,
+            "corr": 0.03653584220249169,
+            "a": 0.3784042141927154,
+            "b": 0.23626404864649025
+          },
+          "control_oracle_shape": {
+            "score": 169.81837659559443,
+            "corr": 0.04120902529732952,
+            "a": 0.35366027928744026,
+            "b": 0.2855464411376705
+          },
+          "oracle_shape_gain": -35.31375986826558,
+          "shape_over_control": -36.33160005105714,
+          "equal_mean_gain": -362.65722150439217,
+          "mean_shift": 0.0022352635148779054,
+          "F_contribution": -386.6276135752753,
+          "R_contribution": 0.0,
+          "blend": {
+            "d": -386.6276135752854,
+            "K": 25.358116659794387,
+            "optimal_weight": 0.0,
+            "analytic_gain": 0.0
+          },
+          "bootstrap": {
+            "draws": 3000,
+            "pitchers": 382,
+            "median": -385.8900946898872,
+            "p025": -503.5246428703114,
+            "p975": -289.67252369882027,
+            "prob_positive": 0.0
+          },
+          "gate_pass": false,
+          "gate_checks": {
+            "raw_gain": false,
+            "oracle_shape_gain": false,
+            "equal_mean_gain": false,
+            "shape_over_control": false,
+            "analytic_blend_gain": false,
+            "bootstrap_p025": false
+          }
+        }
+      }
+    }
+  },
+  "reads_test_or_public_lb": false,
+  "selected_branch": null,
+  "discovery_pass": false,
+  "confirmation_opened": false,
+  "elapsed_seconds": 3250.286515235901
+}

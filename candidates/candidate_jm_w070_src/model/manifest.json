@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "prior": 0.5237659811973572,
+  "main_weights": [
+    0.27358084,
+    0.26512224,
+    0.46129691
+  ],
+  "stack_intercept": 0.0300329767,
+  "stack_coefficients": [
+    0.93505266,
+    -0.00520129,
+    0.01091677,
+    -0.02528331
+  ],
+  "adaptive_gate": true,
+  "gate_scale": 1.0,
+  "psych_latent_validation_2024_score": 927.4038,
+  "validation_2024_score": 959.7513,
+  "notes": "Experimental 0.75x F-regime strength selected from the leaderboard quadratic fitted to F-expert, 1.0x and 1.25x scores. All inference remains row-local.",
+  "channel_weights": {
+    "psych": 0.6782,
+    "split": 0.5098,
+    "film": -0.3057,
+    "minimax": -0.5914,
+    "hier": -0.3688
+  },
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "global_shift": 0.0052
+}

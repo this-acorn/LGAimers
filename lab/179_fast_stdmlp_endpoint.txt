@@ -1,0 +1,12 @@
+=== exp179 fast std-z dual-head MLP discovery ===
+status=ELIGIBLE_FOR_2024_CONFIRMATION fit_seconds=21.56 row_independence=5.960e-08
+direct_probability: d=-56.2678 K=580.0489 w=0.451497 gain=+118.2429 early=+112.7256 late=+123.8289 p025=+60.0368 pass=True
+current_logit_residual_skip: d=-83.7815 K=12.8756 w=0.000000 gain=+0.0000 early=+0.0000 late=+0.0000 p025=+0.0000 pass=False
+2024 unopened; test unopened; no ZIP
+
+=== exp179 untouched 2024 confirmation ===
+locked w=0.451497359 gain=-183.4326
+current=936.5840 endpoint=90.1098 candidate=753.1514
+early=-235.6424 late=-115.2441 pitcher_p025=-239.1298
+row_independence=5.960e-08
+post-2024 tuning=false; test unopened; no ZIP

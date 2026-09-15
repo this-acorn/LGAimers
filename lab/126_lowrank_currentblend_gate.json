@@ -1,0 +1,352 @@
+{
+  "experiment": 126,
+  "description": "clean-room low-rank pitcher-context residual on current blend",
+  "status": "FAIL_LOW_GAIN_NO_SUBMISSION",
+  "analysis_only": true,
+  "reads_official_train": true,
+  "reads_test": false,
+  "reads_exp021_python_source": false,
+  "builds_model_or_submission": false,
+  "uses_public_lb_for_candidate_selection": false,
+  "protocol": {
+    "source_year": 2023,
+    "validation_year": 2024,
+    "baseline": "seed42 corrected CAT5+CS+V18+affine blended with saved EXP021 OOF",
+    "champion_weight": 0.6434428305247574,
+    "exp021_weight": 0.35655716947524263,
+    "effect_target": "source y-current_blend residual, centered within source season",
+    "smoothing_formula": "sum(centered residual)/(cell_n+300)",
+    "factorization": "deterministic full SVD truncated to rank 6",
+    "unseen_pitcher_effect": 0.0,
+    "primary_gamma": 0.25,
+    "diagnostic_gammas_use_2024_labels": true,
+    "same_fold_oracle_is_not_deployable": true
+  },
+  "promotion_thresholds": {
+    "raw_gain_min": 10.0,
+    "equal_mean_shape_gain_min": 8.0,
+    "F_contribution_min": 0.0,
+    "R_contribution_min": 0.0,
+    "abs_corr_exp021_lowrank_max": 0.5,
+    "abs_corr_endpoint_direction_max": 0.25
+  },
+  "alignment": {
+    "2023": {
+      "rows": 245525,
+      "official_vs_saved_target_exact": true,
+      "official_target_rate": 0.49995723449750534,
+      "F_rows": 25686,
+      "R_rows": 219839
+    },
+    "2024": {
+      "rows": 253507,
+      "official_vs_saved_target_exact": true,
+      "official_target_rate": 0.4861049201797189,
+      "F_rows": 30010,
+      "R_rows": 223497
+    }
+  },
+  "baseline_scores": {
+    "2023": -22.742734501002282,
+    "2024": 936.5839989479041
+  },
+  "variants": {
+    "context24": {
+      "name": "context24",
+      "context_definition": "pitcher x legal_count(12) x batter_hand(2)",
+      "fit": {
+        "source_rows": 245525,
+        "source_pitchers": 382,
+        "context_count": 24,
+        "observed_cells": 8323,
+        "matrix_cells": 9168,
+        "observed_density": 0.9078315881326352,
+        "raw_residual_mean_before_centering": -0.0038163361536680566,
+        "centered_residual_mean": -2.3151784486633955e-18,
+        "smoothed_effect_mean_abs": 0.005443855415684588,
+        "singular_values": [
+          0.42667430109381904,
+          0.28032639176186225,
+          0.20462418342161345,
+          0.18974243488965048,
+          0.17571062913349358,
+          0.175242722237921,
+          0.16376059740529417,
+          0.1584997310794351,
+          0.14756943924124036,
+          0.14327379141891447,
+          0.1385503975839546,
+          0.13612381494925452,
+          0.1350971930517258,
+          0.12958325330587753,
+          0.11765812199642996,
+          0.11511578299064194,
+          0.10950679788363096,
+          0.10430142319115306,
+          0.09365972359400765,
+          0.08992331929353625,
+          0.08248632475454475,
+          0.07709850306754422,
+          0.06262388980349412,
+          0.055515756858038195
+        ],
+        "retained_energy_fraction": 0.612059924868116
+      },
+      "mapping": {
+        "validation_rows": 253507,
+        "seen_pitcher_rows": 191783,
+        "seen_pitcher_rate": 0.7565195438390261,
+        "effect_mean": 0.0005904281248196534,
+        "effect_std": 0.010461791460952155,
+        "effect_mean_abs": 0.006031097878752081,
+        "effect_min": -0.05933440525546737,
+        "effect_max": 0.08250360923617896
+      },
+      "overlap": {
+        "exp021_lowrank_effect": {
+          "pearson_correlation": 0.3849879922757896,
+          "cosine_similarity": 0.3828203476646469
+        },
+        "v18_raw_effect": {
+          "pearson_correlation": 0.17172653006256205,
+          "cosine_similarity": 0.169039000804238
+        },
+        "endpoint_direction": {
+          "pearson_correlation": -0.00571778216001244,
+          "cosine_similarity": 0.0003673501839028749
+        }
+      },
+      "diagnostic_gamma_sweep": {
+        "0.25": {
+          "gamma": 0.25,
+          "base_score": 936.5839989479041,
+          "candidate_score": 939.002033670655,
+          "raw_gain": 2.4180347227509174,
+          "equal_mean_shape_gain": 2.9407976951500814,
+          "prediction_mean_shift": 0.0001476070312050326,
+          "F_contribution": 2.3141913802838214,
+          "R_contribution": 0.10384334245574806
+        },
+        "0.50": {
+          "gamma": 0.5,
+          "base_score": 936.5839989479041,
+          "candidate_score": 935.9259410202548,
+          "raw_gain": -0.6580579276493381,
+          "equal_mean_shape_gain": 0.40491175735678553,
+          "prediction_mean_shift": 0.0002952140624099542,
+          "F_contribution": 3.9370988356792562,
+          "R_contribution": -4.595156763313737
+        },
+        "0.75": {
+          "gamma": 0.75,
+          "base_score": 936.5839989479041,
+          "candidate_score": 927.3557209967809,
+          "raw_gain": -9.228277951123232,
+          "equal_mean_shape_gain": -7.607657813346577,
+          "prediction_mean_shift": 0.0004428210936147092,
+          "F_contribution": 4.868722366186318,
+          "R_contribution": -14.097000317308526
+        },
+        "1.00": {
+          "gamma": 1.0,
+          "base_score": 936.5839989479041,
+          "candidate_score": 913.2913736002113,
+          "raw_gain": -23.29262534769282,
+          "equal_mean_shape_gain": -21.09691101692681,
+          "prediction_mean_shift": 0.0005904281248196863,
+          "F_contribution": 5.109061971804989,
+          "R_contribution": -28.40168731952861
+        }
+      },
+      "same_fold_oracle": {
+        "diagnostic_only": true,
+        "uses_validation_2024_labels": true,
+        "must_not_be_used_for_deployment": true,
+        "unclipped_quadratic_beta": 0.23502815181226983,
+        "score_gain_after_probability_clip": 2.427887066125436,
+        "note": "Descriptive ceiling only; never a selectable gamma."
+      },
+      "promotion_gate": {
+        "primary_gamma": 0.25,
+        "checks": {
+          "raw_gain": false,
+          "equal_mean_shape_gain": false,
+          "F_nonnegative": true,
+          "R_nonnegative": true,
+          "exp021_lowrank_overlap": true,
+          "endpoint_direction_overlap": true
+        },
+        "pass": false
+      }
+    },
+    "context48": {
+      "name": "context48",
+      "context_definition": "pitcher x game_type(2) x legal_count(12) x batter_hand(2)",
+      "fit": {
+        "source_rows": 245525,
+        "source_pitchers": 382,
+        "context_count": 48,
+        "observed_cells": 10693,
+        "matrix_cells": 18336,
+        "observed_density": 0.5831697207678883,
+        "raw_residual_mean_before_centering": -0.0038163361536680566,
+        "centered_residual_mean": -2.3151784486633955e-18,
+        "smoothed_effect_mean_abs": 0.0030162786388142613,
+        "singular_values": [
+          0.33395155540600285,
+          0.31020371515098943,
+          0.24517207934398297,
+          0.19640891156339318,
+          0.1805126695938211,
+          0.1667244109259715,
+          0.1592556956190605,
+          0.1531224334626779,
+          0.14780455641411452,
+          0.13784042256366105,
+          0.13231682122248076,
+          0.1300512938931774,
+          0.12642294907096552,
+          0.12445604061265038,
+          0.11368753433938274,
+          0.11091140761891677,
+          0.10680065886155009,
+          0.10397606552935772,
+          0.10100254112979264,
+          0.09840200126409226,
+          0.08809080648143994,
+          0.0853619452376403,
+          0.08169189751928116,
+          0.07903663536059558,
+          0.07673652167825457,
+          0.06893175060803475,
+          0.06635738286504388,
+          0.06322118323558205,
+          0.0600725578746303,
+          0.058239864514540635,
+          0.057229152490884214,
+          0.056006103868238274,
+          0.053285692174413535,
+          0.05070819283253097,
+          0.04958069984786885,
+          0.04682767066768774,
+          0.045599139113895695,
+          0.04243135381827967,
+          0.039179039984695255,
+          0.03419318239408977,
+          0.0338927083705835,
+          0.031299427197988096,
+          0.02870065236828624,
+          0.02719747819356673,
+          0.025381619249646575,
+          0.02187128501231177,
+          0.01980637534632226,
+          0.018149172508929834
+        ],
+        "retained_energy_fraction": 0.5456197920881405
+      },
+      "mapping": {
+        "validation_rows": 253507,
+        "seen_pitcher_rows": 191783,
+        "seen_pitcher_rate": 0.7565195438390261,
+        "effect_mean": 0.0013683207760535677,
+        "effect_std": 0.009152967603090244,
+        "effect_mean_abs": 0.005089448070371023,
+        "effect_min": -0.0555207920334857,
+        "effect_max": 0.08350899872201827
+      },
+      "overlap": {
+        "exp021_lowrank_effect": {
+          "pearson_correlation": 0.3788300116562314,
+          "cosine_similarity": 0.37078834788175424
+        },
+        "v18_raw_effect": {
+          "pearson_correlation": 0.1726194821784261,
+          "cosine_similarity": 0.16461386972444136
+        },
+        "endpoint_direction": {
+          "pearson_correlation": -0.03412096798650685,
+          "cosine_similarity": -0.01769445747743099
+        }
+      },
+      "diagnostic_gamma_sweep": {
+        "0.25": {
+          "gamma": 0.25,
+          "base_score": 936.5839989479041,
+          "candidate_score": 938.461303889937,
+          "raw_gain": 1.877304942032879,
+          "equal_mean_shape_gain": 3.1154420487844163,
+          "prediction_mean_shift": 0.00034208019401360534,
+          "F_contribution": 2.4473144050944198,
+          "R_contribution": -0.5700094630520168
+        },
+        "0.50": {
+          "gamma": 0.5,
+          "base_score": 936.5839989479041,
+          "candidate_score": 936.0528430807258,
+          "raw_gain": -0.5311558671783132,
+          "equal_mean_shape_gain": 2.0388057877407846,
+          "prediction_mean_shift": 0.0006841603880268776,
+          "F_contribution": 4.358015006670711,
+          "R_contribution": -4.889170873828835
+        },
+        "0.75": {
+          "gamma": 0.75,
+          "base_score": 936.5839989479041,
+          "candidate_score": 929.3586165203038,
+          "raw_gain": -7.225382427600266,
+          "equal_mean_shape_gain": -3.2299087830422195,
+          "prediction_mean_shift": 0.0010262405820403164,
+          "F_contribution": 5.732101804728912,
+          "R_contribution": -12.957484232330525
+        },
+        "1.00": {
+          "gamma": 1.0,
+          "base_score": 936.5839989479041,
+          "candidate_score": 918.3786242085934,
+          "raw_gain": -18.20537473931074,
+          "equal_mean_shape_gain": -12.690701663597906,
+          "prediction_mean_shift": 0.0013683207760535887,
+          "F_contribution": 6.569574799269013,
+          "R_contribution": -24.77494953855703
+        }
+      },
+      "same_fold_oracle": {
+        "diagnostic_only": true,
+        "uses_validation_2024_labels": true,
+        "must_not_be_used_for_deployment": true,
+        "unclipped_quadratic_beta": 0.23450813991046657,
+        "score_gain_after_probability_clip": 1.8855335344181867,
+        "note": "Descriptive ceiling only; never a selectable gamma."
+      },
+      "promotion_gate": {
+        "primary_gamma": 0.25,
+        "checks": {
+          "raw_gain": false,
+          "equal_mean_shape_gain": false,
+          "F_nonnegative": true,
+          "R_nonnegative": false,
+          "exp021_lowrank_overlap": true,
+          "endpoint_direction_overlap": true
+        },
+        "pass": false
+      }
+    }
+  },
+  "context24_vs_context48_effect_similarity": {
+    "pearson_correlation": 0.8688851465494141,
+    "cosine_similarity": 0.8663014192158598
+  },
+  "input_sha256": {
+    "data/train.csv": "d2081186b458b49f60b082be480c273135833e15ba59a76d033af28bcf8763ff",
+    "lab/122_y2023_seed42_base_final.npy": "34dad30a9469d137ed75f79a06f91b9f9bd53cd1c26f7820377027428b7fc7cc",
+    "lab/89_cat5_probs_seed42.npy": "0122c2af82647231c3f788a8927a23958e0817bbbada5fd4f2776a52b9180258",
+    "lab/104_v18_effect_y2023.npy": "719392ec251d9cbb3a19e9dc01845631023bc149eb9bec90d96f877bb69f3243",
+    "lab/103_v18_effect_2024.npy": "9c6d6a55dbacc2347c44f18ab54c3aa906a8381b6fa0c3913bc46c02db2685f3",
+    "lab/115_mkis_exp021_work/artifacts/EXP-020/low_rank_pitcher_context_eb/predictions_lowrank_s300_r6_2023.npy": "cb4af985cc43d9b946cecfcd2b0015b529d7f7b37a583c617aacc692bee608e8",
+    "lab/115_mkis_exp021_work/artifacts/EXP-020/low_rank_pitcher_context_eb/predictions_lowrank_s300_r6_2024.npy": "576f4d9d312877079026779f1d3cff10a1a4fb5961f6adc894aba46e0b32118d",
+    "lab/115_mkis_exp021_work/artifacts/EXP-020/low_rank_pitcher_context_eb/targets_2023.npy": "7f2117cb4614e23e43bbfef3f52fb8aff65340e4a2b3f90253fd3f23874e1417",
+    "lab/115_mkis_exp021_work/artifacts/EXP-020/low_rank_pitcher_context_eb/targets_2024.npy": "32a5a12d22d5e171e4227ed46fe02a9cd4fac20b0ca4b7618977333df97b238f",
+    "lab/115_mkis_exp021_work/artifacts/EXP-019/team_eb_ensemble/predictions_all_prior_s1000_2024.npy": "fe5baff5945c6a20ff91942a00e54c767fb98bef683b7fbe291169f39eebb3cd"
+  },
+  "elapsed_seconds": 10.433044672012329
+}

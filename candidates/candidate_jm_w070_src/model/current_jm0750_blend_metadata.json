@@ -1,0 +1,29 @@
+{
+  "name": "current_affine_opt__calico_jm0750_blend",
+  "weights": {
+    "current_affine_opt": 0.5,
+    "calico_jm0750": 0.5
+  },
+  "row_local": true,
+  "component_execution": "sequential",
+  "packaging": "flat_build_time_merge_no_runtime_extraction",
+  "current": {
+    "name": "candidate_affine_opt.zip",
+    "sha256": "E772CA86DAF99209A50AB9E29F030EE680C0770520D98FF5ABE9C3FD4832EC65"
+  },
+  "calico_jm_source": {
+    "name": "sub_JM_R_res_scale075_RE.zip",
+    "sha256": "46AA2A15130ED9BA8D302F203FA42C8E3F1730ACE5D47B3D4EF80429AE2B053F",
+    "source_scale": 0.075,
+    "deployed_scale": 0.75,
+    "authorized_by_user": true
+  },
+  "manifest_patch": {
+    "path": "model/r_residual_manifest.json",
+    "old_scale": 0.075,
+    "new_scale": 0.75,
+    "source_sha256": "402FCA9513A202ADBE9491EA47E33E2EDCFC4FB4CE7E63B1054E88E84B3D1ADC",
+    "patched_sha256": "7F76BDD899A20EFE9A29D52642CB498238B9F7E6E77F11A13AE5C0A03BA6F41F",
+    "only_semantic_change": true
+  }
+}

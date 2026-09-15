@@ -19,7 +19,7 @@ Predict pitch-control success from pre-pitch game context and player history. De
 
 ## Run the included checkpoint
 
-The runnable example uses the preserved `submit14` multiclass checkpoint. Later ensemble configurations are described in the methodology; their complete model packages are not included here.
+The runnable example uses the preserved `submit14` multiclass checkpoint. Late-stage source is in `candidates/` and `probes/`; additional weights and ZIPs are kept locally ([artifact guide](artifacts/README.md)).
 
 Use **Python 3.11** in a virtual environment. From the repository root, place the competition `test.csv` and optional `sample_submission.csv` in `data/`, then run:
 
@@ -41,9 +41,12 @@ See the [data guide](docs/DATA.md) and [training instructions](exp/README.md#run
 ```text
 docs/                   Methodology, development notes, and data guide
 exp/                    Experiment scripts and shared utilities
-submissions/            Inference code and preserved model checkpoints
+submissions/            Earlier inference packages and preserved checkpoints
+candidates/             Late-stage ensemble inference packages
+probes/                 Calibration and blend probes
+handoffs/               GPU and team experiment work
 tools/                  Inference and packaging commands
 lab/                    Experiment reports
-artifacts/submissions/  Historical submission archives
+artifacts/              Archive inventory and local artifact locations
 archive/                Earlier local automation
 ```

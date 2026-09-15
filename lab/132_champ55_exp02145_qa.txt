@@ -1,0 +1,13 @@
+EXP021 45% blend QA: PASS
+artifact=C:\Users\gwonn\Desktop\open\candidate_champ55_exp02145_v001.zip
+sha256=32d7f275afd34134ecd34891e67b3128b20d817732364507b3f4fbe2f1630faf
+component_parity_max_abs=0.000e+00
+repeat_max_abs=0.000e+00
+reverse_max_abs=0.000e+00
+permutation_max_abs=0.000e+00
+split_max_abs=0.000e+00
+singleton_max_abs=0.000e+00
+small_repeated_pattern_max_abs=0.000e+00
+full_repeated_pattern_max_abs=0.000e+00
+fake_server_rows=245789
+fake_server_runtime_seconds=38.718

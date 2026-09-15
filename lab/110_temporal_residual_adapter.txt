@@ -1,0 +1,18 @@
+=== exp/110 strict temporal ExtraTrees residual adapter ===
+analysis only: no CatBoost training, test read, fitted-model save, bundle or submission
+structure locked: fit/correct R only; F correction exactly zero
+discovery 2022 residual -> 2023; confirmation 2022+2023 -> 2024
+ET={'n_estimators': 300, 'max_depth': 12, 'min_samples_leaf': 200, 'max_features': 0.5, 'criterion': 'squared_error', 'bootstrap': False} seeds=(42, 7) effect_clip=0.050 gammas=(0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3)
+
+DISCOVERY (2022 residual -> 2023)
+locked_gamma=0.00
+ensemble base=-897.977 candidate=-897.977 raw=+0.000 shape=+0.000 center=+0.000 mean_shift=+0.0000000
+domain contribution R=+0.000 F=+0.000
+seed42 raw=+0.000 shape=+0.000 mean_shift=+0.0000000
+seed7 raw=+0.000 shape=+0.000 mean_shift=+0.0000000
+pitcher bootstrap median=+0.000 95%=[+0.000,+0.000] P(>0)=0.0000 clusters=382
+gate nonzero_gamma=False raw_gain=False shape_gain=False all_seed_raw_nonnegative=True pitcher_bootstrap_p025_positive=False R_nonnegative=True F_exact_fallback=True
+gamma curve: g=0.00:+0.00/+0.00 g=0.05:-0.14/+0.07 g=0.10:-0.62/-0.19 g=0.15:-1.42/-0.78 g=0.20:-2.55/-1.70 g=0.25:-4.01/-2.95 g=0.30:-5.80/-4.53
+
+DISCOVERY GATE FAIL — 2024 is not loaded; confirmation/model/deployment skipped.
+elapsed=814.6s

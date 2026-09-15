@@ -1,0 +1,38 @@
+=== exp/91b arm=D smoke=True ===
+train 로딩...
+클래스 분포: 0:52.3% 1:11.5% 2:19.5% 3:3.4% 4:13.2%  미복원 0.05%
+영역 분포 (라벨행 99.95%): 0:34.2% 1:15.0% 2:50.8%   성공 중 볼 29.9% / 존 70.1%
+  [   149s] 테이블·PFB 준비 — 프로필 셀 T1 15,893 / T2 8,271 / 투수 711
+  [   152s]   시즌 2019: 프로필 커버리지 0.0%
+  [   158s]   시즌 2020: 프로필 커버리지 77.6%
+  [   164s]   시즌 2021: 프로필 커버리지 79.4%
+  [   173s]   시즌 2022: 프로필 커버리지 84.3%
+  [   184s]   시즌 2023: 프로필 커버리지 86.2%
+  [   191s] 피처 부착 완료 — 검증 프로필 커버리지 80.1%  lvl 분포 {1: 0.696, 2: 0.051, 3: 0.053, 4: 0.2}
+
+--- 사전 게이트: corr(챔피언 잔차, 피처) / 결측 제외 ---
+  f_smooth_p       corr +0.0019  cover 100.0%  mean 0.5166
+  f_cs_p_rate      corr +0.0044  cover  99.2%  mean 0.4937
+  f_mixcg_fb       corr -0.0030  cover  80.1%  mean 0.5402
+  f_pc_succ        corr +0.0019  cover  80.1%  mean 0.5262
+  f_pc_succ_d      corr +0.0114  cover  80.1%  mean -0.0001
+  f_pc_logn        corr +0.0058  cover 100.0%  mean 3.9464
+  f_pc_lvl         corr -0.0061  cover 100.0%  mean 1.7567
+  f_pc_int         corr +0.0034  cover  80.1%  mean 0.3077
+  f_pc_int_d       corr +0.0047  cover  80.1%  mean 0.0011
+  f_pc_arr_ball    corr +0.0023  cover  80.1%  mean 0.3505
+  f_pc_arr_mid     corr +0.0005  cover  80.1%  mean 0.1462
+  f_pc_sgb         corr +0.0028  cover  80.1%  mean 0.4614
+  f_pc_sge         corr +0.0010  cover  80.1%  mean 0.7226
+  f_pc_agree       corr -0.0019  cover  80.1%  mean 0.4651
+  f_pc_exec        corr +0.0012  cover  80.1%  mean 0.6442
+  선형 게이트 [B  ] R²(잔차) 0.00018 → 점수 상당 +18.1  (in-sample OLS, 8개 열)
+  선형 게이트 [C  ] R²(잔차) 0.00020 → 점수 상당 +19.6  (in-sample OLS, 12개 열)
+  선형 게이트 [D  ] R²(잔차) 0.00023 → 점수 상당 +23.0  (in-sample OLS, 24개 열)
+  (참고: 기존 피처의 잔차 R² 는 모델이 이미 흡수해 0 근처여야 정상)
+  선형 게이트 [ref] R²(잔차) 0.00003 → 점수 상당 +3.0  (in-sample OLS, 4개 열)
+
+멀티클래스 학습 행: 1,221,184 / 1,221,585   피처 91 (79 + 12)
+smoke: 6만행·20it 학습/예측 정상 — P(성공) 평균 0.4378 점수 -597.1
+smoke 중요도 상위 15: f_count_diff=13.2, asof_pitcher_reverse_rate=13.2, asof_pitcher_success_rate=6.9, f_pfb=6.3, f_cs_p_rate=5.0, strikes_before=3.9, outs_before=3.6, f_cs_b_rate=3.1, balls_before=3.0, asof_pitcher_prev5_game_success_rate=2.7, f_is_2strike=2.5, asof_pitcher_offspeed_rate=2.4, f_smooth_p=2.2, asof_pitcher_prev1_game_success_rate=2.1, f_cs_p_logn=2.0
+smoke 중 새 피처 중요도: f_pc_succ=0.0, f_pc_succ_d=0.0, f_pc_logn=0.0, f_pc_lvl=0.0, f_pc_int=0.0, f_pc_int_d=0.0, f_pc_arr_ball=0.0, f_pc_arr_mid=0.0, f_pc_sgb=0.0, f_pc_sge=0.0, f_pc_agree=0.0, f_pc_exec=0.0

@@ -1,0 +1,20 @@
+=== exp/107 strict public-hierarchy extension audit ===
+Five axes fixed before reading results; no k/key/bin/negative-weight search.
+2021: rows=247,088 extension effects ready
+2022: rows=247,472 extension effects ready
+2023: rows=245,525 extension effects ready
+2024: rows=253,507 extension effects ready
+
+LOO/Holm results
+axis                 weights       raw heldout       shape heldout      p(max) Holm
+pitcher_bteam        0.00/0.00/0.00 +0.00/+0.00/+0.00 +0.00/+0.00/+0.00 1.0000 False
+pitcher_count        0.20/0.15/0.15 +0.33/+2.31/+1.50 +0.04/+2.34/+2.60 0.4091 False
+pitcher_inning       0.00/0.00/0.15 +0.00/+0.00/-1.23 +0.00/+0.00/-3.46 1.0000 False
+pitcher_baseout      0.00/0.00/0.05 +0.00/+0.00/-0.38 +0.00/+0.00/-0.60 1.0000 False
+pitcher_batter       0.50/0.00/0.00 -0.11/+0.00/+0.00 -0.11/+0.00/+0.00 1.0000 False
+
+No LOO+Holm survivor; exact confirmation skipped by design.
+
+FINAL GATE FAIL
+PASS would authorize only a separate audited bundle; this script never builds/submits.
+elapsed=26.3s

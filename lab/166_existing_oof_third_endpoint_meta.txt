@@ -1,0 +1,20 @@
+=== exp166 existing-OOF third-endpoint discovery gate ===
+2022 FIT -> 2023 CONFIG LOCK; 2024 confirmation skipped because eligible=0
+inventory: top-level npy=125 used_complete_family_files=9 logs=255
+families=40 discovery_eligible=0
+cat2seed_raw_endpoint_R_only: g22=+3.3684 g23=+5.3291 F/R=+0.0000/+5.3291 early/late=+1.8483/+8.8418 p025=-6.2778
+cat7_raw_endpoint_R_only: g22=+6.0650 g23=+5.1341 F/R=+0.0000/+5.1341 early/late=+2.5250/+7.7673 p025=-3.5913
+cat42_raw_endpoint_R_only: g22=+0.0000 g23=-0.0051 F/R=+0.0000/-0.0051 early/late=-0.0041/-0.0061 p025=-0.0111
+v18_F_only: g22=+0.0257 g23=-0.0325 F/R=-0.0325/+0.0000 early/late=+0.0261/-0.0917 p025=-0.3202
+seed7_minus_seed42_R: g22=+1.8055 g23=-0.0429 F/R=+0.0000/-0.0429 early/late=-0.1408/+0.0559 p025=-0.9671
+bigmiss_shape: g22=+0.3226 g23=-0.1010 F/R=+0.3503/-0.4513 early/late=+0.4332/-0.6399 p025=-0.6392
+middle_shape: g22=+0.0157 g23=-0.2117 F/R=-0.0692/-0.1425 early/late=-0.1692/-0.2547 p025=-0.3488
+v18_R_only: g22=+0.1505 g23=-0.2946 F/R=+0.0000/-0.2946 early/late=-0.4390/-0.1489 p025=-1.0091
+v18_all: g22=+0.1722 g23=-0.3259 F/R=-0.0194/-0.3065 early/late=-0.4399/-0.2110 p025=-1.1037
+cat7_champion_R_only: g22=+1.5611 g23=-0.6115 F/R=+0.0000/-0.6115 early/late=+0.1105/-1.3402 p025=-1.7275
+2024-only and incomplete-year arrays excluded from the forward gate.
+stable positive: []
+submission strength: []
+builder possible/prepared: False
+FINAL: FAIL_NO_THIRD_ENDPOINT_BUILD
+elapsed=1.82s

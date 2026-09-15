@@ -1,0 +1,17 @@
+=== exp/93 arm=C smoke=True ===
+train 로딩...
+클래스 분포: 0:52.3% 1:11.5% 2:19.5% 3:3.4% 4:13.2%  미복원 0.05%
+  [    45s] 테이블·PFB 준비
+  조합 c_team_matchup   학습 레벨   94  검증 레벨   94  검증 미출현행 0.230%
+  조합 c_pteam_role     학습 레벨   44  검증 레벨   43  검증 미출현행 0.115%
+  조합 c_bteam_role     학습 레벨   44  검증 레벨   43  검증 미출현행 0.115%
+  조합 c_count_hand     학습 레벨   48  검증 레벨   48  검증 미출현행 0.000%
+  조합 c_base_out       학습 레벨   24  검증 레벨   24  검증 미출현행 0.000%
+  [    58s] 피처 부착 완료
+기준 cat5: 시드별 851.2 / 856.5  2시드 873.9  proj8 889.0  벌점 37.0
+멀티클래스 학습 행: 1,221,184 / 1,221,585   피처 84 (79 + 5)  cat 10개 ['top_bottom', 'game_type', 'base_state', 'pitcher_team_id', 'batter_team_id', 'c_team_matchup', 'c_pteam_role', 'c_bteam_role', 'c_count_hand', 'c_base_out']
+smoke: 6만행·20it 학습/예측 정상 — 클래스 [np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4)]  P(성공) 평균 0.4363 점수 -814.3
+smoke 중요도 상위 12: asof_pitcher_reverse_rate=15.8, f_count_diff=15.7, f_pfb=8.0, asof_pitcher_success_rate=6.2, f_cs_p_rate=3.6, asof_pitcher_middle_rate=3.3, f_smooth_p=2.9, strikes_before=2.6, inning=2.1, asof_pitcher_n=2.1, balls_before=2.0, asof_batter_success_rate=2.0
+smoke 새 조합 중요도: c_team_matchup=0.0, c_pteam_role=0.0, c_bteam_role=0.0, c_count_hand=0.0, c_base_out=0.0
+smoke 조합 예시: c_team_matchup=13_17 | c_pteam_role=13_T_R | c_bteam_role=17_T_R | c_count_hand=00_11 | c_base_out=____0
+exit=0

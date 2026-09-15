@@ -1,0 +1,3 @@
+# Only this extra wheel is needed. Core pandas/numpy/sklearn/joblib/torch packages
+# are already provided by the official evaluation image.
+catboost==1.2.10

@@ -1,0 +1,130 @@
+{
+  "artifact": "C:\\Users\\gwonn\\Desktop\\open\\candidate_exp021_w0356557_v002.zip",
+  "sha256": "c080da7e82b1707e091501b9ba0d58bcd18cbebf9b73a975dbcee3a87c0f330b",
+  "environment": {
+    "python": "3.11",
+    "numpy": "1.26.4",
+    "pandas": "2.0.3",
+    "sklearn": "1.8.0",
+    "joblib": "1.5.3",
+    "catboost": "1.2.10",
+    "lightgbm": "4.6.0"
+  },
+  "archives": {
+    "champion": {
+      "sha256": "ed1b729b9b83eb1f0d344b475939353149d5adc83009a40ff116df6e5a168557",
+      "bytes": 10461927,
+      "entries": [
+        "script.py",
+        "requirements.txt",
+        "model/model.pkl",
+        "model/v18_tables.npz"
+      ],
+      "crc": "passed"
+    },
+    "exp021": {
+      "sha256": "e3035466beb88a5e04635567a4b318286da26c56eb51de18852c6c55b74cd5e2",
+      "bytes": 1944379,
+      "entries": [
+        "script.py",
+        "requirements.txt",
+        "model/feature_schemas.json",
+        "model/group_effects.json",
+        "model/histgradientboosting.json",
+        "model/history_state.json",
+        "model/lowrank_effects.json",
+        "model/metadata.json",
+        "model/multirate_state.json",
+        "model/pitcher_count_effects.json",
+        "model/rfull_lightgbm.txt",
+        "model/team_effects.json"
+      ],
+      "crc": "passed"
+    },
+    "blend": {
+      "sha256": "c080da7e82b1707e091501b9ba0d58bcd18cbebf9b73a975dbcee3a87c0f330b",
+      "bytes": 12408198,
+      "entries": [
+        "script.py",
+        "requirements.txt",
+        "model/blend_metadata.json",
+        "model/champion_inference.py",
+        "model/exp021_inference.py",
+        "model/feature_schemas.json",
+        "model/group_effects.json",
+        "model/histgradientboosting.json",
+        "model/history_state.json",
+        "model/lowrank_effects.json",
+        "model/metadata.json",
+        "model/model.pkl",
+        "model/multirate_state.json",
+        "model/pitcher_count_effects.json",
+        "model/rfull_lightgbm.txt",
+        "model/team_effects.json",
+        "model/v18_tables.npz"
+      ],
+      "crc": "passed"
+    }
+  },
+  "weights": {
+    "champion": 0.6434428305247574,
+    "exp021_strict": 0.35655716947524263
+  },
+  "genuine_5": {
+    "champion": [
+      0.4136738613401332,
+      0.3871855292144946,
+      0.4609841897239697,
+      0.5143937088382337,
+      0.5194945274532742
+    ],
+    "exp021": [
+      0.3810933855090245,
+      0.3729165651008432,
+      0.4441587362008253,
+      0.5022321253158382,
+      0.5162418838966417
+    ],
+    "blend": [
+      0.4020570590976365,
+      0.3820978277587872,
+      0.4549849536406201,
+      0.5100574090411516,
+      0.5183347740734094
+    ],
+    "blend_mean": 0.45350640472232095,
+    "component_parity_max_abs": 5.551115123125783e-17,
+    "stdout_tail": "Saved: output\\submission.csv | rows=5 | champion=0.64 exp021=0.36 | mean=0.453506405 min=0.382097828 max=0.518334774"
+  },
+  "row_independence": {
+    "repeat_max_abs": 0.0,
+    "reverse_max_abs": 0.0,
+    "permutation_max_abs": 0.0,
+    "split_max_abs": 0.0,
+    "singleton_max_abs": 0.0,
+    "small_repeated_pattern_max_abs": 5.551115123125783e-17,
+    "full_repeated_pattern_max_abs": 5.551115123125783e-17
+  },
+  "runtime_seconds": {
+    "champion_5": 1.5033917427062988,
+    "exp021_5": 3.4102494716644287,
+    "blend_5": 3.888798475265503,
+    "small_40": 2.839852809906006,
+    "repeat_40": 3.757514238357544,
+    "reverse_40": 3.629465103149414,
+    "permutation_40": 3.7171573638916016,
+    "split_20_plus_20": 7.302149534225464,
+    "singletons_5_total": 21.675662994384766,
+    "fake_server_245789": 48.0468487739563
+  },
+  "fake_server": {
+    "rows": 245789,
+    "runtime_below_600": true,
+    "stdout_tail": "Saved: output\\submission.csv | rows=245789 | champion=0.64 exp021=0.36 | mean=0.453506141 min=0.382097828 max=0.518334774",
+    "row_id_order": "passed",
+    "row_id_unique": "passed",
+    "finite_range": "passed"
+  },
+  "tolerance": 1e-12,
+  "status": "PASS"
+}

@@ -1,0 +1,7 @@
+[08-28 06:28:08] runq91c started (waiting for exp/91b arm D; takes over if runq91 dies)
+[08-28 07:52:51] arm D finished by runq91 -> chain continues
+[08-28 07:53:21] start exp/91c
+[08-28 07:53:26]   exp/91c PID 512 priority High
+[08-28 08:03:26] done exp/91c exit=
+[08-28 08:03:26] exp/91c FAILED - skipping arms T/T0
+[08-28 08:03:26] runq91c finished

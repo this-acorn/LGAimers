@@ -1,0 +1,112 @@
+================================================================================================
+CODEX low-rank pitcher-batter residual matchup probe
+mode=SMOKE (not a verdict), threads=1, process_priority=BelowNormal
+selection: 2021->2022 and 2021~22->2023 only; 2024 untouched confirmation
+correction: pure centered u_pitcher dot v_batter; additive player effects are discarded
+================================================================================================
+load 2021: n=30,000, y_rate=0.524933, base=1232.60, residual_mean=+2.842e-17
+load 2022: n=30,000, y_rate=0.536367, base=2294.15, residual_mean=+1.220e-17
+load 2023: n=30,000, y_rate=0.506933, base=-1484.85, residual_mean=-2.274e-17
+load 2024: n=30,000, y_rate=0.483267, base=638.15, residual_mean=-3.517e-17
+load 2024 champion: n=30,000, score=766.70
+prepare (2021,): rows=30,000, pitchers=383, batters=384, pairs=15,251, pair-MSE raw=0.12747818 -> after additive=0.12444459
+prepare (2021, 2022): rows=60,000, pitchers=512, batters=497, pairs=26,563, pair-MSE raw=0.11066878 -> after additive=0.10854247
+
+================================================================================================
+HYPERPARAMETER SELECTION (2024 is not read here)
+================================================================================================
+
+  rank=2, ridge=1
+      seed=42: interaction train pair-MSE=0.11036859, effect_std=0.086095381
+      validation 2022: known_both=65.87%, unseen_pair_among_known=56.47%
+      validation 2022: residual/effect corr=-0.005820, unconstrained beta*=-0.033879, gain*=+3.421
+      seed=42: interaction train pair-MSE=0.09964061, effect_std=0.073113341
+      validation 2023: known_both=74.85%, unseen_pair_among_known=48.66%
+      validation 2023: residual/effect corr=+0.000109, unconstrained beta*=+0.001169, gain*=+0.003
+      gamma=0.01: gain22=  -1.084, gain23=  -0.028, mean=  -0.556, stable=False
+      gamma=0.02: gain22=  -5.232, gain23=  -0.755, mean=  -2.994, stable=False
+      gamma=0.05: gain22= -17.552, gain23=  -5.097, mean= -11.324, stable=False
+      gamma=0.10: gain22= -50.008, gain23= -20.886, mean= -35.447, stable=False
+
+  rank=2, ridge=10
+      seed=42: interaction train pair-MSE=0.12301780, effect_std=0.008548649
+      validation 2022: known_both=65.87%, unseen_pair_among_known=56.47%
+      validation 2022: residual/effect corr=-0.001671, unconstrained beta*=-0.101573, gain*=+0.303
+      seed=42: interaction train pair-MSE=0.10610110, effect_std=0.018697313
+      validation 2023: known_both=74.85%, unseen_pair_among_known=48.66%
+      validation 2023: residual/effect corr=+0.001320, unconstrained beta*=+0.023615, gain*=+0.078
+      gamma=0.01: gain22=  -0.031, gain23=  +0.030, mean=  -0.001, stable=False
+      gamma=0.02: gain22=  -0.131, gain23=  +0.076, mean=  -0.027, stable=False
+      gamma=0.05: gain22=  -0.372, gain23=  -0.019, mean=  -0.196, stable=False
+      gamma=0.10: gain22=  -0.891, gain23=  -0.738, mean=  -0.815, stable=False
+
+  rank=4, ridge=1
+      seed=42: interaction train pair-MSE=0.09868295, effect_std=0.113932511
+      validation 2022: known_both=65.87%, unseen_pair_among_known=56.47%
+      validation 2022: residual/effect corr=+0.000839, unconstrained beta*=+0.003658, gain*=+0.070
+      seed=42: interaction train pair-MSE=0.09131377, effect_std=0.101848024
+      validation 2023: known_both=74.85%, unseen_pair_among_known=48.66%
+      validation 2023: residual/effect corr=-0.002268, unconstrained beta*=-0.012524, gain*=+0.651
+      gamma=0.01: gain22=  +0.060, gain23=  -0.624, mean=  -0.282, stable=False
+      gamma=0.02: gain22=  -1.324, gain23=  -3.739, mean=  -2.532, stable=False
+      gamma=0.05: gain22= -11.140, gain23= -15.574, mean= -13.357, stable=False
+      gamma=0.10: gain22= -48.379, gain23= -51.900, mean= -50.139, stable=False
+
+  rank=4, ridge=10
+      seed=42: interaction train pair-MSE=0.12252140, effect_std=0.007722817
+      validation 2022: known_both=65.87%, unseen_pair_among_known=56.47%
+      validation 2022: residual/effect corr=+0.002401, unconstrained beta*=+0.150455, gain*=+0.543
+      seed=42: interaction train pair-MSE=0.10382153, effect_std=0.025273060
+      validation 2023: known_both=74.85%, unseen_pair_among_known=48.66%
+      validation 2023: residual/effect corr=-0.003922, unconstrained beta*=-0.087088, gain*=+1.939
+      gamma=0.01: gain22=  +0.035, gain23=  -0.229, mean=  -0.097, stable=False
+      gamma=0.02: gain22=  +0.135, gain23=  -0.993, mean=  -0.429, stable=False
+      gamma=0.05: gain22=  +0.301, gain23=  -2.865, mean=  -1.282, stable=False
+      gamma=0.10: gain22=  +0.482, gain23=  -7.008, mean=  -3.263, stable=False
+
+Top selection rows:
+ rank  ridge  gamma  gain_2022  gain_2023  mean_gain  min_gain  stable_positive  known_2022  known_2023  unseen_2022  unseen_2023
+    2   10.0  0.005  -0.030586   0.029539  -0.000524 -0.030586            False      0.6587    0.748533     0.371967       0.3642
+    2   10.0  0.020  -0.131160   0.076186  -0.027487 -0.131160            False      0.6587    0.748533     0.371967       0.3642
+    4   10.0  0.005   0.035485  -0.228990  -0.096752 -0.228990            False      0.6587    0.748533     0.371967       0.3642
+    2   10.0  0.050  -0.371984  -0.019379  -0.195682 -0.371984            False      0.6587    0.748533     0.371967       0.3642
+    4    1.0  0.005   0.060465  -0.623557  -0.281546 -0.623557            False      0.6587    0.748533     0.371967       0.3642
+    4   10.0  0.020   0.134747  -0.992642  -0.428947 -0.992642            False      0.6587    0.748533     0.371967       0.3642
+    2    1.0  0.005  -1.084439  -0.028462  -0.556450 -1.084439            False      0.6587    0.748533     0.371967       0.3642
+    2   10.0  0.100  -0.890914  -0.738236  -0.814575 -0.890914            False      0.6587    0.748533     0.371967       0.3642
+    4   10.0  0.050   0.300891  -2.865008  -1.282058 -2.865008            False      0.6587    0.748533     0.371967       0.3642
+    4    1.0  0.020  -1.324100  -3.739335  -2.531718 -3.739335            False      0.6587    0.748533     0.371967       0.3642
+    2    1.0  0.020  -5.232038  -0.755440  -2.993739 -5.232038            False      0.6587    0.748533     0.371967       0.3642
+    4   10.0  0.100   0.481862  -7.008028  -3.263083 -7.008028            False      0.6587    0.748533     0.371967       0.3642
+
+Historical stability gate (each year > 0.05): FAIL
+
+SELECTED (without 2024): rank=2, ridge=10, gamma=0.005, gain22=-0.031, gain23=+0.030
+
+prepare final 2021~23: rows=90,000, pitchers=585, batters=580, pairs=36,600
+      seed=42: interaction train pair-MSE=0.09872218, effect_std=0.020958576
+
+================================================================================================
+UNTOUCHED 2024 CONFIRMATION (SMOKE ONLY)
+================================================================================================
+  effect mean=+0.0001071, std=0.0209586, q01/q50/q99=[-0.06881799  0.          0.07198126]
+
+  [HGB base65 + frozen FM] base=638.149, frozen candidate=638.083
+    frozen d=-0.066, K=0.004, analytic w*=0.0000, oracle mix gain=+0.000
+    fixed candidate-weight gains: w=0.25 -0.016  w=0.50 -0.032  w=0.75 -0.049  w=1.00 -0.066
+    pitcher bootstrap frozen d: median=-0.063, 95% [-0.556,+0.411], P(d>0)=0.395 (200 draws)
+    subgroup coverage and gain:
+      known+seen_pair     n=  11,524 ( 38.41%)  global_contrib=  -0.043  local_gain=  -0.112
+      known+unseen_pair   n=   9,982 ( 33.27%)  global_contrib=  -0.023  local_gain=  -0.069
+      unknown_player      n=   8,494 ( 28.31%)  global_contrib=  +0.000  local_gain=  +0.000
+
+  [CAT5 champion + frozen FM] base=766.703, frozen candidate=766.650
+    frozen d=-0.053, K=0.004, analytic w*=0.0000, oracle mix gain=+0.000
+    fixed candidate-weight gains: w=0.25 -0.012  w=0.50 -0.025  w=0.75 -0.039  w=1.00 -0.053
+    pitcher bootstrap frozen d: median=-0.050, 95% [-0.541,+0.445], P(d>0)=0.430 (200 draws)
+    subgroup coverage and gain:
+      known+seen_pair     n=  11,524 ( 38.41%)  global_contrib=  -0.034  local_gain=  -0.088
+      known+unseen_pair   n=   9,982 ( 33.27%)  global_contrib=  -0.019  local_gain=  -0.056
+      unknown_player      n=   8,494 ( 28.31%)  global_contrib=  +0.000  local_gain=  +0.000
+
+Saved Codex-prefixed artifacts. No CatBoost training or submission was started.

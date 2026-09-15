@@ -1,0 +1,895 @@
+<title>제구 데이터 판독기</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
+
+<style>
+:root{
+  color-scheme: light;
+  --plane:#f4f5f7; --surface:#fbfbfc; --sunk:#eef0f3;
+  --ink:#12151b; --ink2:#4b515c; --muted:#7b818c;
+  --grid:#e3e5ea; --rule:#d5d9e0; --hair:rgba(18,21,27,.10);
+  --lo:#164b8f; --hi:#b8332f; --mid:#edeef1; --onheat:#ffffff;
+  --c1:#2a78d6; --c2:#eb6834; --c3:#1baf7a;
+  --accent:#1b5ba8;
+  --st-ok:#0ca30c; --st-warn:#b07d05; --st-bad:#c0392f;
+  --shadow:0 1px 2px rgba(18,21,27,.05), 0 8px 24px -18px rgba(18,21,27,.35);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --plane:#0c0e12; --surface:#15181e; --sunk:#1b1f26;
+    --ink:#f2f4f8; --ink2:#b9bfc9; --muted:#868d99;
+    --grid:#242832; --rule:#2e333d; --hair:rgba(242,244,248,.12);
+    --lo:#5f9ee8; --hi:#e0685f; --mid:#22262e; --onheat:#0f1216;
+    --c1:#3987e5; --c2:#d95926; --c3:#199e70;
+    --accent:#7fb2f0;
+    --st-ok:#31b431; --st-warn:#e0ab2c; --st-bad:#e5776d;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -18px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --plane:#0c0e12; --surface:#15181e; --sunk:#1b1f26;
+  --ink:#f2f4f8; --ink2:#b9bfc9; --muted:#868d99;
+  --grid:#242832; --rule:#2e333d; --hair:rgba(242,244,248,.12);
+  --lo:#5f9ee8; --hi:#e0685f; --mid:#22262e; --onheat:#0f1216;
+  --c1:#3987e5; --c2:#d95926; --c3:#199e70;
+  --accent:#7fb2f0;
+  --st-ok:#31b431; --st-warn:#e0ab2c; --st-bad:#e5776d;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -18px rgba(0,0,0,.9);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--plane); color:var(--ink);
+  font-family:"IBM Plex Sans KR", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-weight:400; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:"IBM Plex Mono", ui-monospace, "Cascadia Mono", monospace; font-variant-numeric:tabular-nums}
+.num{font-family:"IBM Plex Mono", ui-monospace, monospace; font-variant-numeric:tabular-nums; font-weight:500}
+
+/* ---- shell ---- */
+.wrap{max-width:1180px; margin:0 auto; padding:0 24px}
+header.top{
+  position:sticky; top:0; z-index:40; background:color-mix(in srgb, var(--plane) 88%, transparent);
+  backdrop-filter:blur(12px); border-bottom:1px solid var(--rule);
+}
+.topin{display:flex; align-items:center; gap:20px; height:56px; flex-wrap:nowrap; overflow-x:auto}
+.brand{font-weight:600; font-size:14px; letter-spacing:-.01em; white-space:nowrap}
+.brand em{font-style:normal; color:var(--muted); font-weight:400}
+nav.jump{display:flex; gap:2px; margin-left:auto}
+nav.jump a{
+  font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.06em;
+  color:var(--muted); text-decoration:none; padding:5px 9px; border-radius:5px; white-space:nowrap;
+}
+nav.jump a:hover{color:var(--ink); background:var(--sunk)}
+nav.jump a:focus-visible{outline:2px solid var(--accent); outline-offset:1px}
+
+/* ---- hero ---- */
+.hero{padding:56px 0 40px; border-bottom:1px solid var(--rule)}
+.eyebrow{
+  font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:500;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--muted);
+}
+h1{
+  font-size:clamp(30px,4.4vw,46px); line-height:1.12; font-weight:700; letter-spacing:-.028em;
+  margin:14px 0 0; text-wrap:balance; max-width:20ch;
+}
+.lede{margin:18px 0 0; max-width:62ch; color:var(--ink2); font-size:16px}
+.lede b{color:var(--ink); font-weight:600}
+
+.tiles{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1px;
+  background:var(--rule); border:1px solid var(--rule); border-radius:10px; overflow:hidden; margin-top:34px}
+.tile{background:var(--surface); padding:16px 18px}
+.tile .k{font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--muted)}
+.tile .v{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums;
+  font-size:24px; font-weight:500; letter-spacing:-.02em; margin-top:6px; line-height:1.1}
+.tile .s{font-size:12px; color:var(--muted); margin-top:3px}
+
+/* ---- sections ---- */
+section{padding:52px 0; border-bottom:1px solid var(--rule)}
+section:last-of-type{border-bottom:none}
+.shead{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:8px}
+.shead h2{font-size:22px; font-weight:600; letter-spacing:-.02em; margin:0}
+.shead .idx{font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--muted);
+  letter-spacing:.12em; border:1px solid var(--rule); border-radius:4px; padding:2px 6px}
+.sdesc{color:var(--ink2); font-size:14.5px; max-width:70ch; margin:0 0 26px}
+.sdesc code{font-family:"IBM Plex Mono",monospace; font-size:12.5px; background:var(--sunk);
+  padding:1px 5px; border-radius:4px}
+
+.card{background:var(--surface); border:1px solid var(--rule); border-radius:10px;
+  padding:20px 22px; box-shadow:var(--shadow)}
+.card + .card{margin-top:16px}
+.grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(330px,1fr)); gap:16px}
+.grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px}
+.ctitle{font-size:13.5px; font-weight:600; letter-spacing:-.005em; margin:0 0 3px}
+.csub{font-size:12px; color:var(--muted); margin:0 0 16px; line-height:1.5}
+.scroll{overflow-x:auto}
+
+/* ---- callout ---- */
+.finding{
+  background:var(--surface); border:1px solid var(--rule); border-left:3px solid var(--hi);
+  border-radius:10px; padding:20px 22px; box-shadow:var(--shadow);
+}
+.finding .tag{font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--hi); font-weight:600}
+.finding h3{margin:8px 0 10px; font-size:17px; font-weight:600; letter-spacing:-.015em}
+.finding p{margin:0 0 10px; font-size:14px; color:var(--ink2); max-width:74ch}
+.finding p:last-child{margin-bottom:0}
+.finding b{color:var(--ink); font-weight:600}
+
+/* ---- legend ---- */
+.legend{display:flex; align-items:center; gap:14px; flex-wrap:wrap; font-size:11.5px; color:var(--muted); margin-top:14px}
+.legend .item{display:inline-flex; align-items:center; gap:6px}
+.swatch{width:11px; height:11px; border-radius:3px; box-shadow:0 0 0 1px var(--hair) inset}
+.ramp{display:flex; height:11px; border-radius:3px; overflow:hidden; width:132px; box-shadow:0 0 0 1px var(--hair) inset}
+.ramp i{flex:1}
+
+/* ---- table ---- */
+table{border-collapse:collapse; width:100%; font-size:12.5px}
+th,td{padding:7px 10px; text-align:right; border-bottom:1px solid var(--grid); white-space:nowrap}
+th{font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--muted); font-weight:500}
+td:first-child,th:first-child{text-align:left}
+tbody tr:last-child td{border-bottom:none}
+td.n{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums}
+
+/* ---- column map ---- */
+.cgroup{margin-bottom:20px}
+.cgname{display:flex; align-items:baseline; gap:9px; margin-bottom:9px}
+.cgname h4{margin:0; font-size:12.5px; font-weight:600}
+.cgname span{font-family:"IBM Plex Mono",monospace; font-size:10.5px; color:var(--muted)}
+.crow{display:grid; grid-template-columns:1fr 64px 118px 52px; align-items:center; gap:10px;
+  padding:2.5px 0; font-size:12px}
+.crow .cn{font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--ink2);
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.chip{display:inline-block; font-family:"IBM Plex Sans KR",sans-serif; font-size:9.5px;
+  font-weight:500; letter-spacing:.01em; padding:1px 5px; border-radius:3px; margin-left:7px;
+  vertical-align:1px; border:1px solid currentColor; opacity:.9}
+
+/* ---- verdict rows ---- */
+.vrow{display:grid; grid-template-columns:96px 1fr; gap:16px; padding:14px 0;
+  border-bottom:1px solid var(--grid); align-items:start}
+.vrow:last-child{border-bottom:none}
+.vstat{display:flex; align-items:center; gap:6px; font-family:"IBM Plex Mono",monospace;
+  font-size:10.5px; font-weight:600; letter-spacing:.06em; padding-top:1px}
+.vstat .dot{width:9px; height:9px; border-radius:50%; flex:none}
+.vbody h4{margin:0 0 5px; font-size:13.5px; font-weight:600; letter-spacing:-.01em}
+.vbody p{margin:0; font-size:12.5px; color:var(--ink2); line-height:1.62; max-width:76ch}
+.vbody code{font-family:"IBM Plex Mono",monospace; font-size:11.5px;
+  background:var(--sunk); padding:1px 4px; border-radius:3px}
+@media (max-width:640px){.vrow{grid-template-columns:1fr; gap:6px}}
+.crow .cv{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums;
+  font-size:11px; text-align:right; color:var(--ink2)}
+.cbar{position:relative; height:8px; background:var(--sunk); border-radius:2px}
+.cbar i{position:absolute; top:0; bottom:0; left:50%; border-radius:2px}
+.cbar .zero{position:absolute; top:-2px; bottom:-2px; left:50%; width:1px; background:var(--rule)}
+.cmiss{font-family:"IBM Plex Mono",monospace; font-size:10.5px; text-align:right; color:var(--muted)}
+
+/* ---- heat cells ---- */
+.hm{display:grid; gap:2px}
+.cell{border-radius:4px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums;
+  min-height:44px; cursor:default; position:relative}
+.cell .r{font-size:12.5px; font-weight:500}
+.cell .n{font-size:9.5px; opacity:.72; margin-top:1px}
+.axl{font-family:"IBM Plex Mono",monospace; font-size:10.5px; color:var(--muted);
+  display:flex; align-items:center; justify-content:center}
+
+/* ---- deviation bars ---- */
+.dev{display:grid; grid-template-columns:auto 1fr auto; gap:9px; align-items:center;
+  padding:3px 0; font-size:12px}
+.dev .lb{font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--ink2); text-align:right; min-width:44px}
+.dev .tr{position:relative; height:15px; background:var(--sunk); border-radius:3px}
+.dev .tr i{position:absolute; top:2px; bottom:2px; border-radius:2px}
+.dev .tr .z{position:absolute; top:-1px; bottom:-1px; left:50%; width:1px; background:var(--rule)}
+.dev .vl{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums;
+  font-size:11px; color:var(--ink2); min-width:52px; text-align:right}
+
+/* ---- tooltip ---- */
+#tip{position:fixed; z-index:90; pointer-events:none; opacity:0; transition:opacity .09s;
+  background:var(--ink); color:var(--plane); font-family:"IBM Plex Mono",monospace;
+  font-size:11px; line-height:1.55; padding:7px 10px; border-radius:6px; max-width:280px;
+  box-shadow:0 6px 20px -8px rgba(0,0,0,.5)}
+#tip b{font-weight:600}
+
+svg{display:block; overflow:visible}
+.gl{stroke:var(--grid); stroke-width:1}
+.bl{stroke:var(--rule); stroke-width:1}
+.tk{font-family:"IBM Plex Mono",monospace; font-size:10px; fill:var(--muted)}
+.dl{font-family:"IBM Plex Mono",monospace; font-size:10.5px; font-weight:500}
+
+footer{padding:40px 0 64px; color:var(--muted); font-size:12px}
+footer p{margin:0 0 6px; max-width:78ch}
+@media (prefers-reduced-motion: reduce){*{transition:none!important; animation:none!important}}
+@media (max-width:640px){
+  .crow{grid-template-columns:1fr 52px 74px 44px}
+  .hero{padding:36px 0 28px}
+}
+</style>
+
+<div id="tip"></div>
+
+<header class="top"><div class="wrap topin">
+  <div class="brand">제구 데이터 판독기 <em>· train.csv</em></div>
+  <nav class="jump">
+    <a href="#map">컬럼</a><a href="#drift">드리프트</a><a href="#sit">상황</a>
+    <a href="#curve">신호</a><a href="#cold">콜드스타트</a><a href="#who">선수</a>
+    <a href="#tm">Trackman</a><a href="#audit">감사</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <div class="hero">
+    <div class="eyebrow">LG Aimers 9기 · 투구 제구 성공 확률</div>
+    <h1>147만 개의 동전 던지기</h1>
+    <p class="lede">투구 직전 상황만으로 제구 성공을 맞히는 문제다. 전체 성공률은 <b>52.38%</b> — 거의 반반이고,
+      가장 강한 단일 피처의 상관계수조차 <b>0.084</b>다. 그래서 이 문서의 모든 차트는
+      절대값이 아니라 <b>기준선 r로부터의 편차</b>를 그린다. 신호는 편차 안에만 있다.</p>
+    <div class="tiles" id="tiles"></div>
+  </div>
+
+  <section id="map">
+    <div class="shead"><span class="idx">01</span><h2>49개 컬럼이 각각 얼마나 아는가</h2></div>
+    <p class="sdesc">그룹별로 묶고, 막대 길이는 타겟과의 <b>피어슨 상관계수</b>(중앙 = 0), 오른쪽 숫자는 결측률이다.
+      상관은 선형 관계만 재므로 트리 모델의 실제 기여와 다를 수 있지만, <b>어느 축에 신호가 몰려 있는지</b>는 정확히 보여준다.</p>
+    <div class="card"><div id="colmap"></div>
+      <div class="legend">
+        <span class="item"><span class="swatch" style="background:var(--lo)"></span>음의 상관</span>
+        <span class="item"><span class="swatch" style="background:var(--hi)"></span>양의 상관</span>
+        <span class="item">막대 최대치 = |r| 0.09</span>
+        <span class="item">우측 = 결측률</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="drift">
+    <div class="shead"><span class="idx">02</span><h2>해마다 정답이 이동한다</h2></div>
+    <p class="sdesc">성공률 r은 6시즌 동안 <b>0.5647 → 0.4861</b>로 단조 하락했다. test는 아직 본 적 없는 2025 시즌이므로,
+      이 하락이 어디서 오는지가 모델의 최대 리스크다.</p>
+    <div class="grid2">
+      <div class="card"><p class="ctitle">시즌별 성공률</p>
+        <p class="csub">경기 유형을 나눠 보면 두 개의 서로 다른 이야기다</p>
+        <div id="driftline"></div></div>
+      <div class="card"><p class="ctitle">2019 → 2024 하락 −0.0786의 출처</p>
+        <p class="csub">각 세그먼트의 하락폭 × 2024 비중</p>
+        <div id="decomp"></div></div>
+    </div>
+    <div class="card" style="margin-top:16px"><p class="ctitle">시즌 × 월</p>
+      <p class="csub">기준선 r=0.5238 대비 편차. 계단은 연 단위로 지고, 시즌 안에서는 방향이 제각각이다</p>
+      <div class="scroll"><div id="smheat"></div></div>
+      <div class="legend" id="lg1"></div></div>
+    <div class="finding" style="margin-top:16px">
+      <div class="tag">★ 이번 EDA에서 새로 나온 것</div>
+      <h3>드리프트의 35%는 전체 행의 11.8%에서 나온다</h3>
+      <p><code>game_type</code>은 <b>R</b>(정규, 131만 행)과 <b>F</b>(16만 행) 두 값뿐인데, F는 완전히 다른 리그처럼 움직인다.
+        F는 2022년 0.7087에서 2023년 0.4729로 <b>한 해 만에 −0.236</b> 떨어졌다. 같은 기간 R은 −0.001이다.</p>
+      <p>F 쪽 정황: 투수 표본 중앙값이 R의 3분의 1(635 vs 1,957), 팀 22·23·25는 <b>F에만 존재</b>하고,
+        F 행의 49%가 팀 13 하나에 몰려 있다. 2군·교육리그 계열로 보인다.</p>
+      <p>HANDOFF에 적힌 “2023·2024 공통 투수 263명도 동일하게 하락(−0.0132)”은 R 쪽 완만한 하락과 일치한다.
+        <b>F의 절벽은 별개의 현상이고, 아직 아무도 보지 않았다.</b> 2025 test에 F가 어떤 비율로 들어오는지는 알 수 없다 —
+        이건 피처 문제가 아니라 <b>세그먼트 구성 리스크</b>다.</p>
+    </div>
+  </section>
+
+  <section id="sit">
+    <div class="shead"><span class="idx">03</span><h2>경기 상황이 만드는 편차</h2></div>
+    <p class="sdesc">모든 셀은 기준선 r=0.5238과의 차이로 칠했다. 야구 상식과 맞는 방향인지, 표본이 충분한지를 함께 본다.</p>
+    <div class="grid2">
+      <div class="card"><p class="ctitle">볼 카운트</p>
+        <p class="csub">3볼 열 전체가 파랗다 — 볼넷을 피하려 스트라이크를 넣어야 하는 상황에서 오히려 제구가 무너진다</p>
+        <div class="scroll"><div id="cmat"></div></div></div>
+      <div class="card"><p class="ctitle">투수 손 × 타자 손</p>
+        <p class="csub">좌투–좌타 0.4909, 좌투–우타 0.5375. 이 4.7%p 격차가 <code>f_same_hand</code>가 +107점을 낸 이유다</p>
+        <div class="scroll"><div id="hmat"></div></div></div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <p class="ctitle">범주별 편차</p>
+      <p class="csub">막대 = r 대비 편차(%p), 오른쪽 숫자 = 편차와 표본 수</p>
+      <div class="grid3" id="devs"></div>
+      <div class="legend" id="lg2"></div>
+    </div>
+  </section>
+
+  <section id="curve">
+    <div class="shead"><span class="idx">04</span><h2>asof 피처의 신호 곡선</h2></div>
+    <p class="sdesc">각 피처를 12분위로 잘라 구간별 실제 성공률을 그렸다. 가로 점선이 기준선 r이다.
+      <b>기울어진 곡선 = 신호, 평평한 곡선 = 정보 없음.</b> 세로 범위는 모두 동일하게 맞췄으므로 패널끼리 직접 비교할 수 있다.</p>
+    <div class="card"><div class="grid3" id="curves"></div></div>
+  </section>
+
+  <section id="cold">
+    <div class="shead"><span class="idx">05</span><h2>콜드스타트와 결측</h2></div>
+    <p class="sdesc">누적 표본이 적은 행일수록 성공률이 높아 보이지만, 이건 <b>교란된 관측</b>이다 —
+      표본이 적은 행은 대체로 앞선 시즌(r이 높던 시절)에 몰려 있다. 스무딩 설계 시 반드시 시즌을 통제해야 한다.</p>
+    <div class="grid2">
+      <div class="card"><p class="ctitle">누적 표본 구간별 성공률</p>
+        <p class="csub">투수 / 타자 각각의 <code>asof_*_n</code> 버킷</p>
+        <div id="coldchart"></div></div>
+      <div class="card"><p class="ctitle">결측 구조</p>
+        <p class="csub">16개 rate 컬럼 중 하나라도 비어 있는 행</p>
+        <div id="misspanel"></div></div>
+    </div>
+  </section>
+
+  <section id="who">
+    <div class="shead"><span class="idx">06</span><h2>누가 던지고 누가 치는가</h2></div>
+    <p class="sdesc">투수 792명, 타자 830명. 소수가 대부분의 투구를 차지하는 강한 편중 구조다.</p>
+    <div class="grid2">
+      <div class="card"><p class="ctitle">투구량 집중도</p>
+        <p class="csub">상위 x%의 선수가 전체 투구의 y%를 차지 — 대각선이 완전 균등</p>
+        <div id="lorenz"></div></div>
+      <div class="card"><p class="ctitle">선수별 통산 성공률 분포</p>
+        <p class="csub">표본 500개 이상만. 투수의 개인차(σ=0.0503)가 타자(σ=0.0409)보다 크다</p>
+        <div id="ratehist"></div></div>
+    </div>
+  </section>
+
+  <section id="tm">
+    <div class="shead"><span class="idx">07</span><h2>Trackman 보조 로그</h2></div>
+    <p class="sdesc">179만 행, 2019~2024. train과 ID 체계가 달라 직접 결합은 불가능하고,
+      지문 매칭으로 투수 325명(train 투구량의 71.3%)만 연결돼 있다. 여기엔 asof_*에 없는 <b>“원인” 측 신호</b>가 있다 —
+      릴리스 위치, 구속, 회전수.</p>
+    <div class="grid2">
+      <div class="card"><p class="ctitle">구종군 구성</p><p class="csub">전체 179만 투구</p><div id="tmmix"></div></div>
+      <div class="card"><p class="ctitle">구종군별 물리량</p><p class="csub">평균값</p>
+        <div class="scroll"><table id="tmtab"></table></div></div>
+    </div>
+    <div class="finding" style="margin-top:16px">
+      <div class="tag">🚨 배포 함정 · exp/21-D 실측</div>
+      <h3>시즌 키로 만든 trackman 피처는 2025에서 전부 NaN이 된다</h3>
+      <p>trackman은 <b>2019~2024만</b> 존재한다. 그래서 <code>(투수, 시즌)</code>을 키로 집계한 피처를
+        test에 조인하면 <code>(tid, 2025)</code> 키가 <b>0개</b>가 되어 값이 하나도 붙지 않는다.</p>
+      <p>문제는 이 결함이 <b>로컬 검증에서는 절대 안 보인다</b>는 것이다. 로컬은 2024를 채점하는데
+        2024 키는 97.2% 생성된다(시즌별 91.5~97.9%). 로컬에서 멀쩡한 피처가 제출하는 순간 무력화된다.</p>
+      <p>같은 함정은 trackman만의 것이 아니다. <b>“2025 행에서 이 값이 NaN이 아닌가”</b>를
+        모든 새 피처에 대해 먼저 확인해야 한다. trackman을 쓰려면 시즌 키가 아니라
+        <b>통산(≤2024 전체) 단일 키</b>여야 한다.</p>
+    </div>
+  </section>
+
+  <section id="audit">
+    <div class="shead"><span class="idx">08</span><h2>감사 노트</h2></div>
+    <p class="sdesc">외부 리뷰가 제기한 네 가지 주장을 데이터로 판정한 결과다.
+      전부 학습 없이 결정적으로 계산되므로 <b>노이즈 바닥과 무관한 사실</b>이다.
+      출처 <code>exp/21_review_audit.py</code> → <code>lab/21_result.txt</code>.</p>
+    <div class="card"><div id="verdicts"></div></div>
+  </section>
+
+  <footer>
+    <p>출처: <span class="mono">data/train.csv</span> 1,475,092행 · <span class="mono">data/trackman_history.csv</span> 1,793,078행 전수 집계.
+      생성 스크립트 <span class="mono">exp/24_eda_stats.py</span>, <span class="mono">exp/24b_segment.py</span> → <span class="mono">lab/eda_stats.json</span>.</p>
+    <p>test.csv(2025 시즌)는 어떤 통계에도 사용하지 않았다. 이 페이지의 모든 수치는 train 전용이다.</p>
+  </footer>
+</main>
+
+<script type="application/json" id="D">__DATA__</script>
+<script>
+const D = JSON.parse(document.getElementById('D').textContent);
+const R0 = D.meta.target_mean;
+
+/* exp/21_review_audit.py 실측값 — 출처 lab/21_result.txt (학습 없는 결정적 진단) */
+const AUDIT = {
+  colchip: {
+    base_state:  ['중복', 'var(--st-warn)'],
+    pitcher_id:  ['≈데뷔시기', 'var(--st-warn)'],
+    batter_id:   ['≈데뷔시기', 'var(--st-warn)'],
+  },
+  coltip: {
+    base_state: 'runner_on_1b/2b/3b 세 컬럼으로 <b>100% 복원 가능</b>.<br>조합 8가지 전부 base_state 고유값 1개.',
+    pitcher_id: 'corr(pitcher_id, 첫 등장 시즌) = <b>+0.704</b><br>수치 분할이 사실상 “데뷔 시기” 분할이다.',
+    batter_id:  'corr(batter_id, 첫 등장 시즌) = <b>+0.706</b><br>수치 분할이 사실상 “데뷔 시기” 분할이다.',
+  },
+};
+const fmt = (n,d=0)=> n.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
+const pct = (v,d=2)=> (v*100).toFixed(d)+'%';
+const sgn = v => (v>=0?'+':'−')+Math.abs(v).toFixed(2);
+
+/* ---------- color: every value is a live CSS var, so both themes follow with no re-render ---------- */
+const PAL = new Proxy({}, {get:(_,k)=>'var(--'+k+')'});   // PAL.hi -> "var(--hi)"
+const SPAN = 0.06;                      // ±6%p maps to a full-saturation pole
+function heat(rate){
+  const d = Math.max(-1,Math.min(1,(rate-R0)/SPAN));
+  const pole = d>=0 ? 'var(--hi)' : 'var(--lo)';
+  return `color-mix(in oklab, ${pole} ${(Math.abs(d)*100).toFixed(1)}%, var(--mid))`;
+}
+const heatInk = rate => Math.abs(rate-R0)/SPAN > 0.55 ? 'var(--onheat)' : 'var(--ink)';
+
+/* ---------- tooltip ---------- */
+const tip=document.getElementById('tip');
+function bind(el,html){
+  el.tabIndex=0;
+  const show=e=>{tip.innerHTML=html; tip.style.opacity=1;
+    const r=el.getBoundingClientRect(); const w=tip.offsetWidth||200;
+    tip.style.left=Math.max(8,Math.min(innerWidth-w-8, r.left+r.width/2-w/2))+'px';
+    tip.style.top=(r.top>90? r.top-tip.offsetHeight-8 : r.bottom+8)+'px';};
+  el.addEventListener('mouseenter',show); el.addEventListener('focus',show);
+  el.addEventListener('mouseleave',()=>tip.style.opacity=0);
+  el.addEventListener('blur',()=>tip.style.opacity=0);
+}
+const E=(t,c,h)=>{const e=document.createElement(t); if(c)e.className=c; if(h!=null)e.innerHTML=h; return e;};
+
+/* ================= 00 tiles ================= */
+(function(){
+  const t=[
+    ['행 수', fmt(D.meta.rows), 'train.csv · 2019–2024'],
+    ['컬럼', D.meta.cols+'', '피처 48 + 타겟 1'],
+    ['성공률 r', R0.toFixed(4), pct(R0)+' — 사실상 반반'],
+    ['기준 Brier', D.meta.baseline_brier.toFixed(5), 'r(1−r) · 이걸 못 이기면 0점'],
+    ['투수 / 타자', D.meta.n_pitcher+' / '+D.meta.n_batter, '팀 '+D.meta.n_pitcher_team+'개'],
+    ['최강 상관', '0.084', 'asof_pitcher_success_rate'],
+  ];
+  const box=document.getElementById('tiles');
+  t.forEach(([k,v,s])=>{const d=E('div','tile');
+    d.append(E('div','k',k),E('div','v',v),E('div','s',s)); box.append(d);});
+})();
+
+/* ================= 01 column map ================= */
+(function(){
+  const GN={game:['경기 정보','season · month · inning'],count:['카운트 / 점수','볼·스트라이크·아웃·득점'],
+    runner:['주자 / 중요도','base_state · WE · LI'],player:['선수 / 팀','ID · 좌우'],
+    asof_pitcher:['asof 투수 통산','누적 성공률·middle·ball'],asof_form:['asof 투수 최근 폼','직전 1·3·5경기'],
+    asof_batter:['asof 타자','타자가 상대한 투구'],asof_mix:['asof 구종 믹스','fastball/breaking/offspeed'],
+    id:['식별자',''],target:['타겟','']};
+  const order=['asof_pitcher','asof_form','asof_batter','asof_mix','game','count','runner','player'];
+  const MAX=0.09, box=document.getElementById('colmap');
+  order.forEach(g=>{
+    const rows=D.columns.filter(c=>c.group===g).sort((a,b)=>Math.abs(b.corr||0)-Math.abs(a.corr||0));
+    if(!rows.length) return;
+    const w=E('div','cgroup'); const h=E('div','cgname');
+    h.append(E('h4',null,GN[g][0]), E('span',null,GN[g][1]+' · '+rows.length+'개')); w.append(h);
+    rows.forEach(c=>{
+      const r=E('div','crow');
+      const chip=AUDIT.colchip[c.name];
+      r.append(E('div','cn',c.name.replace(/^asof_/,'')
+        +(chip?'<span class="chip" style="color:'+chip[1]+'">'+chip[0]+'</span>':'')));
+      r.append(E('div','cv', c.corr!=null? (c.corr>=0?'+':'−')+Math.abs(c.corr).toFixed(3) : '—'));
+      const bar=E('div','cbar'); bar.append(E('div','zero'));
+      if(c.corr!=null){
+        const f=Math.min(1,Math.abs(c.corr)/MAX)*50, i=E('i');
+        i.style.background=c.corr>=0?PAL.hi:PAL.lo;
+        i.style.width=f+'%'; if(c.corr>=0) i.style.left='50%'; else {i.style.left=(50-f)+'%';}
+        bar.append(i);
+      }
+      r.append(bar);
+      r.append(E('div','cmiss', c.missing>0.0005? (c.missing*100).toFixed(1)+'%' : '·'));
+      bind(r,'<b>'+c.name+'</b><br>상관 '+(c.corr!=null?c.corr.toFixed(4):'—')
+        +'<br>고유값 '+fmt(c.nunique)+'<br>결측 '+(c.missing*100).toFixed(2)+'%'
+        +(c.mean!=null?'<br>평균 '+c.mean.toFixed(3)+' · 범위 '+c.min.toFixed(2)+'–'+c.max.toFixed(2):'')
+        +(AUDIT.coltip[c.name]?'<br><br>'+AUDIT.coltip[c.name]:''));
+      w.append(r);
+    });
+    box.append(w);
+  });
+})();
+
+/* ================= 02 drift ================= */
+function lineChart(el,series,opt){
+  const W=opt.w||440,H=opt.h||210,P={t:16,r:opt.pr||58,b:26,l:38};
+  const xs=opt.xs, y0=opt.y0, y1=opt.y1;
+  const X=i=>P.l+(W-P.l-P.r)*(xs.length<2?0.5:i/(xs.length-1));
+  const Y=v=>P.t+(H-P.t-P.b)*(1-(v-y0)/(y1-y0));
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" height="${H}" role="img">`;
+  (opt.ticks||[]).forEach(v=>{s+=`<line class="gl" x1="${P.l}" y1="${Y(v)}" x2="${W-P.r}" y2="${Y(v)}"/>`
+    +`<text class="tk" x="${P.l-7}" y="${Y(v)+3.5}" text-anchor="end">${v.toFixed(2)}</text>`;});
+  if(opt.rule!=null) s+=`<line x1="${P.l}" y1="${Y(opt.rule)}" x2="${W-P.r}" y2="${Y(opt.rule)}"
+    style="stroke:${PAL.muted}" stroke-width="1" stroke-dasharray="3 3"/>`;
+  xs.forEach((x,i)=>{s+=`<text class="tk" x="${X(i)}" y="${H-P.b+15}" text-anchor="middle">${x}</text>`;});
+  series.forEach(se=>{
+    s+=`<polyline style="fill:none;stroke:${se.color}" stroke-width="2" stroke-linejoin="round"
+      stroke-linecap="round" points="${se.v.map((v,i)=>X(i)+','+Y(v)).join(' ')}"/>`;
+    se.v.forEach((v,i)=>{s+=`<circle cx="${X(i)}" cy="${Y(v)}" r="3.6"
+      style="fill:${se.color};stroke:${PAL.surface}" stroke-width="2"/>`;});
+  });
+  // direct labels at the last point, pushed apart so they never collide
+  const li=xs.length-1;
+  const lab=series.map(se=>({se,y:Y(se.v[li])})).sort((a,b)=>a.y-b.y);
+  for(let i=1;i<lab.length;i++) if(lab[i].y-lab[i-1].y<13) lab[i].y=lab[i-1].y+13;
+  lab.forEach(l=>{
+    s+=`<line x1="${X(li)+4}" y1="${Y(l.se.v[li])}" x2="${X(li)+8}" y2="${l.y}"
+      style="stroke:${l.se.color}" stroke-width="1"/>`
+     +`<text class="dl" x="${X(li)+11}" y="${l.y+3.5}" style="fill:${l.se.color}">${l.se.name}</text>`;
+  });
+  s+='</svg>'; el.innerHTML=s;
+  // hover targets
+  const svg=el.querySelector('svg');
+  xs.forEach((x,i)=>{
+    const g=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    g.setAttribute('x',X(i)-((W-P.l-P.r)/(xs.length*2)));g.setAttribute('y',P.t);
+    g.setAttribute('width',(W-P.l-P.r)/xs.length);g.setAttribute('height',H-P.t-P.b);
+    g.setAttribute('fill','transparent'); svg.append(g);
+    bind(g,'<b>'+x+'</b><br>'+series.map(se=>se.name+' '+se.v[i].toFixed(4)
+      +(se.n?' · '+fmt(se.n[i])+'행':'')).join('<br>'));
+  });
+}
+(function(){
+  const ss=D.season.map(d=>d.season);
+  const all=D.season.map(d=>d.rate), an=D.season.map(d=>d.n);
+  const get=t=>ss.map(y=>D.segment_season.find(d=>d.type===t&&d.season===y));
+  const F=get('F'), Rg=get('R');
+  lineChart(document.getElementById('driftline'),[
+    {name:'전체',color:PAL.c1,v:all,n:an},
+    {name:'R 정규',color:PAL.c3,v:Rg.map(d=>d.rate),n:Rg.map(d=>d.n)},
+    {name:'F',color:PAL.c2,v:F.map(d=>d.rate),n:F.map(d=>d.n)},
+  ],{xs:ss,y0:0.44,y1:0.73,ticks:[0.45,0.50,0.55,0.60,0.65,0.70],rule:R0,h:340,pr:64});
+
+  // decomposition
+  const dd=D.drift_decomp, box=document.getElementById('decomp');
+  const rows=dd.parts.map(p=>({...p,label:p.type==='F'?'F · 2군 계열':'R · 정규시즌'}))
+    .sort((a,b)=>a.contrib-b.contrib);
+  const tot=dd.total_change, mx=Math.max(...rows.map(r=>Math.abs(r.contrib)),Math.abs(tot));
+  const tbl=E('div');
+  rows.concat([{label:'합계',contrib:tot,share_last:1,rate_first:null}]).forEach((r,i)=>{
+    const d=E('div','dev');
+    d.append(E('div','lb',r.label));
+    const tr=E('div','tr'); tr.style.background=i===2?'transparent':PAL.sunk;
+    const w=Math.abs(r.contrib)/mx*100, b=E('i');
+    b.style.background=i===2?PAL.ink2:(r.contrib<0?PAL.lo:PAL.hi);
+    b.style.width=w+'%'; b.style.left='0'; tr.append(b); d.append(tr);
+    d.append(E('div','vl',r.contrib.toFixed(4)));
+    if(r.rate_first!=null) bind(d,'<b>'+r.label+'</b><br>2019 '+r.rate_first.toFixed(4)
+      +' → 2024 '+r.rate_last.toFixed(4)+'<br>하락 '+(r.rate_last-r.rate_first).toFixed(4)
+      +'<br>2024 비중 '+pct(r.share_last,1)+'<br>기여 '+r.contrib.toFixed(4)
+      +' ('+(r.contrib/tot*100).toFixed(0)+'%)');
+    tbl.append(d);
+  });
+  box.append(tbl);
+  const note=E('p','csub','F는 행의 11.8%인데 하락의 '+
+    Math.round(rows.find(r=>r.type==='F').contrib/tot*100)+'%를 만든다. 행당 하락폭은 R의 3.8배.');
+  note.style.margin='14px 0 18px'; box.append(note);
+
+  const st=E('table');
+  st.innerHTML='<thead><tr><th>시즌</th><th>R 성공률</th><th>F 성공률</th><th>격차</th><th>F 비중</th></tr></thead>';
+  const stb=E('tbody');
+  ss.forEach((y,i)=>{
+    const f=F[i], r=Rg[i], gap=f.rate-r.rate, tr=E('tr');
+    tr.append(E('td',null,y+''));
+    tr.append(E('td','n',r.rate.toFixed(4)));
+    const fc=E('td','n',f.rate.toFixed(4)); fc.style.color=heat(f.rate); fc.style.fontWeight='600';
+    tr.append(fc);
+    tr.append(E('td','n',(gap>=0?'+':'−')+Math.abs(gap).toFixed(3)));
+    tr.append(E('td','n',pct(f.n/(f.n+r.n),1)));
+    stb.append(tr);
+  });
+  st.append(stb); box.append(st);
+  const n2=E('p','csub','F–R 격차가 2022년 +0.205에서 2023년 −0.030으로 부호까지 뒤집힌다.');
+  n2.style.marginTop='12px'; n2.style.marginBottom='0'; box.append(n2);
+
+  // season x month heat
+  const months=[...new Set(D.season_month.map(d=>d.month))].sort((a,b)=>a-b);
+  const hm=E('div','hm');
+  hm.style.gridTemplateColumns='34px repeat('+months.length+',minmax(52px,1fr))';
+  hm.append(E('div','axl',''));
+  months.forEach(m=>hm.append(E('div','axl',m+'월')));
+  ss.forEach(y=>{
+    hm.append(E('div','axl',y+''));
+    months.forEach(m=>{
+      const c=D.season_month.find(d=>d.season===y&&d.month===m);
+      const cell=E('div','cell');
+      if(!c||c.n<5000){cell.style.background=PAL.sunk; cell.style.opacity=.45;
+        cell.append(E('div','n','—'));}
+      else{cell.style.background=heat(c.rate); cell.style.color=heatInk(c.rate);
+        cell.append(E('div','r',c.rate.toFixed(3)),E('div','n',fmt(Math.round(c.n/1000))+'k'));
+        bind(cell,'<b>'+y+'년 '+m+'월</b><br>성공률 '+c.rate.toFixed(4)
+          +'<br>기준 대비 '+sgn((c.rate-R0)*100)+'%p<br>'+fmt(c.n)+'행');}
+      hm.append(cell);
+    });
+  });
+  document.getElementById('smheat').append(hm);
+})();
+
+function rampLegend(el,label,note){
+  const L=E('div','legend');
+  L.innerHTML='<span class="item">'+label+'</span>'
+    +'<span class="item"><span class="mono">−6%p</span>'
+    +'<span class="ramp">'+Array.from({length:13},(_,i)=>{
+      const t=i/12*2-1;
+      return '<i style="background:'+heat(R0+t*SPAN)+'"></i>';}).join('')+'</span>'
+    +'<span class="mono">+6%p</span></span>'
+    +'<span class="item">중앙 = r '+R0.toFixed(4)+'</span>'
+    +(note?'<span class="item">'+note+'</span>':'');
+  el.replaceWith(L);
+}
+rampLegend(document.getElementById('lg1'),'기준선 대비 편차','표본 5,000행 미만은 회색 처리');
+
+/* ================= 03 situations ================= */
+(function(){
+  const hm=E('div','hm'); hm.style.gridTemplateColumns='40px repeat(3,minmax(76px,1fr))';
+  hm.append(E('div','axl',''));
+  [0,1,2].forEach(s=>hm.append(E('div','axl',s+'S')));
+  [0,1,2,3].forEach(b=>{
+    hm.append(E('div','axl',b+'B'));
+    [0,1,2].forEach(s=>{
+      const c=D.count_matrix.find(d=>d.b===b&&d.s===s), cell=E('div','cell');
+      cell.style.minHeight='56px';
+      cell.style.background=heat(c.rate); cell.style.color=heatInk(c.rate);
+      cell.append(E('div','r',c.rate.toFixed(4)),E('div','n',fmt(Math.round(c.n/1000))+'k행'));
+      bind(cell,'<b>'+b+'-'+s+' 카운트</b><br>성공률 '+c.rate.toFixed(4)
+        +'<br>기준 대비 '+sgn((c.rate-R0)*100)+'%p<br>'+fmt(c.n)+'행 ('+pct(c.n/D.meta.rows,1)+')');
+      hm.append(cell);
+    });
+  });
+  document.getElementById('cmat').append(hm);
+
+  const HN={1:'좌',2:'우'};
+  const h2=E('div','hm'); h2.style.gridTemplateColumns='62px repeat(2,minmax(88px,1fr))';
+  h2.append(E('div','axl',''));
+  [1,2].forEach(b=>h2.append(E('div','axl','타자 '+HN[b])));
+  [1,2].forEach(p=>{
+    h2.append(E('div','axl','투수 '+HN[p]));
+    [1,2].forEach(b=>{
+      const c=D.hand_matrix.find(d=>d.p===p&&d.b===b), cell=E('div','cell');
+      cell.style.minHeight='87px';
+      cell.style.background=heat(c.rate); cell.style.color=heatInk(c.rate);
+      cell.append(E('div','r',c.rate.toFixed(4)),E('div','n',fmt(Math.round(c.n/1000))+'k행'));
+      bind(cell,'<b>투수 '+HN[p]+' vs 타자 '+HN[b]+'</b>'+(p===b?' · 동일 손':'')
+        +'<br>성공률 '+c.rate.toFixed(4)+'<br>기준 대비 '+sgn((c.rate-R0)*100)+'%p<br>'+fmt(c.n)+'행');
+      h2.append(cell);
+    });
+  });
+  document.getElementById('hmat').append(h2);
+
+  const DEV=[
+    ['base_state','주자 상황',d=>d.key.replace(/_/g,'·'),2000],
+    ['inning','이닝',d=>d.key+'회',2000],
+    ['month','월',d=>d.key+'월',2000],
+    ['pitcher_team','투수 팀 (1군 10팀)',d=>'#'+d.key,20000],
+    ['num_runners','주자 수',d=>d.key+'명',2000],
+    ['outs','아웃',d=>d.key+'아웃',2000],
+  ];
+  const box=document.getElementById('devs');
+  DEV.forEach(([k,title,lab,minn])=>{
+    const rows=D.by[k].filter(d=>d.n>=minn);
+    const mx=Math.max(...rows.map(d=>Math.abs(d.rate-R0)));
+    const w=E('div'); const h=E('p','ctitle',title); h.style.fontSize='12px'; w.append(h);
+    const sub=E('p','csub','표본 '+fmt(minn)+'행 이상'); sub.style.margin='2px 0 10px'; w.append(sub);
+    rows.forEach(d=>{
+      const dv=E('div','dev'); dv.style.gridTemplateColumns='auto 1fr auto';
+      dv.append(E('div','lb',lab(d)));
+      const tr=E('div','tr'); tr.append(E('div','z'));
+      const diff=d.rate-R0, wd=Math.abs(diff)/mx*50, i=E('i');
+      i.style.background=diff>=0?PAL.hi:PAL.lo; i.style.width=wd+'%';
+      if(diff>=0) i.style.left='50%'; else i.style.left=(50-wd)+'%';
+      tr.append(i); dv.append(tr);
+      dv.append(E('div','vl',sgn(diff*100)));
+      bind(dv,'<b>'+title+' · '+lab(d)+'</b><br>성공률 '+d.rate.toFixed(4)
+        +'<br>기준 대비 '+sgn(diff*100)+'%p<br>'+fmt(d.n)+'행 ('+pct(d.n/D.meta.rows,1)+')');
+      w.append(dv);
+    });
+    box.append(w);
+  });
+})();
+rampLegend(document.getElementById('lg2'),'막대 = 기준선 대비 편차 (%p)','막대 길이는 각 패널 안에서만 비교할 것');
+
+/* ================= 04 signal curves ================= */
+(function(){
+  const ORD=['asof_pitcher_success_rate','asof_pitcher_prev5_game_success_rate','asof_pitcher_reverse_rate',
+    'asof_pitcher_prev3_game_success_rate','asof_pitcher_prev1_game_success_rate','asof_batter_success_rate',
+    'asof_pitcher_middle_rate','asof_batter_middle_rate','asof_pitcher_prev5_game_middle_rate',
+    'asof_pitcher_ball_rate','asof_pitcher_strike_rate','asof_batter_n',
+    'asof_pitcher_n','asof_pitcher_fastball_rate','asof_pitcher_breaking_rate',
+    'asof_pitcher_offspeed_rate','li','home_win_expectancy','score_diff_pitcher_team','run_total_before'];
+  const box=document.getElementById('curves');
+  const Y0=0.43,Y1=0.63;
+  ORD.forEach(k=>{
+    const c=D.curves[k]; if(!c) return;
+    const col=D.columns.find(x=>x.name===k)||{};
+    const W=250,H=124,P={t:12,r:8,b:20,l:32};
+    const n=c.bins.length;
+    const X=i=>P.l+(W-P.l-P.r)*(i/(n-1));
+    const Y=v=>P.t+(H-P.t-P.b)*(1-(Math.max(Y0,Math.min(Y1,v))-Y0)/(Y1-Y0));
+    const strong=Math.abs(col.corr||0)>=0.03;
+    const color=strong?((col.corr||0)>=0?PAL.hi:PAL.lo):PAL.muted;
+    let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" height="${H}" role="img">`;
+    [0.45,0.50,0.55,0.60].forEach(v=>{s+=`<line class="gl" x1="${P.l}" y1="${Y(v)}" x2="${W-P.r}" y2="${Y(v)}"/>`;});
+    s+=`<text class="tk" x="${P.l-6}" y="${Y(0.60)+3.5}" text-anchor="end">.60</text>`;
+    s+=`<text class="tk" x="${P.l-6}" y="${Y(0.45)+3.5}" text-anchor="end">.45</text>`;
+    s+=`<line x1="${P.l}" y1="${Y(R0)}" x2="${W-P.r}" y2="${Y(R0)}" style="stroke:${PAL.muted}"
+      stroke-width="1" stroke-dasharray="3 3"/>`;
+    s+=`<polyline style="fill:none;stroke:${color}" stroke-width="2" stroke-linejoin="round"
+      stroke-linecap="round" points="${c.bins.map((b,i)=>X(i)+','+Y(b.rate)).join(' ')}"/>`;
+    c.bins.forEach((b,i)=>{s+=`<circle cx="${X(i)}" cy="${Y(b.rate)}" r="2.6"
+      style="fill:${color};stroke:${PAL.surface}" stroke-width="1.5"/>`;});
+    s+=`<text class="tk" x="${P.l}" y="${H-4}">저</text>`
+      +`<text class="tk" x="${W-P.r}" y="${H-4}" text-anchor="end">고</text>`;
+    s+='</svg>';
+    const w=E('div');
+    const hd=E('div'); hd.style.cssText='display:flex;justify-content:space-between;align-items:baseline;gap:8px';
+    const nm=E('div','mono',k.replace(/^asof_/,'')); nm.style.cssText='font-size:11px;color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap';
+    const cv=E('div','mono', col.corr!=null?((col.corr>=0?'+':'−')+Math.abs(col.corr).toFixed(3)):'');
+    cv.style.cssText='font-size:10.5px;color:'+(strong?color:PAL.muted)+';font-weight:600;flex:none';
+    hd.append(nm,cv); w.append(hd);
+    const sv=E('div'); sv.innerHTML=s; w.append(sv);
+    const spread=(Math.max(...c.bins.map(b=>b.rate))-Math.min(...c.bins.map(b=>b.rate)))*100;
+    const ft=E('div','mono','구간 편차 폭 '+spread.toFixed(1)+'%p'
+      +(c.missing>0.0005?' · 결측 '+(c.missing*100).toFixed(1)+'%':''));
+    ft.style.cssText='font-size:10px;color:var(--muted);margin-top:2px'; w.append(ft);
+    bind(w,'<b>'+k+'</b><br>상관 '+(col.corr!=null?col.corr.toFixed(4):'—')
+      +'<br>최저 구간 '+Math.min(...c.bins.map(b=>b.rate)).toFixed(4)
+      +'<br>최고 구간 '+Math.max(...c.bins.map(b=>b.rate)).toFixed(4)
+      +'<br>구간당 약 '+fmt(Math.round(c.bins[0].n/1000))+'k행');
+    box.append(w);
+  });
+})();
+
+/* ================= 05 cold start ================= */
+(function(){
+  const P=D.coldstart.pitcher_n, B=D.coldstart.batter_n;
+  const xs=P.map(d=>d.bucket);
+  const cc=document.getElementById('coldchart');
+  lineChart(cc,[
+    {name:'투수',color:PAL.c1,v:P.map(d=>d.rate),n:P.map(d=>d.n)},
+    {name:'타자',color:PAL.c2,v:B.map(d=>d.rate),n:B.map(d=>d.n)},
+  ],{xs,y0:0.48,y1:0.62,ticks:[0.50,0.54,0.58,0.62],rule:R0,h:206,w:460,pr:44});
+  const ct=E('table'); ct.style.marginTop='18px';
+  ct.innerHTML='<thead><tr><th>누적 표본</th><th>투수 행</th><th>성공률</th><th>타자 행</th><th>성공률</th></tr></thead>';
+  const ctb=E('tbody');
+  P.forEach((p,i)=>{
+    const b=B[i], tr=E('tr');
+    tr.append(E('td',null,'<span class="mono" style="font-size:11px">'+p.bucket+'</span>'));
+    tr.append(E('td','n',fmt(p.n)));
+    tr.append(E('td','n',p.rate.toFixed(4)));
+    tr.append(E('td','n',fmt(b.n)));
+    tr.append(E('td','n',b.rate.toFixed(4)));
+    ctb.append(tr);
+  });
+  ct.append(ctb); cc.append(ct);
+  const cn=E('p','csub','투수 표본 0인 행은 792개뿐 — 선수당 데뷔 첫 투구 1개씩이다. '
+    +'구간 사이 성공률 차이(0.552 → 0.513)는 <b>시즌 구성 차이</b>가 대부분을 설명한다.');
+  cn.style.marginTop='12px'; cn.style.marginBottom='0'; cc.append(cn);
+
+  const m=D.missing_summary, box=document.getElementById('misspanel');
+  const st=E('div'); st.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-bottom:16px';
+  [['결측 있는 행',pct(m.any_missing_frac,2),fmt(Math.round(m.any_missing_frac*D.meta.rows))+'행'],
+   ['그 행들의 성공률',m.rate_when_missing.toFixed(4),sgn((m.rate_when_missing-R0)*100)+'%p'],
+  ].forEach(([k,v,s])=>{const d=E('div','tile'); d.style.background=PAL.surface;
+    d.append(E('div','k',k),E('div','v',v),E('div','s',s)); st.append(d);});
+  box.append(st);
+  const t=E('table');
+  t.innerHTML='<thead><tr><th>컬럼</th><th>결측률</th></tr></thead>';
+  const tb=E('tbody');
+  m.per_col.slice(0,7).forEach(p=>{
+    const tr=E('tr');
+    tr.append(E('td',null,'<span class="mono" style="font-size:11px">'+p.name.replace(/^asof_/,'')+'</span>'));
+    tr.append(E('td','n', p.missing>0.0005?(p.missing*100).toFixed(2)+'%':'0.05%'));
+    tb.append(tr);
+  });
+  t.append(tb); box.append(t);
+  const note=E('p','csub','최근 폼 6개 컬럼만 2.0% 결측(데뷔 경기). 나머지 통산 rate는 0.05% 수준 — '
+    +'결측 자체는 큰 문제가 아니다. 진짜 콜드스타트 위험은 결측이 아니라 <b>표본 10~50개짜리 얕은 rate</b>다.');
+  note.style.marginTop='12px'; box.append(note);
+})();
+
+/* ================= 06 who ================= */
+(function(){
+  const W=440,H=230,P={t:14,r:14,b:30,l:40};
+  const X=v=>P.l+(W-P.l-P.r)*v, Y=v=>P.t+(H-P.t-P.b)*(1-v);
+  const S=[['pitcher','투수',PAL.c1],['batter','타자',PAL.c2]];
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" height="${H}" role="img">`;
+  [0,.25,.5,.75,1].forEach(v=>{s+=`<line class="gl" x1="${P.l}" y1="${Y(v)}" x2="${W-P.r}" y2="${Y(v)}"/>`
+    +`<text class="tk" x="${P.l-7}" y="${Y(v)+3.5}" text-anchor="end">${(v*100).toFixed(0)}%</text>`;});
+  [0,.25,.5,.75,1].forEach(v=>{s+=`<text class="tk" x="${X(v)}" y="${H-P.b+15}" text-anchor="middle">${(v*100).toFixed(0)}%</text>`;});
+  s+=`<line x1="${X(0)}" y1="${Y(0)}" x2="${X(1)}" y2="${Y(1)}" style="stroke:${PAL.muted}" stroke-width="1" stroke-dasharray="3 3"/>`;
+  S.forEach(([k,name,color])=>{
+    const L=D.entities[k].lorenz;
+    s+=`<polyline style="fill:none;stroke:${color}" stroke-width="2" stroke-linejoin="round"
+      points="${L.map(p=>X(p.top_frac)+','+Y(p.vol_frac)).join(' ')}"/>`;
+  });
+  S.forEach(([k,name,color],i)=>{
+    const L=D.entities[k].lorenz, f=i?0.55:0.22;
+    let p=L[0]; L.forEach(q=>{if(Math.abs(q.top_frac-f)<Math.abs(p.top_frac-f))p=q});
+    s+=`<text class="dl" x="${X(p.top_frac)}" y="${Y(p.vol_frac)+(i?18:-9)}"
+      text-anchor="middle" style="fill:${color}">${name}</text>`;
+  });
+  s+=`<text class="tk" x="${W-P.r}" y="${H-2}" text-anchor="end">상위 선수 비율 →</text></svg>`;
+  const el=document.getElementById('lorenz'); el.innerHTML=s;
+  const facts=E('div','legend');
+  const pl=D.entities.pitcher.lorenz, bl=D.entities.batter.lorenz;
+  const at=(L,f)=>{let best=L[0]; L.forEach(p=>{if(Math.abs(p.top_frac-f)<Math.abs(best.top_frac-f))best=p}); return best;};
+  facts.innerHTML='<span class="item">투수 상위 20% → 전체 투구의 '+pct(at(pl,.2).vol_frac,0)+'</span>'
+    +'<span class="item">중앙값 투수 '+fmt(D.entities.pitcher.quantiles['50'])+'구 · 최다 '+fmt(D.entities.pitcher.max)+'구</span>';
+  el.append(facts);
+
+  // rate histogram
+  const H2=200,W2=440,P2={t:12,r:12,b:28,l:34};
+  const bins=D.entities.pitcher.rate_hist.length;
+  const [r0,r1]=D.entities.pitcher.rate_hist_range;
+  const mx=Math.max(...D.entities.pitcher.rate_hist,...D.entities.batter.rate_hist);
+  const bw=(W2-P2.l-P2.r)/bins;
+  const BX=i=>P2.l+bw*i, BY=v=>P2.t+(H2-P2.t-P2.b)*(1-v/mx);
+  let s2=`<svg viewBox="0 0 ${W2} ${H2}" width="100%" height="${H2}" role="img">`;
+  [0,40,80,120].forEach(v=>{if(v<=mx)s2+=`<line class="gl" x1="${P2.l}" y1="${BY(v)}" x2="${W2-P2.r}" y2="${BY(v)}"/>`
+    +`<text class="tk" x="${P2.l-6}" y="${BY(v)+3.5}" text-anchor="end">${v}</text>`;});
+  [['batter',PAL.c2,.34],['pitcher',PAL.c1,.62]].forEach(([k,c,op])=>{
+    D.entities[k].rate_hist.forEach((v,i)=>{ if(!v)return;
+      s2+=`<rect x="${BX(i)+1}" y="${BY(v)}" width="${bw-2}" height="${(H2-P2.t-P2.b)-(BY(v)-P2.t)}"
+        rx="2" style="fill:${c};fill-opacity:${op}"/>`;});
+  });
+  const toX=r=>P2.l+(W2-P2.l-P2.r)*((r-r0)/(r1-r0));
+  s2+=`<line x1="${toX(R0)}" y1="${P2.t}" x2="${toX(R0)}" y2="${H2-P2.b}" style="stroke:${PAL.ink2}"
+    stroke-width="1" stroke-dasharray="3 3"/>`
+   +`<text class="dl" x="${toX(R0)+5}" y="${P2.t+10}" style="fill:${PAL.ink2}">r</text>`;
+  [0.35,0.45,0.55,0.65,0.75].forEach(v=>{s2+=`<text class="tk" x="${toX(v)}" y="${H2-P2.b+15}" text-anchor="middle">${v.toFixed(2)}</text>`;});
+  s2+='</svg>';
+  const el2=document.getElementById('ratehist'); el2.innerHTML=s2;
+  const lg=E('div','legend');
+  lg.innerHTML='<span class="item"><span class="swatch" style="background:var(--c1);opacity:.62"></span>투수 '
+    +D.entities.pitcher.n_qualified+'명 · σ '+D.entities.pitcher.rate_std.toFixed(4)+'</span>'
+    +'<span class="item"><span class="swatch" style="background:var(--c2);opacity:.34"></span>타자 '
+    +D.entities.batter.n_qualified+'명 · σ '+D.entities.batter.rate_std.toFixed(4)+'</span>';
+  el2.append(lg);
+})();
+
+/* ================= 08 audit verdicts ================= */
+(function(){
+  const V=[
+    ['기각','var(--st-ok)','범주형을 범주형으로 처리하지 않는다',
+     '피해 <b>0</b>이다. <code>base_state</code>는 8개 값 전부가 <code>runner_on_1b/2b/3b</code> 조합으로 '
+     +'1:1 대응하므로 이미 완전 중복이고, <code>top_bottom</code>·<code>game_type</code>은 2값이라 '
+     +'수치 분할과 범주 분할이 수학적으로 동일하다. OrdinalEncoder를 쓰는 현재 방식은 손해가 없다.'],
+    ['절반 사실','var(--st-warn)','선수 ID를 수치로 넣는 것이 해롭다',
+     'ID축은 임의 구간이 아니다 — <code>corr(pitcher_id, 첫 등장 시즌) = +0.704</code>, 타자는 +0.706. '
+     +'즉 ID로 자르는 것은 사실상 <b>“데뷔 시기”로 자르는 것</b>이라 정보가 있다. '
+     +'다만 데뷔 시기는 시즌 드리프트와 얽힌 축이라, 판정 기준이 바뀐 해에는 오히려 해가 된다. '
+     +'ID를 빼는 실험(no_pid)이 연도별로 +44 / +2 / +55 / −5로 크게 널뛰는 것과 앞뒤가 맞는다.'],
+    ['무관','var(--st-ok)','타순 일순(TTO) 계산에 cumcount 버그가 있다',
+     '버그 자체는 재현된다(타석이 아니라 투구를 세어 평균 3.88배 부풀려진다). 그러나 '
+     +'<b>현재 65피처에 TTO 계열이 없다</b> — 이 주장은 현재 모델과 무관하다. '
+     +'게다가 새로 넣을 이유도 없다: 선발 한정으로 재보면 직접 만든 대리지표의 정확도가 '
+     +'<code>corr=+0.795</code>인데, 이미 피처로 들어 있는 <code>inning</code>이 <code>+0.827</code>로 '
+     +'<b>더 낫다.</b> TTO 효과 크기도 0.6%p에 불과하다.'],
+    ['사실 · 치명적','var(--st-bad)','trackman 키가 2025에 0개가 된다',
+     '사실이다. 그리고 이것이 이번 감사에서 가장 값진 발견이다. 자세한 내용은 바로 위 07번 섹션의 '
+     +'경고 상자를 보라. 로컬 검증(2024 채점)에서는 키가 97.2% 생성되므로 결함이 드러나지 않고, '
+     +'제출한 뒤에야 무력화된다.'],
+  ];
+  const box=document.getElementById('verdicts');
+  V.forEach(([st,col,title,body])=>{
+    const r=E('div','vrow');
+    const s=E('div','vstat'); s.style.color=col;
+    const d=E('span','dot'); d.style.background=col;
+    s.append(d, E('span',null,st)); r.append(s);
+    const b=E('div','vbody'); b.append(E('h4',null,title), E('p',null,body)); r.append(b);
+    box.append(r);
+  });
+})();
+
+/* ================= 07 trackman ================= */
+(function(){
+  const T=D.trackman; if(!T||T.error) return;
+  const mix2=T.pitch_mix, tot=mix2.reduce((a,b)=>a+b.n,0);
+  const box=document.getElementById('tmmix');
+  const bar=E('div'); bar.style.cssText='display:flex;gap:2px;height:34px;margin-bottom:14px';
+  const cols=[PAL.c1,PAL.c2,PAL.c3,PAL.muted];
+  mix2.forEach((m,i)=>{
+    const seg=E('div'); seg.style.cssText='flex:'+m.n+';background:'+cols[i]+';border-radius:4px';
+    bind(seg,'<b>'+m.group+'</b><br>'+fmt(m.n)+'구 · '+pct(m.n/tot,1));
+    bar.append(seg);
+  });
+  box.append(bar);
+  const lg=E('div','legend');
+  lg.innerHTML=mix2.map((m,i)=>'<span class="item"><span class="swatch" style="background:'+cols[i]
+    +'"></span>'+m.group+' <span class="mono">'+pct(m.n/tot,1)+'</span></span>').join('');
+  box.append(lg);
+  const st=E('div'); st.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-top:16px';
+  [['전체 투구',fmt(T.rows),'2019–2024'],['Trackman 투수 ID',fmt(T.n_pitcher),'train 매칭 325명']]
+    .forEach(([k,v,s])=>{const d=E('div','tile'); d.style.background=PAL.surface;
+      d.append(E('div','k',k),E('div','v',v),E('div','s',s)); st.append(d);});
+  box.append(st);
+
+  const t=document.getElementById('tmtab');
+  t.innerHTML='<thead><tr><th>구종군</th><th>구속</th><th>회전수</th><th>수직무브</th><th>수평무브</th></tr></thead>';
+  const tb=E('tbody');
+  T.speed_by_group.sort((a,b)=>b.n-a.n).forEach(g=>{
+    const tr=E('tr');
+    tr.append(E('td',null,g.group));
+    [[g.speed_mean,1,' km/h'],[g.spin_mean,0,''],[g.ivb_mean,1,''],[g.hb_mean,1,'']]
+      .forEach(([v,d,u])=>tr.append(E('td','n',v.toFixed(d)+u)));
+    tb.append(tr);
+  });
+  t.append(tb);
+})();
+
+</script>

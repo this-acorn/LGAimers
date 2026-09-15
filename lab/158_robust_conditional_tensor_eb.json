@@ -1,0 +1,357 @@
+{
+  "experiment": 158,
+  "status": "FAIL_NO_SUBMISSION",
+  "analysis_only": true,
+  "reads_test": false,
+  "uses_lb": false,
+  "third_party_code_or_artifacts_read": false,
+  "method_source": "calico-cat17/LG-Aimers-9th issue #5 prose specification",
+  "protocol": {
+    "tensor_specs": [
+      {
+        "name": "pitcher_batter_hand",
+        "keys": [
+          "pitcher_id",
+          "batter_hand"
+        ],
+        "weight": 0.25,
+        "alpha": 500.0
+      },
+      {
+        "name": "pitcher_count_base",
+        "keys": [
+          "pitcher_id",
+          "_count_state",
+          "base_state"
+        ],
+        "weight": 0.75,
+        "alpha": 1000.0
+      },
+      {
+        "name": "hand_count_base",
+        "keys": [
+          "pitcher_hand",
+          "batter_hand",
+          "_count_state",
+          "base_state"
+        ],
+        "weight": 0.05,
+        "alpha": 500.0
+      }
+    ],
+    "source_rows": "immediately previous season, game_type R only",
+    "residual": "control_success - current blended OOF",
+    "shrinkage_prior": 0.0,
+    "reliability_alpha": 500.0,
+    "reliable_weight": 1.0,
+    "unstable_weight": 0.25,
+    "unseen_weight": 0.5,
+    "primary_scale_fixed_before_2024": 1.0,
+    "scale_curve_and_oracle_are_2024_diagnostics_only": true,
+    "early_late_definition": "game_month <= 6 versus > 6"
+  },
+  "alignment": {
+    "2022": {
+      "rows": 247472,
+      "baseline_score": 2337.158883878898,
+      "target_rate": 0.5289204435249241
+    },
+    "2023": {
+      "rows": 245525,
+      "baseline_score": -22.742734501002282,
+      "target_rate": 0.49995723449750534
+    },
+    "2024": {
+      "rows": 253507,
+      "baseline_score": 936.5839989479041,
+      "target_rate": 0.4861049201797189
+    }
+  },
+  "tensor_2022_to_2023": {
+    "source_R_rows": 217024,
+    "validation_R_rows": 219839,
+    "components": {
+      "pitcher_batter_hand": {
+        "keys": [
+          "pitcher_id",
+          "batter_hand"
+        ],
+        "weight": 0.25,
+        "alpha": 500.0,
+        "groups": 561,
+        "coverage": 0.7671235108441096,
+        "correction_mean": 0.00017593701452758563,
+        "correction_std": 0.013919107210703512,
+        "correction_mean_abs": 0.009489146244219213,
+        "correction_max_abs": 0.07092401673379871
+      },
+      "pitcher_count_base": {
+        "keys": [
+          "pitcher_id",
+          "_count_state",
+          "base_state"
+        ],
+        "weight": 0.75,
+        "alpha": 1000.0,
+        "groups": 18483,
+        "coverage": 0.7297831178087771,
+        "correction_mean": 6.590044301238576e-05,
+        "correction_std": 0.0032673375344447093,
+        "correction_mean_abs": 0.0018372529361479531,
+        "correction_max_abs": 0.023776104182672925
+      },
+      "hand_count_base": {
+        "keys": [
+          "pitcher_hand",
+          "batter_hand",
+          "_count_state",
+          "base_state"
+        ],
+        "weight": 0.05,
+        "alpha": 500.0,
+        "groups": 384,
+        "coverage": 1.0,
+        "correction_mean": 0.0008863565474525268,
+        "correction_std": 0.009809602572366065,
+        "correction_mean_abs": 0.007508704243984691,
+        "correction_max_abs": 0.0339415408119744
+      }
+    },
+    "tensor_mean_R": 0.0002554666654908443,
+    "tensor_std_R": 0.004836642566761173,
+    "tensor_mean_abs_R": 0.0033437761321713604,
+    "tensor_max_abs_R": 0.025738672849683696
+  },
+  "discovery_2023_ungated": {
+    "raw_gain": 3.2321641808330526,
+    "equal_mean_shape_gain": 3.9514539142304628,
+    "F_contribution": 0.0,
+    "R_contribution": 3.232164180819062,
+    "mean_shift": 0.00022874060187305645,
+    "effect_std": 0.004577326293837289,
+    "effect_mean_abs": 0.0029939615156111183
+  },
+  "reliability_fit_2023": {
+    "source_pitchers": 286,
+    "global_mean_row_loss_gain": 9.02452595638335e-06,
+    "reliable_pitchers": 170,
+    "unstable_pitchers": 116,
+    "reliable_row_share": 0.5121748188447,
+    "shrunk_gain_min": -0.0008968128346297753,
+    "shrunk_gain_median": 4.514799475266048e-06,
+    "shrunk_gain_max": 0.000985912309435239
+  },
+  "tensor_2023_to_2024": {
+    "source_R_rows": 219839,
+    "validation_R_rows": 223497,
+    "components": {
+      "pitcher_batter_hand": {
+        "keys": [
+          "pitcher_id",
+          "batter_hand"
+        ],
+        "weight": 0.25,
+        "alpha": 500.0,
+        "groups": 572,
+        "coverage": 0.7056057623655363,
+        "correction_mean": 0.00400115484930364,
+        "correction_std": 0.014460865075959537,
+        "correction_mean_abs": 0.009619006674736702,
+        "correction_max_abs": 0.08020874925347818
+      },
+      "pitcher_count_base": {
+        "keys": [
+          "pitcher_id",
+          "_count_state",
+          "base_state"
+        ],
+        "weight": 0.75,
+        "alpha": 1000.0,
+        "groups": 18820,
+        "coverage": 0.6645023608815536,
+        "correction_mean": 0.0004776834996653645,
+        "correction_std": 0.0033102140916758953,
+        "correction_mean_abs": 0.0017081622936260977,
+        "correction_max_abs": 0.02869943793027327
+      },
+      "hand_count_base": {
+        "keys": [
+          "pitcher_hand",
+          "batter_hand",
+          "_count_state",
+          "base_state"
+        ],
+        "weight": 0.05,
+        "alpha": 500.0,
+        "groups": 384,
+        "coverage": 1.0,
+        "correction_mean": 0.00818185639511803,
+        "correction_std": 0.010789863738342752,
+        "correction_mean_abs": 0.010962696858088504,
+        "correction_max_abs": 0.0382458171512592
+      }
+    },
+    "tensor_mean_R": 0.001906952942433586,
+    "tensor_std_R": 0.005155653731143993,
+    "tensor_mean_abs_R": 0.0035562440886608973,
+    "tensor_max_abs_R": 0.03516599105601972
+  },
+  "gate_application_2024": {
+    "weight_1_row_share_R": 0.38590227161885843,
+    "weight_025_row_share_R": 0.35141858727410213,
+    "weight_05_unseen_row_share_R": 0.2626791411070395,
+    "mean_gate_R": 0.6050964889909037
+  },
+  "confirmation_2024_fixed_scale": {
+    "raw_gain": 0.3426772924752868,
+    "equal_mean_shape_gain": 4.320048522532602,
+    "F_contribution": 0.0,
+    "R_contribution": 0.3426772924694565,
+    "mean_shift": 0.0010220331058051757,
+    "effect_std": 0.0034696078387534595,
+    "effect_mean_abs": 0.0019319324909139088
+  },
+  "periods_2024": {
+    "early_month_le_6": {
+      "rows": 143541,
+      "target_rate": 0.49031983893103714,
+      "baseline_score": 1080.0848610441171,
+      "candidate_score": 1088.8708755970033,
+      "gain": 8.786014552886172
+    },
+    "late_month_gt_6": {
+      "rows": 109966,
+      "target_rate": 0.48060309550224617,
+      "baseline_score": 727.8416294052015,
+      "candidate_score": 717.1506348796707,
+      "gain": -10.690994525530755
+    }
+  },
+  "hands_2024": {
+    "pitcher=1|batter=1": {
+      "rows": 30493,
+      "target_rate": 0.453841865346145,
+      "baseline_score": 838.4111049091647,
+      "candidate_score": 839.0515724414848,
+      "gain": 0.6404675323201445
+    },
+    "pitcher=1|batter=2": {
+      "rows": 41337,
+      "target_rate": 0.5069550281829838,
+      "baseline_score": 1021.6305380149948,
+      "candidate_score": 1034.0340035232098,
+      "gain": 12.403465508214936
+    },
+    "pitcher=2|batter=1": {
+      "rows": 89268,
+      "target_rate": 0.49815163328404355,
+      "baseline_score": 750.7952494130832,
+      "candidate_score": 746.271327008119,
+      "gain": -4.523922404964196
+    },
+    "pitcher=2|batter=2": {
+      "rows": 92409,
+      "target_rate": 0.47578699044465367,
+      "baseline_score": 798.9178737025537,
+      "candidate_score": 798.469395908985,
+      "gain": -0.4484777935687134
+    }
+  },
+  "all_hands_positive": false,
+  "pitcher_cluster_bootstrap_2024": {
+    "draws": 5000,
+    "pitchers": 391,
+    "median": 0.3972674431894525,
+    "p025": -6.859475227573842,
+    "p975": 7.834113303794759,
+    "prob_positive": 0.5454
+  },
+  "scale_curve_2024_diagnostic_only": [
+    {
+      "scale": 0.0,
+      "raw_gain": 0.0,
+      "equal_mean_shape_gain": 0.0,
+      "F_contribution": 0.0,
+      "R_contribution": 0.0,
+      "mean_shift": 0.0,
+      "effect_std": 0.0,
+      "effect_mean_abs": 0.0
+    },
+    {
+      "scale": 0.25,
+      "raw_gain": 1.0676324531666523,
+      "equal_mean_shape_gain": 1.983573336195036,
+      "F_contribution": 0.0,
+      "R_contribution": 1.067632453149816,
+      "mean_shift": 0.00025550827645121066,
+      "effect_std": 0.0008674019596883649,
+      "effect_mean_abs": 0.0004829831227284772
+    },
+    {
+      "scale": 0.5,
+      "raw_gain": 1.4806228196163147,
+      "equal_mean_shape_gain": 3.3647725353636133,
+      "F_contribution": 0.0,
+      "R_contribution": 1.4806228196114037,
+      "mean_shift": 0.0005110165529025323,
+      "effect_std": 0.0017348039193767297,
+      "effect_mean_abs": 0.0009659662454569544
+    },
+    {
+      "scale": 0.75,
+      "raw_gain": 1.2389710993710423,
+      "equal_mean_shape_gain": 4.1435975974724215,
+      "F_contribution": 0.0,
+      "R_contribution": 1.238971099384519,
+      "mean_shift": 0.000766524829353854,
+      "effect_std": 0.0026022058790650944,
+      "effect_mean_abs": 0.0014489493681854322
+    },
+    {
+      "scale": 1.0,
+      "raw_gain": 0.3426772924752868,
+      "equal_mean_shape_gain": 4.320048522532602,
+      "F_contribution": 0.0,
+      "R_contribution": 0.3426772924694565,
+      "mean_shift": 0.0010220331058051757,
+      "effect_std": 0.0034696078387534595,
+      "effect_mean_abs": 0.0019319324909139088
+    },
+    {
+      "scale": 1.25,
+      "raw_gain": -1.2082586011374588,
+      "equal_mean_shape_gain": 3.8941253105328997,
+      "F_contribution": 0.0,
+      "R_contribution": -1.2082586011340917,
+      "mean_shift": 0.0012775413822563864,
+      "effect_std": 0.004337009798441824,
+      "effect_mean_abs": 0.0024149156136423866
+    },
+    {
+      "scale": 1.5,
+      "raw_gain": -3.4138365814339977,
+      "equal_mean_shape_gain": 2.865827961473542,
+      "F_contribution": 0.0,
+      "R_contribution": -3.413836581425837,
+      "mean_shift": 0.0015330496587076525,
+      "effect_std": 0.005204411758130189,
+      "effect_mean_abs": 0.0028978987363708643
+    },
+    {
+      "scale": 2.0,
+      "raw_gain": -9.788918802100511,
+      "equal_mean_shape_gain": -0.997889147769115,
+      "F_contribution": 0.0,
+      "R_contribution": -9.78891880207435,
+      "mean_shift": 0.002044066211609963,
+      "effect_std": 0.006939215677506919,
+      "effect_mean_abs": 0.0038638649818278177
+    }
+  ],
+  "scalar_oracle_2024_diagnostic_only": {
+    "beta": 0.5327160920674765,
+    "gain": 1.4862283505334517
+  },
+  "f_rows_exact_fallback": true,
+  "elapsed_seconds": 21.375516653060913
+}

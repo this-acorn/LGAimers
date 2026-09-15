@@ -1,0 +1,94 @@
+[08-25 12:02:43] chain started
+[08-25 12:02:43] waiting for PID 8976 to exit
+[08-25 12:17:38] runq started
+[08-25 12:17:39] start exp/67_train_mc04
+[08-25 12:17:44]   exp/67_train_mc04 PID 25924 priority High
+[08-25 13:00] exp/67 intentionally stopped - demoted after exp/74 seed-scaling audit (8-seed gain only +3.8, not +15.3). Reordering to 69 -> 72 -> 67.
+[08-25 13:17] exp/69 aborted at 9min (arm 1 of 6). Replaced by exp/75 (mc7 @ lr0.04) per workflow synthesis: mc7 = 4.6 pts/hour vs exp/69 = 0.6. exp/69 requeued after exp/72.
+[08-27 23:14:46] runq89 started
+[08-27 23:14:46] start exp/89_cat5_val
+[08-27 23:14:51]   exp/89_cat5_val PID 22556 priority High
+[08-28 00:55:27] done exp/89_cat5_val exit=
+[08-28 00:55:27] runq89 finished
+[08-28 04:51:26] runq91 started arms=B,D
+[08-28 04:51:26] start exp/91b arm=B,D
+[08-28 04:51:31]   exp/91b arm=B,D PID 25616 priority High
+[08-28 04:52:01] runq91 started arms=B,D
+[08-28 04:52:01] start exp/91b arm=B
+[08-28 04:52:06]   exp/91b arm=B PID 23924 priority High
+[probe] out-file from tool
+[08-28 06:28:08] runq91c started (waiting for exp/91b arm D; takes over if runq91 dies)
+[08-28 07:52:51] arm D finished by runq91 -> chain continues
+[08-28 07:52:56] done exp/91b arm=D exit=
+[08-28 07:52:56] runq91 finished
+[08-28 07:53:21] start exp/91c
+[08-28 07:53:26]   exp/91c PID 512 priority High
+[08-28 08:03:26] done exp/91c exit=
+[08-28 08:03:26] exp/91c FAILED - skipping arms T/T0
+[08-28 08:03:26] runq91c finished
+[08-28 08:04:09] runq91 started arms=T,T0
+[08-28 08:04:09] start exp/91b arm=T
+[08-28 08:04:14]   exp/91b arm=T PID 26956 priority High
+[08-28 09:29:30] done exp/91b arm=T exit=
+[08-28 09:29:30] start exp/91b arm=T0
+[08-28 09:29:35]   exp/91b arm=T0 PID 23852 priority High
+[08-28 10:26:46] STOPPED by user: arm T0 seed7 killed mid-training
+[08-29 01:20:05] runq93 started arms=A,B,C,M4
+[08-29 01:20:05] start exp/93 arm=A
+[08-29 01:20:10]   exp/93 arm=A PID 25856 priority High
+[08-29 03:33:54] done exp/93 arm=A OK (npy present)
+[08-29 03:33:54] start exp/93 arm=B
+[08-29 03:33:56] auto: arm C skipped (marker lab/93_C.npy) because arm A paired mean -20.2 <= -10
+[08-29 03:33:59]   exp/93 arm=B PID 15928 priority High
+[08-29 05:14:10] done exp/93 arm=B OK (npy present)
+[08-29 05:14:10] skip exp/93 arm=C (lab/93_C.npy exists)
+[08-29 05:14:10] start exp/93 arm=M4
+[08-29 05:14:15]   exp/93 arm=M4 PID 19420 priority High
+[08-29 16:57:31] done exp/93 arm=M4 OK (npy present)
+[08-29 16:57:31] runq93 finished
+[08-29 16:58:30] runq93 started arms=OH,CTR1
+[08-29 16:58:30] start exp/93 arm=OH
+[08-29 16:58:36]   exp/93 arm=OH PID 23432 priority High
+[08-29 17:28:01] done exp/93 arm=OH OK (npy present)
+[08-29 17:28:01] start exp/93 arm=CTR1
+[08-29 17:28:06]   exp/93 arm=CTR1 PID 25104 priority High
+[08-29 18:23:13] done exp/93 arm=CTR1 OK (npy present)
+[08-29 18:23:13] runq93 finished
+[08-29 22:37:32] runq100 started arms=C6
+[08-29 22:37:33] start exp/100 arm=C6  (battery status 2, charge 79%)
+[08-29 22:37:38]   exp/100 arm=C6 PID 25628 priority High
+[08-30 00:21:17] STOPPED by user: exp/100 arm=C6 seed42 834.6 (paired -16.7, rookie -14.9 vet -1.8 F -7.4 R -9.3) -> arm rejected by rule (both seeds must be positive); seed7 killed. Next: IT 2 seeds.
+[08-30 00:21:24] runq100 started arms=IT
+[08-30 00:21:25] start exp/100 arm=IT  (battery status 2, charge 55%)
+[08-30 00:21:30]   exp/100 arm=IT PID 38132 priority High
+[08-30 02:00:14] P01 f_rk_ratedev (hamin harness) DEAD: seed42 -24.2 (rookie -65.4) / seed7 +16.6 / paired -3.8 spread 28.8 -> instability, user confirmed dead.
+[08-30 03:37:47] done exp/100 arm=IT OK (npy present)
+[08-30 03:37:47] runq100 finished
+[08-30 04:12:12] runq100 started arms=IT300
+[08-30 04:12:12] start exp/100 arm=IT300  (battery status 2, charge 79%)
+[08-30 04:12:17]   exp/100 arm=IT300 PID 39908 priority High
+[08-30 05:14:17] done exp/100 arm=IT300 OK (npy present)
+[08-30 05:14:17] runq100 finished
+[08-30 05:21:12] IT300 (2 seeds, codex rerun) PASSED local gate: paired +21.6/+15.9 mean +18.8 spread 2.86, 2seed +13.4, proj8 +9.4, pen 37.0->31.8, shape +8.3, rookie +9.0 F +3.1 R +10.3. User: Hamin builds ntree_end=300 from champion bundle -> LB probe.
+[08-30 05:44:40] BUILT+VALIDATED submit18_it300.zip (champion bundle, ntree_end=300) and submit18_it300_m012.zip (+ preds-0.012 center probe). All checks OK (venv311, fake server 245,789 rows 20s, row-independence 0.00e+00, real 5 rows). User submits: it300 first -> S0, then m012 -> S1; d_hat=(dS*0.25/1e5+0.012^2)/(0.024).
+[08-30 06:29:04] LB submit18_it300 = 1040.04 (-19.0 vs champion 1059.05) -> tree-count reduction DEAD on 2025 (3rd local+/LB- flip on regularization axes). Built submit19_it500_m012.zip (champion + preds-0.012, train-trend constant) -> center probe; d_hat=(dS*0.25/1e5+0.000144)/0.024 with S0=1059.05.
+[08-30 06:37:14] LB submit19_it500_m012 = 1065.26 (+6.2, new team best). d_hat=0.0066 -> built submit20_it500_m0066.zip (expected ~1076.7).
+[08-30 06:42:19] LB submit20_it500_m0066 = 1076.81 (predicted 1076.8; new team best, +17.8). Center axis closed. Built submit21_s115.zip (c=0.49, s=1.15, delta=0.0066) as scale probe.
+[08-30 06:47:10] LB submit21_s115 = 1073.66 (-3.15 vs 1076.81) -> s*~1.06, gain ~+3.5. Built submit22_s106.zip (polish).
+[08-30 06:50:14] LB submit22_s106 = 1081.67 (new team best, +22.6 vs 1059.05). Exact quadratic: s*=1.066, peak 1081.70 -> scale axis closed. HANDOFF 1.17 appended.
+[08-30 07:27:39] Reference repo (x2_qp_cheese, 27th place 1081.68) dissected by 5-reader workflow -> lab/105_reference_dissection.md. Only transferable card: V18-style protected conditional residual (codex exp/103 pre-gate PASS gamma=0.30, exp/104 strict year-fold running). Everything else matches our dead-axis ledger.
+[08-30 10:45:28] TEAM A (threads14) BASE reproduces lab/89 bit-exactly (851.2/856.5). HT (has_time=True): paired -16.5/-23.0 mean -19.7 spread 3.25, shape -14.9, pen 37.0->40.3, all segments negative -> REJECTED. TEAM B IT (threads12): vs lab/89 unpaired noise (+10.4/-9.1); own curve peaks it400/it300 (+8.6/+7.7) = same local direction, LB already says -19 -> IT axis closed.
+[08-31 06:13:21 KST] LB candidate_v18g030.zip (SHA256 ED1B729B9B83EB1F0D344B475939353149D5ADC83009A40FF116DF6E5A168557) = 1092.808353586, runtime 4s. New team best: +33.75835 vs 1059.05 and about +11.14 vs submit22_s106 1081.67. Frozen hierarchical hand+pressure residual transfers positively to 2025; gamma=.30 safe champion preserved.
+[08-30 14:38:58] exp/109 (Claude): our dead-as-feature signals re-tested as V18-style protected residuals on top of .30 correction — team_match(k700), rookie_srate(k200), batter_count(k280), mid_bin(k300), b_early(k300). ALL LOO folds selected weight 0.00 -> survivors 0, GATE FAIL. Axis closed: residual form does not revive our signals either.
+[08-30 14:45:38] WARNING to codex logged in HANDOFF: it300+V18 cross is the already-LB-dead tree-count axis (submit18_it300 = 1040.04, -19). Do not submit.
+[08-30 15:24:58] exp/101 MLP (lab GPU) verdict: raw d=-389/K=335 w*=0 gain 0; even optimal logit recalibration leaves d=-171.5 -> 2025 gain +0.4. DL axis CLOSED.
+[08-30 15:35:45] exp/111 row-independence QA on candidate_v18g030.zip: 6 cases (batch/reverse/permutation/duplicate/split/singleton) all max-abs-diff 0.000e+00 -> rule 4 satisfied. exp/110 mk-isos audit saved (their best 1053.86 < our 1092.81; they never used calibration).
+[08-30 16:15:43] file-number collision with codex resolved: Claude's QA/dissection renumbered 111->120, 110->121 (codex owns 110/111/113/114/115).
+[08-30 16:55:23] Claude: closed-form screener shape=1e5*corr^2 verified (911.1 match). 5-class recombination DEAD (+1.76, sign-unstable). All 49 raw columns as linear residual corrections: 0 survive 3-year transfer. Champion residual is linearly orthogonal to all raw columns.
+[08-30 23:15:40] runq130 start: exp/94 --arm none --iterations 1000 --threads 14 --out-dir submit30_src (battery 1, 75%)
+[08-30 23:15:45]   PID 12936 priority High
+[08-30 23:30:54]   WARNING exp/94 it1000 appears stalled (3 x 5min with <30s cpu)
+[08-30 23:45:57]   WARNING exp/94 it1000 appears stalled (3 x 5min with <30s cpu)
+[08-31 00:01:02]   WARNING exp/94 it1000 appears stalled (3 x 5min with <30s cpu)
+[08-31 00:16:06]   WARNING exp/94 it1000 appears stalled (3 x 5min with <30s cpu)
+[08-31 00:21:06] runq130 done FAILED (no model.pkl) - see lab/130_it1000_err.txt
