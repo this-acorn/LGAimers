@@ -1,6 +1,6 @@
 # Methodology
 
-This document describes the selected `submit14` implementation and the experiments that led to it. It is a guide to the recorded work, rather than a claim that every exploratory branch became part of the deployed model.
+This document follows development from the reproducible `submit14` checkpoint through the final local `last.zip` pipeline. The early checkpoint is included in this repository; the later pipeline description is grounded in its local inference source and artifact metadata. Exploratory branches are distinguished from components actually used in that package.
 
 ## Problem formulation
 
@@ -55,7 +55,7 @@ Reconstruction is a training-time operation, not an operation across test rows. 
 
 Sources: [target analysis](../exp/52_target_anatomy.py), [multiclass comparison](../exp/53_multiclass.py), [full-data training](../exp/54_train_mc79.py).
 
-## Selected CatBoost configuration
+## Core CatBoost configuration
 
 | Parameter | Value |
 | --- | --- |
@@ -68,7 +68,47 @@ Sources: [target analysis](../exp/52_target_anatomy.py), [multiclass comparison]
 | Native categorical columns | `top_bottom`, `game_type`, `base_state` |
 | Prediction | Mean class-0 probability from eight models, clipped to [0, 1] |
 
-The selected version does not use a neural network, a TrackMan physics model, or an affine calibration layer in its inference path. Those approaches appear in exploratory work or other versions and should not be attributed to this bundle.
+This table describes the `submit14` checkpoint. The later core retains the five-class objective and adds `pitcher_team_id` and `batter_team_id` to native categorical handling. Additional model branches have their own features and configurations; the 79-feature count is not the width of the entire final ensemble.
+
+## Hierarchical residual correction
+
+The later CatBoost branch adds fixed corrections organized by game type, pitcher, batter handedness, and count-pressure state. Broader groups provide parent estimates; finer groups contribute shrunk differences weighted by how much history supports them. At prediction time, each row looks up its own correction from training-derived tables.
+
+This V18-style extension was reconstructed from a public hierarchy description rather than treated as an exact copy of an unavailable V18 implementation. The correction is added to the multiclass success probability before the branch's fixed calibration transform.
+
+## Complementary temporal residual pipeline
+
+The EXP-021-style branch follows a different modeling structure:
+
+1. Estimate a temporal base from empirically smoothed pitcher and batter current-season success rates.
+2. Add frozen group-level corrections derived from recent form and failure profiles.
+3. Predict residuals with LightGBM and histogram-based gradient boosting, applying those residual branches to regular-season rows.
+4. Combine the residual branches and add smoothed team effects.
+5. Add low-rank interaction effects, representing structured group interactions with a compact factorization.
+
+The method draws on mk-isos reference work. The later local package contains a rebuilt inference implementation that uses stored training-derived tables and model artifacts. This attribution distinguishes an implemented reference method from a wholly original model design.
+
+## Probability calibration and ensemble geometry
+
+Fixed affine transforms adjust probability location and spread: `p_adjusted = clip(center + scale * (p - center) + shift, 0, 1)`. These are stored constants at inference time.
+
+For a two-model blend `p(w) = (1 - w) * p_a + w * p_b`, Brier loss is quadratic in `w` before clipping. Development used this relationship to analyze model disagreement, select mixtures, and explore shifts and scaling. Public evaluation feedback was used during this selection; it is not an untouched validation protocol. No test-batch mean or other cross-row statistic is fitted during inference.
+
+## Final reference-component integration
+
+The inspected `last.zip` has a two-branch outer blend:
+
+```text
+p_current = calibrated blend of the multiclass/hierarchical and temporal branches
+p_jm      = JOA reference prediction + bounded JM residual correction on R rows
+p_final   = (1 - w) * p_current + w * p_jm
+```
+
+`w` and the residual scale are fixed in the artifact. The actual package uses a convex outer blend; an alternative three-component affine builder in the workspace is not the wrapper stored in `last.zip`.
+
+The Calico JM component averages three CatBoost residual regressors. Its inputs include historical and current-season features, contextual categories, the JOA probability, and auxiliary prediction differences. Corrections are bounded and applied only where `game_type == 'R'`; other rows retain the JOA prediction.
+
+The inherited JOA stack includes seed-averaged CatBoost residual models, failure-subtype estimates, adaptive gating, and game-type-specific experts. It also incorporates contextual correction channels, including a saved neural conditioning component. Those internals belong to the integrated reference stack, not the project's independently tested MLP candidate. Rejection of the latter should not be interpreted as an entirely neural-network-free final ensemble.
 
 ## Validation and development workflow
 
@@ -81,8 +121,12 @@ The selected version does not use a neural network, a TrackMan physics model, or
 
 Repeated use of 2024 for feature and hyperparameter decisions makes it a development set. Multiple seeds estimate model variability but do not create independent holdout datasets. The original [validation harness](../exp/22_multiyear_harness.py) explicitly discusses this limitation.
 
-## Deployment design
+## Deployment and reproducibility
 
-The bundle stores CatBoost models, feature names, a training prior, historical pitcher/batter constants, pitch-mix tables, and the auxiliary classifier. The standalone script reads `data/test.csv` and writes `output/submission.csv`, matching sample-submission order when a compatible file is supplied.
+The included checkpoint bundle stores CatBoost models, feature names, a training prior, historical pitcher/batter constants, pitch-mix tables, and the auxiliary classifier. Its standalone script reads `data/test.csv` and writes `output/submission.csv`, matching sample-submission order when a compatible file is supplied.
 
 Every feature is a function of one input row and fixed training artifacts. The portable [runner](../tools/run_inference.py) supplies the directory layout expected by the original script. The [packager](../tools/build_submission.py) preserves the archive paths `script.py`, `requirements.txt`, and `model/model.pkl`.
+
+The final local package stores additional inference modules and model assets in a flat layout and executes its outer components sequentially. It checks component schemas, row IDs, and finite probability ranges before combining predictions. It is a larger package than the runnable `submit14` example; the example commands do not reproduce that complete final ensemble.
+
+See the [development journey and source map](DEVELOPMENT.md) for how these stages connect.

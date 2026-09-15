@@ -2,11 +2,11 @@
 
 **LG Aimers · Tabular machine learning · Probability estimation**
 
-Predict the probability that a baseball pitch achieves its intended control outcome using information available **before the pitch**. This team project develops a CatBoost ensemble through feature engineering, chronological validation, and analysis of why individual pitches fail.
+Predict the probability that a baseball pitch achieves its intended control outcome using information available **before the pitch**. This team project progressed from tree-based baselines to multiclass CatBoost, hierarchical residual corrections, probability calibration, and a final ensemble of complementary prediction pipelines.
 
-The documented multiclass submission scored **1,033.99** on the public leaderboard, compared with **549.51** for the organizer's Random Forest baseline. These are historical results for the submission versions included here, not a claim about the team's final competition score or rank.
+The focus of this repository is the development process: how features, model objectives, validation, and ensemble design evolved through the final submission.
 
-[Methodology](docs/METHODOLOGY.md) · [Results and lessons](docs/RESULTS.md) · [Experiment guide](exp/README.md) · [Data guide](docs/DATA.md)
+[Methodology](docs/METHODOLOGY.md) · [Development journey](docs/DEVELOPMENT.md) · [Experiment guide](exp/README.md) · [Data guide](docs/DATA.md)
 
 ## Project at a glance
 
@@ -14,11 +14,12 @@ The documented multiclass submission scored **1,033.99** on the public leaderboa
 | --- | --- |
 | Task | Binary probability prediction: `P(control_success = 1)` |
 | Training data | 1,475,092 pitches from 2019–2024; 48 input columns and one target |
-| Selected model | Eight CatBoost classifiers trained on five outcome classes; average the success-class probabilities |
-| Features | 79 inputs: 47 supplied predictors + 18 contextual features + 11 season-progress features + 3 pitch-mix features |
+| Core model | Eight-seed, five-class CatBoost with contextual, current-season, and pitch-mix features |
+| Later extensions | Team categorical encoding, hierarchical shrinkage, residual learning, and low-rank interaction effects |
+| Final approach | Blend a calibrated CatBoost/temporal-residual pipeline with a reference-model pipeline enhanced by a regular-season residual ensemble |
 | Evaluation | Brier-based competition score; chronological backtests and comparisons using the same random seeds |
-| Delivery | Standalone inference script, serialized model bundle, and pinned dependencies |
-| Stack | Python, NumPy, pandas, scikit-learn, CatBoost, joblib; exploratory LightGBM, XGBoost, and neural-network experiments |
+| Delivery | Frozen model artifacts, shared feature transformations, and row-independent inference |
+| Stack | Python, NumPy, pandas, scikit-learn, CatBoost, LightGBM, joblib; additional XGBoost and neural-network investigations |
 
 ## Methodology
 
@@ -38,41 +39,43 @@ Start with the organizer's Random Forest baseline and histogram-based gradient b
 
 A single failure label combines different outcomes. The selected model learns five mutually exclusive classes: **success, middle-location failure, reverse-direction failure, both failure indicators, and other failure**. Auxiliary training labels are reconstructed from consecutive cumulative statistics within the training data. At inference, only the probability of the success class is returned.
 
-This change increased the recorded public score from **993.63 to 1,033.99** with the same 79-feature family. See [label construction and its limits](docs/METHODOLOGY.md#multiclass-target-construction).
+The resulting success probability became the core of the later pipeline. Team IDs were subsequently treated as native categorical features to capture team-level differences. See [label construction and its limits](docs/METHODOLOGY.md#multiclass-target-construction).
 
-### 4. Reduce variance and test changes systematically
+### 4. Add structured residual corrections
+
+Extend the multiclass model with frozen, hierarchical corrections for pitcher, batter handedness, and count pressure. Shrink sparse groups toward broader groups so that limited history does not produce unstable adjustments.
+
+A complementary temporal pipeline combines smoothed pitcher/batter season estimates with LightGBM and histogram-gradient-boosting residual models, team effects, and low-rank interaction corrections. The EXP-021 method was informed by the mk-isos reference work; the project includes a locally rebuilt implementation in its later development artifacts.
+
+### 5. Calibrate and combine complementary models
+
+Apply fixed probability shifts and scaling to address systematic bias. Study prediction differences and the quadratic structure of Brier loss to choose blend weights, rather than assuming that adding another model will help.
+
+The final local package combines the calibrated pipeline with a **Calico JM reference component**: a JOA prediction stack plus an ensemble of CatBoost residual regressors applied to regular-season rows. The blend coefficients and correction strengths are fixed before inference. The [development journey](docs/DEVELOPMENT.md) distinguishes the project's development work from integrated reference components.
+
+### 6. Validate changes and package independent inference
 
 Average eight CatBoost models trained with different seeds. Compare feature groups, training depth, learning schedules, and ensemble weights through controlled experiments. Separate improvements in the shape of predictions from improvements caused by their overall mean moving closer to the observed success rate.
 
-Local gains did not always transfer to the leaderboard. The repository records rejected feature and neural-network experiments as well as successful changes; [the results discussion](docs/RESULTS.md) explains these limitations.
-
-### 5. Package inference that works on independent rows
+Local improvements did not always transfer to a later season. Controlled ablations, forward-year checks, and unsuccessful experiments informed which changes were retained.
 
 Training and inference share feature functions. The model bundle contains the fitted models, feature order, priors, and historical lookup tables. Each test row is transformed using its own inputs and those fixed artifacts, so predictions do not require aggregating or ordering the test batch.
 
 ```mermaid
-flowchart LR
-    A[Pre-pitch inputs] --> B[Context and history features]
-    C[Fixed training artifacts] --> B
-    B --> D[Eight 5-class CatBoost models]
-    D --> E[Average success probability]
-    E --> F[submission.csv]
+flowchart TD
+    A[Pre-pitch inputs and frozen history] --> B[Multiclass CatBoost and hierarchical corrections]
+    A --> C[Temporal base and tree residual models]
+    B --> D[Blend and fixed probability calibration]
+    C --> D
+    A --> E[JOA reference stack and JM regular-season residuals]
+    D --> F[Final fixed-weight blend]
+    E --> F
+    F --> G[Success probability per row]
 ```
 
-## Recorded results
+## Run the included reference model
 
-| Submission | Main change | Public score |
-| --- | --- | ---: |
-| Organizer baseline | Random Forest | 549.51 |
-| `submit4` | 65-feature histogram gradient boosting | 830.32 |
-| `submit8` | Eight-seed CatBoost ensemble | 898.62 |
-| `submit10` | Add season-progress features | 990.96 |
-| `submit12` | Add pitch-mix features | 993.63 |
-| **`submit14`** | **Five-class target decomposition** | **1,033.99** |
-
-Higher is better. Values are rounded historical public-leaderboard observations from the [project log](docs/archive/HANDOFF.md), not classification accuracy. Local validation scores use different seasons and should not be compared directly with public scores. [Metric definition and evidence](docs/RESULTS.md).
-
-## Run inference
+The commands below run the preserved `submit14` multiclass model, an earlier reproducible checkpoint. The final development pipeline is documented above and in the methodology; its complete collection of later model artifacts is not included in this checkout.
 
 Use **Python 3.11** for the supplied model environment. Obtain the competition data separately and place `test.csv` and, optionally, `sample_submission.csv` in `data/`. The distributed five-row test file demonstrates the schema; it is not the hidden evaluation set.
 
@@ -127,7 +130,7 @@ LGAimers/
 ├── exp/                   # Numbered experiments and shared utilities
 ├── submissions/           # Inference sources and fitted model bundles
 │   ├── baseline_submit/   # Organizer-provided baseline
-│   └── submit14_src/      # Selected multiclass CatBoost submission
+│   └── submit14_src/      # Reproducible multiclass CatBoost checkpoint
 ├── tools/                 # Portable inference and ZIP-building commands
 ├── lab/                   # Experiment reports and recorded predictions
 │   └── deep_learning/     # MLP experiment reports
@@ -135,8 +138,8 @@ LGAimers/
 └── archive/runners/       # Original local automation scripts
 ```
 
-Competition data, local environments, and newly generated outputs are ignored by Git. Historical artifacts already tracked in the repository are preserved. See the [path migration map](docs/REPOSITORY_MAP.md).
+Competition data and local environments are kept outside the versioned source. Ignore rules are maintained locally rather than distributed in this repository. Historical artifacts already tracked in the repository are preserved. See the [path migration map](docs/REPOSITORY_MAP.md).
 
 ## Scope and attribution
 
-This is a competition research repository and team project. The organizer supplied the baseline and data specification; the repository preserves those materials alongside the team's experiments. The English overview describes the code and results included in this snapshot. Original Korean research notes remain available for provenance, and exploratory methods are identified separately from the selected inference model.
+This is a competition research repository and team project. The organizer supplied the baseline and data specification. Later development used methods informed by mk-isos and integrated the Calico JM/JOA reference components; these are identified explicitly rather than presented as original models developed entirely by this project. Original Korean research notes remain available for provenance. The English documentation describes the methodology through the final local package, while the runnable example uses the earlier checkpoint included here.

@@ -1,6 +1,6 @@
 # Data guide
 
-Obtain the competition files separately and place them in the ignored `data/` directory.
+Obtain the competition files separately and place them in a local `data/` directory.
 
 | File | Contents | Used for |
 | --- | --- | --- |

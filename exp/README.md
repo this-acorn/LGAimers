@@ -39,4 +39,4 @@ python -X utf8 exp/54_train_mc79.py
 
 Other scripts may require predictions from earlier experiments, optional libraries, or private data. Original packaging scripts contain historical workstation-specific scratch directories and interpreter paths. For portable packaging and inference, use [tools/run_inference.py](../tools/run_inference.py) and [tools/build_submission.py](../tools/build_submission.py).
 
-Original Korean comments and reports remain as research history. The English [methodology](../docs/METHODOLOGY.md) describes the selected path and its limitations.
+Original Korean comments and reports remain as research history. The English [methodology](../docs/METHODOLOGY.md) follows the core model through later corrections and the final local blend; those later artifacts extend beyond the standalone sources included here.
