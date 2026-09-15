@@ -41,7 +41,3 @@ Some validation years and public feedback were consulted repeatedly. These were 
 The later local artifacts are described here but are not bundled into this checkout. The inference commands in the root README run the earlier preserved checkpoint. The final package was inspected directly because a later-numbered builder script alone does not establish which implementation was actually packaged.
 
 The project's work includes feature development, multiclass modeling, experiments, inference implementation, calibration, component integration, and packaging.
-
-## Acknowledgments
-
-The organizer supplied the baseline and data specification. The temporal branch builds on the mk-isos EXP-021 method, and the final integrated stack includes Calico JM/JOA components.

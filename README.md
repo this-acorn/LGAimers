@@ -142,4 +142,4 @@ Competition data and local environments are kept outside the versioned source. I
 
 ## Project scope
 
-The team worked on feature engineering, multiclass modeling, chronological experiments, residual correction, probability calibration, model integration, and inference packaging. The documentation covers the methodology through the final local package; the runnable example uses the earlier checkpoint included here. See the [implementation map and acknowledgments](docs/DEVELOPMENT.md#implementation-map) for component details.
+The team worked on feature engineering, multiclass modeling, chronological experiments, residual correction, probability calibration, model integration, and inference packaging. The documentation covers the methodology through the final local package; the runnable example uses the earlier checkpoint included here. See the [implementation map](docs/DEVELOPMENT.md#implementation-map) for component details.

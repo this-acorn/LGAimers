@@ -86,7 +86,7 @@ The EXP-021-style branch follows a different modeling structure:
 4. Combine the residual branches and add smoothed team effects.
 5. Add low-rank interaction effects, representing structured group interactions with a compact factorization.
 
-The later local package contains a rebuilt inference implementation using stored training-derived tables and model artifacts. Development work included reproducing its transformations, checking inference equivalence, and integrating its predictions with the multiclass branch. Component acknowledgments are collected in the [development guide](DEVELOPMENT.md#acknowledgments).
+The later local package contains an inference implementation using stored training-derived tables and model artifacts. Development work included implementing feature transformations, checking prediction consistency, and integrating its predictions with the multiclass branch. The [development guide](DEVELOPMENT.md#implementation-map) maps these components to the packaged implementation.
 
 ## Probability calibration and ensemble geometry
 
