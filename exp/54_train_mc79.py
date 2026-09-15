@@ -6,7 +6,7 @@
       exp/53 2024 폴드 +36.1 (837.0 vs 이진 800.9, 시드 각각 817.6/812.2).
 피처·전처리 = exp/48(CS79)와 동일. 타겟만 복원 라벨 5클래스. 제출 확률 = P(클래스0).
 검증 스테이지 생략 (exp/53이 동일 코드 경로로 검증) — 전체 학습 8시드만.
-피처 로직 단일 원본 = submit14_src/script.py
+피처 로직 단일 원본 = submissions/submit14_src/script.py
 
 ★ venv311:  <venv311>/Scripts/python.exe -u exp/54_train_mc79.py   (~6.5시간, keep-awake 필수)
 """
@@ -27,7 +27,7 @@ CB_PRM = dict(iterations=500, depth=6, learning_rate=0.08, l2_leaf_reg=10.0,
               loss_function="MultiClass")
 K_MIX = 50.0
 
-spec = importlib.util.spec_from_file_location("s14", "submit14_src/script.py")
+spec = importlib.util.spec_from_file_location("s14", "submissions/submit14_src/script.py")
 s14 = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(s14)
 add_features, attach_cs, attach_pt = s14.add_features, s14.attach_cs, s14.attach_pt
@@ -209,13 +209,13 @@ bundle = {"cb_models": models, "feats": FEATS79, "prior": prior,
           "mix_tbl": mix_fin, "pfb_model": pfb_fin,
           "seeds": SEEDS, "version": "mc79",
           "classes": "0=성공 1=미들 2=리버스 3=미들∩리버스 4=빅미스"}
-os.makedirs("submit14_src/model", exist_ok=True)
-joblib.dump(bundle, "submit14_src/model/model.pkl", compress=3)
-tick(f"저장: submit14_src/model/model.pkl "
-     f"({os.path.getsize('submit14_src/model/model.pkl')/1024**2:.1f} MB)")
+os.makedirs("submissions/submit14_src/model", exist_ok=True)
+joblib.dump(bundle, "submissions/submit14_src/model/model.pkl", compress=3)
+tick(f"저장: submissions/submit14_src/model/model.pkl "
+     f"({os.path.getsize('submissions/submit14_src/model/model.pkl')/1024**2:.1f} MB)")
 
 # ---- 5행 검증 ----
-b2 = joblib.load("submit14_src/model/model.pkl")
+b2 = joblib.load("submissions/submit14_src/model/model.pkl")
 t5 = pd.read_csv("data/test.csv", encoding="utf-8-sig")
 t5.columns = [c.replace("﻿", "").strip() for c in t5.columns]
 ft5 = s14.attach_pt(s14.attach_cs(s14.add_features(t5, b2["prior"]),
@@ -227,4 +227,4 @@ log(f"  5행 클래스 확률 (성공/미들/리버스/둘다/빅미스):")
 for row in np.round(pr, 3):
     log(f"    {row.tolist()}")
 log(f"  P(성공) = {np.round(pr[:, 0], 6).tolist()}")
-log(f"\n총 {time.time()-T0:.0f}초. 다음: exp/55 submit14.zip 빌드")
+log(f"\n총 {time.time()-T0:.0f}초. 다음: exp/55 artifacts/submissions/submit14.zip 빌드")

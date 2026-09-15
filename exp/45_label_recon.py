@@ -37,7 +37,7 @@ CB_PRM = dict(iterations=500, depth=6, learning_rate=0.08, l2_leaf_reg=10.0,
 
 # ---- exp/41의 CS 함수 재사용 (submit10 script.py가 단일 원본) ----
 import importlib.util
-spec = importlib.util.spec_from_file_location("s10", "submit10_src/script.py")
+spec = importlib.util.spec_from_file_location("s10", "submissions/submit10_src/script.py")
 s10 = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(s10)
 attach_cs, CS_FEATS, P_RATES, B_RATES = s10.attach_cs, s10.CS_FEATS, s10.P_RATES, s10.B_RATES

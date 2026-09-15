@@ -28,7 +28,7 @@ from catboost import CatBoostClassifier, Pool
 sys.path.insert(0, "exp")
 from common import log, tick, raw_score, load_train
 
-spec = importlib.util.spec_from_file_location("s12", "submit12_src/script.py")
+spec = importlib.util.spec_from_file_location("s12", "submissions/submit12_src/script.py")
 s12 = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(s12)
 

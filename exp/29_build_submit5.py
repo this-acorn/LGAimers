@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-[29] submit5.zip 생성 + 전체 검증 — 5번째 제출: HGB(8) + CatBoost(8) w=0.3 혼합
+[29] artifacts/submissions/submit5.zip 생성 + 전체 검증 — 5번째 제출: HGB(8) + CatBoost(8) w=0.3 혼합
 
 exp/20 (submit4) 기반, 혼합 구성 검증 추가:
   · 피처 65 + hand delta 비활성 (submit4와 동일해야 함)
@@ -21,9 +21,10 @@ import zipfile
 import numpy as np
 import pandas as pd
 
-ROOT = "c:/Users/gwonn/Desktop/open"
-SRC = f"{ROOT}/submit"
-OUT_ZIP = f"{ROOT}/submit5.zip"
+from pathlib import Path
+ROOT = str(Path(__file__).resolve().parents[1])
+SRC = f"{ROOT}/submissions/submit"
+OUT_ZIP = f"{ROOT}/artifacts/submissions/submit5.zip"
 SP = ("C:/Users/gwonn/AppData/Local/Temp/claude/c--Users-gwonn-Desktop-open/"
       "aecbab82-c8d9-4dad-8fa6-306809344e0a/scratchpad")
 VENV_PY = f"{SP}/venv311/Scripts/python.exe"
@@ -52,7 +53,7 @@ def check(cond, msg_ok, msg_ng):
 
 # =====================================================================
 log("=" * 84)
-log("A. submit5.zip 생성 및 구조 검사")
+log("A. artifacts/submissions/submit5.zip 생성 및 구조 검사")
 log("=" * 84)
 
 req = open(f"{SRC}/requirements.txt", encoding="utf-8").read()

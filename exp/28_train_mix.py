@@ -8,11 +8,11 @@
   w는 번들 스칼라로 저장 — 바꿀 때 재학습 불필요 (추론 시 적용)
 
 이 스크립트가 하는 일:
-  1. 기존 submit/model/model.pkl 로드 (8 HGB, 전체 2019~2024 학습, LB 830.32 확정)
+  1. 기존 submissions/submit/model/model.pkl 로드 (8 HGB, 전체 2019~2024 학습, LB 830.32 확정)
      → HGB 재학습 없음. 검증: models=8, feats=65, hand_tbl 비활성
   2. CatBoost 8시드를 전체 데이터로 학습 (exp/25/27과 동일 설정: iter500 lr0.08 d6 L2=10)
   3. 번들 확장 저장: + cb_models(8), w_cb=0.3, cb_params
-     원본 백업: 스크래치패드/model_65feat_backup.pkl (+ submit4.zip 안에도 원본 보존)
+     원본 백업: 스크래치패드/model_65feat_backup.pkl (+ artifacts/submissions/submit4.zip 안에도 원본 보존)
   4. 5행 test.csv 서빙 경로 검증
 
 ★ 반드시 venv311(서버 버전 numpy 1.26.4)로 실행:
@@ -36,7 +36,7 @@ CB_PARAMS = dict(iterations=500, learning_rate=0.08, depth=6,
                  l2_leaf_reg=10.0, verbose=False, thread_count=6,
                  allow_writing_files=False)
 CAT = ["top_bottom", "game_type", "base_state"]
-BUNDLE_PATH = "submit/model/model.pkl"
+BUNDLE_PATH = "submissions/submit/model/model.pkl"
 BACKUP = ("C:/Users/gwonn/AppData/Local/Temp/claude/c--Users-gwonn-Desktop-open/"
           "ac9f75b2-20b2-4bd0-a3a5-9f91191c2d24/scratchpad/model_65feat_backup.pkl")
 
@@ -75,7 +75,7 @@ tick(f"로딩 완료 {df.shape}")
 
 # 피처 생성은 script.py의 add_features (학습·추론 단일 원본 유지)
 import importlib.util
-spec = importlib.util.spec_from_file_location("subm", "submit/script.py")
+spec = importlib.util.spec_from_file_location("subm", "submissions/submit/script.py")
 subm = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(subm)
 ft = subm.add_features(df, b["prior"])
@@ -125,4 +125,4 @@ log(f"  혼합  5행: {np.round(p, 6).tolist()}")
 log(f"  범위: [{p.min():.6f}, {p.max():.6f}]  (0~1 이내: "
     f"{bool((p >= 0).all() and (p <= 1).all())})")
 log(f"\n총 소요 {time.time()-T0:.0f}초")
-log("다음: script.py 혼합 추론 개편 → exp/29 submit5.zip 빌드+검증")
+log("다음: script.py 혼합 추론 개편 → exp/29 artifacts/submissions/submit5.zip 빌드+검증")

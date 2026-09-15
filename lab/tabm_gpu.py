@@ -55,7 +55,7 @@ def brier_score(p, y):
 
 
 # =====================================================================
-# 피처 (submit/script.py add_features와 동일 — 단일 파일 유지 위해 인라인)
+# 피처 (submissions/submit/script.py add_features와 동일 — 단일 파일 유지 위해 인라인)
 # =====================================================================
 def add_features(d, prior):
     d = d.copy()

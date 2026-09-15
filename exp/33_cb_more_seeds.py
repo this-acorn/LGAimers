@@ -29,7 +29,7 @@ CB_PARAMS = dict(iterations=500, learning_rate=0.08, depth=6,
                  l2_leaf_reg=10.0, verbose=False, thread_count=6,
                  allow_writing_files=False)
 CAT = ["top_bottom", "game_type", "base_state"]
-BUNDLE = "submit/model/model.pkl"
+BUNDLE = "submissions/submit/model/model.pkl"
 BACKUP = ("C:/Users/gwonn/AppData/Local/Temp/claude/c--Users-gwonn-Desktop-open/"
           "ac9f75b2-20b2-4bd0-a3a5-9f91191c2d24/scratchpad/model_mix8_backup.pkl")
 
@@ -56,7 +56,7 @@ for c in df.select_dtypes("float64").columns:
 y = df["control_success"].to_numpy()
 
 import importlib.util
-spec = importlib.util.spec_from_file_location("subm", "submit/script.py")
+spec = importlib.util.spec_from_file_location("subm", "submissions/submit/script.py")
 subm = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(subm)
 ft = subm.add_features(df, b["prior"])

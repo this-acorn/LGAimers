@@ -3,11 +3,11 @@
 [43] CS 76피처 배포 학습 — CatBoost 8시드 전체 데이터 + 상수표 번들
 
 근거: exp/41 시즌 진행분 +107.9 (역대 최대), exp/42 적층 확인(물리 흡수 → CS만).
-피처 로직 단일 원본 = submit10_src/script.py (여기서 import).
+피처 로직 단일 원본 = submissions/submit10_src/script.py (여기서 import).
 
 절차:
   1. 검증 재현: 2019~2023 학습 → 2024 채점, 8시드 — exp/41(2시드 782.3) 재현 확인
-  2. 최종: 2019~2024 전체 학습 8시드 + 배포 상수표(≤2024) → submit10_src/model/model.pkl
+  2. 최종: 2019~2024 전체 학습 8시드 + 배포 상수표(≤2024) → submissions/submit10_src/model/model.pkl
   3. 5행 test.csv 서빙 경로 검증 (CS 커버리지 포함)
 
 ★ venv311 필수:  <venv311>/Scripts/python.exe -u exp/43_train_cs.py   (~2.5시간)
@@ -28,7 +28,7 @@ CB_PRM = dict(iterations=500, depth=6, learning_rate=0.08, l2_leaf_reg=10.0,
               verbose=False, thread_count=14, allow_writing_files=False)
 LOCAL_REF = 782.3          # exp/41 2시드 앙상블 (8시드는 이보다 소폭 높아야 정상)
 
-spec = importlib.util.spec_from_file_location("subm", "submit10_src/script.py")
+spec = importlib.util.spec_from_file_location("subm", "submissions/submit10_src/script.py")
 subm = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(subm)
 add_features, attach_cs, build_matrix = subm.add_features, subm.attach_cs, subm.build_matrix
@@ -154,13 +154,13 @@ log(f"  배포 상수표: 투수 {len(cp_d)}명 / 타자 {len(cb_d)}명 (≤2024
 bundle = {"cb_models": models, "feats": FEATS, "prior": prior,
           "cs_const_p": cp_d, "cs_const_b": cb_d,
           "seeds": SEEDS, "cb_params": CB_PRM, "version": "cs76"}
-os.makedirs("submit10_src/model", exist_ok=True)
-joblib.dump(bundle, "submit10_src/model/model.pkl", compress=3)
-tick(f"저장: submit10_src/model/model.pkl "
-     f"({os.path.getsize('submit10_src/model/model.pkl')/1024**2:.1f} MB)")
+os.makedirs("submissions/submit10_src/model", exist_ok=True)
+joblib.dump(bundle, "submissions/submit10_src/model/model.pkl", compress=3)
+tick(f"저장: submissions/submit10_src/model/model.pkl "
+     f"({os.path.getsize('submissions/submit10_src/model/model.pkl')/1024**2:.1f} MB)")
 
 # ---- 5행 서빙 경로 검증 ----
-b2 = joblib.load("submit10_src/model/model.pkl")
+b2 = joblib.load("submissions/submit10_src/model/model.pkl")
 t5 = pd.read_csv("data/test.csv", encoding="utf-8-sig")
 t5.columns = [c.replace("﻿", "").strip() for c in t5.columns]
 ft5 = subm.attach_cs(subm.add_features(t5, b2["prior"]), b2["cs_const_p"], b2["cs_const_b"])
@@ -172,4 +172,4 @@ p5 = acc5 / len(b2["cb_models"])
 log(f"  진짜 test.csv 5행(2025) 예측 = {np.round(p5, 6).tolist()}")
 log(f"  5행 CS 커버리지: f_cs_p_rate {ft5['f_cs_p_rate'].notna().sum()}/5, "
     f"cs_p_n = {np.expm1(ft5['f_cs_p_logn'].to_numpy()).round(0).tolist()}")
-log(f"\n총 {time.time()-T0:.0f}초. 다음: exp/44 submit10.zip 빌드+검증")
+log(f"\n총 {time.time()-T0:.0f}초. 다음: exp/44 artifacts/submissions/submit10.zip 빌드+검증")

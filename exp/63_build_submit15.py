@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-[63] submit15.zip — 3-way 앙상블 (CB65 0.02 / CS76 0.46 / CS79 0.52), 재학습 없음
+[63] artifacts/submissions/submit15.zip — 3-way 앙상블 (CB65 0.02 / CS76 0.46 / CS79 0.52), 재학습 없음
 
 가중치 산출 근거 (전부 이미 확보된 실측):
   단독 LB:  CB65 898.62 / CS76 990.96 / CS79 993.63
@@ -26,9 +26,10 @@ import joblib
 import numpy as np
 import pandas as pd
 
-ROOT = "c:/Users/gwonn/Desktop/open"
-SRC = f"{ROOT}/submit15_src"
-OUT_ZIP = f"{ROOT}/submit15.zip"
+from pathlib import Path
+ROOT = str(Path(__file__).resolve().parents[1])
+SRC = f"{ROOT}/submissions/submit15_src"
+OUT_ZIP = f"{ROOT}/artifacts/submissions/submit15.zip"
 SP = ("C:/Users/gwonn/AppData/Local/Temp/claude/c--Users-gwonn-Desktop-open/"
       "ac9f75b2-20b2-4bd0-a3a5-9f91191c2d24/scratchpad")
 VENV_PY = ("C:/Users/gwonn/AppData/Local/Temp/claude/c--Users-gwonn-Desktop-open/"
@@ -57,14 +58,14 @@ log("=" * 80)
 log("A. 세 번들 병합")
 log("=" * 80)
 os.makedirs(f"{SRC}/model", exist_ok=True)
-shutil.copy(f"{ROOT}/submit12_src/requirements.txt", f"{SRC}/requirements.txt")
+shutil.copy(f"{ROOT}/submissions/submit12_src/requirements.txt", f"{SRC}/requirements.txt")
 
-if not os.path.exists(f"{ROOT}/submit8_extract/model/model.pkl"):
-    with zipfile.ZipFile(f"{ROOT}/submit8.zip") as z:
-        z.extract("model/model.pkl", f"{ROOT}/submit8_extract")
-b8 = joblib.load(f"{ROOT}/submit8_extract/model/model.pkl")
-b10 = joblib.load(f"{ROOT}/submit10_src/model/model.pkl")
-b12 = joblib.load(f"{ROOT}/submit12_src/model/model.pkl")
+if not os.path.exists(f"{ROOT}/submissions/submit8_extract/model/model.pkl"):
+    with zipfile.ZipFile(f"{ROOT}/artifacts/submissions/submit8.zip") as z:
+        z.extract("model/model.pkl", f"{ROOT}/submissions/submit8_extract")
+b8 = joblib.load(f"{ROOT}/submissions/submit8_extract/model/model.pkl")
+b10 = joblib.load(f"{ROOT}/submissions/submit10_src/model/model.pkl")
+b12 = joblib.load(f"{ROOT}/submissions/submit12_src/model/model.pkl")
 check(len(b8["cb_models"]) == 8, "CB65 8시드 (LB 898.62 검증본)", "CB65 이상")
 check(len(b10["cb_models"]) == 8 and len(b10["feats"]) == 76,
       "CS76 8시드/76피처 (LB 990.96)", "CS76 이상")

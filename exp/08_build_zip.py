@@ -1,5 +1,5 @@
 """
-[08] submit.zip 생성 + 전체 검증
+[08] artifacts/submissions/submit.zip 생성 + 전체 검증
 
 실행:  PYTHONIOENCODING=utf-8 py -3.12 -u exp/08_build_zip.py
        (zip 만들기와 구조 검사는 어느 파이썬으로 해도 무방.
@@ -25,9 +25,10 @@ import zipfile
 import numpy as np
 import pandas as pd
 
-ROOT = "c:/Users/gwonn/Desktop/open"
-SRC = f"{ROOT}/submit"
-OUT_ZIP = f"{ROOT}/submit_gbdt.zip"
+from pathlib import Path
+ROOT = str(Path(__file__).resolve().parents[1])
+SRC = f"{ROOT}/submissions/submit"
+OUT_ZIP = f"{ROOT}/artifacts/submissions/submit_gbdt.zip"
 SP = ("C:/Users/gwonn/AppData/Local/Temp/claude/c--Users-gwonn-Desktop-open/"
       "aecbab82-c8d9-4dad-8fa6-306809344e0a/scratchpad")
 VENV_PY = f"{SP}/venv311/Scripts/python.exe"
@@ -61,7 +62,7 @@ log("=" * 84)
 
 model_files = sorted(os.listdir(f"{SRC}/model"))
 if not model_files:
-    raise SystemExit("submit/model/ 이 비어있다. 07번 학습을 먼저 돌릴 것.")
+    raise SystemExit("submissions/submit/model/ 이 비어있다. 07번 학습을 먼저 돌릴 것.")
 
 items = [(f"{SRC}/script.py", "script.py"),
          (f"{SRC}/requirements.txt", "requirements.txt")]

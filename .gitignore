@@ -1,15 +1,34 @@
-# 대회 제공 데이터 — 용량 제한(GitHub 100MB/파일) + 재배포 제한 가능성
+# Competition data and course materials
 data/
-
-# 강의자료 PDF — 저작권/재배포 제한
 학습자료/
+reference/
 
-# Python
+# Python environments and caches
+.venv*/
+venv*/
 __pycache__/
-*.pyc
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
 
-# 임시 결과/스크래치
+# Local configuration
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Generated artifacts. Previously tracked research files remain versioned.
+*.pkl
+*.joblib
+*.cbm
+*.npy
+*.npz
+*.zip
+*.log
 *.tmp
-
-# 대용량 예측 배열 (재생성 가능, 스크래치패드에 백업)
-lab/*.npz
+output/
+catboost_info/

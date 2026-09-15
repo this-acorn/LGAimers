@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-[55] submit14.zip 빌드+검증 — 타겟분해 멀티클래스 CS79 CatBoost 8시드
+[55] artifacts/submissions/submit14.zip 빌드+검증 — 타겟분해 멀티클래스 CS79 CatBoost 8시드
 
 실행: PYTHONIOENCODING=utf-8 py -3.12 -u exp/55_build_submit14.py
 """
@@ -15,9 +15,10 @@ import zipfile
 import numpy as np
 import pandas as pd
 
-ROOT = "c:/Users/gwonn/Desktop/open"
-SRC = f"{ROOT}/submit14_src"
-OUT_ZIP = f"{ROOT}/submit14.zip"
+from pathlib import Path
+ROOT = str(Path(__file__).resolve().parents[1])
+SRC = f"{ROOT}/submissions/submit14_src"
+OUT_ZIP = f"{ROOT}/artifacts/submissions/submit14.zip"
 SP = ("C:/Users/gwonn/AppData/Local/Temp/claude/c--Users-gwonn-Desktop-open/"
       "ac9f75b2-20b2-4bd0-a3a5-9f91191c2d24/scratchpad")
 VENV_SP = ("C:/Users/gwonn/AppData/Local/Temp/claude/c--Users-gwonn-Desktop-open/"
@@ -43,7 +44,7 @@ def check(cond, ok, ng):
 
 
 log("=" * 80)
-log("A. submit14.zip 생성 및 구조 검사")
+log("A. artifacts/submissions/submit14.zip 생성 및 구조 검사")
 log("=" * 80)
 req = open(f"{SRC}/requirements.txt", encoding="utf-8").read()
 check("catboost==1.2.10" in req, "catboost 명시", "catboost 없음")

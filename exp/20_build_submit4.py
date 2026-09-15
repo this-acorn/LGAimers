@@ -1,8 +1,8 @@
 """
-[20] submit4.zip 생성 + 전체 검증 — 4번째 실제 제출용 (65피처, hand delta 철회)
+[20] artifacts/submissions/submit4.zip 생성 + 전체 검증 — 4번째 실제 제출용 (65피처, hand delta 철회)
 
 exp/08_build_zip.py를 기반으로 하되:
-  - 출력 파일명 submit4.zip (제출 이력 추적용 이름)
+  - 출력 파일명 artifacts/submissions/submit4.zip (제출 이력 추적용 이름)
   - 67피처/hand delta 하드코딩 검증을 65피처/hand delta 비활성 검증으로 교체
     (exp/18로 hand delta 연도 불안정 확인 → exp/19로 철회 재학습한 모델 대상)
 
@@ -20,9 +20,10 @@ import zipfile
 import numpy as np
 import pandas as pd
 
-ROOT = "c:/Users/gwonn/Desktop/open"
-SRC = f"{ROOT}/submit"
-OUT_ZIP = f"{ROOT}/submit4.zip"
+from pathlib import Path
+ROOT = str(Path(__file__).resolve().parents[1])
+SRC = f"{ROOT}/submissions/submit"
+OUT_ZIP = f"{ROOT}/artifacts/submissions/submit4.zip"
 SP = ("C:/Users/gwonn/AppData/Local/Temp/claude/c--Users-gwonn-Desktop-open/"
       "aecbab82-c8d9-4dad-8fa6-306809344e0a/scratchpad")
 VENV_PY = f"{SP}/venv311/Scripts/python.exe"
@@ -52,12 +53,12 @@ def check(cond, msg_ok, msg_ng):
 # A. zip 생성 + 구조 검사
 # =====================================================================
 log("=" * 84)
-log("A. submit4.zip 생성 및 구조 검사")
+log("A. artifacts/submissions/submit4.zip 생성 및 구조 검사")
 log("=" * 84)
 
 model_files = sorted(os.listdir(f"{SRC}/model"))
 if not model_files:
-    raise SystemExit("submit/model/ 이 비어있다. 19번 재학습을 먼저 돌릴 것.")
+    raise SystemExit("submissions/submit/model/ 이 비어있다. 19번 재학습을 먼저 돌릴 것.")
 
 items = [(f"{SRC}/script.py", "script.py"),
          (f"{SRC}/requirements.txt", "requirements.txt")]

@@ -20,14 +20,15 @@ import joblib
 import numpy as np
 import pandas as pd
 
-ROOT = "c:/Users/gwonn/Desktop/open"
+from pathlib import Path
+ROOT = str(Path(__file__).resolve().parents[1])
 SP = ("C:/Users/gwonn/AppData/Local/Temp/claude/c--Users-gwonn-Desktop-open/"
       "ac9f75b2-20b2-4bd0-a3a5-9f91191c2d24/scratchpad")
 VENV_SP = ("C:/Users/gwonn/AppData/Local/Temp/claude/c--Users-gwonn-Desktop-open/"
            "aecbab82-c8d9-4dad-8fa6-306809344e0a/scratchpad")
 VENV_PY = f"{VENV_SP}/venv311/Scripts/python.exe"
 N_EVAL = 245789
-VARIANTS = [("submit7.zip", 0.9, 897.58), ("submit8.zip", 1.0, 898.62)]
+VARIANTS = [("artifacts/submissions/submit7.zip", 0.9, 897.58), ("artifacts/submissions/submit8.zip", 1.0, 898.62)]
 
 
 def log(*a):
@@ -61,9 +62,9 @@ for zip_name, w, pred in VARIANTS:
     if os.path.exists(stage):
         shutil.rmtree(stage)
     os.makedirs(f"{stage}/model")
-    shutil.copy(f"{ROOT}/submit/script.py", f"{stage}/script.py")
-    shutil.copy(f"{ROOT}/submit/requirements.txt", f"{stage}/requirements.txt")
-    b = joblib.load(f"{ROOT}/submit/model/model.pkl")
+    shutil.copy(f"{ROOT}/submissions/submit/script.py", f"{stage}/script.py")
+    shutil.copy(f"{ROOT}/submissions/submit/requirements.txt", f"{stage}/requirements.txt")
+    b = joblib.load(f"{ROOT}/submissions/submit/model/model.pkl")
     assert len(b["models"]) == 8 and len(b["cb_models"]) == 8
     b["w_cb"] = w
     joblib.dump(b, f"{stage}/model/model.pkl", compress=3)
@@ -110,7 +111,7 @@ for zip_name, w, pred in VARIANTS:
 
 log("\n" + "=" * 80)
 log("최종: " + ("✅ 두 변형 모두 제출 가능" if ok_all else "❌ 문제 있음"))
-log("  submit7.zip = w0.9 (헤지)  /  submit8.zip = w1.0 (곡선 최적)")
-log("  ※ submit/model/model.pkl 원본(w=0.3)은 그대로")
+log("  artifacts/submissions/submit7.zip = w0.9 (헤지)  /  artifacts/submissions/submit8.zip = w1.0 (곡선 최적)")
+log("  ※ submissions/submit/model/model.pkl 원본(w=0.3)은 그대로")
 log("=" * 80)
 sys.exit(0 if ok_all else 1)

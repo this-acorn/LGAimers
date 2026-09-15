@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-[50] submit13.zip — CS79(993.63) ⊗ CB65(898.62) 혼합, w65=0.5 (곡선 측정용)
+[50] artifacts/submissions/submit13.zip — CS79(993.63) ⊗ CB65(898.62) 혼합, w65=0.5 (곡선 측정용)
 
 번들 = submit12 번들 전체 + cb65_models(submit8 검증본) + feats65 + w65 스칼라.
 50:50 측정 → 곡선 계산 → w65 최적값 재빌드(재학습 없음) → 수확 제출.
@@ -20,9 +20,10 @@ import joblib
 import numpy as np
 import pandas as pd
 
-ROOT = "c:/Users/gwonn/Desktop/open"
-SRC = f"{ROOT}/submit13_src"
-OUT_ZIP = f"{ROOT}/submit13.zip"
+from pathlib import Path
+ROOT = str(Path(__file__).resolve().parents[1])
+SRC = f"{ROOT}/submissions/submit13_src"
+OUT_ZIP = f"{ROOT}/artifacts/submissions/submit13.zip"
 SP = ("C:/Users/gwonn/AppData/Local/Temp/claude/c--Users-gwonn-Desktop-open/"
       "ac9f75b2-20b2-4bd0-a3a5-9f91191c2d24/scratchpad")
 VENV_SP = ("C:/Users/gwonn/AppData/Local/Temp/claude/c--Users-gwonn-Desktop-open/"
@@ -51,8 +52,8 @@ def check(cond, ok, ng):
 log("=" * 80)
 log("A. 번들 병합 (CS79 + CB65)")
 log("=" * 80)
-b12 = joblib.load(f"{ROOT}/submit12_src/model/model.pkl")
-b8 = joblib.load(f"{ROOT}/submit8_extract/model/model.pkl")
+b12 = joblib.load(f"{ROOT}/submissions/submit12_src/model/model.pkl")
+b8 = joblib.load(f"{ROOT}/submissions/submit8_extract/model/model.pkl")
 check(len(b12["cb_models"]) == 8 and b12.get("version") == "cs79",
       "CS79 번들 정상 (LB 993.63 검증본)", "CS79 번들 이상")
 check(len(b8["cb_models"]) == 8, "CB65 8시드 (LB 898.62 검증본)", "CB65 이상")

@@ -8,7 +8,7 @@
   → 2025 특이. 제출은 65피처로 복귀하되 원인 기록." 그대로 적용한다.
 
 이 스크립트는 hand delta를 완전히 빼고 원래 65피처 구성(원본47+엔지니어링18)만으로
-8시드 앙상블을 다시 학습해 submit/model/model.pkl을 덮어쓴다.
+8시드 앙상블을 다시 학습해 submissions/submit/model/model.pkl을 덮어쓴다.
 exp/07_train_submit.py와 동일한 절차, HAND_ENG만 제외.
 
 실행 (★ 반드시 서버 버전 venv311로):
@@ -41,12 +41,12 @@ def tick(m):
     log(f"  [{time.time()-T0:6.0f}s] {m}")
 
 
-# ---- submit/script.py 에서 피처 함수 가져오기 (add_features만. attach_hand_deltas는 안 씀) ----
-spec = importlib.util.spec_from_file_location("subm", "submit/script.py")
+# ---- submissions/submit/script.py 에서 피처 함수 가져오기 (add_features만. attach_hand_deltas는 안 씀) ----
+spec = importlib.util.spec_from_file_location("subm", "submissions/submit/script.py")
 subm = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(subm)
 add_features, to_matrix = subm.add_features, subm.to_matrix
-log("피처 함수 출처: submit/script.py add_features (hand delta 미사용)")
+log("피처 함수 출처: submissions/submit/script.py add_features (hand delta 미사용)")
 log(f"실행 환경: python {sys.version.split()[0]} / numpy {np.__version__} / "
     f"pandas {pd.__version__}")
 
@@ -131,7 +131,7 @@ log("  재현 확인. 제출 코드 경로가 정상 동작한다.")
 del models_v, enc_v, tr, va
 
 # =====================================================================
-# 2단계 — 최종 학습 + 저장 (기존 submit/model/model.pkl 덮어씀)
+# 2단계 — 최종 학습 + 저장 (기존 submissions/submit/model/model.pkl 덮어씀)
 # =====================================================================
 log("\n" + "=" * 84)
 log("2단계 최종: 2019~2024 전체 학습 → 저장 (65피처, hand delta 제외)")
@@ -141,16 +141,16 @@ prior = float(df["control_success"].mean())
 log(f"  prior (전체 평균 성공률) = {prior:.6f}")
 models, enc = train_ensemble(df, prior, "최종")
 
-os.makedirs("submit/model", exist_ok=True)
+os.makedirs("submissions/submit/model", exist_ok=True)
 bundle = {"models": models, "encoder": enc, "prior": prior, "feats": FEATS,
           "seeds": SEEDS, "hgb": HGB, "n_train": int(len(df)),
           "hand_tbl_p": None, "hand_tbl_b": None}   # hand delta 비활성 표시
-joblib.dump(bundle, "submit/model/model.pkl", compress=3)
-size = os.path.getsize("submit/model/model.pkl") / 1024 ** 2
-tick(f"저장 완료 submit/model/model.pkl  ({size:.1f} MB, 65피처)")
+joblib.dump(bundle, "submissions/submit/model/model.pkl", compress=3)
+size = os.path.getsize("submissions/submit/model/model.pkl") / 1024 ** 2
+tick(f"저장 완료 submissions/submit/model/model.pkl  ({size:.1f} MB, 65피처)")
 
 log("\n  저장본 재로드 검증 (5행 test.csv, hand delta 없이)...")
-b2 = joblib.load("submit/model/model.pkl")
+b2 = joblib.load("submissions/submit/model/model.pkl")
 t5 = pd.read_csv("data/test.csv", encoding="utf-8-sig")
 t5.columns = [c.replace("﻿", "").strip() for c in t5.columns]
 ft5 = subm.add_features(t5, b2["prior"])

@@ -12,9 +12,9 @@
 단계:
   1단계 검증  2019~2023 학습 → 2024 채점.  로컬 실험값(총점 708.7)이 재현되는지 확인.
               여기서 재현이 안 되면 파이프라인 어딘가가 틀린 것이므로 저장하지 않는다.
-  2단계 최종  2019~2024 전체 학습 → submit/model/model.pkl 저장
+  2단계 최종  2019~2024 전체 학습 → submissions/submit/model/model.pkl 저장
 
-★ 피처 생성 함수는 submit/script.py 에서 import한다 (복사 금지).
+★ 피처 생성 함수는 submissions/submit/script.py 에서 import한다 (복사 금지).
   학습과 추론이 물리적으로 같은 코드를 쓰게 만드는 장치.
 """
 
@@ -46,12 +46,12 @@ def tick(m):
     log(f"  [{time.time()-T0:6.0f}s] {m}")
 
 
-# ---- submit/script.py 에서 피처 함수 가져오기 (단일 원본) ----
-spec = importlib.util.spec_from_file_location("subm", "submit/script.py")
+# ---- submissions/submit/script.py 에서 피처 함수 가져오기 (단일 원본) ----
+spec = importlib.util.spec_from_file_location("subm", "submissions/submit/script.py")
 subm = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(subm)
 add_features, to_matrix = subm.add_features, subm.to_matrix
-log(f"피처 함수 출처: submit/script.py  (학습·추론 동일 코드 보장)")
+log(f"피처 함수 출처: submissions/submit/script.py  (학습·추론 동일 코드 보장)")
 log(f"실행 환경: python {sys.version.split()[0]} / numpy {np.__version__} / "
     f"pandas {pd.__version__}")
 
@@ -229,17 +229,17 @@ dep_b = deployment_table(df, prior, "batter_id")
 log(f"  배포 테이블: 투수 {dep_p['eid'].nunique()}명 {len(dep_p)}행 / "
     f"타자 {dep_b['eid'].nunique()}명 {len(dep_b)}행")
 
-os.makedirs("submit/model", exist_ok=True)
+os.makedirs("submissions/submit/model", exist_ok=True)
 bundle = {"models": models, "encoder": enc, "prior": prior, "feats": FEATS,
           "seeds": SEEDS, "hgb": HGB, "n_train": int(len(df)),
           "hand_tbl_p": dep_p, "hand_tbl_b": dep_b}
-joblib.dump(bundle, "submit/model/model.pkl", compress=3)
-size = os.path.getsize("submit/model/model.pkl") / 1024 ** 2
-tick(f"저장 완료 submit/model/model.pkl  ({size:.1f} MB)")
+joblib.dump(bundle, "submissions/submit/model/model.pkl", compress=3)
+size = os.path.getsize("submissions/submit/model/model.pkl") / 1024 ** 2
+tick(f"저장 완료 submissions/submit/model/model.pkl  ({size:.1f} MB)")
 
 # 저장한 걸 다시 열어서 5행 test.csv로 ★서빙 경로 그대로★ 예측되는지 확인
 log("\n  저장본 재로드 검증 (script.py 서빙 경로)...")
-b2 = joblib.load("submit/model/model.pkl")
+b2 = joblib.load("submissions/submit/model/model.pkl")
 t5 = pd.read_csv("data/test.csv", encoding="utf-8-sig")
 t5.columns = [c.replace("﻿", "").strip() for c in t5.columns]
 ft5 = subm.add_features(t5, b2["prior"])

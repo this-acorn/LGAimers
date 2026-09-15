@@ -21,7 +21,7 @@ sys.path.insert(0, "exp")
 from common import log, tick, raw_score, load_train, add_features, CAT, ALL_ENG
 
 import importlib.util
-spec = importlib.util.spec_from_file_location("s10", "submit10_src/script.py")
+spec = importlib.util.spec_from_file_location("s10", "submissions/submit10_src/script.py")
 s10 = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(s10)
 attach_cs, CS_FEATS, P_RATES, B_RATES = s10.attach_cs, s10.CS_FEATS, s10.P_RATES, s10.B_RATES

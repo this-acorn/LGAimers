@@ -46,7 +46,7 @@ df = pd.read_csv("data/train.csv", encoding="utf-8-sig",
                           "batter_hand", "control_success"])
 df.columns = [c.replace("﻿", "").strip() for c in df.columns]
 
-b = joblib.load("submit/model/model.pkl")
+b = joblib.load("submissions/submit/model/model.pkl")
 prior = b["prior"]
 print(f"로드 완료 — prior={prior:.6f}, 기존 테이블 "
       f"투수 {len(b['hand_tbl_p'])}행 / 타자 {len(b['hand_tbl_b'])}행")
@@ -65,5 +65,5 @@ for old, new, nm in [(b["hand_tbl_p"], dep_p, "투수"),
     assert len(mg) == len(old), "기존 키가 사라짐 — 수정 로직 점검 필요"
 
 b["hand_tbl_p"], b["hand_tbl_b"] = dep_p, dep_b
-joblib.dump(b, "submit/model/model.pkl", compress=3)
-print("재저장 완료: submit/model/model.pkl")
+joblib.dump(b, "submissions/submit/model/model.pkl", compress=3)
+print("재저장 완료: submissions/submit/model/model.pkl")

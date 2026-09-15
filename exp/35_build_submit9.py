@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-[35] submit9.zip — CatBoost 16시드, w=1.0 (exp/33 증량분 반영)
+[35] artifacts/submissions/submit9.zip — CatBoost 16시드, w=1.0 (exp/33 증량분 반영)
 
 실행: PYTHONIOENCODING=utf-8 <venv311>/Scripts/python.exe -u exp/35_build_submit9.py
 """
@@ -16,7 +16,8 @@ import joblib
 import numpy as np
 import pandas as pd
 
-ROOT = "c:/Users/gwonn/Desktop/open"
+from pathlib import Path
+ROOT = str(Path(__file__).resolve().parents[1])
 SP = ("C:/Users/gwonn/AppData/Local/Temp/claude/c--Users-gwonn-Desktop-open/"
       "ac9f75b2-20b2-4bd0-a3a5-9f91191c2d24/scratchpad")
 VENV_SP = ("C:/Users/gwonn/AppData/Local/Temp/claude/c--Users-gwonn-Desktop-open/"
@@ -42,21 +43,21 @@ def check(cond, ok, ng):
 
 
 log("=" * 80)
-log("submit9.zip (CB 16시드, w=1.0)")
+log("artifacts/submissions/submit9.zip (CB 16시드, w=1.0)")
 log("=" * 80)
-b = joblib.load(f"{ROOT}/submit/model/model.pkl")
+b = joblib.load(f"{ROOT}/submissions/submit/model/model.pkl")
 check(len(b["cb_models"]) == 16, f"CB 모델 {len(b['cb_models'])}개 (=16)",
       f"CB {len(b['cb_models'])}개 != 16 — exp/33 미완?")
 stage = f"{SP}/submit9_src"
 if os.path.exists(stage):
     shutil.rmtree(stage)
 os.makedirs(f"{stage}/model")
-shutil.copy(f"{ROOT}/submit/script.py", f"{stage}/script.py")
-shutil.copy(f"{ROOT}/submit/requirements.txt", f"{stage}/requirements.txt")
+shutil.copy(f"{ROOT}/submissions/submit/script.py", f"{stage}/script.py")
+shutil.copy(f"{ROOT}/submissions/submit/requirements.txt", f"{stage}/requirements.txt")
 b["w_cb"] = W
 joblib.dump(b, f"{stage}/model/model.pkl", compress=3)
 
-out_zip = f"{ROOT}/submit9.zip"
+out_zip = f"{ROOT}/artifacts/submissions/submit9.zip"
 with zipfile.ZipFile(out_zip, "w", zipfile.ZIP_DEFLATED) as z:
     for real, arc in [(f"{stage}/script.py", "script.py"),
                       (f"{stage}/requirements.txt", "requirements.txt"),
@@ -99,5 +100,5 @@ else:
     check(len(sub) == N_EVAL and not np.isnan(p).any()
           and 0 <= p.min() and p.max() <= 1, f"출력 정상 (평균 {p.mean():.6f})", "출력 이상")
 
-log("\n최종: " + ("✅ submit9.zip 제출 가능 (CB16, w=1.0)" if ok_all else "❌ 문제"))
+log("\n최종: " + ("✅ artifacts/submissions/submit9.zip 제출 가능 (CB16, w=1.0)" if ok_all else "❌ 문제"))
 sys.exit(0 if ok_all else 1)

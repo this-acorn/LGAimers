@@ -8,7 +8,7 @@
 
 단계: 1) 라벨 복원(전체)  2) 검증 4시드 (게이트: 800.9-30 이상)
       3) 최종 8시드 전체 학습 + 배포 테이블  4) 5행 검증
-피처 로직 단일 원본 = submit12_src/script.py
+피처 로직 단일 원본 = submissions/submit12_src/script.py
 
 ★ venv311 (10스레드 — exp/47과 병렬):
   <venv311>/Scripts/python.exe -u exp/48_train_cs79.py   (~3.5시간)
@@ -31,7 +31,7 @@ CB_PRM = dict(iterations=500, depth=6, learning_rate=0.08, l2_leaf_reg=10.0,
 GATE = 800.9 - 30.0
 K_MIX = 50.0
 
-spec = importlib.util.spec_from_file_location("s12", "submit12_src/script.py")
+spec = importlib.util.spec_from_file_location("s12", "submissions/submit12_src/script.py")
 s12 = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(s12)
 add_features, attach_cs, attach_pt = s12.add_features, s12.attach_cs, s12.attach_pt
@@ -246,13 +246,13 @@ bundle = {"cb_models": models, "feats": FEATS79, "prior": prior_fin,
           "cs_const_p": cp_fin, "cs_const_b": cb_fin,
           "mix_tbl": mix_fin, "pfb_model": pfb_fin,
           "seeds": SEEDS_FIN, "version": "cs79"}
-os.makedirs("submit12_src/model", exist_ok=True)
-joblib.dump(bundle, "submit12_src/model/model.pkl", compress=3)
-tick(f"저장: submit12_src/model/model.pkl "
-     f"({os.path.getsize('submit12_src/model/model.pkl')/1024**2:.1f} MB)")
+os.makedirs("submissions/submit12_src/model", exist_ok=True)
+joblib.dump(bundle, "submissions/submit12_src/model/model.pkl", compress=3)
+tick(f"저장: submissions/submit12_src/model/model.pkl "
+     f"({os.path.getsize('submissions/submit12_src/model/model.pkl')/1024**2:.1f} MB)")
 
 # ---- 4. 5행 검증 ----
-b2 = joblib.load("submit12_src/model/model.pkl")
+b2 = joblib.load("submissions/submit12_src/model/model.pkl")
 t5 = pd.read_csv("data/test.csv", encoding="utf-8-sig")
 t5.columns = [c.replace("﻿", "").strip() for c in t5.columns]
 ft5 = s12.attach_pt(s12.attach_cs(s12.add_features(t5, b2["prior"]),
@@ -266,4 +266,4 @@ p5 = acc5 / len(b2["cb_models"])
 log(f"  5행 예측 = {np.round(p5, 6).tolist()}")
 log(f"  f_pfb = {np.round(ft5['f_pfb'].to_numpy(), 3).tolist()}")
 log(f"  f_mixcg_fb 커버 {ft5['f_mixcg_fb'].notna().sum()}/5")
-log(f"\n총 {time.time()-T0:.0f}초. 다음: exp/49 submit12.zip 빌드")
+log(f"\n총 {time.time()-T0:.0f}초. 다음: exp/49 artifacts/submissions/submit12.zip 빌드")
