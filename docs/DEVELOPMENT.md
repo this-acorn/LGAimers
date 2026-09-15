@@ -1,6 +1,6 @@
 # Development journey
 
-This overview records the methods used to reach the final pipeline. It focuses on modeling decisions and engineering work rather than leaderboard results.
+This overview records the methods used to reach the final pipeline in `candidate_jm_w070_small.zip` and `last.zip`, identified by the team as its two final submission artifacts. It focuses on modeling decisions and engineering work rather than leaderboard results.
 
 ## From baseline to final ensemble
 
@@ -13,7 +13,7 @@ This overview records the methods used to reach the final pipeline. It focuses o
 | Hierarchical correction | Shrunk pitcher/handedness/pressure effects | Model conditional differences while stabilizing sparse groups. |
 | Complementary branch | Temporal empirical-Bayes base, LightGBM/HGB residuals, team effects, and low-rank interactions | Add a model with a different inductive structure and error pattern. |
 | Calibration and blending | Fixed probability shifts/scaling and quadratic Brier-loss blend analysis | Adjust bias and combine complementary predictions. |
-| Final integration | Blend the calibrated pipeline with an adaptive prediction stack and a regular-season CatBoost residual ensemble | Combine complementary predictions in the final local package. |
+| Final integration | Blend the calibrated pipeline with an adaptive prediction stack and a regular-season CatBoost residual ensemble | Produce the 70% residual-branch variant and the later approximately 61.85% variant. |
 | Packaging | Frozen artifacts, sequential execution, row-ID alignment, and probability checks | Make the selected computation reproducible and independent of test-batch ordering. |
 
 ## How experiments informed development
@@ -27,6 +27,17 @@ This overview records the methods used to reach the final pipeline. It focuses o
 
 Some validation years and public feedback were consulted repeatedly. These were model-development tools, not independent final-test estimates. The final methods should not be confused with every experiment proposed near the deadline.
 
+## Final submission variants
+
+| Artifact | Role in the final workflow |
+| --- | --- |
+| `candidate_jm_w070_small.zip` | Compact package of a fixed 30:70 blend between the calibrated pipeline and regular-season residual pipeline. |
+| `last.zip` | Same component model files, with outer blend weights approximately 38.15:61.85 and explicit final probability clipping. |
+
+Archive inspection found 116 matching member paths in both packages. Only `script.py` and the outer-blend metadata differ in uncompressed size or CRC. The `small` archive also matches the member paths, sizes, and CRC values of the larger `candidate_jm_w070.zip` variant. The distinction is the blend and packaging, rather than an additional training method.
+
+Blend weights are read from the executable wrapper, since the 70% variant's descriptive metadata retains an earlier equal-weight setting.
+
 ## Implementation map
 
 | Evidence | What it establishes |
@@ -36,8 +47,9 @@ Some validation years and public feedback were consulted repeatedly. These were 
 | Local `candidate_v18g030_src/script.py` | Later team categorical handling, hierarchical correction, and fixed calibration. |
 | `model/exp021_inference.py` inside local `last.zip` | The rebuilt temporal/residual branch and its frozen feature transformations. |
 | `model/current_inference.py` inside local `last.zip` | The calibrated combination of the existing branches. |
-| `script.py`, `model/jm0750_inference.py`, and its residual manifest inside local `last.zip` | The actual final two-branch blend and the regular-season residual component. |
+| `script.py` inside local `candidate_jm_w070_small.zip` and `last.zip` | The two actual final blend settings and their output validation. |
+| `model/jm0750_inference.py` and its residual manifest in both archives | The shared regular-season residual component. |
 
-The later local artifacts are described here but are not bundled into this checkout. The inference commands in the root README run the earlier preserved checkpoint. The final package was inspected directly because a later-numbered builder script alone does not establish which implementation was actually packaged.
+The two final local artifacts are described here but are not bundled into this checkout. The inference commands in the root README run the earlier preserved checkpoint. Both final packages were inspected directly because a later-numbered builder script alone does not establish which implementation was actually packaged.
 
 The project's work includes feature development, multiclass modeling, experiments, inference implementation, calibration, component integration, and packaging.

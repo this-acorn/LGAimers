@@ -4,7 +4,7 @@
 
 Predict the probability that a baseball pitch achieves its intended control outcome using information available **before the pitch**. This team project progressed from tree-based baselines to multiclass CatBoost, hierarchical residual corrections, probability calibration, and a final ensemble of complementary prediction pipelines.
 
-The focus of this repository is the development process: how features, model objectives, validation, and ensemble design evolved through the final submission.
+The focus of this repository is the development process: how features, model objectives, validation, and ensemble design evolved through the two final submission artifacts, `candidate_jm_w070_small.zip` and `last.zip`.
 
 [Methodology](docs/METHODOLOGY.md) · [Development journey](docs/DEVELOPMENT.md) · [Experiment guide](exp/README.md) · [Data guide](docs/DATA.md)
 
@@ -52,6 +52,15 @@ A complementary temporal pipeline combines smoothed pitcher/batter season estima
 Apply fixed probability shifts and scaling to address systematic bias. Study prediction differences and the quadratic structure of Brier loss to choose blend weights, rather than assuming that adding another model will help.
 
 We integrated the calibrated pipeline with an adaptive prediction stack and an ensemble of CatBoost residual regressors applied to regular-season rows. We then selected the blend coefficients and correction strengths and froze them before inference. The [development journey](docs/DEVELOPMENT.md) explains the implementation and integration work behind this final configuration.
+
+The two final submissions use the same model components with different outer blend weights:
+
+| Submission artifact | Calibrated pipeline | Regular-season residual pipeline |
+| --- | ---: | ---: |
+| `candidate_jm_w070_small.zip` | 30% | 70% |
+| `last.zip` | Approximately 38.15% | Approximately 61.85% |
+
+The `small` artifact is a more compact packaging of the corresponding 70% variant. `last.zip` also explicitly clips the final probability to [0, 1]. These changes concern blending and packaging, rather than a different core model architecture.
 
 ### 6. Validate changes and package independent inference
 

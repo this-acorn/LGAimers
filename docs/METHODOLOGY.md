@@ -1,6 +1,6 @@
 # Methodology
 
-This document follows development from the reproducible `submit14` checkpoint through the final local `last.zip` pipeline. The early checkpoint is included in this repository; the later pipeline description is grounded in its local inference source and artifact metadata. Exploratory branches are distinguished from components actually used in that package.
+This document follows development from the reproducible `submit14` checkpoint through the two final submission artifacts, `candidate_jm_w070_small.zip` and `last.zip`. The early checkpoint is included in this repository; the later pipeline description is grounded in the local archives' inference source and artifact metadata. Exploratory branches are distinguished from components actually used in those packages.
 
 ## Problem formulation
 
@@ -96,7 +96,7 @@ For a two-model blend `p(w) = (1 - w) * p_a + w * p_b`, Brier loss is quadratic 
 
 ## Final model integration
 
-The inspected `last.zip` has a two-branch outer blend:
+Both final submission archives have a two-branch outer blend:
 
 ```text
 p_current = calibrated blend of the multiclass/hierarchical and temporal branches
@@ -104,7 +104,16 @@ p_specialist = adaptive-stack prediction + bounded residual correction on R rows
 p_final      = (1 - w) * p_current + w * p_specialist
 ```
 
-`w` and the residual scale are fixed in the artifact. The actual package uses a convex outer blend; an alternative three-component affine builder in the workspace is not the wrapper stored in `last.zip`.
+`w` and the residual scale are fixed in each artifact:
+
+| Artifact | Existing calibrated pipeline weight | Residual pipeline weight (`w`) | Final operation |
+| --- | ---: | ---: | --- |
+| `candidate_jm_w070_small.zip` | 0.30 | 0.70 | Weighted sum with probability-range validation |
+| `last.zip` | 0.381501766470134 | 0.618498233529866 | Weighted sum, clipping to [0, 1], and probability-range validation |
+
+Both packages use the same regular-season residual scale, 0.75, and a convex outer blend. An alternative three-component affine builder in the workspace is not the wrapper stored in either final artifact.
+
+The executable `script.py` is the source of truth for these weights. The 70% package's descriptive blend metadata retains an older equal-weight recipe; that metadata does not control the outer blend at runtime.
 
 The regular-season component averages three CatBoost residual regressors. Its inputs include historical and current-season features, contextual categories, the underlying stack's probability, and auxiliary prediction differences. Corrections are bounded and applied only where `game_type == 'R'`; other rows retain the underlying stack's prediction.
 
@@ -127,6 +136,8 @@ The included checkpoint bundle stores CatBoost models, feature names, a training
 
 Every feature is a function of one input row and fixed training artifacts. The portable [runner](../tools/run_inference.py) supplies the directory layout expected by the original script. The [packager](../tools/build_submission.py) preserves the archive paths `script.py`, `requirements.txt`, and `model/model.pkl`.
 
-The final local package stores additional inference modules and model assets in a flat layout and executes its outer components sequentially. It checks component schemas, row IDs, and finite probability ranges before combining predictions. It is a larger package than the runnable `submit14` example; the example commands do not reproduce that complete final ensemble.
+Both final packages store additional inference modules and model assets in a flat layout and execute their outer components sequentially. They check component schemas, row IDs, and finite probability ranges before combining predictions. They are larger packages than the runnable `submit14` example; the example commands do not reproduce the complete final ensemble.
+
+The `candidate_jm_w070_small.zip` archive has the same 116 member paths, uncompressed sizes, and CRC values as `candidate_jm_w070.zip`, with a smaller compressed archive. Comparing it with `last.zip` identifies changes only in the top-level inference wrapper and descriptive outer-blend metadata by those checks. This supports describing the last step as a blend-weight and packaging revision, not a retrained model family.
 
 See the [development journey and source map](DEVELOPMENT.md) for how these stages connect.
