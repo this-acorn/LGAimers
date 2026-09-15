@@ -1,6 +1,6 @@
 # Baseball Pitch Control Prediction
 
-**LG Aimers · Tabular machine learning · Probability estimation**
+**LG Aimers 9th Cohort Hackathon · Tabular machine learning · Probability estimation**
 
 Predict the probability that a baseball pitch achieves its intended control outcome using information available **before the pitch**. This team project progressed from tree-based baselines to multiclass CatBoost, hierarchical residual corrections, probability calibration, and a final ensemble of complementary prediction pipelines.
 
@@ -139,7 +139,3 @@ LGAimers/
 ```
 
 Competition data and local environments are kept outside the versioned source. Ignore rules are maintained locally rather than distributed in this repository. Historical artifacts already tracked in the repository are preserved. See the [path migration map](docs/REPOSITORY_MAP.md).
-
-## Project scope
-
-The team worked on feature engineering, multiclass modeling, chronological experiments, residual correction, probability calibration, model integration, and inference packaging. The documentation covers the methodology through the final local package; the runnable example uses the earlier checkpoint included here. See the [implementation map](docs/DEVELOPMENT.md#implementation-map) for component details.
