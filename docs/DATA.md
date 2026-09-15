@@ -1,16 +1,14 @@
-# Data guide
+# Data
 
-Obtain the competition files separately and place them in a local `data/` directory.
+The training data covers approximately 1.48 million pitches from 2019–2024. Each row contains pre-pitch context, player/team identifiers, and historical statistics; the target is `control_success`.
 
-| File | Contents | Used for |
-| --- | --- | --- |
-| `train.csv` | 1,475,092 rows × 49 columns, including `control_success` | Training and chronological backtests |
-| `test.csv` | Distributed five-row schema sample with 48 input columns | Inference smoke checks |
-| `sample_submission.csv` | Five-row example: `row_id`, `control_success` | Output schema and ordering |
-| `trackman_history.csv` | 1,793,078 records × 30 columns, covering 2019–2024 | Exploratory tracking-history experiments |
+| File | Purpose |
+| --- | --- |
+| `train.csv` | Model training and chronological validation. |
+| `test.csv` | Prediction inputs; the distributed sample contains five rows. |
+| `sample_submission.csv` | Expected output columns and row order. |
+| `trackman_history.csv` | Additional tracking data used in exploratory feature experiments. |
 
-Official evaluation replaces the sample with hidden inputs. Passing the five-row sample checks functionality, not predictive quality.
+Competition data is stored locally in `data/`. The multiclass inference example does not require tracking data.
 
-Inputs describe game context, counts, scores, baserunners, player/team identifiers, handedness, and precomputed `asof_*` history. Missing rates can occur when a player has no prior observations. The selected multiclass submission does not require `trackman_history.csv` for inference or full-data training.
-
-The organizer's detailed Korean specification is preserved in [data_description.md](data_description.md). Competition CSVs are not included in this cleanup.
+See the [official data specification](data_description.md) for field definitions and [usage](RUNNING.md) for execution instructions.
